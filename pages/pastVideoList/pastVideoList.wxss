@@ -1,0 +1,38 @@
+/* pages/pastVideoList/pastVideoList.wxss 往期视频列表 */
+
+.video_list {
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.v_item {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #f3f3f3;
+  padding: 20rpx 0;
+}
+
+.v_item>image {
+  width: 200rpx;
+  height: 150rpx;
+}
+
+.item_xx {
+  margin-left: 20rpx;
+  width: 100%;
+  padding-right: 30rpx;
+}
+
+.xx_user {
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 10rpx;
+}
+
+.inline-block text {
+  color: #bdbdbd;
+  font-size: 22rpx;
+  vertical-align: middle;
+  margin-left: 8rpx;
+}

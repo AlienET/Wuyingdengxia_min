@@ -1,0 +1,181 @@
+<!--pages/pastVideo/pastVideo.wxml  往期视频详情页-->
+<video src='/images/deom.mp4' style='width:100%;'></video>
+<view style='padding:20rpx;padding-bottom:30rpx;border-bottom:1px solid #f3f3f3;'>
+  <view style='title' style='font-size:30rpx;'>
+    手术器械在手术室中的正确使用方法
+  </view>
+  <view style='font-size:26rpx;color:#666;margin-top:10rpx;'>主讲：刘教授</view>
+  <view style='margin-top:10rpx;'>
+    <view style='font-size:22rpx;color:#BDBDBD;width:50%;display:inline-block'>播放数 24340 • 获赞数 24340</view>
+    <view style='display:inline-block;text-align:right;width:48%'>
+      <image src='/images/icon/ydz.png' style='width:48rpx;height:48rpx;'></image>
+      <image src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;margin-left:40rpx;'></image>
+      <image src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;margin-left:40rpx;'></image>
+    </view>
+  </view>
+</view>
+<view>
+  <view class='section'>
+    <view style='font-size:30rpx;'>
+      精彩片段
+    </view>
+    <view class='video-list'>
+      <view class='active'>
+        手术剪的多种使用方法及在实际应用过程中的避免错误示范
+      </view>
+      <view>
+        手术剪的多种使用方法及在实际应用过程中的避免错误示范
+      </view>
+      <view>
+        手术剪的多种使用方法及在实际应用过程中的避免错误示范
+      </view>
+      <view>
+        手术剪的多种使用方法及在实际应用过程中的避免错误示范
+      </view>
+      <view>
+        手术剪的多种使用方法及在实际应用过程中的避免错误示范
+      </view>
+      <view>
+        手术剪的多种使用方法及在实际应用过程中的避免错误示范
+      </view>
+      <view>
+        手术剪的多种使用方法及在实际应用过程中的避免错误示范
+      </view>
+    </view>
+  </view>
+  <!-- <view style='padding:20rpx;font-size:30rpx;border-bottom:1px solid #F3F3F3;'>
+    全部评论 324
+  </view> -->
+  <view class='comment'>
+    <view class='comment_all'>全部评论 <text>324</text></view>
+    <view class='comment_list'>
+      <view class='column'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>Gallen Meklda</text>
+            <view class='column_btn'>
+              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
+              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
+              <text>8</text>
+            </view>
+            <view class='column_text'>领导去定版啊！！</view>
+            <view class='column_tr'>
+              <text class='column_time'>30分钟前 ·</text>
+              <text class='column_replay'>回复</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='column'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>Gallen Meklda</text>
+            <view class='column_btn'>
+              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
+              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
+              <text>8</text>
+            </view>
+            <view class='column_text'>领导去定版啊！！</view>
+            <view class='column_tr'>
+              <text class='column_time'>30分钟前 ·</text>
+              <text class='column_replay'>回复</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='column'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>Gallen Meklda</text>
+            <view class='column_btn'>
+              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
+              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
+              <text>8</text>
+            </view>
+            <view class='column_text'>领导去定版啊！！</view>
+            <view class='column_tr'>
+              <text class='column_time'>30分钟前 ·</text>
+              <text class='column_replay'>回复</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='column'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>Gallen Meklda</text>
+            <view class='column_btn'>
+              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
+              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
+              <text>8</text>
+            </view>
+            <view class='column_text'>领导去定版啊！！</view>
+            <view class='column_tr'>
+              <text class='column_time'>30分钟前 ·</text>
+              <text class='column_replay'>回复</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='column'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>Gallen Meklda</text>
+            <view class='column_btn'>
+              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
+              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
+              <text>8</text>
+            </view>
+            <view class='column_text'>领导去定版啊！！</view>
+            <view class='column_tr'>
+              <text class='column_time'>30分钟前 ·</text>
+              <text class='column_replay'>回复</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='column'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>Gallen Meklda</text>
+            <view class='column_btn'>
+              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
+              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
+              <text>8</text>
+            </view>
+            <view class='column_text'>领导去定版啊！！</view>
+            <view class='column_tr'>
+              <text class='column_time'>30分钟前 ·</text>
+              <text class='column_replay'>回复</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='fill_comment'>
+    <!-- <view style='width:600rpx;margin:0 auto;border-radius:100rpx;background:#EDEDED;text-align:center;font-size:26rpx;padding:15rpx;'>
+      <image class='ver-middle' src='/images/icon/icon_discuss.png' style='width:26.4rpx;height:27.8rpx;margin-right:10rpx;'></image>
+      发表讨论
+    </view> -->
+    <input type='text' maxlength='-1' placeholder='发表评论' style='width:80%;margin:0 auto;border-radius:100rpx;background:#EDEDED;font-size:26rpx;padding:10rpx 20rpx;text-align:center'></input>
+  </view>
+</view>

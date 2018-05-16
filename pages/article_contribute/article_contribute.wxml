@@ -1,0 +1,3 @@
+<!--pages/article_contribute/article_contribute.wxml-->
+<input type='text' placeholder='请输入文章标题' style=''></input>
+<textarea maxlength='-1' placeholder='请输入文章内容'></textarea>

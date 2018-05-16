@@ -1,0 +1,99 @@
+/* pages/SignBoard/SignBoard.wxss */
+
+page {
+  background: #fafafa;
+}
+
+.p_rel>image {
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.user_img {
+  border-radius: 50%;
+  width: 116rpx;
+  height: 116rpx;
+}
+
+.moonN text {
+  color: #fff;
+  font-size: 48rpx;
+  margin-right: 15rpx;
+}
+
+.moonN image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.signIn {
+  background: #fff;
+  border-radius: 10rpx;
+  width: 85%;
+  margin: 30rpx auto;
+  padding: 15rpx 30rpx;
+  box-shadow: 0 1px 2px 0 rgba(219, 219, 219, 0.42);
+}
+
+.signIn text.ver-middle {
+  font-size: 28rpx;
+}
+
+.signIn .signNum {
+  color: #fcba2a;
+  font-size: 48rpx;
+  margin: 0 10rpx;
+}
+
+.signIn .mt-sm {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.signIn .clickSign {
+  background-image: linear-gradient(-141deg, #ffc547 3%, #ffbc29 100%);
+  color: #fff;
+  font-size: 28rpx;
+  padding: 10rpx 30rpx;
+  border-radius: 100rpx;
+  margin-left: 100rpx;
+}
+
+.head_tit {
+  font-size: 32rpx;
+  margin-left: 10rpx;
+}
+
+.section .gifts {
+  overflow: hidden;
+}
+
+.gifts .gift {
+  float: left;
+  width: 50%;
+}
+
+.gifts .gift .gift_img {
+  width: 332rpx;
+}
+
+.gifts .gift .gift_mess {
+  font-size: 26rpx;
+}
+
+.gifts .gift .gift_dh .dhj {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.gifts .gift .gift_dh .dhNum {
+  color: #fcba2a;
+  font-size: 36rpx;
+  margin: 0 10rpx;
+}
+
+.gifts .gift .gift_dh image {
+  width: 22rpx;
+  height: 22rpx;
+}

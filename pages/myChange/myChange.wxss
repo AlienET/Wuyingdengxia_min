@@ -1,0 +1,61 @@
+/* pages/myChange/myChange.wxss */
+
+page {
+  background: #f3f4f8;
+}
+
+.change_item {
+  background: #fff;
+  border-radius: 8rpx;
+  margin:30rpx;
+}
+
+.ci_title {
+  border-bottom: 1px solid #f3f4f8;
+  padding: 15rpx 25rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ci_title text {
+  font-size: 26rpx;
+}
+
+.orderNumber {
+  color: #979797;
+}
+/*  待使用  */
+.ci_state_warn {
+  color: #fcba2a;
+}
+/*  已过期  */
+.ci_state_default {
+  color: #C9C9C9;
+}
+/*  已使用  */
+.ci_state_success {
+  color: #40CE7D;
+}
+
+.ci_inner {
+  padding: 15rpx 25rpx;
+}
+
+.ci_inner image.ver-middle {
+  width: 176rpx;
+  height: 144rpx;
+}
+
+.ci_name {
+  font-size: 30rpx;
+  color: #2f2f2f;
+}
+
+.ci_num {
+  font-size: 40rpx;
+  margin: 0 15rpx;
+}
+
+.ci_dhj {
+  color: #999;
+}

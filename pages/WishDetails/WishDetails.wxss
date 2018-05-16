@@ -1,0 +1,28 @@
+/* pages/WishDetails/WishDetails.wxss */
+
+.section {
+  font-size: 34rpx;
+  text-align: justify;
+}
+
+.mt-sm>text {
+  color: #c5c5c5;
+  font-size: 24rpx;
+}
+
+.fl-r image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 5rpx;
+}
+
+.fl-r text {
+  color: #fcba2a;
+  font-size: 30rpx;
+}
+
+.txt-center {
+  position: absolute;
+  bottom: 10%;
+  width: 100%;
+}

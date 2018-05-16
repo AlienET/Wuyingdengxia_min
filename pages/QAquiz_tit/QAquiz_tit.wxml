@@ -1,0 +1,3 @@
+<!--pages/QAquiz/QAquiz.wxml 提问/提问检索-->
+<input type='text' maxlength='-1' placeholder='请输入问题标题'></input>
+<view catchtap='onInnerTap'>下一步</view>

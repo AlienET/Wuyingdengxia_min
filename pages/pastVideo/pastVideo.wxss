@@ -1,0 +1,42 @@
+/* pages/pastVideo/pastVideo.wxss */
+
+/*  视频片段列表  */
+
+.video-list {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  white-space: nowrap;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+
+.video-list view {
+  text-align: justify;
+  display: inline-block;
+  width: 40%;
+  padding: 15rpx;
+  border: 1px solid #f5f5f5;
+  border-radius: 10rpx;
+  color: #333;
+  font-size: 26rpx;
+  margin-right: 3%;
+  background: #f5f5f5;
+  white-space: normal;
+}
+
+.video-list .active {
+  border-color: #1397ff;
+  color: #1397ff;
+  background: #fff;
+}
+
+.video-list::-webkit-scrollbar {
+  display: none;
+}
+
+.comment_list .column{
+  padding-top: 0;
+}
+.comment_list .column:first-child{
+  padding-top: 20rpx;
+}

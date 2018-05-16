@@ -1,0 +1,42 @@
+<!--pages/index/search/search.wxml-->
+<view class='container'>
+  <view class='section bg-white'>
+    <view class='mt-n'>
+      <label class='search'>
+        <image class='i-search' src='/images/icon/icon_search.png'></image>
+        <input catchtap="onSearchTap" type='text' class='search' placeholder='输入想要搜索的关键词' maxlength='20'></input>
+      </label>
+      <text catchtap='onBackTap' class='ver-middle' style='font-size:30rpx;color:#2DA3FF'>取消</text>
+    </view>
+  </view>
+  <view class='section pt-n'>
+    <view class='top_search_tit'>
+      热门搜索
+    </view>
+    <view class='top_search'>
+     <text>医院管理</text>
+     <text>手术器械</text>
+     <text>评选</text>
+    </view>
+    <view class='past_search'>
+      <view class='past_search_tit'>
+        <text>搜索历史</text>
+        <view>
+          <image src='/images/icon/icon_delete.png'></image>
+          清除历史
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='past_search_list'>
+    <view>
+      医院
+    </view>
+    <view>
+      会议活动
+    </view>
+    <view>
+      医院
+    </view>
+  </view>
+</view>

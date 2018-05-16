@@ -1,0 +1,113 @@
+<!--pages/index/article_detail/article_detail.wxml-->
+<view class='container'>
+  <view class='section'>
+    <view class='title'>
+      只能停诊！三甲医院儿科医生集体累至病倒！
+    </view>
+    <view class='author'>
+      <view class='author_img'>
+        <image src='/images/black.jpg'></image>
+      </view>
+      <view class='author_mess'>
+        <view>Gallen Meklda</view>
+        <text>2018-1-24</text>
+      </view>
+      <view class='attention'>关注</view>
+    </view>
+    <view class='content'>
+      <view>“因我院儿科医生超负荷工作，目前均已病倒，自今日起儿科不得不停诊，何日开诊尚不能确定，特此通知，请理解见谅！请就近就诊其他医院儿科门诊，谢谢您的配合！” </view>
+      <view class='content_img'>
+        <image src='/images/black.jpg'></image>
+      </view>
+      <view>“因我院儿科医生超负荷工作，目前均已病倒，自今日起儿科不得不停诊，何日开诊尚不能确定，特此通知，请理解见谅！请就近就诊其他医院儿科门诊，谢谢您的配合！”</view>
+      <view class='content_label'>
+        <text>头条</text>
+        <text>儿科医生</text>
+        <text>咨询</text>
+      </view>
+    </view>
+  </view>
+  <view style='height:30rpx;background-color:#F3F4F8;'></view>
+  <view class='comment'>
+    <view class='comment_all'>全部评论
+      <text>324</text>
+    </view>
+    <view class='comment_list'>
+      <view class='column'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>Gallen Meklda</text>
+            <view class='column_btn'>
+              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
+              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
+              <text>8</text>
+            </view>
+          </view>
+          <view class='column_text'>
+            领导去顶班啊！！
+          </view>
+          <view class='column_tr'>
+            <text class='column_time'>30分钟前 ·</text>
+            <text class='column_replay'>回复</text>
+          </view>
+        </view>
+      </view>
+      <view class='column'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>Gallen Meklda</text>
+            <view class='column_btn'>
+              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
+              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
+              <text>8</text>
+            </view>
+          </view>
+          <view class='column_text'>
+            领导去顶班啊！！
+          </view>
+          <view class='column_tr'>
+            <text class='column_time'>30分钟前 ·</text>
+            <text class='column_replay'>回复</text>
+          </view>
+        </view>
+      </view>
+      <view class='column'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>Gallen Meklda</text>
+            <view class='column_btn'>
+              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
+              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
+              <text>8</text>
+            </view>
+          </view>
+          <view class='column_text'>
+            领导去顶班啊！！
+          </view>
+          <view class='column_tr'>
+            <text class='column_time'>30分钟前 ·</text>
+            <text class='column_replay'>回复</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='fill_comment'>
+    <view class='fill_in'>
+      <image src='/images/icon/icon_discuss.png'></image>
+      参与评论
+    </view>
+    <image class='ver-middle' src='/images/icon/icon_dz.png' style='width:44rpx;height:44rpx;'></image>
+    <image class='ver-middle' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
+    <image class='ver-middle' src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;'></image>
+  </view>
+</view>

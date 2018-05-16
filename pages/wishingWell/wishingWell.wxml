@@ -1,0 +1,23 @@
+<!--pages/wishingWell/wishingWell.wxml 许愿池-->
+<image class='ww_bg' src='/images/icon/xuyuanbg.png' mode='{{imgMode}}'></image>
+<view class='section' style='display:box;'>
+  <view>
+    <view class='inline-block'>
+      <image class='ver-middle' src='/images/avatar.png' mode='{{imgMode}}' style='width:76rpx;'></image>
+      <view class='inline-block ver-middle mt-sm'>
+        <view class='ww_name'>李鲫鱼</view>
+        <view class='ww_moon'>
+          <image src='/images/icon/meiriqiandao.png'></image>
+          <text>456</text>
+        </view>
+      </view>
+    </view>
+    <view catchtap='onMakeVowRecordTap' class='mt-md fs-30 fl-r'>
+      许愿记录
+    </view>
+  </view>
+  <image class='ww_lh' src='/images/icon/lianhua.png' mode='{{imgMode}}'></image>
+  <view class='txt-center'>
+    <text catchtap='onmakeVowTap' class='bm'>我要许愿</text>
+  </view>
+</view>

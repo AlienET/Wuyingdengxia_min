@@ -1,0 +1,67 @@
+/* pages/reservationInformation/reservationInformation.wxss */
+
+.table {
+  font-size: 30rpx;
+}
+
+.table .td_i {
+  border-top: 1px solid #f1f1f1;
+  width: 80%;
+}
+
+.table .tr:first-child .td_i {
+  border-top: none;
+}
+
+.table .td {
+  padding: 30rpx 0;
+}
+
+.table .td_t {
+  color: #999;
+  width: 15%;
+}
+
+.table .th {
+  padding: 25rpx 0;
+  /* border-bottom:1px solid #F1F1F1; */
+  display: inline-block;
+  width: 33%;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.table .th image {
+  vertical-align: text-bottom;
+}
+
+.table .tr_bor {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.table .tr_bor .td_i {
+  border: none;
+  text-align: right;
+}
+
+.table .tr image.ver-middle {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+}
+
+.ic {
+  color: #c8c8c8;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.th_day {
+  font-size: 20rpx;
+  border: 1px solid #d7d7d7;
+  border-radius: 50px;
+  color: #666;
+  padding: 5rpx 10rpx;
+}

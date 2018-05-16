@@ -1,0 +1,9 @@
+<!--pages/contribute_error/contribute_error.wxml  投稿失败-->
+<view class='cont_state'>
+  <image src='/images/icon/tg_error.png' style='width:396rpx;height:362rpx;'></image>
+  <!--  成功 tg_success.png  -->
+  <view class='error'>提交失败，请从新提交……</view>
+  <!-- 成功 success   提交成功，请等待审核……  -->
+  <text>返 回</text>
+  <!--  成功 确 定  -->
+</view>

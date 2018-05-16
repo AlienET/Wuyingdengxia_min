@@ -1,0 +1,24 @@
+<!--pages/myNavEdit/myNavEdit.wxml-->
+<view class='section'>
+  <view class='navbar'>
+    <text class='fs-30'>我的导航</text>
+    <text class='fs-30 banji'>编辑</text>
+  </view>
+  <view>
+    <text class='tag m'>儿科医生</text>
+    <text class='tag m'>医生</text>
+    <text class='tag m'>儿科医生</text>
+    <text class='tag m'>科医生</text>
+    <text class='tag m'>儿医生</text>
+    <text class='tag m'>儿科医生</text>
+  </view>
+  <view class='navbar mt-md'>
+    <text class='fs-30 ver-middle'>导航推荐</text>
+    <image src='/images/icon/huanyipi.png' class='ver-middle' style='height:30rpx;width:120rpx;'></image>
+  </view>
+  <text class='tag tj'>儿科医生</text>
+  <text class='tag tj'>儿啊科医生</text>
+  <text class='tag tj'>儿医生</text>
+  <text class='tag tj'>医生</text>
+  <text class='tag tj'>儿科医生</text>
+</view>

@@ -1,0 +1,28 @@
+/* pages/makeVow/makeVow.wxss */
+
+textarea {
+  font-size: 26rpx;
+  width: 95%;
+}
+
+.bottom_nav {
+  background: #f8f8f8;
+  padding: 10rpx 20rpx;
+  position: fixed;
+  bottom: 0rpx;
+  width: 95%;
+}
+
+.bottom_nav text.txt-center {
+  border: 1px solid #666;
+  font-size: 28rpx;
+  color: #666;
+  border-radius: 50%;
+  width: 38.6rpx;
+  height: 38.6rpx;
+}
+
+.bottom_nav text.fl-r {
+  font-size: 34rpx;
+  color: #2DA3FF;
+}

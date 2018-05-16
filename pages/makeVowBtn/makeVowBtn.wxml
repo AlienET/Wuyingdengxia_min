@@ -1,0 +1,9 @@
+<!--pages/makeVowBtn/makeVowBtn.wxml 许愿成功-->
+<view class='txt-center mt300'>
+  <image class='ver-middle' src='/images/icon/cgicon.png' mode='{{imgMode}}' style='width:70rpx;'></image>
+  <text class='ver-middle'>恭喜您许愿成功</text>
+  <view class='mv_ts'>我们会在条件允许的情况下，帮您实现愿望</view>
+  <view class='mt300'>
+    <text catchtap='onmakeVowSuccess' class='bm'>确 定</text>
+  </view>
+</view>

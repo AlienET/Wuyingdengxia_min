@@ -1,0 +1,107 @@
+<!--pages/reservationInformation/reservationInformation.wxml  报名 预定信息填写 -->
+<view class='section'>
+  <view class='table'>
+    <view class='tr'>
+      <view class='td td_t'>参会名称</view>
+      <view class='td td_i'>苏州医疗器械装备交流会</view>
+    </view>
+    <view class='tr'>
+      <view class='td td_t'>参会时间</view>
+      <view class='td td_i'>2018-03-21 至 2018-03-21</view>
+    </view>
+  </view>
+</view>
+<view class='gap'></view>
+<view class='section'>
+  <view class='table'>
+    <view class='tr'>
+      <view class='td td_t'>参会人</view>
+      <view class='td td_i'>李鲫鱼</view>
+    </view>
+    <view class='tr'>
+      <view class='td td_t'>联系方式</view>
+      <view class='td td_i'>18239498731</view>
+    </view>
+    <view class='tr'>
+      <view class='td td_t'>身份证</view>
+      <view class='td td_i'>202394199304109980</view>
+    </view>
+    <view class='tr'>
+      <view class='td td_t'>性别</view>
+      <view class='td td_i'>男</view>
+    </view>
+    <view class='tr'>
+      <view class='td td_t'>单位</view>
+      <view class='td td_i'>北京中日友好医院</view>
+    </view>
+    <view class='tr'>
+      <view class='td td_t'>部门</view>
+      <view class='td td_i'>神经外科</view>
+    </view>
+    <view class='tr'>
+      <view class='td td_t'>职务</view>
+      <view class='td td_i'>护士长</view>
+    </view>
+  </view>
+</view>
+<view class='gap'></view>
+<view class='section'>
+  <view class='table'>
+    <view class='tr'>
+      <image class='ver-middle' src='/images/icon/jiaotong.png'></image>
+      <text class='ver-middle'>乘车信息选择</text>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='th'>北京</view>
+      <view class='th'>
+        <image src='/images/icon/qiehuan.png' style='width:68rpx;height:68rpx;'></image>
+      </view>
+      <view class='th'>苏州</view>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='td td_t'>乘车日期</view>
+      <view class='td td_i'>4月20日</view>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='td td_t'>车次选择</view>
+      <view class='td td_i'>G20</view>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='td td_t'>备选车次</view>
+      <view class='td td_i'>D23 D34</view>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='td td_t'>备注</view>
+      <view class='td td_i'>最好要靠窗的座位</view>
+    </view>
+    <view class='tr txt-center'>
+      <view class='td' style='color:#2DA3FF;'>+ 添加乘车信息</view>
+    </view>
+  </view>
+  <view class='table mt-sm'>
+    <view class='tr'>
+      <image class='ver-middle' src='/images/icon/zhusu.png'></image>
+      <text class='ver-middle'>住宿信息</text>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='th'>
+        <text class='ic'>入住</text>
+        <view>4月20日</view>
+      </view>
+      <view class='th'>
+        <text class='th_day'>共3晚</text>
+      </view>
+      <view class='th'>
+        <text class='ic'>离开</text>
+        <view>4月20日</view>
+      </view>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='td td_t'>备注</view>
+      <view class='td td_i'>最好提供单人间</view>
+    </view>
+  </view>
+</view>
+<view class='txt-center' style='padding:40rpx 0;'>
+  <text catchtap='onBmtjTap' class='bm'>提 交</text>
+</view>

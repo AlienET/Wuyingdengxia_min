@@ -1,0 +1,17 @@
+<!--pages/applySubmit/applySubmit.wxml  报名提交-->
+<view class='hint_box'>
+  <image src='/images/icon/sub_success.png' style='width:284rpx;height:66rpx;'></image>
+  <view class='box_tit'>
+    苏州医疗器械装备交流会
+  </view>
+  <view class='box_time'>
+    2018-03-21 至 2018-03-21
+  </view>
+  <view class='box_war'>
+    • 报名提交成功，请等待审核，可在我的培训中查看进度
+  </view>
+  <view class='box_btns'>
+    <text  class='box_btn back'>返回</text> <!-- wx.redirectTo 关闭当前页面 -->
+    <text class='box_btn check'>查看进度</text>
+  </view>
+</view>

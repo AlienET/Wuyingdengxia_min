@@ -1,0 +1,32 @@
+/* pages/QAquiz_inner/QAquiz_inner.wxss */
+page{
+  height: 100%;
+}
+textarea {
+  display: box-flex;
+  margin: 20rpx;
+  font-size: 26rpx;
+  width: 96%;
+  height: 100%;
+}
+
+.fill_comment image,.fill_comment text {
+  margin-left: 30rpx;
+  vertical-align: middle;
+}
+
+.fill_comment text {
+  display: inline-block;
+  color: #666;
+  width: 38.6rpx;
+  height: 38.6rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border: 1px solid #666;
+  border-radius: 50%;
+}
+
+switch {
+  margin-left: 20rpx;
+  vertical-align: middle;
+}

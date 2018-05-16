@@ -1,0 +1,150 @@
+<!--pages/pastVideoList/pastVideoList.wxml  往期视频列表-->
+<view class='video_list'>
+  <view catchtap='onPastVideoTap' class='v_item'>
+    <image src='/images/black.jpg'></image>
+    <view class='item_xx'>
+      <view class='fs-30'>手术器械在手术室中的正确使用方法</view>
+      <view class='xx_user'>主讲：刘教授</view>
+      <view class='txt-r mt-md'>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_watch.png' style='width:27rpx;height:22.8rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_reply.png' style='width:26rpx;height:24rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_like.png' style='width:23rpx;height:23.2rpx;'></image>
+          <text>24340</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='v_item'>
+    <image src='/images/black.jpg'></image>
+    <view class='item_xx'>
+      <view class='fs-30'>手术器械在手术室中的正确使用方法</view>
+      <view class='xx_user'>主讲：刘教授</view>
+      <view class='txt-r mt-md'>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_watch.png' style='width:27rpx;height:22.8rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_reply.png' style='width:26rpx;height:24rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_like.png' style='width:23rpx;height:23.2rpx;'></image>
+          <text>24340</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view catchtap='onPastVideoTap' class='v_item'>
+    <image src='/images/black.jpg'></image>
+    <view class='item_xx'>
+      <view class='fs-30'>手术器械在手术室中的正确使用方法</view>
+      <view class='xx_user'>主讲：刘教授</view>
+      <view class='txt-r mt-md'>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_watch.png' style='width:27rpx;height:22.8rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_reply.png' style='width:26rpx;height:24rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_like.png' style='width:23rpx;height:23.2rpx;'></image>
+          <text>24340</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='v_item'>
+    <image src='/images/black.jpg'></image>
+    <view class='item_xx'>
+      <view class='fs-30'>手术器械在手术室中的正确使用方法</view>
+      <view class='xx_user'>主讲：刘教授</view>
+      <view class='txt-r mt-md'>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_watch.png' style='width:27rpx;height:22.8rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_reply.png' style='width:26rpx;height:24rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_like.png' style='width:23rpx;height:23.2rpx;'></image>
+          <text>24340</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='v_item'>
+    <image src='/images/black.jpg'></image>
+    <view class='item_xx'>
+      <view class='fs-30'>手术器械在手术室中的正确使用方法</view>
+      <view class='xx_user'>主讲：刘教授</view>
+      <view class='txt-r mt-md'>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_watch.png' style='width:27rpx;height:22.8rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_reply.png' style='width:26rpx;height:24rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_like.png' style='width:23rpx;height:23.2rpx;'></image>
+          <text>24340</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='v_item'>
+    <image src='/images/black.jpg'></image>
+    <view class='item_xx'>
+      <view class='fs-30'>手术器械在手术室中的正确使用方法</view>
+      <view class='xx_user'>主讲：刘教授</view>
+      <view class='txt-r mt-md'>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_watch.png' style='width:27rpx;height:22.8rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_reply.png' style='width:26rpx;height:24rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_like.png' style='width:23rpx;height:23.2rpx;'></image>
+          <text>24340</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='v_item'>
+    <image src='/images/black.jpg'></image>
+    <view class='item_xx'>
+      <view class='fs-30'>手术器械在手术室中的正确使用方法</view>
+      <view class='xx_user'>主讲：刘教授</view>
+      <view class='txt-r mt-md'>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_watch.png' style='width:27rpx;height:22.8rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_reply.png' style='width:26rpx;height:24rpx;'></image>
+          <text>24340</text>
+        </view>
+        <view class='inline-block ml-md'>
+          <image class='ver-middle' src='/images/icon/icon_like.png' style='width:23rpx;height:23.2rpx;'></image>
+          <text>24340</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

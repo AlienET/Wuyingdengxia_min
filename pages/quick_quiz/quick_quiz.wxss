@@ -1,0 +1,109 @@
+/* pages/index/quick_quiz/quick_quiz.wxss */
+
+.p_rel {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.quiz_item {
+  padding: 24rpx;
+  padding-left: 0rpx;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.quiz_item .item_title>text {
+  font-weight: 600;
+  font-size: 34rpx;
+}
+
+.quiz_item .item_title>view {
+  float: right;
+  color: #fcba2a;
+}
+
+.quiz_item .item_title>view>image {
+  width: 25.8rpx;
+  height: 27.8rpx;
+  margin-top: 6rpx;
+}
+
+.quiz_item .item_title>view>text {
+  font-weight: 600;
+  color: #fcba2a;
+  font-size: 30rpx;
+}
+
+.quiz_item_inner {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.quiz_foot>text {
+  color: #c8c8c8;
+  font-size: 22rpx;
+}
+
+.quiz_foot>view {
+  float: right;
+  color: #fcba2a;
+}
+
+.quiz_foot>view image {
+  width: 27.2rpx;
+  height: 29.8rpx;
+  margin-top: 6rpx;
+}
+
+.quiz_foot>view text {
+  font-weight: 600;
+  color: #fcba2a;
+  font-size: 30rpx;
+  margin-left: 10rpx;
+}
+
+.quiz_user image {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+}
+
+.quiz_user text {
+  color: #999;
+  font-size: 26rpx;
+}
+
+.quiz_item_img image {
+  width: 220rpx;
+  height: 140rpx;
+  margin-right: 20rpx;
+}
+
+.quiz_item_img image:last-child {
+  margin-right: 0rpx;
+}
+
+/*  搜索框  */
+
+.ss {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #adadad;
+  background: #f6f5f5;
+  border-radius: 100rpx;
+  padding: 20rpx 30rpx;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.ss image {
+  width: 27.2rpx;
+  height: 27.2rpx;
+  vertical-align: middle;
+  margin-right: 8rpx;
+}
+
+.i_blue {
+  color: #1397ff;
+  font-size: 34rpx;
+  margin-left: 30rpx;
+  vertical-align: middle;
+}

@@ -1,0 +1,80 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/search/search",
+    "pages/article_detail/article_detail",
+    "pages/meeting_mess/meeting_mess",
+    "pages/previous_back/previous_back",
+    "pages/quick_quiz/quick_quiz",
+    "pages/discuss_details/discuss_details",
+    "pages/article_contribute/article_contribute",
+    "pages/myNavEdit/myNavEdit",
+    "pages/contribute_error/contribute_error",
+    "pages/ConferenceDetails/ConferenceDetails",
+    "pages/reservationInformation/reservationInformation",
+    "pages/applySubmit/applySubmit",
+    "pages/pastVideoList/pastVideoList",
+    "pages/pastVideo/pastVideo",
+    "pages/problemDetails/problemDetails",
+    "pages/QAquiz_inner/QAquiz_inner",
+    "pages/QAquiz_tit/QAquiz_tit",
+    "pages/addLabel/addLabel",
+    "pages/searchLabel/searchLabel",
+    "pages/PersonalCenter/PersonalCenter",
+    "pages/SignBoard/SignBoard",
+    "pages/giftDetails/giftDetails",
+    "pages/ForSuccessful/ForSuccessful",
+    "pages/myChange/myChange",
+    "pages/myCashDetail/myCashDetail",
+    "pages/wishingWell/wishingWell",
+    "pages/makeVow/makeVow",
+    "pages/makeVowBtn/makeVowBtn",
+    "pages/makeVowRecord/makeVowRecord",
+    "pages/WishDetails/WishDetails",
+    "pages/MySubmission/MySubmission",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor":"#fff",
+    "navigationBarTitleText": "无影灯下",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar":{
+    "color": "#333",
+    "selectedColor": "#2a98fc",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "position": "bottom",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "iconPath": "images/icon/index_n.png",
+      "selectedIconPath": "images/icon/index.png",
+      "text": "首页"
+    },
+    {
+      "pagePath": "pages/meeting_mess/meeting_mess",
+      "iconPath": "images/icon/action_n.png",
+      "selectedIconPath": "images/icon/action.png",
+      "text": "活动"
+    },
+    {
+      "pagePath": "pages/quick_quiz/quick_quiz",
+      "iconPath": "images/icon/questions_answer_n.png",
+      "selectedIconPath": "images/icon/questions_answer.png",
+      "text": "问答"
+    },
+    {
+      "pagePath": "pages/index/index",
+      "iconPath": "images/icon/tool_n.png",
+      "selectedIconPath": "images/icon/tool.png",
+      "text": "管理工具"
+    },
+    {
+      "pagePath": "pages/PersonalCenter/PersonalCenter",
+      "iconPath": "images/icon/mine_n.png",
+      "selectedIconPath": "images/icon/mine.png",
+      "text": "我的"
+    }]
+  }
+}

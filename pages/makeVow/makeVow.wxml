@@ -1,0 +1,6 @@
+<!--pages/makeVow/makeVow.wxml 我要许愿-->
+<textarea class='section' maxlength='-1' auto-height='true' value=''  placeholder='请输入要许愿的内容'></textarea>
+<view class='bottom_nav'>
+  <text class='inline-block txt-center'>￥</text>
+  <text catchtap='onMakeVowBtnTap' class='fl-r'>提交</text>
+</view>

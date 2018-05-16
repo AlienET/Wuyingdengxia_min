@@ -1,0 +1,53 @@
+<!--pages/discuss_details/discuss_details.wxml-->
+<view class='container'>
+  <view class='section'>
+    <text class='discussion'>正在讨论</text>
+    <view class='title'>
+      {{aboutData.key_dis_title}}
+    </view>
+    <view class='author_mess'>
+      <text>{{aboutData.key_ctime}}</text>
+    </view>
+    <view class='content'>
+      {{aboutData.key_dis_content}}
+    </view>
+  </view>
+  <view style='height:30rpx;background-color:#F3F4F8;'></view>
+  <view class='comment'>
+    <view class='comment_all'>全部评论
+      <text>{{DiscussListsData.length}}</text>
+    </view>
+    <view wx:if="{{!DiscussListsData.length}}" style="text-align:center;padding:20rpx;color: #B9B9B9;font-size:30rpx;">
+      暂无评论 ...
+    </view>
+    <view class='comment_list'>
+      <view class='column' wx:for='{{DiscussListsData}}'>
+        <view class='column_img'>
+          <image src='/images/black.jpg'></image>
+        </view>
+        <view class='column_inner'>
+          <view class='column_user'>
+            <text>{{item.user_name}}</text>
+            <view class='column_btn'>
+              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
+              <image catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
+              <text>{{item.support_num}}</text>
+            </view>
+          </view>
+          <view class='column_text'>
+            {{item.key_dis_content}}
+          </view>
+          <view class='column_tr'>
+            <text class='column_time'>{{item.ctime}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='fill_comment'>
+    <view class='fill_in'>
+      <image src='/images/icon/icon_discuss.png'></image>
+      参与讨论
+    </view>
+  </view>
+</view>

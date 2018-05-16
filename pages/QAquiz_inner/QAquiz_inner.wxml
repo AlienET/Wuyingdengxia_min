@@ -1,0 +1,10 @@
+<!--pages/QAquiz_inner/QAquiz_inner.wxml 提问内容-->
+<textarea placeholder='请输入问题内容' maxlength='-1'></textarea>
+<view class='fill_comment'>
+  <image catchtap='onchooseImage' src='/images/icon/tupian.png' style='width:40rpx;height:34rpx;'></image>
+  <image catchtap='onAddLabelTap' src='/images/icon/biaoqian.png' style='width:36rpx;height:36rpx;'></image>
+  <text>￥</text>
+  <view style='float:right;font-size:28rpx;'>
+    匿名<switch checked bindchange="switchChange"/>
+</view>
+</view>

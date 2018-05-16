@@ -1,0 +1,59 @@
+/* pages/myCashDetail/myCashDetail.wxss */
+
+page {
+  background: #f3f4f8;
+}
+
+.lw_color {
+  color: #2f2f2f;
+}
+
+.lw_num {
+  font-size: 40rpx;
+  color: #fcba2a;
+  margin: 0 15rpx;
+}
+
+.lw_num+text {
+  color: #fcba2a;
+}
+
+.lw_dhm {
+  margin-top: 15rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 25rpx 20rpx;
+}
+
+.lh15 {
+  line-height: 45rpx;
+}
+
+.lw_nav {
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+
+.lw_nav_code {
+  font-size: 28rpx;
+  color: #2a2a2a;
+}
+
+.lw_copy {
+  color: #1397ff;
+  font-size: 30rpx;
+  line-height: 50rpx;
+}
+
+.lw_list {
+  margin-top: 15rpx;
+}
+
+.lw_list>view {
+  border-bottom: 1px solid #f1f1f1;
+  padding: 30rpx 0;
+}
+
+.lw_list>view:last-child {
+  border-bottom: 0;
+}

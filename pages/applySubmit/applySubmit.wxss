@@ -1,0 +1,56 @@
+/* pages/applySubmit/applySubmit.wxss */
+
+page {
+  height: 100%;
+  width: 100%;
+  background: #f3f4f8;
+}
+
+.hint_box {
+  margin: 60rpx auto;
+  width: 75%;
+  background: #fff;
+  border-radius: 10rpx;
+  padding: 40rpx;
+}
+
+.hint_box .box_tit {
+  font-size: 32rpx;
+  margin-top: 30rpx;
+  font-weight: 600;
+}
+
+.hint_box .box_time {
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 30rpx;
+}
+
+.hint_box .box_war {
+  font-size: 22rpx;
+  color: #4a90e2;
+  margin-top: 30rpx;
+}
+
+.box_btns {
+  margin-top: 40rpx;
+  padding: 0 30rpx;
+}
+
+.box_btn {
+  display: inline-block;
+  font-size: 30rpx;
+  border-radius: 100px;
+  padding: 20rpx 50rpx;
+  font-weight: 600;
+}
+
+.box_btn.back {
+  border: 1px solid #ddd;
+}
+
+.box_btn.check {
+  background: #2da3ff;
+  color: #fff;
+  float: right;
+}

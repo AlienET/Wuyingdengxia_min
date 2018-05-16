@@ -1,0 +1,90 @@
+/* pages/discuss_details/discuss_details.wxss */
+
+.title {
+  font-size: 40rpx;
+  color: #333;
+  font-weight: 600;
+}
+
+.discussion {
+  display: inline-block;
+  font-size: 18rpx;
+  color: #0A93FF;
+  border: 1px solid #0A93FF;
+  border-radius: 5rpx;
+  padding: 5rpx;
+  margin-bottom: 8rpx;
+}
+
+.author {
+  margin: 25rpx 0;
+}
+
+.author_img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.author_img image {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.author_mess {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  margin-left: 15rpx;
+}
+
+.author_mess view {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.author_mess text {
+  font-size: 22rpx;
+  color: #b9b9b9;
+}
+
+.content {
+  font-size: 30rpx;
+  text-indent: 4%;
+  text-align: justify;
+}
+
+.content .content_img {
+  text-indent: 0%;
+}
+
+.content image {
+  width: 100%;
+}
+
+.fill_comment {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #f9f9f9;
+  padding: 15rpx 20rpx;
+}
+
+.fill_comment .fill_in {
+  text-align: center;
+  background: #ededed;
+  display: inline-block;
+  width: 95%;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  padding: 15rpx 0;
+  margin-right: 40rpx;
+}
+
+.fill_comment .fill_in image {
+  width: 26.4rpx;
+  height: 27.8rpx;
+  vertical-align: text-bottom;
+  margin-right: 5rpx;
+}

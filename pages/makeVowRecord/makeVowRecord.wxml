@@ -1,0 +1,72 @@
+<!--pages/makeVowRecord/makeVowRecord.wxml  许愿记录-->
+<view class='record_list'>
+  <view catchtap='onItemTap' class='pad20 ml-md r_item'>
+    <view>
+      <view class='ver-middle inline-block r_tit'>
+        <view class='text-hide ver-middle'>
+          谁能帮我找一找国外的文献，最好啊是大阿斯顿
+        </view>
+      </view>
+      <view class='ver-middle inline-block txt-r'>
+        <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+        <text class='ver-middle r_warning fs-30'>15</text>
+      </view>
+    </view>
+    <view>
+      <view class='ver-middle inline-block r_tit'>
+        <view class='ver-middle r_time'>
+          2018-04-09
+        </view>
+      </view>
+      <view class='ver-middle inline-block txt-r'>
+        <text class='ver-middle r_warning fs24'>许愿中</text>
+      </view>
+    </view>
+  </view>
+  <view class='pad20 ml-md r_item'>
+    <view>
+      <view class='ver-middle inline-block r_tit'>
+        <view class='text-hide ver-middle'>
+          谁能帮我找一找国外的文献，最好啊是大阿斯顿
+        </view>
+      </view>
+      <view class='ver-middle inline-block txt-r'>
+        <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+        <text class='ver-middle r_warning fs-30'>15</text>
+      </view>
+    </view>
+    <view>
+      <view class='ver-middle inline-block r_tit'>
+        <view class='ver-middle r_time'>
+          2018-04-09
+        </view>
+      </view>
+      <view class='ver-middle inline-block txt-r'>
+        <text class='ver-middle r_success fs24'>已实现</text>
+      </view>
+    </view>
+  </view>
+  <view class='pad20 ml-md r_item'>
+    <view>
+      <view class='ver-middle inline-block r_tit'>
+        <view class='text-hide ver-middle'>
+          谁能帮我找一找国外的文献
+        </view>
+      </view>
+      <view class='ver-middle inline-block txt-r'>
+        <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+        <text class='ver-middle r_warning fs-30'>15</text>
+      </view>
+    </view>
+    <view>
+      <view class='ver-middle inline-block r_tit'>
+        <view class='ver-middle r_time'>
+          2018-04-09
+        </view>
+      </view>
+      <view class='ver-middle inline-block txt-r'>
+        <text class='ver-middle r_warning fs24'>许愿中</text>
+      </view>
+    </view>
+  </view>
+</view>

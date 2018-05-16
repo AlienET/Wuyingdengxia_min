@@ -1,0 +1,70 @@
+/* pages/ForSuccessful/ForSuccessful.wxss */
+
+page {
+  background: #f3f4f8;
+}
+
+.suc_box {
+  width: 70%;
+  background: #fff;
+  margin: 100rpx auto;
+  border-radius: 12rpx;
+  padding: 50rpx;
+}
+
+.suc_box>image {
+  width: 402rpx;
+  height: 66rpx;
+}
+
+.suc_gift_name {
+  font-size: 32rpx;
+}
+
+.suc_b {
+  margin: 10rpx 0;
+}
+
+.suc_xx {
+  font-size: 28rpx;
+  color: #999;
+  display: inline-block;
+  width: 100rpx;
+}
+
+.suc_xx_num {
+  color: #fcba2a;
+  font-size: 40rpx;
+}
+
+.suc_xx_b {
+  color: #fcba2a;
+  font-size: 24rpx;
+  margin-left: 10rpx;
+}
+
+.suc_xx_code {
+  font-size: 28rpx;
+  color: #151515;
+}
+
+.txt-center {
+  margin-top: 50rpx;
+}
+
+.suc_btn {
+  display: inline-block;
+  border-radius: 100rpx;
+  font-size: 30rpx;
+  padding: 15rpx 70rpx;
+}
+
+.suc_btn.suc_btn_back {
+  border: 1px solid #ddd;
+  margin-right: 50rpx;
+}
+
+.suc_btn.suc_btn_record {
+  background: #2da3ff;
+  color: #fff;
+}

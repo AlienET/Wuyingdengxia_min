@@ -1,0 +1,81 @@
+/* pages/index/article_detail/article_detail.wxss */
+
+.title {
+  font-size: 40rpx;
+  color: #333;
+  font-weight: 600;
+}
+
+.author {
+  margin: 25rpx 0;
+}
+
+.author_img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.author_img image {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.author_mess {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  margin-left: 15rpx;
+}
+
+.author_mess view {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.author_mess text {
+  font-size: 22rpx;
+  color: #b9b9b9;
+}
+
+.attention {
+  float: right;
+  background: #fcba2a;
+  padding: 8rpx 25rpx;
+  border-radius: 200rpx;
+  font-size: 24rpx;
+  color: #fff;
+  margin-top: 14rpx;
+}
+
+
+
+.fill_comment {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #f9f9f9;
+  padding: 15rpx 20rpx;
+}
+
+.fill_comment .fill_in {
+  text-align: center;
+  background: #ededed;
+  display: inline-block;
+  width: 432rpx;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  padding: 15rpx 0;
+  margin-right: 40rpx;
+}
+
+.fill_comment .fill_in image {
+  width: 26.4rpx;
+  height: 27.8rpx;
+  vertical-align: text-bottom;
+  margin-right: 5rpx;
+}
+.fill_comment .ver-middle{
+  margin-right:40rpx;
+}

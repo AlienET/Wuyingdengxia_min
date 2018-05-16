@@ -1,0 +1,50 @@
+/* pages/giftDetails/giftDetails.wxss */
+
+.gift_name {
+  font-size: 32rpx;
+}
+
+.gift_moon {
+}
+
+.fs22 {
+  font-size: 22rpx;
+}
+
+.moon_color {
+  color: #fcba2a;
+}
+
+.Mnumber {
+  font-size: 40rpx;
+  margin: 0 15rpx;
+}
+
+.add-subtract {
+  color: #979797;
+  border: 1px solid #f1f1f1;
+  vertical-align: middle;
+  width: 46rpx;
+  height: 46rpx;
+  display: inline-block;
+  text-align: center;
+  line-height: 46rpx;
+}
+
+.add-subtract-input {
+  display: inline-block;
+  width: 104rpx;
+  height: 46rpx;
+  border: 1px solid #f1f1f1;
+  vertical-align: middle;
+  font-size: 34rpx;
+  text-align: center;
+  min-height: initial;
+  margin: 0 15rpx;
+}
+
+.notice view {
+  font-size: 28rpx;
+  color: #999;
+  line-height: 20px;
+}

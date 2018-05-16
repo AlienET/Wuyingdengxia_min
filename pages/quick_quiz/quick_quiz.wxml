@@ -1,0 +1,431 @@
+<!--pages/index/quick_quiz/quick_quiz.wxml-->
+<view class='container'>
+  <view class='section mt-n'>
+    <view class='ss' catchtap='onSearchTap'>
+      <image src='/images/icon/icon_search.png'></image>
+      输入想要搜索的关键词
+    </view>
+    <text class='i_blue' catchtap='onQuizTap'>提问</text>
+    <text class='i_blue'>我的提问</text>
+  </view>
+  <view class='mt-sm p_rel'>
+    <image catchtap='onNavEditTap' src='/images/icon/icon_addSheet.png'></image>
+    <view class='sheet section mb-n'>
+      <!-- <text class='active'>头条</text>
+      <text>热门</text>
+      <text>热门</text>
+      <text>热门</text>
+      <text>热门</text>
+      <text>热门</text>
+      <text>热门</text>
+      <text>热门</text>
+      <text>热门</text>
+      <text>啊啊</text> -->
+      <text class=" {{currentTopItem==idx ? 'active' : ''}}" wx:for="{{topTabItems}}" wx:for-index="idx" data-idx="{{idx}}" bindtap="switchTab">{{item}}</text>
+    </view>
+  </view>
+  <swiper style='overflow: hidden;' class="swiper" current="{{currentTopItem}}" bindchange="bindChange" duration="300" style="height:{{swiperHeight}}px">
+    <swiper-item>
+      <scroll-view style='height:100%;' scroll-y="">
+        <view class='ml-md'>
+        <view catchtap='onProblemDetailsTap' class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='quiz_user'>
+            <image class='ver-middle' src='/images/black.jpg'></image>
+            <text class='ver-middle ml-md'>Gallen Meklda</text>
+          </view>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_item_img mt-md'>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_item_img mt-md'>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view style='height:100%;' scroll-y="">
+        <view class='ml-md'>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='quiz_user'>
+            <image class='ver-middle' src='/images/black.jpg'></image>
+            <text class='ver-middle ml-md'>Gallen Meklda</text>
+          </view>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_item_img mt-md'>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            aa我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_item_img mt-md'>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view style='height:100%;' scroll-y="">
+        <view class='ml-md'>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='quiz_user'>
+            <image class='ver-middle' src='/images/black.jpg'></image>
+            <text class='ver-middle ml-md'>Gallen Meklda</text>
+          </view>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_item_img mt-md'>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+        <view class='quiz_item'>
+          <view class='item_title' style='margin-bottom:10rpx;'>
+            <text>手术剪怎么验证是否还能用</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <text class='ver-middle'>15</text>
+            </view>
+          </view>
+          <view class='quiz_item_inner text-hide'>
+            我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么我的手术剪使用的时候总是感觉不怎么好用了，有什么
+          </view>
+          <view class='quiz_item_img mt-md'>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+            <image src='/images/black.jpg'></image>
+          </view>
+          <view class='quiz_foot'>
+            <text>30分钟前   ·   已回答 4</text>
+            <view>
+              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+              <text class='ver-middle'>回答</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

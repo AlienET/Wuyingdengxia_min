@@ -1,0 +1,99 @@
+<!--pages/PersonalCenter/PersonalCenter.wxml  个人中心-->
+<view class='p_rel'>
+  <image src='/images/icon/grzxbg.png' mode='{{bGmode}}'></image>
+  <view class='txt-r'>
+    <image src='/images/icon/yaoqing.png' mode='{{bGmode}}' style='width:36.4rpx;'></image>
+    <image src='/images/icon/xiaoxi.png' mode='{{bGmode}}' style='width:37.4rpx;'></image>
+    <image src='/images/icon/shezhi.png' mode='{{bGmode}}' style='width:37.8rpx;'></image>
+  </view>
+  <view class='pad20' style='padding-left:30rpx;'>
+    <view class='inline-block'>
+      <image src='/images/black.jpg'></image>
+    </view>
+    <view class='inline-block ml-md ver-middle'>
+      <view>
+        <text class='user ver-middle'>李鲫鱼</text>
+        <image class='zs' src='/images/icon/vn.png' mode='{{bGmode}}' style='width:38rpx;'></image>
+      </view>
+      <view class='ylb'>
+        <image src='/images/icon/icon_moon.png' style='width:28rpx;height:28rpx;'></image>
+        <text class='ver-middle'>15456</text>
+      </view>
+      <view class='att'>
+        <view>
+          粉丝
+          <text>312</text>
+        </view>
+        <text>|</text>
+        <view>
+          获赞
+          <text>312</text>
+        </view>
+      </view>
+    </view>
+    <image class='link_r' src='/images/icon/jiantou4.png'></image>
+  </view>
+</view>
+<view class='myFun'>
+  <view catchtap='onMySubmissionTap'>
+    <image src='/images/icon/wodetougaoicon.png'></image>
+    <view>我的投稿</view>
+  </view>
+  <view catchtap='onWishingWellTap'>
+    <image src='/images/icon/xuyuanchiicon.png'></image>
+    <view> 许愿池 </view>
+  </view>
+  <view>
+    <image src='/images/icon/keshishujiaicon.png'></image>
+    <view>科室书架</view>
+  </view>
+  <view catchtap='onSignBoardTap'>
+    <image src='/images/icon/meiriqiandao.png'></image>
+    <view>每日签到</view>
+  </view>
+</view>
+<view class='gap'></view>
+<view class='lists'>
+  <view class='mLi'>
+    <view>
+      <image  mode='{{bGmode}}' src='/images/icon/wodetiwen.png'></image>
+      我的提问
+    </view>
+    <image src='/images/icon/jiantouhui.png'></image>
+  </view>
+  <view class='mLi'>
+    <view>
+      <image  mode='{{bGmode}}' src='/images/icon/wodehuida.png'></image>
+      我的回答
+    </view>
+    <image src='/images/icon/jiantouhui.png'></image>
+  </view>
+  <view class='mLi' catchtap='onMyChangeTap'>
+    <view>
+      <image  mode='{{bGmode}}' src='/images/icon/wodeduihuan.png'></image>
+      我的兑换记录
+    </view>
+    <image src='/images/icon/jiantouhui.png'></image>
+  </view>
+  <view class='mLi'>
+    <view>
+      <image  mode='{{bGmode}}' src='/images/icon/wodeguanzhu.png'></image>
+      我的关注
+    </view>
+    <image src='/images/icon/jiantouhui.png'></image>
+  </view>
+  <view class='mLi'>
+    <view>
+      <image  mode='{{bGmode}}' src='/images/icon/wodehuodong.png'></image>
+      我的活动
+    </view>
+    <image src='/images/icon/jiantouhui.png'></image>
+  </view>
+  <view class='mLi'>
+    <view>
+      <image  mode='{{bGmode}}' src='/images/icon/wodeshoucang.png'></image>
+      我的收藏
+    </view>
+    <image src='/images/icon/jiantouhui.png'></image>
+  </view>
+</view>

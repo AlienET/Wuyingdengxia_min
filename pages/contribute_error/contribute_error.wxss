@@ -1,0 +1,25 @@
+/* pages/contribute_error/contribute_error.wxss */
+
+.cont_state {
+  text-align: center;
+  padding-top: 20%;
+}
+
+.cont_state view {
+  font-size: 36rpx;
+  margin: 15% 0;
+}
+.error{
+  color: #e84f4f;  
+}
+.success{
+  color: #2DA3FF;
+}
+
+.cont_state text {
+  color: #fff;
+  background: #2da3ff;
+  padding: 20rpx 200rpx;
+  font-size: 32rpx;
+  border-radius: 100px;
+}

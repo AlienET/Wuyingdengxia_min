@@ -1,0 +1,75 @@
+<!--pages/SignBoard/SignBoard.wxml 每日签到-->
+<view class='p_rel'>
+  <image src='/images/icon/qiandaobg.png' mode='{{bGmode}}'></image>
+  <view class='txt-center' style='padding-top:50rpx;'>
+    <image class='user_img' src='/images/avatar.png'></image>
+    <view class='moonN'>
+      <text class='ver-middle'>15456</text>
+      <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+    </view>
+  </view>
+</view>
+<view class='signIn'>
+  <view class='ver-middle inline-block'>
+    <view>
+      <text class='ver-middle'>已连续签到1天，领取 </text>
+      <text class='signNum'>5</text>
+      <image class='ver-middle' src='/images/icon/icon_moon.png' style='width:28rpx;height:28rpx;'></image>
+    </view>
+    <view class='mt-sm'>
+      速度领取吧！每周一从新开始哦～
+    </view>
+  </view>
+  <view class='inline-block ver-middle clickSign'>
+    签到领币
+  </view>
+</view>
+<view class='section'>
+  <view class='head_tit'>兑换礼物</view>
+  <view class='mt-sm gifts'>
+    <view catchtap='ongiftDetailsTap' class='txt-center mb-md gift'>
+      <image class='gift_img' src='/images/black.jpg' mode='{{bGmode}}'></image>
+      <view class='txt-l pl-md'>
+        <view class='gift_mess'>星巴克 拿铁1杯</view>
+        <view class='gift_dh'>
+          <text class='dhj'>兑换价</text>
+          <text class='dhNum'>40</text>
+          <image src='/images/icon/icon_moon.png'></image>
+        </view>
+      </view>
+    </view>
+    <view class='txt-center mb-md gift'>
+      <image class='gift_img' src='/images/black.jpg' mode='{{bGmode}}'></image>
+      <view class='txt-l pl-md'>
+        <view class='gift_mess'>星巴克 拿铁1杯</view>
+        <view class='gift_dh'>
+          <text class='dhj'>兑换价</text>
+          <text class='dhNum'>40</text>
+          <image src='/images/icon/icon_moon.png'></image>
+        </view>
+      </view>
+    </view>
+    <view class='txt-center mb-md gift'>
+      <image class='gift_img' src='/images/black.jpg' mode='{{bGmode}}'></image>
+      <view class='txt-l pl-md'>
+        <view class='gift_mess'>星巴克 拿铁1杯</view>
+        <view class='gift_dh'>
+          <text class='dhj'>兑换价</text>
+          <text class='dhNum'>40</text>
+          <image src='/images/icon/icon_moon.png'></image>
+        </view>
+      </view>
+    </view>
+    <view class='txt-center mb-md gift'>
+      <image class='gift_img' src='/images/black.jpg' mode='{{bGmode}}'></image>
+      <view class='txt-l pl-md'>
+        <view class='gift_mess'>星巴克 拿铁1杯</view>
+        <view class='gift_dh'>
+          <text class='dhj'>兑换价</text>
+          <text class='dhNum'>40</text>
+          <image src='/images/icon/icon_moon.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

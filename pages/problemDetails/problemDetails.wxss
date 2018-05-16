@@ -1,0 +1,70 @@
+/* pages/problemDetails/problemDetails.wxss */
+
+.title {
+  font-size: 40rpx;
+  display: inline-block;
+  width: 80%;
+  font-weight: 600;
+}
+
+.moon {
+  display: inline-block;
+  width: 18%;
+  text-align: right;
+}
+
+.moon image {
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: middle;
+}
+
+.moon text {
+  font-size: 30rpx;
+  color: #fcba2a;
+  margin-left: 10rpx;
+  vertical-align: middle;
+}
+
+.time {
+  font-size: 22rpx;
+  color: #b9b9b9;
+  margin: 10rpx 0;
+}
+
+.author image {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  vertical-align: sub;
+}
+
+.author>view {
+  display: inline-block;
+  margin-left: 15rpx;
+}
+
+.author .author_name {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.fill_comment {
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+.fill_comment>view {
+  display: inline-block;
+  background: #ededed;
+  font-size: 26rpx;
+  text-align: center;
+  width: 70%;
+  border-radius: 100rpx;
+  padding: 15rpx 0;
+}
+
+.fill_comment image {
+  vertical-align: middle;
+  margin-left: 40rpx;
+}

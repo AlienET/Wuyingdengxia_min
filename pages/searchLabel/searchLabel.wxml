@@ -1,0 +1,38 @@
+<!--pages/searchLabel/searchLabel.wxml  搜索标签-->
+<view class='seach'>
+  <input type='text' placeholder='搜索标签'></input>
+  <image src='/images/icon/icon_search.png'></image>
+  <text>确定</text>
+</view>
+<checkbox-group class='labelList' bindchange="checkboxChange">
+  <label class='item'>
+    医院管理
+    <!-- <image src='/images/icon/fxN.png'></image> -->
+    <checkbox class='fl-r' value='医院管理' checked=''></checkbox>
+  </label>
+  <label class='item'>
+    医院管理
+    <!-- <image src='/images/icon/fxN.png'></image> -->
+    <checkbox class='fl-r' value='' checked=''></checkbox>
+  </label>
+  <label class='item'>
+    医院管理
+    <!-- <image src='/images/icon/fxN.png'></image> -->
+    <checkbox class='fl-r' value='' checked=''></checkbox>
+  </label>
+  <label class='item'>
+    医院管理
+    <!-- <image src='/images/icon/fxN.png'></image> -->
+    <checkbox class='fl-r' value='' checked=''></checkbox>
+  </label>
+  <label class='item'>
+    医院管理
+    <!-- <image src='/images/icon/fxN.png'></image> -->
+    <checkbox class='fl-r' value='' checked=''></checkbox>
+  </label>
+  <label class='item'>
+    医院管理
+    <!-- <image src='/images/icon/fxN.png'></image> -->
+    <checkbox class='fl-r' value='' checked=''></checkbox>
+  </label>
+</checkbox-group>

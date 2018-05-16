@@ -1,0 +1,58 @@
+<!--pages/addLabel/addLabel.wxml  添加标签-->
+<view catchtap='' class='ssLabel'>
+  <image src='/images/icon/icon_search.png'></image>
+  输入想要搜索标签的关键词
+</view>
+<view class='section'>
+  <view class='t'>
+    已选标签
+  </view>
+  <view>
+    <view class='tag m'>
+      儿科医生
+      <image src='/images/icon/label_delete.png'></image>
+    </view>
+    <view class='tag m'>
+      儿科医生生
+      <image src='/images/icon/label_delete.png'></image>
+    </view>
+    <view class='tag m'>
+      儿科医
+      <image src='/images/icon/label_delete.png'></image>
+    </view>
+    <view class='tag m'>
+      儿科
+      <image src='/images/icon/label_delete.png'></image>
+    </view>
+    <view class='tag m'>
+      儿科医生
+      <image src='/images/icon/label_delete.png'></image>
+    </view>
+    <view class='tag m'>
+      儿科医生
+      <image src='/images/icon/label_delete.png'></image>
+    </view>
+    <view class='tag m'>
+      儿科as医生
+      <image src='/images/icon/label_delete.png'></image>
+    </view>
+  </view>
+  <view class='t'>
+    标签推荐
+  </view>
+  <view>
+    <text class='tag tj'>儿科医生</text>
+    <text class='tag tj'>儿科医生生</text>
+    <text class='tag tj'>儿科医</text>
+    <text class='tag tj'>儿科</text>
+    <text class='tag tj'>儿科医生</text>
+    <text class='tag tj'>儿科医生</text>
+    <text class='tag tj'>儿科医生</text>
+    <text class='tag tj'>儿科医生</text>
+  </view>
+</view>
+<view class='fill_comment'>
+  <input type='text' placeholder='自定义标签' ></input>
+  <text>确认</text>
+  <!--  可用换 #2DA3FF   -->
+</view>

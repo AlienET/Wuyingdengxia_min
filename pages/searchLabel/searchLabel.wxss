@@ -1,0 +1,40 @@
+/* pages/searchLabel/searchLabel.wxss */
+
+.seach {
+  position: relative;
+  padding-left: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #ddd;
+}
+
+.seach input {
+  background: #f6f5f5;
+  display: inline-block;
+  padding: 8rpx 20rpx 8rpx 60rpx;
+  border-radius: 100rpx;
+  font-size: 30rpx;
+  width: 70%;
+  vertical-align: middle;
+  margin-right: 30rpx;
+}
+
+.seach image {
+  width: 27.2rpx;
+  height: 27.2rpx;
+  position: absolute;
+  left: 40rpx;
+  top: 25rpx;
+  z-index: 2;
+}
+
+.seach text {
+  vertical-align: middle;
+  font-size: 34rpx;
+  color: #1397ff;
+}
+.labelList{
+  padding-left: 20rpx;
+}
+.labelList .item{display:block;font-size:30rpx;border-bottom:1px solid #F3F3F3;padding:20rpx 30rpx 20rpx 0;}
+.labelList .item checkbox .wx-checkbox-input{width:32rpx;height:32rpx;border-radius: 50%;}
+ /* .labelList .item checked{border-radius: 50%;}  */

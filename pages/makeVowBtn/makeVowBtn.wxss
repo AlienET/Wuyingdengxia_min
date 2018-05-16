@@ -1,0 +1,17 @@
+/* pages/makeVowBtn/makeVowBtn.wxss */
+
+.mt300 {
+  margin-top: 300rpx;
+}
+
+.mt300 text.ver-middle {
+  color: #40ce7d;
+  font-size: 44rpx;
+  margin-left: 30rpx;
+}
+
+.mv_ts {
+  color: #c5c5c5;
+  font-size: 24rpx;
+  margin-top: 50rpx;
+}

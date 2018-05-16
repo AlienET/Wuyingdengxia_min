@@ -1,0 +1,49 @@
+/* pages/ConferenceDetails/ConferenceDetails.wxss */
+
+.img_tit {
+  background: #f3f4f8;
+  padding: 10rpx 15rpx;
+}
+
+.img_tit image {
+  width: 100%;
+  border-radius: 8rpx;
+}
+
+.meet_ image {
+  vertical-align: middle;
+}
+
+.meet_ text {
+  vertical-align: middle;
+  font-size: 32rpx;
+  margin-left: 20rpx;
+  font-weight: 600;
+}
+
+.meet_inner {
+  font-size: 28rpx;
+  color: #666;
+}
+
+
+
+.meets {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.meet_txt {
+  font-size: 28rpx;
+  color: #666;
+  border-top: 1px solid #f1f1f1;
+  padding-top: 20rpx;
+  margin-top: 20rpx;
+}
+
+.unAll {
+  color: #4895f2;
+  font-size: 26rpx;
+}
+
+

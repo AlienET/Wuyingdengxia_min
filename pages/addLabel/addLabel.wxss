@@ -1,0 +1,50 @@
+/* pages/addLabel/addLabel.wxss */
+
+.ssLabel {
+  font-size: 24rpx;
+  color: #adadad;
+  width: 80%;
+  background: #f6f5f5;
+  border-radius: 100rpx;
+  margin: 20rpx auto;
+  padding: 15rpx 30rpx;
+}
+
+.ssLabel image {
+  width: 27.2rpx;
+  height: 27.2rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.section .t {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-top: 30rpx;
+}
+
+.tag image {
+  width: 26.6rpx;
+  height: 26.6rpx;
+  position: absolute;
+  top: -10rpx;
+  right: -8rpx;
+}
+
+.fill_comment input {
+  background: #ededed;
+  border-radius: 100rpx;
+  display: inline-block;
+  width: 70%;
+  font-size: 26rpx;
+  padding: 5rpx 30rpx;
+  margin-left: 20rpx;
+  vertical-align: middle;
+}
+
+.fill_comment text {
+  font-size: 30rpx;
+  margin-left: 50rpx;
+  color: #b9b9b9;
+  vertical-align: middle;
+}

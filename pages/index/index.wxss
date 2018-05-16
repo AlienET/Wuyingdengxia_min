@@ -1,0 +1,108 @@
+/*  Alien 2018/03/21  */
+
+.container {
+  padding-top: 20rpx;
+}
+
+.RC {
+  width: 46rpx;
+  height: 46rpx;
+  vertical-align: middle;
+}
+
+/*轮播  */
+
+swiper {
+  text-align: center;
+}
+
+swiper swiper-item image {
+  width: 100%;
+}
+
+.contribute {
+  font-size: 17px;
+  color: #2da3ff;
+}
+
+.dis_matter {
+  background-color: #f8f8f8;
+  padding: 15rpx 0;
+}
+
+.sheet .item image {
+  display: block;
+  width: 92rpx;
+  height: 36rpx;
+}
+
+.summarys {
+  margin-left: 20rpx;
+}
+
+.abs_item {
+  padding: 10rpx 20rpx 10rpx 0;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.abs_item_author {
+  margin-bottom: 10rpx;
+}
+
+.abs_item_author image {
+  border-radius: 100%;
+  width: 52rpx;
+  height: 52rpx;
+  vertical-align: middle;
+}
+
+.abs_item_author text {
+  vertical-align: middle;
+  font-size: 26rpx;
+  color: #999;
+  margin-left: 20rpx;
+}
+
+.abs_item_title {
+  font-size: 34rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.abs_item_content image {
+  width: 100%;
+}
+
+.abs_item_content .content_txt {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.summarys .txt-r view {
+  font-size: 22rpx;
+  vertical-align: middle;
+  margin-left: 30rpx;
+  display: inline-block;
+}
+
+.summarys .txt-r view image {
+  vertical-align: middle;
+  margin-right: 8rpx;
+}
+
+.summarys .txt-r view text {
+  vertical-align: middle;
+  color: #bdbdbd;
+}
+
+
+/*  标签切换  */
+.swiper-tab{}  
+.swiper-tab-list{    
+}  
+  
+.swiper-box{  }  
+.swiper-box view{  
+     
+}

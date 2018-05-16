@@ -1,0 +1,7 @@
+/* pages/myNavEdit/myNavEdit.wxss */
+.navbar{
+  display:flex;flex-direction:row;justify-content:space-between;
+}
+.banji{
+  color:#1397FF;
+}
