@@ -29,7 +29,15 @@
           <view class='column_user'>
             <text>{{item.user_name}}</text>
             <view class='column_btn'>
-              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
+
+              <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">
+                <image catchtap='luelue' data-postid='{{index}}' style="vertical-align: middle;" style='width:28rpx;' src="/images/icon/luelue.png" mode='widthFix'></image>
+                <view class="report" wx:if='{{item.jubao}}' catchtap='report' data-postid='{{item}}'>
+                  举报
+                </view>
+              </view>
+
+              <!-- <image style='width:28rpx;height:24rpx;' catchtap='report' data-postid='{{item}}' src='/images/icon/icon_warn.png'></image> -->
               <image wx:if='{{item.is_support > 0}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
               <image wx:else catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
               <text>{{item.support_num}}</text>
