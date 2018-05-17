@@ -10,8 +10,7 @@ Page({
     //讨论详情 接口数据
     aboutData: [], //建一个空数组，用来保存调用接口获取的数据
     // 讨论列 接口数据
-    DiscussListsData: [],
-    asd:2
+    DiscussListsData: []
   },
   // 点赞
   like:function(index){

@@ -30,7 +30,8 @@
             <text>{{item.user_name}}</text>
             <view class='column_btn'>
               <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
-              <image catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
+              <image wx:if='{{item.is_support > 0}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
+              <image wx:else catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
               <text>{{item.support_num}}</text>
             </view>
           </view>
