@@ -10,7 +10,62 @@ Page({
     //讨论详情 接口数据
     aboutData: [], //建一个空数组，用来保存调用接口获取的数据
     // 讨论列 接口数据
-    DiscussListsData: []
+    DiscussListsData: [],
+    // 文章id
+    key_dis_id:'',
+    // 输入框value
+    inputTxt:''
+  },
+  // 评论输入框
+  commentInput:function(event){
+    var that = this;
+    console.log(event.detail.value);
+    wx.request({
+      url: InterfaceUrl + 'post_key_dis',
+      data:{
+        key_dis_id:that.data.key_dis_id,
+        user_id:10003,
+        key_dis_content:event.detail.value
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      success:function(res){
+        console.log(res);
+        console.log(that.data.key_dis_id);
+        
+        wx.request({
+          url: InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + that.data.key_dis_id,
+          data: {},
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: function (res) {
+            var arrReverse = [];
+            var time = '';
+            console.log(res.data.data);
+            for (var i = res.data.data.user_dis.length - 1; i >= 0; i--) {
+              res.data.data.user_dis[i].jubao = false;
+              time = res.data.data.user_dis[i].ctime.substring(0, 19);
+              time = time.replace(/-/g, '/');
+              time = new Date(time).getTime();
+              res.data.data.user_dis[i].ctime = that.getDateDiff(time);
+              
+              arrReverse.push(res.data.data.user_dis[i]);
+            }
+            that.setData({
+              DiscussListsData: arrReverse
+            });
+          }
+        });
+          that.setData({inputTxt:''});
+      },
+      fail:function(error){
+        console.log(errpr);
+      }
+
+    })
   },
   // 点赞
   like: function (index) {
@@ -136,6 +191,9 @@ Page({
   onLoad: function (options) {
     var that = this;
     console.log(options.key_dis_id);
+    that.setData({
+      key_dis_id:options.key_dis_id
+    })
     // get_hot_labelList_detail
     wx.request({
       url: InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + options.key_dis_id,
@@ -145,9 +203,17 @@ Page({
       },
       success: function (res) {
         var arrReverse = [];
-        console.log(res.data.data);
+        var time = '';
         for (var i = res.data.data.user_dis.length - 1; i >= 0; i--) {
+          time = res.data.data.user_dis[i].ctime.substring(0, 19);
+          time = time.replace(/-/g, '/');
+          time = new Date(time).getTime();
           res.data.data.user_dis[i].jubao = false;
+          res.data.data.user_dis[i].ctime = that.getDateDiff(time);
+          
+          console.log(res.data.data);
+          console.log(res.data.data.user_dis[i]);
+          console.log(time);
           arrReverse.push(res.data.data.user_dis[i]);
         }
         that.setData({
@@ -204,5 +270,46 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  getDateDiff : function(dateTimeStamp){
+    var result;
+    var minute = 1000 * 60;
+    var hour = minute * 60;
+    var day = hour * 24;
+    var halfamonth = day * 15;
+    var month = day * 30;
+    var now = new Date().getTime();
+    var diffValue = now - dateTimeStamp;
+    if(diffValue < 0){
+      return;
+    }
+	var monthC = diffValue / month;
+    var weekC = diffValue / (7 * day);
+    var dayC = diffValue / day;
+    var hourC = diffValue / hour;
+    var minC = diffValue / minute;
+    if(monthC>=1) {
+      if (monthC <= 12)
+        result = "" + parseInt(monthC) + "月前";
+      else {
+        result = "" + parseInt(monthC / 12) + "年前";
+      }
+    }
+	else if(weekC>=1) {
+      result = "" + parseInt(weekC) + "周前";
+    }
+	else if(dayC>=1) {
+      result = "" + parseInt(dayC) + "天前";
+    }
+	else if(hourC>=1) {
+      result = "" + parseInt(hourC) + "小时前";
+    }
+	else if(minC>=1) {
+      result = "" + parseInt(minC) + "分钟前";
+    }else{
+      result="刚刚";
+    }
+	
+	return result;
   }
 })

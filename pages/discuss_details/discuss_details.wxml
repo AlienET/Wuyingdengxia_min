@@ -53,10 +53,8 @@
       </view>
     </view>
   </view>
+  
   <view class='fill_comment'>
-    <view class='fill_in'>
-      <image src='/images/icon/icon_discuss.png'></image>
-      参与讨论
-    </view>
+    <input bindconfirm='commentInput' value='{{inputTxt}}' confirm-type='send' maxlength='-1' style='display:inline-block;width:97%;padding:10rpx 0;margin-right:40rpx;font-size:26rpx;' placeholder='参与讨论' placeholder-style='text-align:center;font-size:26rpx;background:#ededed url(/images/icon/icon_discuss.png) no-repeat 40% ;background-size:26.4rpx 27.8rpx;border-radius:100rpx;'></input>
   </view>
 </view>
