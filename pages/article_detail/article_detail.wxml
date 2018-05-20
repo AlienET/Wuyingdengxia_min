@@ -2,99 +2,57 @@
 <view class='container'>
   <view class='section'>
     <view class='title'>
-      只能停诊！三甲医院儿科医生集体累至病倒！
+      {{aboutData.article_title}}
     </view>
     <view class='author'>
       <view class='author_img'>
         <image src='/images/black.jpg'></image>
       </view>
       <view class='author_mess'>
-        <view>Gallen Meklda</view>
-        <text>2018-1-24</text>
+        <view>{{aboutData.article_author}}</view>
+        <text>{{aboutData.ctime}}</text>
       </view>
-      <view class='attention'>关注</view>
+      <view class='attention' catchtap='follow'>{{aboutData.is_follow > 0 ?'已关注':'关注'}}</view>
     </view>
     <view class='content'>
-      <view>“因我院儿科医生超负荷工作，目前均已病倒，自今日起儿科不得不停诊，何日开诊尚不能确定，特此通知，请理解见谅！请就近就诊其他医院儿科门诊，谢谢您的配合！” </view>
-      <view class='content_img'>
-        <image src='/images/black.jpg'></image>
-      </view>
-      <view>“因我院儿科医生超负荷工作，目前均已病倒，自今日起儿科不得不停诊，何日开诊尚不能确定，特此通知，请理解见谅！请就近就诊其他医院儿科门诊，谢谢您的配合！”</view>
+      {{aboutData.article_content}}
       <view class='content_label'>
-        <text>头条</text>
-        <text>儿科医生</text>
-        <text>咨询</text>
+        <text wx:for='{{aboutData.article_tags}}'>{{item}}</text>
       </view>
     </view>
   </view>
   <view style='height:30rpx;background-color:#F3F4F8;'></view>
   <view class='comment'>
     <view class='comment_all'>全部评论
-      <text>324</text>
+      <text>{{commentData.length}}</text>
     </view>
     <view class='comment_list'>
-      <view class='column'>
+      <view class='column' wx:for='{{commentData}}'>
         <view class='column_img'>
           <image src='/images/black.jpg'></image>
         </view>
         <view class='column_inner'>
           <view class='column_user'>
-            <text>Gallen Meklda</text>
+            <text>{{item.user_name}}</text>
             <view class='column_btn'>
-              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
-              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>8</text>
+
+              <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">
+                <image catchtap='luelue' data-postid='{{index}}' style="vertical-align: middle;" style='width:28rpx;' src="/images/icon/luelue.png" mode='widthFix'></image>
+                <view class="report" wx:if='{{item.jubao}}' catchtap='report' data-postid='{{item}}'>
+                  举报
+                </view>
+              </view>
+
+              <image wx:if='{{item.is_support}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
+              <image wx:else catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
+              <text>{{item.support_num}}</text>
             </view>
           </view>
           <view class='column_text'>
-            领导去顶班啊！！
+            {{item.comment_content}}
           </view>
           <view class='column_tr'>
-            <text class='column_time'>30分钟前 ·</text>
-            <text class='column_replay'>回复</text>
-          </view>
-        </view>
-      </view>
-      <view class='column'>
-        <view class='column_img'>
-          <image src='/images/black.jpg'></image>
-        </view>
-        <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
-              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>8</text>
-            </view>
-          </view>
-          <view class='column_text'>
-            领导去顶班啊！！
-          </view>
-          <view class='column_tr'>
-            <text class='column_time'>30分钟前 ·</text>
-            <text class='column_replay'>回复</text>
-          </view>
-        </view>
-      </view>
-      <view class='column'>
-        <view class='column_img'>
-          <image src='/images/black.jpg'></image>
-        </view>
-        <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
-              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>8</text>
-            </view>
-          </view>
-          <view class='column_text'>
-            领导去顶班啊！！
-          </view>
-          <view class='column_tr'>
-            <text class='column_time'>30分钟前 ·</text>
+            <text class='column_time'>{{item.ctime}} ·</text>
             <text class='column_replay'>回复</text>
           </view>
         </view>
@@ -102,12 +60,13 @@
     </view>
   </view>
   <view class='fill_comment'>
-    <view class='fill_in'>
-      <image src='/images/icon/icon_discuss.png'></image>
-      参与评论
-    </view>
-    <image class='ver-middle' src='/images/icon/icon_dz.png' style='width:44rpx;height:44rpx;'></image>
-    <image class='ver-middle' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
-    <image class='ver-middle' src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;'></image>
+    <input bindconfirm='commentInput' value='{{inputTxt}}' confirm-type='send' maxlength='-1' style='display:inline-block;width:432rpx;padding:10rpx 0;margin-right:40rpx;font-size:26rpx;vertical-align:middle' placeholder='参与讨论' placeholder-style='text-align:center;font-size:26rpx;background:#ededed url(/images/icon/icon_discuss.png) no-repeat 30% ;background-size:26.4rpx 27.8rpx;border-radius:100rpx;'></input>
+    <image catchtap='wzdz' wx:if='{{aboutData.is_support > 0}}' class='ver-middle' src='/images/icon/ydz.png' style='width:44rpx;height:44rpx;'></image>
+    <image catchtap='wzdz' wx:else class='ver-middle' src='/images/icon/icon_dz.png' style='width:44rpx;height:44rpx;'></image>
+
+    <image catchtap='wzsc' wx:if='{{aboutData.is_collection > 0}}' class='ver-middle' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
+    <image catchtap='wzsc' wx:else class='ver-middle' src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;'></image>
+    
+    <image catchtap='onShareTop' class='ver-middle' src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;'></image>
   </view>
 </view>

@@ -1,83 +1,61 @@
 <!--pages/index//meeting_mess/meeting_mess.wxml-->
 <view class='section'>
   <view class='action'>
-    <view bindtap="onMessTap" class='{{flag==0?"active":""}}'>
+    <view bindtap="onBackTap" data-current="0" class='{{flag==0?"active":""}}'>
       会议资讯
       <view class='default'>
         <view></view>
       </view>
     </view>
-    <view bindtap="onBackTap" class='{{flag==1?"active":""}}'>
+    <view bindtap="onBackTap" data-current="1" class='{{flag==1?"active":""}}'>
       往期回顾
       <view class='default'>
         <view></view>
       </view>
     </view>
   </view>
-  <view class='meeting_mess {{flag===1?"hide":""}}' >
-    <view>
-      <label>
-        <input type='text' placeholder='输入想要搜索的关键词'></input>
-      </label>
-    </view>
-    <view class='mt-md'>
-      <view catchtap='onConferenceDetailsTap' class='mb-md'>
-        <image src='/images/black.jpg'></image>
-        <view class='meeting_msg'>
-          <text class='meet_tit'>苏州医疗器械装备交流会</text>
-          <text class='meet_state z'>报名中</text>
-          <view>2018年4月28日</view>
+  <swiper current='{{flag}}' class='meeting_mess' style="height:{{300*replayList.length}}px" bindchange='bindChange'>
+    <swiper-item>
+    <scroll-view scroll-y='true'>
+      <view class='meeting_mess'>
+        <view>
+          <label>
+            <input type='text' placeholder='输入想要搜索的关键词'></input>
+          </label>
+        </view>
+        <view class='mt-md'>
+          <view catchtap='onConferenceDetailsTap' class='mb-md' wx:for='{{meetingList}}'>
+            <image src='/images/black.jpg'></image>
+            <view class='meeting_msg'>
+              <text class='meet_tit'>{{item.meet_title}}</text>
+              <text class='meet_state z'>报名中</text>
+              <view>{{item.ctime}}</view>
+            </view>
+          </view>
+          <!-- .w 未开始 .z 报名中 -->
         </view>
       </view>
-      <view class='mb-md'>
-        <image src='/images/black.jpg'></image>
-        <view class='meeting_msg'>
-          <text class='meet_tit'>苏州医疗器械装备交流会</text>
-          <text class='meet_state w'>未开始</text>
-          <view>2018年4月28日</view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <view class='meeting_mess'>
+        <view>
+          <label>
+            <input type='text' placeholder='输入想要搜索的关键词'></input>
+          </label>
+        </view>
+        <view class='mt-md'>
+          <view catchtap='onVideoListTap' class='mb-md' wx:for='{{replayList}}'>
+            <image src='/images/black.jpg'></image>
+            <view class='meeting_msg'>
+              <text class='meet_tit'>{{item.replay_title}}</text>
+              <text class='meet_state w'>已结束</text>
+              <!-- <view>2018年4月28日 至 2018年4月28日</view> -->
+              <view>{{item.ctime}}</view>
+            </view>
+          </view>
         </view>
       </view>
-      <view class='mb-md'>
-        <image src='/images/black.jpg'></image>
-        <view class='meeting_msg'>
-          <text class='meet_tit'>苏州医疗器械装备交流会</text>
-          <text class='meet_state z'>报名中</text>
-          <view>2018年4月28日</view>
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class='meeting_mess {{flag===0?"hide":""}}' >
-    <view>
-      <label>
-        <input type='text' placeholder='输入想要搜索的关键词'></input>
-      </label>
-    </view>
-    <view class='mt-md'>
-      <view catchtap='onVideoListTap' class='mb-md'>
-        <image src='/images/black.jpg'></image>
-        <view class='meeting_msg'>
-          <text class='meet_tit'>苏州医疗器械装备交流会</text>
-          <text class='meet_state w'>已结束</text>
-          <view>2018年4月28日 至 2018年4月28日</view>
-        </view>
-      </view>
-      <view class='mb-md'>
-        <image src='/images/black.jpg'></image>
-        <view class='meeting_msg'>
-          <text class='meet_tit'>苏州医疗器械装备交流会</text>
-          <text class='meet_state w'>已结束</text>
-          <view>2018年4月28日 至 2018年4月28日</view>
-        </view>
-      </view>
-      <view class='mb-md'>
-        <image src='/images/black.jpg'></image>
-        <view class='meeting_msg'>
-          <text class='meet_tit'>苏州医疗器械装备交流会</text>
-          <text class='meet_state w'>已结束</text>
-          <view>2018年4月28日 至 2018年4月28日</view>
-        </view>
-      </view>
-    </view>
-  </view>
+    </swiper-item>
+  </swiper>
 </view>

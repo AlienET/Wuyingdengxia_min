@@ -11,13 +11,13 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     // ------------------------------------------------------------------------------------
     // 所有swiper内容告诉
-    swiperInnerHeight:[],
+    swiperInnerHeight: [],
     // 首页轮播banner图
     bannerList: [],
     // 首页标签列
     labellist: [],
     // 当前用户id
-    userid: '1',
+    userid: '10003',
     // 正在讨论列
     discusslist: [],
     winWidth: 0,
@@ -40,9 +40,9 @@ Page({
   // 文章详情页
   onArticleDetailTap: function (item) {
     wx.navigateTo({
-      url: '../article_detail/article_detail?articleid=' + item.currentTarget.dataset.postid.article_id
+      url: '../article_detail/article_detail?articleid=' + item.currentTarget.dataset.postid.article_id + '&userid=' + this.data.userid
     });
-    console.log(item.currentTarget.dataset.postid.article_id)
+    console.log(item.currentTarget.dataset.postid.article_id);
   },
   // 讨论详情
   onDiscussDetailsTap: function (event) {
@@ -112,7 +112,7 @@ Page({
      * 滑动切换tab 
      */
   bindChange: function (e) {
-    
+
     var that = this;
     that.setData({ currentTab: e.detail.current });
     // 文章列
@@ -227,7 +227,7 @@ Page({
     */
     wx.getSystemInfo({
       success: function (res) {
-        
+
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
