@@ -10,29 +10,122 @@ Page({
     // 用户id
     userid:'',
     // 导航推荐
-    NavRecommendation:[]
+    tjlabel:[],
+    // 我的导航
+    mylabel:[],
+    // 是否编辑
+    isEdit:false
   },
-
+  // 换一批 刷新导航推荐
+  refresh:function(){
+    var that = this;
+    // 导航推荐
+    wx.request({
+      url: InterfaceUrl + 'get_labelList_re', //仅为示例，并非真实的接口地址
+      data: {
+        user_id: that.data.userid,
+        type: 2,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data.data);
+        that.setData({
+          tjlabel: res.data.data,
+        });
+      }
+    });
+  },
+  // 删除 我的导航中某一项
+  deleteItem:function(index){
+    var that = this;
+    console.log(index.currentTarget.dataset.postid);
+    var mylabel = that.data.mylabel;
+    mylabel.splice(index.currentTarget.dataset.postid,1);
+    console.log(mylabel)
+    that.setData({
+      mylabel:mylabel
+    })
+  },
+  // 编辑
+  Edit:function(){
+    var that = this;
+    var is_edit = !that.data.isEdit
+    that.setData({
+      isEdit:is_edit
+    })
+  },
+  // 从 导航推荐 中选取 添加向 我的导航
+  addlabel:function(item){
+    var that = this;
+    var item = item.currentTarget.dataset.item;
+    if (that.data.isEdit){
+      wx.request({
+        url: InterfaceUrl + 'post_addMyLabel',
+        data:{
+          userId:that.data.userid,
+          labelIds:item
+        },
+        header: { 'content-type': 'application/x-www-form-urlencoded'},
+        method:'POST',
+        success:function(res){
+          console.log(res);
+          // 我的导航标签
+          wx.request({
+            url: InterfaceUrl + 'get_labelList_re',
+            data: {
+              user_id: that.data.userid,
+              type: 1,
+            },
+            header: { 'content-type': 'application/json' },
+            success: function (res) {
+              console.log(res.data.data);
+              that.setData({ mylabel: res.data.data })
+            }
+          });
+        }
+      })
+    }else{
+      return;
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
+    that.setData({userid:options.userid});
+    // 我的导航标签
+    wx.request({
+      url: InterfaceUrl + 'get_labelList_re',
+      data:{
+        user_id: that.data.userid,
+        type:1,
+      },
+      header: { 'content-type': 'application/json'},
+      success:function(res){
+        console.log(res.data.data);
+        that.setData({mylabel:res.data.data})
+      }
+    });
     // 导航推荐
-    // wx.request({
-    //   url: InterfaceUrl + 'get_labelList?user_id=', //仅为示例，并非真实的接口地址
-    //   data: {},
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success: function (res) {
-    //     that.setData({
-    //       NavRecommendation: res.data.data,
-    //     });
-    //     console.log('导航推荐');
-    //     console.log(that.data.NavRecommendation);
-    //   }
-    // });
+    wx.request({
+      url: InterfaceUrl + 'get_labelList_re', //仅为示例，并非真实的接口地址
+      data: {
+        user_id:that.data.userid,
+        type:2,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data.data);
+        that.setData({
+          tjlabel: res.data.data,
+        });
+      }
+    });
   },
 
   /**

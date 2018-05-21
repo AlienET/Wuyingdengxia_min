@@ -14,7 +14,7 @@
       </view>
     </view>
   </view>
-  <swiper current='{{flag}}' class='meeting_mess' style="height:{{300*replayList.length}}px" bindchange='bindChange'>
+  <swiper current='{{flag}}' class='meeting_mess' style="height:{{310*replayList.length}}px" bindchange='bindChange'>
     <swiper-item>
     <scroll-view scroll-y='true'>
       <view class='meeting_mess'>
@@ -28,8 +28,9 @@
             <image src='/images/black.jpg'></image>
             <view class='meeting_msg'>
               <text class='meet_tit'>{{item.meet_title}}</text>
-              <text class='meet_state z'>报名中</text>
-              <view>{{item.ctime}}</view>
+              <text wx:if='{{item.isfinish > 0}}' class='meet_state z'>报名中</text>
+              <text wx:else class='meet_state w'>未开始</text>
+              <view>{{item.begin_time}}</view>
             </view>
           </view>
           <!-- .w 未开始 .z 报名中 -->
@@ -51,7 +52,7 @@
               <text class='meet_tit'>{{item.replay_title}}</text>
               <text class='meet_state w'>已结束</text>
               <!-- <view>2018年4月28日 至 2018年4月28日</view> -->
-              <view>{{item.ctime}}</view>
+              <view>{{item.begin_time}}</view>
             </view>
           </view>
         </view>

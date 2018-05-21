@@ -2,23 +2,17 @@
 <view class='section'>
   <view class='navbar'>
     <text class='fs-30'>我的导航</text>
-    <text class='fs-30 banji'>编辑</text>
+    <text class='fs-30 banji' catchtap='Edit'>编辑</text>
   </view>
   <view>
-    <text class='tag m'>儿科医生</text>
-    <text class='tag m'>医生</text>
-    <text class='tag m'>儿科医生</text>
-    <text class='tag m'>科医生</text>
-    <text class='tag m'>儿医生</text>
-    <text class='tag m'>儿科医生</text>
+    <view class='tag m' wx:for='{{mylabel}}'>
+      {{item.key_name}}
+      <image wx:if='{{isEdit}}' catchtap='deleteItem' data-postid='{{index}}' style='position:absolute;width:26.6rpx;height:26.6rpx;top:-5rpx;right:-5rpx;' src='/images/icon/label_delete.png'></image>
+    </view>
   </view>
   <view class='navbar mt-md'>
     <text class='fs-30 ver-middle'>导航推荐</text>
-    <image src='/images/icon/huanyipi.png' class='ver-middle' style='height:30rpx;width:120rpx;'></image>
+    <image catchtap='refresh' src='/images/icon/huanyipi.png' class='ver-middle' style='height:30rpx;width:120rpx;'></image>
   </view>
-  <text class='tag tj'>儿科医生</text>
-  <text class='tag tj'>儿啊科医生</text>
-  <text class='tag tj'>儿医生</text>
-  <text class='tag tj'>医生</text>
-  <text class='tag tj'>儿科医生</text>
+  <text catchtap='addlabel' data-item='{{item}}' class='tag tj' wx:for='{{tjlabel}}'>{{item.key_name}}</text>
 </view>

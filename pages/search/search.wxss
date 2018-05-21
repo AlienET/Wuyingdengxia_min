@@ -35,10 +35,12 @@ page {
 }
 
 .top_search text {
+  display: inline-block;
   background: #fff;
   padding: 8rpx 30rpx;
   border-radius: 100rpx;
   margin-right: 25rpx;
+  margin-bottom: 25rpx;
 }
 
 .past_search_tit text{

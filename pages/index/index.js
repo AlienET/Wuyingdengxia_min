@@ -33,7 +33,7 @@ Page({
   // 搜索页
   onSearchTap: function () {
     wx.navigateTo({
-      url: '../search/search'
+      url: '../search/search?userid=' + this.data.userid
     })
   },
 
@@ -61,7 +61,7 @@ Page({
   // 我的导航编辑
   onNavEditTap: function () {
     wx.navigateTo({
-      url: '../myNavEdit/myNavEdit',
+      url: '../myNavEdit/myNavEdit?userid=' + this.data.userid,
     })
   },
   // 活动页

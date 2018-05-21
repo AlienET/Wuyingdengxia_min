@@ -14,14 +14,12 @@
       热门搜索
     </view>
     <view class='top_search'>
-     <text>医院管理</text>
-     <text>手术器械</text>
-     <text>评选</text>
+     <text wx:for='{{hotWords}}'>{{item.search_content}}</text>
     </view>
     <view class='past_search'>
       <view class='past_search_tit'>
         <text>搜索历史</text>
-        <view>
+        <view catchtap='deleteall'>
           <image src='/images/icon/icon_delete.png'></image>
           清除历史
         </view>
@@ -29,14 +27,9 @@
     </view>
   </view>
   <view class='past_search_list'>
-    <view>
-      医院
-    </view>
-    <view>
-      会议活动
-    </view>
-    <view>
-      医院
+    <view wx:for='{{searchHistory}}'>
+      {{item.search_content}}
+      <text catchtap='deleteSome' data-postid='{{item}}' style='float:right;font-size:30rpx;'>×</text>
     </view>
   </view>
 </view>
