@@ -2,134 +2,75 @@
 <view class='section'>
   <view>
     <view class='title'>
-      手术剪怎么验证是否还能用
+      {{aboutData.question_title}}
     </view>
     <view class='moon'>
       <image src='/images/icon/icon_moon.png'></image>
-      <text>15</text>
+      <text>{{aboutData.moon_cash}}</text>
     </view>
   </view>
   <!--  匿名  -->
-   <view class='time hide'>
-    2018-1-24
-  </view> 
+  <view wx:if='{{aboutData.is_public == 0}}' class='time'>
+    {{aboutData.ctime}}
+  </view>
   <!--  未匿名  -->
-  <view class='author mt-md'>
-    <image src='/images/black.jpg'></image>
+  <view wx:else class='author mt-md'>
+    <image src='{{aboutData.headimg}}'></image>
     <view>
-      <view class='author_name'>Gallen Meklda</view>
-      <view class='time'>2018-1-24</view>
+      <view class='author_name'>{{aboutData.username}}</view>
+      <view class='time'>{{aboutData.ctime}}</view>
     </view>
   </view>
   <view class='content mt-md'>
-    <view>“因我院儿科医生超负荷工作，目前均已病倒，自今日起儿科不得不停诊，何日开诊尚不能确定，特此通知，请理解见谅！请就近就诊其他医院儿科门诊，谢谢您的配合！”
-    </view>
-    <view>
-      由于孩子身体发育不成熟，病情变化快，又不会准确表达，因此诊断风险高，而家长们又对孩子分外重视发生在儿科医生的医疗纠纷和投诉特别多。一名儿科医生表示，不少孩子是夜晚来就诊，而夜晚往往医生比较少，有时候忙不过来，家长就医心切就会以为医生怠慢，投诉甚至动手殴打医生。
-    </view>
+    {{aboutData.question_content}}
     <view class='content_label'>
-      <text>手术</text>
-      <text>器械管理</text>
-      <text>器材</text>
+      <text wx:for='{{aboutData.question_tags}}'>{{item}}</text>
     </view>
   </view>
 </view>
 <view class='gap'></view>
 <view class='comment'>
-  <view class='comment_all'>全部回答 324</view>
-  <view class='comment_list'>
-    <view class='column'>
+  <view class='comment_all'>全部回答 {{commentData.length}}</view>
+  <view wx:if='{{commentData.length == 0}}' style='text-align:center;color:#999999;font-size:30rpx;padding:30rpx;'>
+    暂无回答 . . .
+  </view> 
+  <view wx:else class='comment_list'>
+    <view class='column' wx:for='{{commentData}}'>
       <view class='column_img'>
-        <image src='/images/black.jpg'></image>
+        <image src='{{item.headimg}}'></image>
       </view>
       <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
-              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>8</text>
+        <view class='column_user'>
+          <text>{{item.user_name}}</text>
+          <view class='column_btn'>
+            <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">
+              <image catchtap='luelue' data-postid='{{index}}' style="vertical-align: middle;" style='width:28rpx;' src="/images/icon/luelue.png" mode='widthFix'></image>
+              <view class="report" wx:if='{{item.jubao}}' catchtap='report' data-postid='{{item}}'>
+                举报
+              </view>
             </view>
-          </view>
-          <view class='column_text'>
-            领导去顶班啊！！
-          </view>
-          <view class='column_tr'>
-            <text class='column_time'>30分钟前 ·</text>
-            <text class='column_replay'>回复</text>
+
+            <image wx:if='{{item.is_support > 0}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
+            <image wx:else catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
+            <text>{{item.support_num}}</text>
           </view>
         </view>
-    </view>
-    <view class='column'>
-      <view class='column_img'>
-        <image src='/images/black.jpg'></image>
+        <view class='column_text'>
+          {{item.answer_content}}
+        </view>
+        <view class='column_tr'>
+          <text class='column_time'>{{item.ctime}} ·</text>
+          <text class='column_replay'>回复</text>
+        </view>
       </view>
-      <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
-              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>8</text>
-            </view>
-          </view>
-          <view class='column_text'>
-            领导去顶班啊！！
-          </view>
-          <view class='column_tr'>
-            <text class='column_time'>30分钟前 ·</text>
-            <text class='column_replay'>回复</text>
-          </view>
-        </view>
-    </view>
-    <view class='column'>
-      <view class='column_img'>
-        <image src='/images/black.jpg'></image>
-      </view>
-      <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
-              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>8</text>
-            </view>
-          </view>
-          <view class='column_text'>
-            领导去顶班啊！！
-          </view>
-          <view class='column_tr'>
-            <text class='column_time'>30分钟前 ·</text>
-            <text class='column_replay'>回复</text>
-          </view>
-        </view>
-    </view>
-    <view class='column'>
-      <view class='column_img'>
-        <image src='/images/black.jpg'></image>
-      </view>
-      <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image style='width:28rpx;height:24rpx;' src='/images/icon/icon_warn.png'></image>
-              <image style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>8</text>
-            </view>
-          </view>
-          <view class='column_text'>
-            领导去顶班啊！！
-          </view>
-          <view class='column_tr'>
-            <text class='column_time'>30分钟前 ·</text>
-            <text class='column_replay'>回复</text>
-          </view>
-        </view>
     </view>
   </view>
   <view class='fill_comment'>
-    <view>我来回答</view>
-      <image src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
-    <image src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;'></image>
+     <view style='vertical-align:middle;'>
+     <input bindconfirm='commentInput' value='{{inputTxt}}' placeholder='我来回答' maxlength='-1' confirm-type='send' style='font-size:26rpx;'></input> 
+     </view> 
+    <image wx:if='{{aboutData.is_collection}}' catchtap='wzsc' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
+    <image wx:else catchtap='wzsc' src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;'></image>
+    <image catchtap='onShareTop' src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;'></image>
   </view>
 </view>

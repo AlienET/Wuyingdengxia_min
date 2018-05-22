@@ -30,13 +30,13 @@
   <!--
      current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange"
   -->
-  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:1000px">
+  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{127*tabActiveKeyId.length}}px">
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
       <scroll-view style='height:100%;' scroll-y=" ">
       <view class='ml-md'>
-        <view catchtap='onProblemDetailsTap' class='quiz_item' wx:for='{{tabActiveKeyId}}'>
+        <view catchtap='onProblemDetailsTap'  class='quiz_item' wx:for='{{tabActiveKeyId}}' data-quesid='{{item.question_id}}'>
           <view>
-            <image src='/images/black.jpg' style='border-radius:100%;width:52rpx;height:52rpx;vertical-align:middle;'></image>
+            <image src='{{item.headimg}}' style='border-radius:100%;width:52rpx;height:52rpx;vertical-align:middle;'></image>
             <text style='font-size:26rpx;color:#999;vertical-align:middle;margin-left:15rpx;'>{{item.user_name}}</text>
           </view>
           <view class='item_title' style='margin-bottom:10rpx;'>

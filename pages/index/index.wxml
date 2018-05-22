@@ -32,7 +32,7 @@
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
       <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}' ><!-- wx:if='{{tabActiveKeyId}}'  -->
         <view class='abs_item_author'>
-          <image src='/images/black.jpg'></image>
+          <image src='{{item.heading?item.heading:"/images/black.jpg"}}'></image>
           <text>{{item.article_author}}</text>
         </view>
         <view>

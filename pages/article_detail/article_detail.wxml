@@ -6,7 +6,7 @@
     </view>
     <view class='author'>
       <view class='author_img'>
-        <image src='/images/black.jpg'></image>
+        <image src='{{aboutData.heading}}'></image>
       </view>
       <view class='author_mess'>
         <view>{{aboutData.article_author}}</view>
@@ -29,7 +29,7 @@
     <view class='comment_list'>
       <view class='column' wx:for='{{commentData}}'>
         <view class='column_img'>
-          <image src='/images/black.jpg'></image>
+          <image src='{{item.heading?heading:"/images/black.jpg"}}'></image>
         </view>
         <view class='column_inner'>
           <view class='column_user'>

@@ -24,7 +24,7 @@
           </label>
         </view>
         <view class='mt-md'>
-          <view catchtap='onConferenceDetailsTap' class='mb-md' wx:for='{{meetingList}}'>
+          <view catchtap='onConferenceDetailsTap' data-postid='{{item.meet_id}}' class='mb-md' wx:for='{{meetingList}}'>
             <image src='/images/black.jpg'></image>
             <view class='meeting_msg'>
               <text class='meet_tit'>{{item.meet_title}}</text>

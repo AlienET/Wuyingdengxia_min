@@ -39,10 +39,12 @@ Page({
     })
   },
   //  会议咨询详情
-  onConferenceDetailsTap: function () {
+  onConferenceDetailsTap: function (e) {
+    var that = this;
     wx.navigateTo({
-      url: '../ConferenceDetails/ConferenceDetails',
+      url: '../ConferenceDetails/ConferenceDetails?meet_id='+e.currentTarget.dataset.postid,
     })
+
   },
   /** 
     * 滑动切换tab 
@@ -70,7 +72,7 @@ Page({
         });
       }
     });
-    // 获取列表
+    // 会议资讯列
     wx.request({
       url: InterfaceUrl + 'get_allmeeting',
       data:{},
@@ -80,6 +82,7 @@ Page({
         that.setData({ meetingList:res.data.data})
       }
     });
+    // 往期回顾列
     wx.request({
       url: InterfaceUrl + 'get_allreplay',
       data:{},

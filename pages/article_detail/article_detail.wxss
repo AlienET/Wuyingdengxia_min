@@ -79,14 +79,4 @@
   margin-right: 40rpx;
 }
 
-.report {
-  position: absolute;
-  border: 1rpx solid #b9b9b9;
-  color: #b9b9b9;
-  font-size: 22rpx;
-  bottom: 9.5rpx;
-  right: 40rpx;
-  width: 70rpx;
-  text-align: center;
-  border-radius: 5rpx;
-}
+

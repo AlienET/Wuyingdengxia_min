@@ -85,15 +85,16 @@ Page({
   },
 
   // 问题详情
-  onProblemDetailsTap: function () {
+  onProblemDetailsTap: function (q) {
+    console.log(q.currentTarget.dataset.quesid)
     wx.navigateTo({
-      url: '../problemDetails/problemDetails',
+      url: '../problemDetails/problemDetails?quesid=' + q.currentTarget.dataset.quesid + '&userid=' + this.data.userid ,
     })
   },
   //搜索
   onSearchTap: function () {
     wx.navigateTo({
-      url: '../search/search',
+      url: '../search/search?userid=' + this.data.userid
     })
   },
   /**

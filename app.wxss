@@ -395,3 +395,15 @@ body, view, text {
 .tag.tj {
   border: 1px solid #ddd;
 }
+/*举报  */
+.report {
+  position: absolute;
+  border: 1rpx solid #b9b9b9;
+  color: #b9b9b9;
+  font-size: 22rpx;
+  bottom: 9.5rpx;
+  right: 40rpx;
+  width: 70rpx;
+  text-align: center;
+  border-radius: 5rpx;
+}
