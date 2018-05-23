@@ -24,7 +24,8 @@
       <!--
        <text wx:for='{{labellist}}' class="swiper-tab-list {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" bindtap="swichNav">{{item.key_name}}</text>
       -->
-      <text class=" {{currentTab==index ? 'active' : ''}}" wx:for='{{labellist}}' data-current="{{index}}" bindtap="swichNav">{{item.key_name}}</text>
+      <text class=" {{currentTab==index ? 'active' : ''}}" wx:for='{{labellist}}' data-current="{{index}}" bindtap="swichNav">{{item.
+      name}}</text>
     </view>
   </view>
   <!--

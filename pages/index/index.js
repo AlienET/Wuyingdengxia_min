@@ -94,7 +94,7 @@ Page({
       });
       // 文章列
       wx.request({
-        url: InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.target.dataset.current].key_name + '&sortby=1',
+        url: InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.target.dataset.current].name + '&sortby=1',
         data: {},
         header: {
           'content-type': 'application/json' // 默认值
@@ -117,7 +117,7 @@ Page({
     that.setData({ currentTab: e.detail.current });
     // 文章列
     wx.request({
-      url: InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.detail.current].key_name + '&sortby=1',
+      url: InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.detail.current].name + '&sortby=1',
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -176,7 +176,7 @@ Page({
     });
     // 标签列表
     wx.request({
-      url: InterfaceUrl + 'get_labelList?user_id' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
+      url: InterfaceUrl + 'get_labels?user_id' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -186,7 +186,7 @@ Page({
           labellist: res.data.data,
           currentTab: 0
         });
-        var initActive = that.data.labellist[0].key_name;
+        var initActive = that.data.labellist[0].name;
         console.log(initActive)
         // 文章列
         wx.request({

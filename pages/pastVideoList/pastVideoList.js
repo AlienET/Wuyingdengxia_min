@@ -1,4 +1,6 @@
 // pages/pastVideoList/pastVideoList.js
+// 接口URL
+const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
 Page({
 
   /**
@@ -17,7 +19,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var replay_id = options.replay_id;
+    wx.request({
+      url: InterfaceUrl + 'get_allsub_replay?replay_id=' + options.replay_id,
+      data:{},
+      success:function(res){
+        console.log(res.data.data)
+      }
+    })
   },
 
   /**

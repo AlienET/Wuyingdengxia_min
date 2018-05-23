@@ -35,7 +35,7 @@ Page({
       });
       // 文章列
       wx.request({
-        url: InterfaceUrl + 'get_question_bylabel?label=' + that.data.labellist[e.target.dataset.current].key_name,
+        url: InterfaceUrl + 'get_question_bylabel?label=' + that.data.labellist[e.target.dataset.current].name,
         data: {},
         header: {
           'content-type': 'application/json' // 默认值
@@ -46,7 +46,7 @@ Page({
           });
         }
       });
-      console.log(this.data.labellist[e.target.dataset.current].key_name);
+      console.log(this.data.labellist[e.target.dataset.current].name);
     }
   },
   /** 
@@ -58,7 +58,7 @@ Page({
     that.setData({ currentTab: e.detail.current });
     // 文章列
     wx.request({
-      url: InterfaceUrl + 'get_question_bylabel?label=' + that.data.labellist[e.detail.current].key_name ,
+      url: InterfaceUrl + 'get_question_bylabel?label=' + that.data.labellist[e.detail.current].name ,
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -104,7 +104,7 @@ Page({
     var that =this;
     // 标签列表
     wx.request({
-      url: InterfaceUrl + 'get_labelList?user_id' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
+      url: InterfaceUrl + 'get_labels?userid' + this.data.userid + '&type=3', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -114,7 +114,7 @@ Page({
           labellist: res.data.data,
           currentTab: 0
         });
-        var initActive = that.data.labellist[0].key_name;
+        var initActive = that.data.labellist[0].name;
         console.log(initActive)
         // 文章列
         wx.request({

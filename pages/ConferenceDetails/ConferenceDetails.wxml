@@ -7,20 +7,20 @@
     <image src='/images/icon/didian.png' style='width:36rpx;height:36rpx;'></image>
     <text>会议时间</text>
   </view>
-  <text class='meet_inner'>2018-03-21 至 2018-03-21</text>
+  <text class='meet_inner'><!--2018-03-21 至 2018-03-21-->{{aboutData.begin_time}}</text>
   <view class='meet_ mt-md'>
     <image src='/images/icon/time.png' style='width:36rpx;height:36rpx;'></image>
     <text>会议地点</text>
   </view>
-  <text class='meet_inner'>苏州  苏州和达希尔顿逸林酒店  经济技术开发区金沙大道600号(金沙湖地铁Ｂ出口)</text>
+  <text class='meet_inner'>{{aboutData.meet_address}}</text>
 </view>
 <view class='gap'></view>
 <view class='pad20'>
   <view class='meets'>会议介绍</view>
-  <view class='meet_txt'>
-    近年来，以微创外科为代表的“手术流程”板块将继续 成为增长热点，并将作为未来医学发展的重要方向。微创 外科行业内也不断涌现了许多颠覆性的创新产品，如 3D 腹腔镜、机器人外科手术系统 及 NOTES 等微创技术。有 数据显示，在外科手术器械领域的全球市场规模约 150~2 00亿美元，其中美国约占30%市场份额，而中国的市场份 额为8%，对比欧美成熟市场，中国市场还有很大的提升空 间。 在此背景下， CHC医疗咨询将主办第三届中国微创外
+  <view class='meet_txt text-hide'>
+    {{aboutData.meet_content}}
     <view class='txt-center mt-md'>
-      <text class='unAll'>展开全部 ∨</text>
+      <text catchtap='isIntroduce' class='unAll'>{{isIntroduce?'点击收起 ∧':'展开全部 ∨'}}</text>
       <!-- 展开全部后 ∧ -->
     </view>
   </view>
@@ -30,17 +30,13 @@
   <view class='meets'>会议日程</view>
   <view class='meet_txt pt-n'>
     <view class='table'>
-      <view class='tr mt-md'>
-        <view class='td_t'>09:00--09:10</view>
-        <view class='td_i'>开幕致辞</view>
-      </view>
-      <view class='tr mt-md'>
-        <view class='td_t'>09:00--09:10</view>
-        <view class='td_i'>开幕开幕致辞开幕致辞开幕致辞开幕致辞开幕致辞致辞</view>
+      <view class='tr mt-md' wx:for='{{schedule}}' wx:if='{{isSchedule?true:index<2}}'>
+        <view class='td_t'>{{item.meet_class_begin}} — {{item.meet_class_end}}</view>
+        <view class='td_i'>{{item.main_content}}</view>
       </view>
     </view>
     <view class='txt-center mt-md'>
-      <text class='unAll'>展开全部 ∨</text>
+      <text catchtap='isSchedule' class='unAll'>{{isSchedule?'点击收起 ∧':'展开全部 ∨'}}</text>
       <!-- 展开全部后 ∧ -->
     </view>
   </view>

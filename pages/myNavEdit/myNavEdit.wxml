@@ -6,7 +6,7 @@
   </view>
   <view>
     <view class='tag m' wx:for='{{mylabel}}'>
-      {{item.key_name}}
+      {{item.name}}
       <image wx:if='{{isEdit}}' catchtap='deleteItem' data-postid='{{index}}' style='position:absolute;width:26.6rpx;height:26.6rpx;top:-5rpx;right:-5rpx;' src='/images/icon/label_delete.png'></image>
     </view>
   </view>
@@ -14,5 +14,5 @@
     <text class='fs-30 ver-middle'>导航推荐</text>
     <image catchtap='refresh' src='/images/icon/huanyipi.png' class='ver-middle' style='height:30rpx;width:120rpx;'></image>
   </view>
-  <text catchtap='addlabel' data-item='{{item}}' class='tag tj' wx:for='{{tjlabel}}'>{{item.key_name}}</text>
+  <text catchtap='addlabel' data-item='{{item}}' class='tag tj' wx:for='{{tjlabel}}'>{{item.label_name}}</text>
 </view>

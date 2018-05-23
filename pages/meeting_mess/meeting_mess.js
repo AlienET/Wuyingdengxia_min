@@ -33,9 +33,10 @@ Page({
     }
   },
   // 往期回顾 详情
-  onVideoListTap: function () {
+  onVideoListTap: function (e) {
+    console.log(e.currentTarget.dataset.postid)//replay_id
     wx.navigateTo({
-      url: '../pastVideoList/pastVideoList',
+      url: '../pastVideoList/pastVideoList?replay_id=' + e.currentTarget.dataset.postid,
     })
   },
   //  会议咨询详情

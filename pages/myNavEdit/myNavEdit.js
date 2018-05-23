@@ -21,10 +21,10 @@ Page({
     var that = this;
     // 导航推荐
     wx.request({
-      url: InterfaceUrl + 'get_labelList_re', //仅为示例，并非真实的接口地址
+      url: InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
       data: {
-        user_id: that.data.userid,
-        type: 2,
+        limit: 10,
+        type: 1,
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -62,18 +62,18 @@ Page({
     var item = item.currentTarget.dataset.item;
     if (that.data.isEdit){
       wx.request({
-        url: InterfaceUrl + 'post_addMyLabel',
+        url: InterfaceUrl + 'post_user_key',
         data:{
-          userId:that.data.userid,
-          labelIds:item
+          user_id:that.data.userid,
+          key_id: item.label_id
         },
         header: { 'content-type': 'application/x-www-form-urlencoded'},
-        method:'POST',
+        method:'GET',
         success:function(res){
           console.log(res);
           // 我的导航标签
           wx.request({
-            url: InterfaceUrl + 'get_labelList_re',
+            url: InterfaceUrl + 'get_labels',
             data: {
               user_id: that.data.userid,
               type: 1,
@@ -98,7 +98,7 @@ Page({
     that.setData({userid:options.userid});
     // 我的导航标签
     wx.request({
-      url: InterfaceUrl + 'get_labelList_re',
+      url: InterfaceUrl + 'get_labels',
       data:{
         user_id: that.data.userid,
         type:1,
@@ -111,10 +111,10 @@ Page({
     });
     // 导航推荐
     wx.request({
-      url: InterfaceUrl + 'get_labelList_re', //仅为示例，并非真实的接口地址
+      url: InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
       data: {
-        user_id:that.data.userid,
-        type:2,
+        limit:10,
+        type:1,
       },
       header: {
         'content-type': 'application/json' // 默认值
