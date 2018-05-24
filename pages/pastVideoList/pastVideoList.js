@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    // 数据列
+    subReplay:[]
   },
   // 往期视频详情页
   onPastVideoTap:function(){
@@ -19,12 +20,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     var replay_id = options.replay_id;
     wx.request({
       url: InterfaceUrl + 'get_allsub_replay?replay_id=' + options.replay_id,
       data:{},
       success:function(res){
-        console.log(res.data.data)
+        console.log(res.data.data);
+        that.setData({subReplay:res.data.data})
       }
     })
   },
