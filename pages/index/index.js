@@ -176,7 +176,7 @@ Page({
     });
     // 标签列表
     wx.request({
-      url: InterfaceUrl + 'get_labels?user_id' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
+      url: InterfaceUrl + 'get_labels?user_id=' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值

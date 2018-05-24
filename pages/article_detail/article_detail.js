@@ -94,9 +94,9 @@ Page({
           console.log(res)
           var isFollow = that.data.aboutData.is_follow;
           that.setData({
-            'isFollow': 0
+            'aboutData.is_follow': 0
           })
-          console.log(isFollow)
+          console.log(that.data.aboutData.is_follow)
         },
         fail: function (error) {
           console.log(error);
@@ -114,9 +114,9 @@ Page({
         success: function (res) {
           var isFollow = that.data.aboutData.is_follow;
           that.setData({
-            'isFollow': 1
+            'aboutData.is_follow': 1
           })
-          console.log(res)
+          console.log(that.data.aboutData.is_follow)
         },
         fail: function (error) {
           console.log(error);

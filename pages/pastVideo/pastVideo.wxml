@@ -1,15 +1,18 @@
 <!--pages/pastVideo/pastVideo.wxml  往期视频详情页-->
-<video src='/images/deom.mp4' style='width:100%;'></video>
+<video src='{{VideoUrl}}' style='width:100%;'></video>
 <view style='padding:20rpx;padding-bottom:30rpx;border-bottom:1px solid #f3f3f3;'>
   <view style='title' style='font-size:30rpx;'>
-    手术器械在手术室中的正确使用方法
+    {{aboutData.meeting_title}}
   </view>
-  <view style='font-size:26rpx;color:#666;margin-top:10rpx;'>主讲：刘教授</view>
+  <view style='font-size:26rpx;color:#666;margin-top:10rpx;'>主讲：{{aboutData.meeting_specialist}}</view>
   <view style='margin-top:10rpx;'>
-    <view style='font-size:22rpx;color:#BDBDBD;width:50%;display:inline-block'>播放数 24340 • 获赞数 24340</view>
+    <view style='font-size:22rpx;color:#BDBDBD;width:50%;display:inline-block'>播放数 {{aboutData.play_num}} • 获赞数 {{aboutData.support_num}}</view>
     <view style='display:inline-block;text-align:right;width:48%'>
-      <image src='/images/icon/ydz.png' style='width:48rpx;height:48rpx;'></image>
-      <image src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;margin-left:40rpx;'></image>
+      <image catchtap='support' wx:if='{{aboutData.is_support > 0}}' src='/images/icon/ydz.png' style='width:48rpx;height:48rpx;'></image>
+      <image catchtap='support' wx:else src='/images/icon/icon_dz.png' style='width:48rpx;height:48rpx;'></image>
+
+      <image catchtap='collection' wx:if='{{aboutData.is_collection > 0}}' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;margin-left:40rpx;'></image>
+      <image catchtap='collection' wx:else src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;margin-left:40rpx;'></image>
       <image src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;margin-left:40rpx;'></image>
     </view>
   </view>
@@ -20,152 +23,46 @@
       精彩片段
     </view>
     <view class='video-list'>
-      <view class='active'>
-        手术剪的多种使用方法及在实际应用过程中的避免错误示范
-      </view>
-      <view>
-        手术剪的多种使用方法及在实际应用过程中的避免错误示范
-      </view>
-      <view>
-        手术剪的多种使用方法及在实际应用过程中的避免错误示范
-      </view>
-      <view>
-        手术剪的多种使用方法及在实际应用过程中的避免错误示范
-      </view>
-      <view>
-        手术剪的多种使用方法及在实际应用过程中的避免错误示范
-      </view>
-      <view>
-        手术剪的多种使用方法及在实际应用过程中的避免错误示范
-      </view>
-      <view>
-        手术剪的多种使用方法及在实际应用过程中的避免错误示范
+      <view wx:for='{{VideoList}}' catchtap='{{item.Vactive?return:"VideoItem"}}' data-postid='{{index}}' class='{{item.Vactive?"active":""}}'>
+        {{item.meeting_title}}
       </view>
     </view>
   </view>
   <!-- <view style='padding:20rpx;font-size:30rpx;border-bottom:1px solid #F3F3F3;'>
     全部评论 324
   </view> -->
-  <view class='comment'>
-    <view class='comment_all'>全部评论 <text>324</text></view>
+  <view class='comment' style='margin-bottom:100rpx;'>
+    <view class='comment_all'>全部评论
+      <text>{{commentData.length}}</text>
+    </view>
     <view class='comment_list'>
-      <view class='column'>
+      <view class='column' wx:for='{{commentData}}'>
         <view class='column_img'>
-          <image src='/images/black.jpg'></image>
+          <image src='{{item.heading?heading:"/images/black.jpg"}}'></image>
         </view>
         <view class='column_inner'>
           <view class='column_user'>
-            <text>Gallen Meklda</text>
+            <text>{{item.user_name}}</text>
             <view class='column_btn'>
-              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
-              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
-              <text>8</text>
-            </view>
-            <view class='column_text'>领导去定版啊！！</view>
-            <view class='column_tr'>
-              <text class='column_time'>30分钟前 ·</text>
-              <text class='column_replay'>回复</text>
+
+              <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">
+                <image catchtap='luelue' data-postid='{{index}}' style="vertical-align: middle;" style='width:28rpx;' src="/images/icon/luelue.png" mode='widthFix'></image>
+                <view class="report" wx:if='{{item.jubao}}' catchtap='report' data-postid='{{item}}'>
+                  举报
+                </view>
+              </view>
+
+              <image wx:if='{{item.is_support}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
+              <image wx:else catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
+              <text>{{item.support_num}}</text>
             </view>
           </view>
-        </view>
-      </view>
-      <view class='column'>
-        <view class='column_img'>
-          <image src='/images/black.jpg'></image>
-        </view>
-        <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
-              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
-              <text>8</text>
-            </view>
-            <view class='column_text'>领导去定版啊！！</view>
-            <view class='column_tr'>
-              <text class='column_time'>30分钟前 ·</text>
-              <text class='column_replay'>回复</text>
-            </view>
+          <view class='column_text'>
+            {{item.comment_content}}
           </view>
-        </view>
-      </view>
-      <view class='column'>
-        <view class='column_img'>
-          <image src='/images/black.jpg'></image>
-        </view>
-        <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
-              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
-              <text>8</text>
-            </view>
-            <view class='column_text'>领导去定版啊！！</view>
-            <view class='column_tr'>
-              <text class='column_time'>30分钟前 ·</text>
-              <text class='column_replay'>回复</text>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class='column'>
-        <view class='column_img'>
-          <image src='/images/black.jpg'></image>
-        </view>
-        <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
-              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
-              <text>8</text>
-            </view>
-            <view class='column_text'>领导去定版啊！！</view>
-            <view class='column_tr'>
-              <text class='column_time'>30分钟前 ·</text>
-              <text class='column_replay'>回复</text>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class='column'>
-        <view class='column_img'>
-          <image src='/images/black.jpg'></image>
-        </view>
-        <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
-              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
-              <text>8</text>
-            </view>
-            <view class='column_text'>领导去定版啊！！</view>
-            <view class='column_tr'>
-              <text class='column_time'>30分钟前 ·</text>
-              <text class='column_replay'>回复</text>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class='column'>
-        <view class='column_img'>
-          <image src='/images/black.jpg'></image>
-        </view>
-        <view class='column_inner'>
-          <view class='column_user'>
-            <text>Gallen Meklda</text>
-            <view class='column_btn'>
-              <image src='/images/icon/icon_warn.png' style='width:28rpx;height:24rpx'></image>
-              <image src='/images/icon/icon_like.png' style='width:26rpx;height:26rpx;'></image>
-              <text>8</text>
-            </view>
-            <view class='column_text'>领导去定版啊！！</view>
-            <view class='column_tr'>
-              <text class='column_time'>30分钟前 ·</text>
-              <text class='column_replay'>回复</text>
-            </view>
+          <view class='column_tr'>
+            <text class='column_time'>{{item.ctime}} ·</text>
+            <text class='column_replay'>回复</text>
           </view>
         </view>
       </view>
@@ -176,6 +73,6 @@
       <image class='ver-middle' src='/images/icon/icon_discuss.png' style='width:26.4rpx;height:27.8rpx;margin-right:10rpx;'></image>
       发表讨论
     </view> -->
-    <input type='text' maxlength='-1' placeholder='发表评论' style='width:80%;margin:0 auto;border-radius:100rpx;background:#EDEDED;font-size:26rpx;padding:10rpx 20rpx;text-align:center'></input>
+    <input bindconfirm='commentInput' type='text' maxlength='-1' value='{{inputTxt}}' confirm-type='send' placeholder='发表评论' style='margin:0 20rpx;border-radius:100rpx;background:#EDEDED;font-size:26rpx;padding:10rpx 20rpx;' placeholder-style='background:#ededed url(/images/icon/icon_discuss.png) no-repeat 38% ;background-size:26.4rpx 27.8rpx;border-radius:100rpx;text-align:center;'></input>
   </view>
 </view>

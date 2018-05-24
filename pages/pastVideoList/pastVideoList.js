@@ -11,9 +11,10 @@ Page({
     subReplay:[]
   },
   // 往期视频详情页
-  onPastVideoTap:function(){
+  onPastVideoTap:function(e){
+    console.log(e.currentTarget.dataset.postid)
     wx.navigateTo({
-      url: '../pastVideo/pastVideo',
+      url: '../pastVideo/pastVideo?replay_sub_id=' + e.currentTarget.dataset.postid,
     })
   },
   /**
