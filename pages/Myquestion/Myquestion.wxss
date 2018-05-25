@@ -1,5 +1,4 @@
-/* pages/MySubmission/MySubmission.wxss */
-
+/* pages/Myquestion/Myquestion.wxss */
 .sub_item {
   padding-left: 0rpx;
   border-bottom: 1px solid #ebebeb;

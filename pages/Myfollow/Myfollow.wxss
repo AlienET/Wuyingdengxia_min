@@ -1,0 +1,14 @@
+/* pages/Myfollow/Myfollow.wxss */
+.sub_item {
+  padding-left: 0rpx;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.sub_tit {
+  font-size: 34rpx;
+}
+
+.text-hide {
+  color: #999;
+  font-size: 28rpx;
+}

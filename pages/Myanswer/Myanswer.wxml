@@ -1,0 +1,9 @@
+<!--pages/Myanswer/Myanswer.wxml 我的回答-->
+<view class='sub_list'>
+  <view class='sub_item ml-md pad20' wx:for='{{aboutData}}'>
+    <view class='sub_tit'>{{item.question_title}}</view>
+    <view class='text-hide mt-sm'>
+      {{item.question_content}}
+    </view>
+  </view>
+</view>

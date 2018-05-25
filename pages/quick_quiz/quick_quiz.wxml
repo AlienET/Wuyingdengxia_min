@@ -43,7 +43,7 @@
           <view class='item_title' style='margin-bottom:10rpx;'>
             <text>{{item.question_title}}</text>
             <view>
-              <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
+              <image class='ver-middle' style='margin-right:10rpx;' src='/images/icon/icon_moon.png'></image>
               <text class='ver-middle'>{{item.moon_cash}}</text>
             </view>
           </view>

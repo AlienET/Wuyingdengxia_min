@@ -1,0 +1,13 @@
+<!--pages/Myquestion/Myquestion.wxml   我的提问-->
+<view class='sub_list'>
+  <view catchtap='OnMyQuestionTap' class='sub_item ml-md pad20' wx:for='{{aboutData}}' data-questionid='{{item.question_id}}'>
+    <view class='sub_tit'>{{item.question_title}}</view>
+    <view class='text-hide mt-sm'>
+      {{item.question_content}}
+    </view>
+    <view class='mt-sm sub_xx'>
+      <text class='fs24 sub_time'>{{item.ctime}} · 已回答 {{item.answer_num}}</text>
+      <text class='sub_warning {{item.is_solve == "0"?"sub_warning":item.is_solve == "1"?"sub_success":"sub_error"}} fs24'>{{item.is_solve == '0'?'未解决':item.is_solve == '1'?'已解决':'已停止'}}</text>
+    </view>
+  </view>
+</view>

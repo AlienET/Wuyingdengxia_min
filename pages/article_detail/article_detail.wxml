@@ -12,7 +12,7 @@
         <view>{{aboutData.article_author}}</view>
         <text>{{aboutData.ctime}}</text>
       </view>
-      <view class='attention' catchtap='follow'>{{aboutData.is_follow > 0 ?'已关注':'关注'}}</view>
+      <view class='attention' style='{{aboutData.is_follow > 0?"background:#E9E9E9":""}}' catchtap='follow'>{{aboutData.is_follow > 0 ?'已关注':'关注'}}</view>
     </view>
     <view class='content'>
       {{aboutData.article_content}}

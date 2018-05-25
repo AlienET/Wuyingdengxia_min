@@ -32,6 +32,9 @@
     "pages/makeVowRecord/makeVowRecord",
     "pages/WishDetails/WishDetails",
     "pages/MySubmission/MySubmission",
+    "pages/Myquestion/Myquestion",
+    "pages/Myanswer/Myanswer",
+    "pages/Myfollow/Myfollow",
     "pages/logs/logs"
   ],
   "window":{

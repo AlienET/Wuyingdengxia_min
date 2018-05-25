@@ -26,6 +26,24 @@ Page({
       url: '../myChange/myChange',
     })
   },
+  // 我的提问
+  OnMyQuestionTap:function(){
+    wx.navigateTo({
+      url: '../Myquestion/Myquestion',
+    })
+  },
+  // 我的回答
+  OnMyAnswerTap:function(){
+    wx.navigateTo({
+      url: '../Myanswer/Myanswer',
+    })
+  },
+  // 我的关注
+  OnMyfollowTap:function(){
+    wx.navigateTo({
+      url: '../Myfollow/Myfollow',
+    })
+  },
   // 许愿池
   onWishingWellTap: function () {
     wx.navigateTo({

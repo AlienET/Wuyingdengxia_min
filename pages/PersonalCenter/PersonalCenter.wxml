@@ -55,14 +55,14 @@
 <view class='gap'></view>
 <view class='lists'>
   <view class='mLi'>
-    <view>
+    <view catchtap='OnMyQuestionTap'>
       <image  mode='{{bGmode}}' src='/images/icon/wodetiwen.png'></image>
       我的提问
     </view>
     <image src='/images/icon/jiantouhui.png'></image>
   </view>
   <view class='mLi'>
-    <view>
+    <view catchtap='OnMyAnswerTap'>
       <image  mode='{{bGmode}}' src='/images/icon/wodehuida.png'></image>
       我的回答
     </view>
@@ -75,7 +75,7 @@
     </view>
     <image src='/images/icon/jiantouhui.png'></image>
   </view>
-  <view class='mLi'>
+  <view class='mLi' catchtap='OnMyfollowTap'>
     <view>
       <image  mode='{{bGmode}}' src='/images/icon/wodeguanzhu.png'></image>
       我的关注

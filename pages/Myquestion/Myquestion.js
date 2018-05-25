@@ -1,4 +1,4 @@
-// pages/MySubmission/MySubmission.js
+// pages/Myquestion/Myquestion.js
 // 接口URL
 const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
 Page({
@@ -7,18 +7,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // 列 数据
-    aboutData:[]
+    // 当前用户id
+    userid: '10003',
+    // 数据列
+    aboutData: []
   },
-
+  // 问题详情
+  OnMyQuestionTap:function(e){
+    console.log(e.currentTarget.dataset.questionid);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: InterfaceUrl + 'get_myarticle?userid=10003',
-      success:function(res){
+      url: InterfaceUrl + 'get_question_byuserid?userid='+that.data.userid,
+      success: function (res) {
         console.log(res.data.data);
         var arrReverse = [];
         var time = '';
@@ -44,49 +49,49 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
   getDateDiff: function (dateTimeStamp) {
     var result;

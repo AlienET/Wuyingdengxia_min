@@ -92,7 +92,6 @@ Page({
         method: "POST",
         success: function (res) {
           console.log(res)
-          var isFollow = that.data.aboutData.is_follow;
           that.setData({
             'aboutData.is_follow': 0
           })
@@ -112,7 +111,6 @@ Page({
         header: { 'content-type': 'application/x-www-form-urlencoded' },
         method: "POST",
         success: function (res) {
-          var isFollow = that.data.aboutData.is_follow;
           that.setData({
             'aboutData.is_follow': 1
           })

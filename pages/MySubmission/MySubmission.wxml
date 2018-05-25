@@ -1,33 +1,13 @@
 <!--pages/MySubmission/MySubmission.wxml 我的投稿-->
 <view class='sub_list'>
-  <view class='sub_item ml-md pad20'>
-    <view class='sub_tit'>只能停诊！三甲医院儿科医生集体累至病倒</view>
+  <view class='sub_item ml-md pad20' wx:for='{{aboutData}}'>
+    <view class='sub_tit'>{{item.article_title}}</view>
     <view class='text-hide mt-sm'>
-      只能停诊！三甲医院儿科医生累至病倒，儿科医生超负荷工作，日前均已病倒，自今日起儿科不得不停针荷工作，日前均已病倒，自今日起儿科不得不停针
+      {{item.article_content}}
     </view>
     <view class='mt-sm sub_xx'>
-      <text class='fs24 sub_time'>2018-04-09</text>
-      <text class='sub_warning fs24'>待审核</text>
-    </view>
-  </view>
-  <view class='sub_item ml-md pad20'>
-    <view class='sub_tit'>只能停诊！三甲医院儿科医生集体累至病倒</view>
-    <view class='text-hide mt-sm'>
-      只能停诊！三甲医院儿科医生累至病倒，儿科医生超负荷工作，日前均已病倒，自今日起儿科不得不停针荷工作，日前均已病倒，自今日起儿科不得不停针
-    </view>
-    <view class='mt-sm sub_xx'>
-      <text class='fs24 sub_time'>2018-04-09</text>
-      <text class='sub_success fs24'>投稿成功</text>
-    </view>
-  </view>
-  <view class='sub_item ml-md pad20'>
-    <view class='sub_tit'>只能停诊！三甲医院儿科医生集体累至病倒</view>
-    <view class='text-hide mt-sm'>
-      只能停诊！三甲医院儿科医生累至病倒，儿科医生超负荷工作，日前均已病倒，自今日起儿科不得不停针荷工作，日前均已病倒，自今日起儿科不得不停针
-    </view>
-    <view class='mt-sm sub_xx'>
-      <text class='fs24 sub_time'>2018-04-09</text>
-      <text class='sub_success fs24'>投稿成功</text>
+      <text class='fs24 sub_time'>{{item.ctime}}</text>
+      <text class=' {{item.is_check == "0"?"sub_warning":item.is_check == "1"?"sub_success":"sub_error"}} fs24'>{{item.is_check == '0'?"待审核":item.is_check == '1'?"投稿成功":"已退稿"}}</text>
     </view>
   </view>
 </view>
