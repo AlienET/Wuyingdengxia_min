@@ -100,7 +100,7 @@ Page({
     wx.request({
       url: InterfaceUrl + 'get_labels',
       data:{
-        user_id: that.data.userid,
+        userid: that.data.userid,
         type:1,
       },
       header: { 'content-type': 'application/json'},

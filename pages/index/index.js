@@ -2,7 +2,7 @@
 //获取应用实例
 const app = getApp()
 // 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
+const InterfaceUrl = 'https://cloud.yszg.org/index.php/API/'
 Page({
   data: {
     motto: 'Hello World',
@@ -176,7 +176,7 @@ Page({
     });
     // 标签列表
     wx.request({
-      url: InterfaceUrl + 'get_labels?user_id=' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
+      url: InterfaceUrl + 'get_labels?userid=' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值

@@ -16,4 +16,31 @@ textarea {
   display: block;
   width: 95%;
   line-height: 35rpx;
+  min-height: 400rpx;
+}
+
+.bottomBar {
+  position: fixed;
+  width: 100%;
+  bottom: 0rpx;
+  z-index: 99;
+  box-sizing: border-box;
+}
+
+.pice_item {
+  position: relative;
+}
+
+.img_item {
+  width: 132rpx;
+  height: 132rpx;
+  margin: 5rpx;
+}
+
+.img_delete {
+  position: absolute;
+  right: -5rpx;
+  top: -5rpx;
+  width: 40rpx;
+  height: 40rpx;
 }

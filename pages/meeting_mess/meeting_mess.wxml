@@ -14,7 +14,7 @@
       </view>
     </view>
   </view>
-  <swiper current='{{flag}}' class='meeting_mess' style="height:{{310*replayList.length}}px" bindchange='bindChange'>
+  <swiper current='{{flag}}' class='meeting_mess' style="height:{{flag==0?310*meetingList.length:310*replayList.length}}px" bindchange='bindChange'>
     <swiper-item>
     <scroll-view scroll-y='true'>
       <view class='meeting_mess'>

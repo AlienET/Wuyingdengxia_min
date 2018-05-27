@@ -1,18 +1,17 @@
 <!--pages/Myfollow/Myfollow.wxml-->
 <view class='sub_list'>
-  <view class='sub_item ml-md pad20' style='display:flex;justify-content:space-between;'>
-    <view style='vertival-align:middle'>
-      <image src='/images/black.jpg' style='width:86rpx;height:86rpx;border-radius:100%;vertical-align:middle;'></image>
-      <view style='display:inline-block;margin-left:20rpx;vertical-align:middle;'>
-        <view>
-          <text style='font-size:30rpx;vertical-align:middle;'>李鲫鱼</text>
-          <image src='/images/icon/lzs.png' style='width:38rpx;height:32rpx;vertical-align:middle;margin-left:5rpx;'></image>
-        </view>
-        <view style='font-size:24rpx;color: #C3C3C3;margin-top:10rpx;'>护士长  粉丝 231</view>
+  <view class='sub_item ml-md pad20' wx:for='{{aboutData}}'>
+    <view class='ver-middle'>
+      <image class='ver-middle portrait' src='{{item.followhead}}'></image>
+      <view class='ver-middle ml-md inline-block'>
+        <text class='ver-middle fs-30'>{{item.followname}}</text>
+        <image class='ver-middle ml-md' src='/images/icon/lzs.png' style='width:38rpx;height:32rpx;'></image>
+        <view class='position'>{{item.user_post}} 粉丝 {{item.fans_num}}</view>
       </view>
     </view>
-    <view style='vertival-align:middle'>
-      <text style='display:inline-blcok;background:#E9E9E9;padding:8rpx 25rpx;border-radius:100rpx;color:#fff;font-size:24rpx;vertival-align:middle'>已关注</text>
+    <view class='ver-middle' style='padding-top:20rpx;'>
+      <text catchtap='state' data-item='{{item}}' data-idx='{{index}}' class='ver-middle state  {{item.state?"":"cel"}}'>{{item.state?'已关注':'关注'}}</text>
+      <!-- cel -->
     </view>
   </view>
 </view>

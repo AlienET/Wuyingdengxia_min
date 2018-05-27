@@ -1,3 +1,20 @@
 <!--pages/article_contribute/article_contribute.wxml-->
-<input type='text' placeholder='请输入文章标题' style=''></input>
-<textarea maxlength='-1' placeholder='请输入文章内容'></textarea>
+<input bindinput='istitletext' type='text' placeholder='请输入文章标题' style=''></input>
+<textarea bindinput='isinnertext' maxlength='-1' auto-height placeholder='请输入文章内容'></textarea>
+<view class='bottomBar'>
+  <view class='mb-md'>
+    <view class='pice_item inline-block' wx:for='{{tempFilePaths}}'>
+      <image catchtap='imgDelete' data-deleteimg='{{index}}' class='img_delete' src='/images/icon/cha.png'></image>
+      <image class='img_item' src='{{item}}' mode='aspectFill'></image>
+    </view>
+  </view>
+  <view style='padding:20rpx 40rpx;background:#F8F8F8;box-sizing:border-box'>
+    <image catchtap='addImg' src='/images/icon/tupian.png' style='width:40rpx;height:34rpx;margin-right:40rpx;'></image>
+    <view catchtap='addLabel' style='display:inline-block;position:relative'>
+      <text wx:if='{{labels.length}}' style='display:inline-block;background:#EF5555;color:#fff;border-radius:50%;position: absolute;top:0rpx;right:-5rpx;font-size:18rpx;width:20rpx;height:20rpx;text-align:center;line-height:20rpx;'>{{labels.length}}</text>
+      <image catchtap='addLabel' src='/images/icon/biaoqian.png' style='width:36rpx;height:36rpx;'></image>
+    </view>
+    <text catchtap='Submission' style='float:right;font-size:34rpx;color: {{isSubmission?"#2DA3FF":"#BFBFBF"}};'>投稿</text>
+  </view>
+</view>
+<!-- quick_quiz -->
