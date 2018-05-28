@@ -70,14 +70,17 @@ Page({
     console.log(this.data.titleText)
     console.log(this.data.innerText)
     // 图片转码
+    var data = {
+      data: that.data.tempFilePaths[0]
+    }
     wx.uploadFile({
       url: InterfaceUrl + 'upload', //仅为示例，非真实的接口地址
       filePath: that.data.tempFilePaths[0],
-      name: 'file',
-      header: {'content-type':'multipart/form-data'},
+      name: 'image_file',
+      // header: {'content-type':'multipart/form-data'},
       formData: {
-        'type': '1',
-        'data': 'that.data.tempFilePaths[0]'
+        'type': 1,
+        'data': data
       },
       success: function (res) {
         var data = res.data

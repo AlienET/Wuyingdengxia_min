@@ -1,16 +1,18 @@
 /* pages/QAquiz_inner/QAquiz_inner.wxss */
-page{
+
+page {
   height: 100%;
 }
+
 textarea {
   display: box-flex;
   margin: 20rpx;
   font-size: 26rpx;
   width: 96%;
-  height: 100%;
+  min-height: 90%;
 }
 
-.fill_comment image,.fill_comment text {
+.fill_comment image, .fill_comment text {
   margin-left: 30rpx;
   vertical-align: middle;
 }
@@ -29,4 +31,39 @@ textarea {
 switch {
   margin-left: 20rpx;
   vertical-align: middle;
+}
+
+.sub_btn {
+  position: fixed;
+  right: 15rpx;
+  bottom: 15%;
+  border-radius: 50%;
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.pro_btn{
+  background: #999;
+  color: #ddd;
+}
+.ena_btn{
+  background: #1397FF;
+  color: #fff;
+}
+.fill_comment .content_label text{
+  width:152rpx;
+  text-align: center;
+  border-radius: 100rpx;
+  padding: 8rpx 0;
+  margin-left: 15rpx;
+  margin-bottom: 15rpx;
+  font-size: 32rpx;
+}
+.fill_comment .content_label text:last-child{
+  float: right;
+  width: 248rpx;
+  border-color: #F0F0F0;
+  color: #C9C9C9;
 }

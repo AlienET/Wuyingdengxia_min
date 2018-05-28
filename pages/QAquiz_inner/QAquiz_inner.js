@@ -16,7 +16,7 @@ Page({
   // 选取照片
   onchooseImage: function () {
     wx.chooseImage({
-      count: 9, // 默认9
+      count: 5, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -27,11 +27,15 @@ Page({
       }
     })
   },
+  // 匿名状态
+  switchChange:function(event){
+    console.log(event.detail.value)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options.quesTitle)
   },
 
   /**
