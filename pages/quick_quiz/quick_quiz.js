@@ -1,6 +1,6 @@
 // pages/wishingWell/wishingWell.js
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -35,7 +35,7 @@ Page({
       });
       // 文章列
       wx.request({
-        url: InterfaceUrl + 'get_question_bylabel?label=' + that.data.labellist[e.target.dataset.current].name,
+        url: app.InterfaceUrl + 'get_question_bylabel?label=' + that.data.labellist[e.target.dataset.current].name,
         data: {},
         header: {
           'content-type': 'application/json' // 默认值
@@ -58,7 +58,7 @@ Page({
     that.setData({ currentTab: e.detail.current });
     // 文章列
     wx.request({
-      url: InterfaceUrl + 'get_question_bylabel?label=' + that.data.labellist[e.detail.current].name ,
+      url: app.InterfaceUrl + 'get_question_bylabel?label=' + that.data.labellist[e.detail.current].name,
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -88,7 +88,7 @@ Page({
   onProblemDetailsTap: function (q) {
     console.log(q.currentTarget.dataset.quesid)
     wx.navigateTo({
-      url: '../problemDetails/problemDetails?quesid=' + q.currentTarget.dataset.quesid + '&userid=' + this.data.userid ,
+      url: '../problemDetails/problemDetails?quesid=' + q.currentTarget.dataset.quesid + '&userid=' + this.data.userid,
     })
   },
   //搜索
@@ -97,14 +97,20 @@ Page({
       url: '../search/search?userid=' + this.data.userid
     })
   },
+  // 我的提问
+  onMyQuestionTap: function () {
+    wx.navigateTo({
+      url: '../Myquestion/Myquestion',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that =this;
+    var that = this;
     // 标签列表
     wx.request({
-      url: InterfaceUrl + 'get_labels?userid' + this.data.userid + '&type=3', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'get_labels?userid' + this.data.userid + '&type=3', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -118,7 +124,7 @@ Page({
         console.log(initActive)
         // 文章列
         wx.request({
-          url: InterfaceUrl + 'get_question_bylabel?label=' + initActive,
+          url: app.InterfaceUrl + 'get_question_bylabel?label=' + initActive,
           data: {},
           header: {
             'content-type': 'application/json' // 默认值

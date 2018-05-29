@@ -1,6 +1,6 @@
 // pages/discuss_details/discuss_details.js
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/';
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -23,7 +23,7 @@ Page({
     var that = this;
     console.log(event.detail.value);
     wx.request({
-      url: InterfaceUrl + 'post_key_dis',
+      url: app.InterfaceUrl + 'post_key_dis',
       data: {
         key_dis_id: that.data.key_dis_id,
         user_id: that.data.userid,
@@ -38,7 +38,7 @@ Page({
         console.log(that.data.key_dis_id);
 
         wx.request({
-          url: InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + that.data.key_dis_id,
+          url: app.InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + that.data.key_dis_id,
           data: {},
           header: {
             'content-type': 'application/json' // 默认值
@@ -52,7 +52,7 @@ Page({
               time = res.data.data.user_dis[i].ctime.substring(0, 19);
               time = time.replace(/-/g, '/');
               time = new Date(time).getTime();
-              res.data.data.user_dis[i].ctime = that.getDateDiff(time);
+              res.data.data.user_dis[i].ctime = app.getDateDiff(time);
 
               arrReverse.push(res.data.data.user_dis[i]);
             }
@@ -79,7 +79,7 @@ Page({
     var isSupport = that.data.DiscussListsData[index.currentTarget.dataset.postid].is_support;
     if (isSupport > 0) {
       wx.request({
-        url: InterfaceUrl + 'post_cel_support',
+        url: app.InterfaceUrl + 'post_cel_support',
         data: {
           userid: that.data.userid,
           toid: that.data.DiscussListsData[index.currentTarget.dataset.postid].key_dis_list_id,
@@ -106,7 +106,7 @@ Page({
 
     } else {
       wx.request({
-        url: InterfaceUrl + 'get_support',
+        url: app.InterfaceUrl + 'get_support',
         data: {
           userid: that.data.userid,
           toid: that.data.DiscussListsData[index.currentTarget.dataset.postid].key_dis_list_id,
@@ -155,7 +155,7 @@ Page({
     console.log(item.currentTarget.dataset.postid.jubao);
     var that = this;
     wx.request({
-      url: InterfaceUrl + 'post_report',
+      url: app.InterfaceUrl + 'post_report',
       data: {
         user_id: that.data.userid,
         to_id: item.currentTarget.dataset.postid.key_dis_list_id,
@@ -197,7 +197,7 @@ Page({
     })
     // get_hot_labelList_detail
     wx.request({
-      url: InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + options.key_dis_id,
+      url: app.InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + options.key_dis_id,
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -210,7 +210,7 @@ Page({
           time = time.replace(/-/g, '/');
           time = new Date(time).getTime();
           res.data.data.user_dis[i].jubao = false;
-          res.data.data.user_dis[i].ctime = that.getDateDiff(time);
+          res.data.data.user_dis[i].ctime = app.getDateDiff(time);
 
           console.log(res.data.data);
           console.log(res.data.data.user_dis[i]);
@@ -272,45 +272,4 @@ Page({
   onShareAppMessage: function () {
 
   },
-  getDateDiff: function (dateTimeStamp) {
-    var result;
-    var minute = 1000 * 60;
-    var hour = minute * 60;
-    var day = hour * 24;
-    var halfamonth = day * 15;
-    var month = day * 30;
-    var now = new Date().getTime();
-    var diffValue = now - dateTimeStamp;
-    if (diffValue < 0) {
-      result = "刚刚";
-    }
-    var monthC = diffValue / month;
-    var weekC = diffValue / (7 * day);
-    var dayC = diffValue / day;
-    var hourC = diffValue / hour;
-    var minC = diffValue / minute;
-    if (monthC >= 1) {
-      if (monthC <= 12)
-        result = "" + parseInt(monthC) + "月前";
-      else {
-        result = "" + parseInt(monthC / 12) + "年前";
-      }
-    }
-    else if (weekC >= 1) {
-      result = "" + parseInt(weekC) + "周前";
-    }
-    else if (dayC >= 1) {
-      result = "" + parseInt(dayC) + "天前";
-    }
-    else if (hourC >= 1) {
-      result = "" + parseInt(hourC) + "小时前";
-    }
-    else if (minC >= 1) {
-      result = "" + parseInt(minC) + "分钟前";
-    } else {
-      result = "刚刚";
-    }
-
-    return result;
-  }
 })

@@ -1,8 +1,6 @@
 //index.js
 //获取应用实例
 const app = getApp()
-// 接口URL
-const InterfaceUrl = 'https://cloud.yszg.org/index.php/API/'
 Page({
   data: {
     motto: 'Hello World',
@@ -94,7 +92,7 @@ Page({
       });
       // 文章列
       wx.request({
-        url: InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.target.dataset.current].name + '&sortby=1',
+        url: app.InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.target.dataset.current].name + '&sortby=1',
         data: {},
         header: {
           'content-type': 'application/json' // 默认值
@@ -117,7 +115,7 @@ Page({
     that.setData({ currentTab: e.detail.current });
     // 文章列
     wx.request({
-      url: InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.detail.current].name + '&sortby=1',
+      url: app.InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.detail.current].name + '&sortby=1',
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -133,6 +131,7 @@ Page({
 
   onLoad: function () {
     var that = this;
+    console.log(app.InterfaceUrl)
     // if (app.globalData.userInfo) {
     //   this.setData({
     //     userInfo: app.globalData.userInfo,
@@ -161,7 +160,7 @@ Page({
     // }
     // banner图
     wx.request({
-      url: InterfaceUrl + 'get_allbanner', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'get_allbanner', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -176,7 +175,7 @@ Page({
     });
     // 标签列表
     wx.request({
-      url: InterfaceUrl + 'get_labels?userid=' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'get_labels?userid=' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -187,15 +186,23 @@ Page({
           currentTab: 0
         });
         var initActive = that.data.labellist[0].name;
-        console.log(initActive)
         // 文章列
         wx.request({
-          url: InterfaceUrl + 'get_article_bylabel?label=' + initActive + '&sortby=1',
+          url: app.InterfaceUrl + 'get_article_bylabel?label=' + initActive + '&sortby=1',
           data: {},
           header: {
             'content-type': 'application/json' // 默认值
           },
           success: function (res) {
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              // console.log(res.data.data[i].article_img_path)//split(',');
+              if (res.data.data[i].article_img_path == '') {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path
+              } else {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+              }
+            };
+            console.log(res.data.data)
             that.setData({
               tabActiveKeyId: res.data.data,
             });
@@ -209,7 +216,7 @@ Page({
     });
     // 正在讨论列
     wx.request({
-      url: InterfaceUrl + 'get_hot_labelList?key_id=6', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'get_hot_labelList?key_id=6', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -238,7 +245,7 @@ Page({
 
     // // 文章列\
     // wx.request({
-    //   url: InterfaceUrl + 'get_article_bylabel?label=' + this.data.labellist[0].key_name + '&sortby=1',
+    //   url: app.InterfaceUrl + 'get_article_bylabel?label=' + this.data.labellist[0].key_name + '&sortby=1',
     //   data: {},
     //   header: {
     //     'content-type': 'application/json' // 默认值

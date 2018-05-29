@@ -1,11 +1,49 @@
 // pages/QAquiz_inner/QAquiz_inner.js
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgSrc:''
+    imgSrc: '',
+    // 当前月亮币
+    currentMoonY: 90,
+    // 当前月亮币数额
+    moonNum: { num: '￥', active: false },
+    // 选择悬赏月亮币 [0,10,20,50,100]
+    moonY: [
+      { num: 0, active: false },
+      { num: 10, active: false },
+      { num: 20, active: false },
+      { num: 50, active: false },
+      { num: 100, active: false }
+    ]
+  },
+  // 选择月亮币
+  chooseMoon: function (item, idx) {
+    var that = this;
+    if (item.currentTarget.dataset.item.num > that.data.currentMoonY) {
+      return;
+    } else {
+      console.log(item.currentTarget.dataset.item);
+      console.log(item.currentTarget.dataset.idx);
+      var active = 'moonY[' + item.currentTarget.dataset.idx + '].active';
+      var num = that.data.moonY[item.currentTarget.dataset.idx].num;
+      for (var i = that.data.moonY.length - 1; i >= 0; i--) {
+        var defout = 'moonY[' + i + '].active';
+        that.setData({ [defout]: false })
+      }
+      that.setData({
+        [active]: true,
+        'moonNum.num': num,
+        'moonNum.active': true,
+      })
+      // var state_idx = 'aboutData[' + e.currentTarget.dataset.idx + '].state';
+      // that.setData({ [state_idx]: false })
+    }
+
   },
   // 标签选取
   onAddLabelTap: function () {
@@ -23,12 +61,12 @@ Page({
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
         console.log(tempFilePaths);
-        
+
       }
     })
   },
   // 匿名状态
-  switchChange:function(event){
+  switchChange: function (event) {
     console.log(event.detail.value)
   },
   /**

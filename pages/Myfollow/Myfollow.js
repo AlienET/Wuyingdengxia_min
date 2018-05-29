@@ -1,6 +1,6 @@
 // pages/Myfollow/Myfollow.js
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -22,7 +22,7 @@ Page({
     if (e.currentTarget.dataset.item.state) {
       // 取消关注
       wx.request({
-        url: InterfaceUrl + 'post_cel_follow',
+        url: app.InterfaceUrl + 'post_cel_follow',
         data: {
           userid: that.data.userid,
           befollid: e.currentTarget.dataset.item.followid
@@ -39,7 +39,7 @@ Page({
       })
     } else {
       wx.request({
-        url: InterfaceUrl + 'post_follow',
+        url: app.InterfaceUrl + 'post_follow',
         data: {
           userid: that.data.userid,
           befollid: e.currentTarget.dataset.item.followid
@@ -62,7 +62,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: InterfaceUrl + 'get_myfollow?userid=' + that.data.userid,
+      url: app.InterfaceUrl + 'get_myfollow?userid=' + that.data.userid,
       data: {},
       success: function (res) {
         console.log(res.data.data);

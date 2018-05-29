@@ -1,6 +1,6 @@
 // pages/Myanswer/Myanswer.js
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -18,7 +18,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: InterfaceUrl + 'get_myanswer?userid=' + that.data.userid,
+      url: app.InterfaceUrl + 'get_myanswer?userid=' + that.data.userid,
       data: {},
       success: function (res) {
         console.log(res.data.data);

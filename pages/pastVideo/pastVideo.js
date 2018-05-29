@@ -1,6 +1,6 @@
 // pages/pastVideo/pastVideo.js
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -27,7 +27,7 @@ Page({
     var that = this;
     console.log(event.detail.value);
     wx.request({
-      url: InterfaceUrl + 'post_comment',
+      url: app.InterfaceUrl + 'post_comment',
       data: {
         userid: that.data.userid,
         toid: that.data.aboutData.replay_sub_id,
@@ -43,7 +43,7 @@ Page({
         console.log(res);
         // 获取评论数据
         wx.request({
-          url: InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.aboutData.replay_sub_id + '&comType=0&comment_to_type=4',
+          url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.aboutData.replay_sub_id + '&comType=0&comment_to_type=4',
           data: {},
           header: {
             'content-type': 'application/json'
@@ -96,7 +96,7 @@ Page({
     var that = this;
     if (that.data.aboutData.is_support > 0) {
       wx.request({
-        url: InterfaceUrl + 'post_cel_support',
+        url: app.InterfaceUrl + 'post_cel_support',
         data: {
           userid: that.data.userid,
           toid: that.data.aboutData.replay_sub_id,
@@ -113,7 +113,7 @@ Page({
       })
     } else {
       wx.request({
-        url: InterfaceUrl + 'get_support?userid=' + that.data.userid + '&toid=' + that.data.aboutData.replay_sub_id + '&supType=3',
+        url: app.InterfaceUrl + 'get_support?userid=' + that.data.userid + '&toid=' + that.data.aboutData.replay_sub_id + '&supType=3',
         data: {},
         header: { 'content-type': 'application/json' },
         success: function (res) {
@@ -130,7 +130,7 @@ Page({
     var that = this;
     if (that.data.aboutData.is_collection > 0) {
       wx.request({
-        url: InterfaceUrl + 'post_cel_collect',
+        url: app.InterfaceUrl + 'post_cel_collect',
         data: {
           userid: that.data.userid,
           toid: that.data.aboutData.replay_sub_id,
@@ -147,7 +147,7 @@ Page({
       })
     } else {
       wx.request({
-        url: InterfaceUrl + 'post_collection',
+        url: app.InterfaceUrl + 'post_collection',
         data: {
           userid: that.data.userid,
           type: 3,
@@ -175,7 +175,7 @@ Page({
     var user_id = that.data.commentData[index.currentTarget.dataset.postid].user_id;
     if (isSupport) {
       wx.request({
-        url: InterfaceUrl + 'post_cel_support',
+        url: app.InterfaceUrl + 'post_cel_support',
         data: {
           userid: that.data.userid,
           toid: user_id,
@@ -202,7 +202,7 @@ Page({
 
     } else {
       wx.request({
-        url: InterfaceUrl + 'get_support',
+        url: app.InterfaceUrl + 'get_support',
         data: {
           userid: that.data.userid,
           toid: that.data.commentData[index.currentTarget.dataset.postid].user_id,
@@ -251,7 +251,7 @@ Page({
     console.log(item.currentTarget.dataset.postid.jubao);
     var that = this;
     wx.request({
-      url: InterfaceUrl + 'post_report',
+      url: app.InterfaceUrl + 'post_report',
       data: {
         user_id: that.data.userid,
         to_id: item.currentTarget.dataset.postid.user_id,
@@ -291,7 +291,7 @@ Page({
     var VideoAddress = [];
     console.log(options.replay_sub_id);
     wx.request({
-      url: InterfaceUrl + 'get_replay_detail?replay_sub_id=' + options.replay_sub_id,
+      url: app.InterfaceUrl + 'get_replay_detail?replay_sub_id=' + options.replay_sub_id,
       data: {},
       success: function (res) {
         console.log(res.data.data.active);
@@ -312,7 +312,7 @@ Page({
     });
     // 获取评论数据
     wx.request({
-      url: InterfaceUrl + 'get_allcomment_byid?toid=' + options.replay_sub_id + '&comType=0&comment_to_type=4',
+      url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + options.replay_sub_id + '&comType=0&comment_to_type=4',
       data: {},
       header: {
         'content-type': 'application/json'

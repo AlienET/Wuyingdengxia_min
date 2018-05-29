@@ -1,5 +1,6 @@
 // pages/index/search/search.js
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
+//获取应用实例
+const app = getApp()
 
 Page({
 
@@ -26,7 +27,7 @@ Page({
     var delId = item.currentTarget.dataset.postid.search_id
 
     wx.request({
-      url: InterfaceUrl + 'clean_searchHistory',
+      url: app.InterfaceUrl + 'clean_searchHistory',
       data: {
         userId: that.data.userid,
         type: 2,
@@ -43,7 +44,7 @@ Page({
   deleteall:function(){
     var that =this;
     wx.request({
-      url: InterfaceUrl + 'clean_searchHistory',
+      url: app.InterfaceUrl + 'clean_searchHistory',
       data:{
         userId: that.data.userid,
         type:1,
@@ -67,7 +68,7 @@ Page({
     }),
       // 热搜关键词
       wx.request({
-        url: InterfaceUrl + 'get_hotWords',
+        url: app.InterfaceUrl + 'get_hotWords',
         data: {},
         header: { 'content-type': 'application/json' },
         success: function (res) {
@@ -79,7 +80,7 @@ Page({
       });
     // 获取历史搜索
     wx.request({
-      url: InterfaceUrl + 'get_searchHistory?userId=' + that.data.userid + '&type=1',
+      url: app.InterfaceUrl + 'get_searchHistory?userId=' + that.data.userid + '&type=1',
       data: {},
       header: { 'content-type': 'application/json' },
       success: function (res) {

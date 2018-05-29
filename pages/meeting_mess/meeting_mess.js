@@ -1,6 +1,6 @@
 // pages/index//meeting_mess/meeting_mess.js
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -75,7 +75,7 @@ Page({
     });
     // 会议资讯列
     wx.request({
-      url: InterfaceUrl + 'get_allmeeting',
+      url: app.InterfaceUrl + 'get_allmeeting',
       data:{},
       header: { 'content-type': 'application/json'},
       success:function(res){
@@ -85,7 +85,7 @@ Page({
     });
     // 往期回顾列
     wx.request({
-      url: InterfaceUrl + 'get_allreplay',
+      url: app.InterfaceUrl + 'get_allreplay',
       data:{},
       header:{'content-type':'application/json'},
       success:function(res){

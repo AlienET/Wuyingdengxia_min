@@ -9,8 +9,8 @@
     <text catchtap='onContributeTap' class='contribute ver-middle' style='float:right;margin-top:14rpx;'>投稿</text>
   </view>
   <view>
-    <swiper  previous-margin='10rpx' style='height:360rpx' next-margin='20rpx' vertical='{{false}}' indicator-dots autoplay interval="5000" duration="1000" circular indicator-color="rgba(256,256,256,0.5)" indicator-active-color="rgba(256,256,256,0.8)">
-      <swiper-item  wx:for='{{bannerList}}' style='text-align:center'>
+    <swiper previous-margin='10rpx' style='height:360rpx' next-margin='20rpx' vertical='{{false}}' indicator-dots autoplay interval="5000" duration="1000" circular indicator-color="rgba(256,256,256,0.5)" indicator-active-color="rgba(256,256,256,0.8)">
+      <swiper-item wx:for='{{bannerList}}' style='text-align:center'>
         <image style='margin:0 15rpx;' catchtap='onBannerImgTap' data-postid="{{item}}" src='{{item.banner_imgpath}}' mode='widthFix'></image>
       </swiper-item>
     </swiper>
@@ -28,9 +28,10 @@
       {{item.key_dis_title}}
     </view>
   </view>
-  <swiper current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+  <swiper current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{20+tabActiveKeyId.length*138}}px" bindchange="bindChange">
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
-      <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}' ><!-- wx:if='{{tabActiveKeyId}}'  -->
+      <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}'>
+        <!-- wx:if='{{tabActiveKeyId}}'  -->
         <view class='abs_item_author'>
           <image src='{{item.heading?item.heading:"/images/black.jpg"}}'></image>
           <text>{{item.article_author}}</text>
@@ -44,6 +45,9 @@
               {{item.article_content}}
             </view>
           </view>
+        </view>
+        <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""}}'>
+          <image wx:for='{{item.article_img_path}}' wx:for-item="itm" src='{{itm}}' mode='aspectFill' style='width:{{item.article_img_path.length == 3?"33%":"100%"}};height:100%'></image>
         </view>
         <view class='txt-r'>
           <view>

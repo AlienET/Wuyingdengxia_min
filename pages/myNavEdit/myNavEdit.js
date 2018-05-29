@@ -1,6 +1,6 @@
 // pages/myNavEdit/myNavEdit.js
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/';
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -21,7 +21,7 @@ Page({
     var that = this;
     // 导航推荐
     wx.request({
-      url: InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
       data: {
         limit: 10,
         type: 1,
@@ -62,7 +62,7 @@ Page({
     var item = item.currentTarget.dataset.item;
     if (that.data.isEdit){
       wx.request({
-        url: InterfaceUrl + 'post_user_key',
+        url: app.InterfaceUrl + 'post_user_key',
         data:{
           user_id:that.data.userid,
           key_id: item.label_id
@@ -73,7 +73,7 @@ Page({
           console.log(res);
           // 我的导航标签
           wx.request({
-            url: InterfaceUrl + 'get_labels',
+            url: app.InterfaceUrl + 'get_labels',
             data: {
               user_id: that.data.userid,
               type: 1,
@@ -98,7 +98,7 @@ Page({
     that.setData({userid:options.userid});
     // 我的导航标签
     wx.request({
-      url: InterfaceUrl + 'get_labels',
+      url: app.InterfaceUrl + 'get_labels',
       data:{
         userid: that.data.userid,
         type:1,
@@ -111,7 +111,7 @@ Page({
     });
     // 导航推荐
     wx.request({
-      url: InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
       data: {
         limit:10,
         type:1,

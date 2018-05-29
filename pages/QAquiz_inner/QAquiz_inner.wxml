@@ -4,7 +4,7 @@
   <view style='padding-bottom:20rpx;'>
     <image catchtap='onchooseImage' src='/images/icon/tupian.png' style='width:40rpx;height:34rpx;'></image>
     <image catchtap='onAddLabelTap' src='/images/icon/biaoqian.png' style='width:36rpx;height:36rpx;'></image>
-    <text>￥</text>
+    <text class='{{moonNum.active?"moonNum":""}}'>{{moonNum.num}}</text>
     <view style='float:right;font-size:28rpx;'>
       匿名
       <switch checked bindchange="switchChange" />
@@ -19,12 +19,10 @@
       </view>
     </view>
     <view class='content_label'>
-      <text>0</text>
-      <text>10</text>
-      <text>20</text>
-      <text>50</text>
-      <text>100</text>
-      <text>输入其它金额</text>
+      <view style='display:flex;justify-content:space-between;flex-wrap:wrap'>
+        <text wx:for='{{moonY}}' bindtap='chooseMoon' data-item='{{item}}' data-idx='{{index}}' class='{{item.num>currentMoonY?"prohibit":""}}  {{item.active?"active":""}}'>{{item.num}}</text>
+        <text>输入其它金额</text>
+      </view>
     </view>
   </view>
 </view>

@@ -1,4 +1,6 @@
 // pages/index/previous_back/previous_back.js
+//获取应用实例
+const app = getApp()
 Page({
 
   /**

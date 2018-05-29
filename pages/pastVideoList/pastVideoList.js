@@ -1,6 +1,6 @@
 // pages/pastVideoList/pastVideoList.js
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/'
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -24,7 +24,7 @@ Page({
     var that = this;
     var replay_id = options.replay_id;
     wx.request({
-      url: InterfaceUrl + 'get_allsub_replay?replay_id=' + options.replay_id,
+      url: app.InterfaceUrl + 'get_allsub_replay?replay_id=' + options.replay_id,
       data:{},
       success:function(res){
         console.log(res.data.data);

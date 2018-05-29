@@ -1,6 +1,6 @@
 // pages/article_contribute/article_contribute.js
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/';
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -31,7 +31,7 @@ Page({
       url: '../myNavEdit/myNavEdit',
     })
     wx.request({
-      url: InterfaceUrl + 'get_labels?type=1&userid='+that.data.userid,
+      url: app.InterfaceUrl + 'get_labels?type=1&userid='+that.data.userid,
       success:function(res){
         console.log(res.data.data)
         that.setData({labels:res.data.data})
@@ -74,7 +74,7 @@ Page({
       data: that.data.tempFilePaths[0]
     }
     wx.uploadFile({
-      url: InterfaceUrl + 'upload', //仅为示例，非真实的接口地址
+      url: app.InterfaceUrl + 'upload', //仅为示例，非真实的接口地址
       filePath: that.data.tempFilePaths[0],
       name: 'image_file',
       // header: {'content-type':'multipart/form-data'},
@@ -90,7 +90,7 @@ Page({
       fail:function(error){
         console.log(error)
       }
-    })
+    });
   },
   // 内容监听
   isinnertext: function (e) {

@@ -1,7 +1,6 @@
 // pages/index/article_detail/article_detail.js
-
-// 接口URL
-const InterfaceUrl = 'http://39.106.2.216/index.php/API/';
+//获取应用实例
+const app = getApp();
 Page({
 
   /**
@@ -24,7 +23,7 @@ Page({
     var that = this;
     console.log(event.detail.value);
     wx.request({
-      url: InterfaceUrl + 'post_comment',
+      url: app.InterfaceUrl + 'post_comment',
       data: {
         userid: that.data.userid,
         toid: that.data.aboutData.article_id,
@@ -42,7 +41,7 @@ Page({
 
         // 获取评论数据
         wx.request({
-          url: InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.articleid + '&comType=0&comment_to_type=0',
+          url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.articleid + '&comType=0&comment_to_type=0',
           data: {},
           header: {
             'content-type': 'application/json'
@@ -58,7 +57,7 @@ Page({
               time = time.replace(/-/g, '/');
               time = new Date(time).getTime();
               res.data.data[i].jubao = false;
-              res.data.data[i].ctime = that.getDateDiff(time);
+              res.data.data[i].ctime = app.getDateDiff(time);
 
               // console.log(res.data.data);
               // console.log(time);
@@ -83,7 +82,7 @@ Page({
     var that = this;
     if (that.data.aboutData.is_follow > 0) {
       wx.request({
-        url: InterfaceUrl + 'post_cel_follow',
+        url: app.InterfaceUrl + 'post_cel_follow',
         data: {
           userid: that.data.userid,
           befollid: that.data.aboutData.user_id
@@ -103,7 +102,7 @@ Page({
       })
     } else {
       wx.request({
-        url: InterfaceUrl + 'post_follow',
+        url: app.InterfaceUrl + 'post_follow',
         data: {
           userid: that.data.userid,
           befollid: that.data.aboutData.user_id
@@ -133,7 +132,7 @@ Page({
     var user_id = that.data.commentData[index.currentTarget.dataset.postid].user_id;
     if (isSupport) {
       wx.request({
-        url: InterfaceUrl + 'post_cel_support',
+        url: app.InterfaceUrl + 'post_cel_support',
         data: {
           userid: that.data.userid,
           toid: 'user_id',
@@ -160,7 +159,7 @@ Page({
 
     } else {
       wx.request({
-        url: InterfaceUrl + 'get_support',
+        url: app.InterfaceUrl + 'get_support',
         data: {
           userid: that.data.userid,
           toid: that.data.commentData[index.currentTarget.dataset.postid].user_id,
@@ -209,7 +208,7 @@ Page({
     console.log(item.currentTarget.dataset.postid.jubao);
     var that = this;
     wx.request({
-      url: InterfaceUrl + 'post_report',
+      url: app.InterfaceUrl + 'post_report',
       data: {
         user_id: that.data.userid,
         to_id: item.currentTarget.dataset.postid.user_id,
@@ -245,7 +244,7 @@ Page({
     var that = this;
     if (that.data.aboutData.is_support > 0) {
       wx.request({
-        url: InterfaceUrl + 'post_cel_support',
+        url: app.InterfaceUrl + 'post_cel_support',
         data: {
           userid: that.data.userid,
           toid: that.data.aboutData.articleid,
@@ -262,7 +261,7 @@ Page({
       })
     } else {
       wx.request({
-        url: InterfaceUrl + 'get_support?userid=' + that.data.userid + '&toid=' + that.data.aboutData.articleid + '&supType=1',
+        url: app.InterfaceUrl + 'get_support?userid=' + that.data.userid + '&toid=' + that.data.aboutData.articleid + '&supType=1',
         data: {},
         header: { 'content-type': 'application/json' },
         success: function (res) {
@@ -279,7 +278,7 @@ Page({
     var that = this;
     if (that.data.aboutData.is_collection > 0) {
       wx.request({
-        url: InterfaceUrl + 'post_cel_collect',
+        url: app.InterfaceUrl + 'post_cel_collect',
         data: {
           userid: that.data.userid,
           toid: that.data.aboutData.articleid,
@@ -296,14 +295,14 @@ Page({
       })
     } else {
       wx.request({
-        url: InterfaceUrl + 'post_collection',
+        url: app.InterfaceUrl + 'post_collection',
         data: {
-          userid:that.data.userid,
+          userid: that.data.userid,
           type: 1,
-          toid:that.data.aboutData.articleid
+          toid: that.data.aboutData.articleid
         },
         header: { 'content-type': 'application/x-www-form-urlencoded' },
-        method:'POST',
+        method: 'POST',
         success: function (res) {
           console.log(res);
           that.setData({
@@ -314,7 +313,7 @@ Page({
     }
   },
   // 分享
-  onShareTop:function(){
+  onShareTop: function () {
     wx.showActionSheet({
       itemList: ['分享给微信好友', '分享到朋友圈'],
       success: function (res) {
@@ -336,7 +335,7 @@ Page({
       articleid: options.articleid
     });
     wx.request({
-      url: InterfaceUrl + 'get_articleinfo_byid?articleid=' + options.articleid + '&userid=' + options.userid,
+      url: app.InterfaceUrl + 'get_articleinfo_byid?articleid=' + options.articleid + '&userid=' + options.userid,
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -353,7 +352,7 @@ Page({
     });
     // 获取评论数据
     wx.request({
-      url: InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.articleid + '&comType=0&comment_to_type=0',
+      url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.articleid + '&comType=0&comment_to_type=0',
       data: {},
       header: {
         'content-type': 'application/json'
@@ -368,7 +367,7 @@ Page({
           time = time.replace(/-/g, '/');
           time = new Date(time).getTime();
           res.data.data[i].jubao = false;
-          res.data.data[i].ctime = that.getDateDiff(time);
+          res.data.data[i].ctime = app.getDateDiff(time);
 
           arrReverse.push(res.data.data[i]);
         }
@@ -427,45 +426,5 @@ Page({
   onShareAppMessage: function () {
 
   },
-  getDateDiff: function (dateTimeStamp) {
-    var result;
-    var minute = 1000 * 60;
-    var hour = minute * 60;
-    var day = hour * 24;
-    var halfamonth = day * 15;
-    var month = day * 30;
-    var now = new Date().getTime();
-    var diffValue = now - dateTimeStamp;
-    if (diffValue < 0) {
-      result = "刚刚";
-    }
-    var monthC = diffValue / month;
-    var weekC = diffValue / (7 * day);
-    var dayC = diffValue / day;
-    var hourC = diffValue / hour;
-    var minC = diffValue / minute;
-    if (monthC >= 1) {
-      if (monthC <= 12)
-        result = "" + parseInt(monthC) + "月前";
-      else {
-        result = "" + parseInt(monthC / 12) + "年前";
-      }
-    }
-    else if (weekC >= 1) {
-      result = "" + parseInt(weekC) + "周前";
-    }
-    else if (dayC >= 1) {
-      result = "" + parseInt(dayC) + "天前";
-    }
-    else if (hourC >= 1) {
-      result = "" + parseInt(hourC) + "小时前";
-    }
-    else if (minC >= 1) {
-      result = "" + parseInt(minC) + "分钟前";
-    } else {
-      result = "刚刚";
-    }
 
-    return result;
-  }
 })
