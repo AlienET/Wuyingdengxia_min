@@ -54,6 +54,12 @@ Page({
       url: '../wishingWell/wishingWell',
     })
   },
+  // 用户认证信息 - 个人资料
+  OnUserTap:function(){
+    wx.navigateTo({
+      url: '../personalData/personalData',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

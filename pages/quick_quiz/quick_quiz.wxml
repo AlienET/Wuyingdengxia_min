@@ -31,34 +31,34 @@
   <!--
      current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange"
   -->
-  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{127*tabActiveKeyId.length}}px">
+  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{150*tabActiveKeyId.length}}px">
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
       <scroll-view style='height:100%;' scroll-y=" ">
-      <view class='ml-md'>
-        <view catchtap='onProblemDetailsTap'  class='quiz_item' wx:for='{{tabActiveKeyId}}' data-quesid='{{item.question_id}}'>
-          <view>
-            <image src='{{item.headimg}}' style='border-radius:100%;width:52rpx;height:52rpx;vertical-align:middle;'></image>
-            <text style='font-size:26rpx;color:#999;vertical-align:middle;margin-left:15rpx;'>{{item.user_name}}</text>
-          </view>
-          <view class='item_title' style='margin-bottom:10rpx;'>
-            <text>{{item.question_title}}</text>
+        <view class='ml-md'>
+          <view catchtap='onProblemDetailsTap' class='quiz_item' wx:for='{{tabActiveKeyId}}' data-quesid='{{item.question_id}}'>
             <view>
-              <image class='ver-middle' style='margin-right:10rpx;' src='/images/icon/icon_moon.png'></image>
-              <text class='ver-middle'>{{item.moon_cash}}</text>
+              <image src='{{item.headimg}}' style='border-radius:100%;width:52rpx;height:52rpx;vertical-align:middle;'></image>
+              <text style='font-size:26rpx;color:#999;vertical-align:middle;margin-left:15rpx;'>{{item.user_name}}</text>
             </view>
-          </view>
-          <view class='quiz_item_inner text-hide'>
-            {{item.question_content}}
-          </view>
-          <view class='quiz_foot'>
-            <text>{{item.ctime}}   ·   已回答 {{item.answer_num}}</text>
-            <view>
-              <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
-              <text class='ver-middle'>回答</text>
+            <view class='item_title' style='margin-bottom:10rpx;'>
+              <text>{{item.question_title}}</text>
+              <view>
+                <image class='ver-middle' style='margin-right:10rpx;' src='/images/icon/icon_moon.png'></image>
+                <text class='ver-middle'>{{item.moon_cash}}</text>
+              </view>
+            </view>
+            <view class='quiz_item_inner text-hide'>
+              {{item.question_content}}
+            </view>
+            <view class='quiz_foot'>
+              <text>{{item.ctime}}   ·   已回答 {{item.answer_num}}</text>
+              <view>
+                <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+                <text class='ver-middle'>回答</text>
+              </view>
             </view>
           </view>
         </view>
-      </view>
       </scroll-view>
     </swiper-item>
   </swiper>

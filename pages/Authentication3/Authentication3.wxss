@@ -1,0 +1,36 @@
+/* pages/Authentication3/Authentication3.wxss */
+page {
+  background: #f3f4f8;
+}
+
+.user_list {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.u_item {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  padding: 20rpx;
+  padding-left: 0rpx;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+
+.u_item .u_li {
+  display: inline-block;
+  vertical-align: middle;
+  color: #999;
+  font-size: 30rpx;
+  padding-top: 5rpx;
+}
+
+.u_item input, picker {
+  font-size: 30rpx;
+  vertical-align: middle;
+  margin-left: 50rpx;
+}
+.bm{
+  margin: 80rpx auto;
+}

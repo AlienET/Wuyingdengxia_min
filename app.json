@@ -35,6 +35,10 @@
     "pages/Myquestion/Myquestion",
     "pages/Myanswer/Myanswer",
     "pages/Myfollow/Myfollow",
+    "pages/personalData/personalData",
+    "pages/Authentication1/Authentication1",
+    "pages/Authentication2/Authentication2",
+    "pages/Authentication3/Authentication3",
     "pages/logs/logs"
   ],
   "window":{

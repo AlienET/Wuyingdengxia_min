@@ -7,9 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userid: '10003',
     imgSrc: '',
     // 当前月亮币
-    currentMoonY: 90,
+    currentMoonY: 40,
     // 当前月亮币数额
     moonNum: { num: '￥', active: false },
     // 选择悬赏月亮币 [0,10,20,50,100]
@@ -19,7 +20,22 @@ Page({
       { num: 20, active: false },
       { num: 50, active: false },
       { num: 100, active: false }
-    ]
+    ],
+    // 选取月亮币状态
+    isMoon: false,
+    // --------------------------------------------------
+    // 提问 - 标题
+    quesTitle: '',
+    // 是否匿名
+    conceal: true
+  },
+  // 切换 选取状态
+  moonTap: function () {
+    var that = this;
+    var isMoon = !that.data.isMoon;
+    that.setData({
+      isMoon: isMoon
+    })
   },
   // 选择月亮币
   chooseMoon: function (item, idx) {
@@ -67,13 +83,19 @@ Page({
   },
   // 匿名状态
   switchChange: function (event) {
-    console.log(event.detail.value)
+    var that = this;
+    that.setData({ conceal: event.detail.value });
+    console.log(that.data.conceal)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.quesTitle)
+    var that = this;
+    console.log(options.quesTitle);
+    that.setData({
+      quesTitle: options.quesTitle
+    })
   },
 
   /**

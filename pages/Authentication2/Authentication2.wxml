@@ -1,0 +1,26 @@
+<!--pages/Authentication2/Authentication2.wxml-->
+<view class='gap' style='font-size:32rpx;color:#9C9C9C;padding-top:30rpx;padding-bottom:30rpx;font-weight:bold'>
+  设置专业信息
+</view>
+<view class='pl-md user_list'>
+  <label class='u_item'>
+    <label class='u_li'>医院</label>
+    <input bindblur='blurUserHospital' type='text' value='{{user_hospital}}'></input>
+  </label>
+  <view class='u_item'>
+    <view class='u_li'>科室</view>
+    <input bindblur='blurUserOffice' type='text' value='{{user_office}}'></input>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>职务</view>
+    <input bindblur='blurUserPost' placeholder='如：护士/医生' placeholder-style='color:#e4e4e4;font-size:28rpx;' type='text' value='{{user_post}}'></input>
+  </view>
+</view>
+<view class='txt-center'>
+  <view catchtap='OnNextStepTap' class='bm'>
+    下一步
+  </view>
+  <view catchtap='OnlastStepTap' class='bm mt-n' style='color:#515151;background:#fff'>
+    上一步
+  </view>
+</view>

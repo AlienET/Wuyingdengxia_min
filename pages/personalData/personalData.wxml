@@ -1,0 +1,62 @@
+<!--pages/personalData/personalData.wxml-->
+<view class='gap'></view>
+<view class='pl-md user_list'>
+  <view class='u_item'>
+    <image bindtap='BindImage' src='{{tempFilePaths?tempFilePaths:"/images/black.jpg"}}'></image>
+    <view catchtap='AuthenticationTap' class='bm'>医护认证</view>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>手机号</view>
+    <input type='number' placeholder='请输入正确的手机号' value='13770681106'></input>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>昵称</view>
+    <input bindblur='blurNC' type='text' placeholder='请输入您的昵称' value='{{username}}'></input>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>性别</view>
+    <!-- <input type='text' placeholder='请输入您的性别' value='男'></input> -->
+    <picker style='width:300rpx;' bindchange="bindPickerChange" value="{{index}}" range="{{sex}}">
+      <view style='font-size:30rpx;'>
+        {{sex[index]}}
+      </view>
+    </picker>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>出生年月</view>
+    <picker mode='date' style='width:300rpx;' start="1000-01-01" end="{{date}}" bindchange="bindDateChange" value="{{date}}">
+      <view style='font-size:30rpx;'>
+        {{date}}
+      </view>
+    </picker>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>城市</view>
+    <!-- <input type='text' placeholder='请输入所在城市' value='北京'></input> -->
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view>
+        {{region[0]}} {{region[1]}} {{region[2]}}
+      </view>
+    </picker>
+  </view>
+</view>
+<view class='gap'></view>
+<view class='pl-md user_list'>
+  <label class='u_item'>
+    <label class='u_li'>医院</label>
+    <input disabled type='text' value=''></input>
+  </label>
+  <view class='u_item'>
+    <view class='u_li'>科室</view>
+    <input disabled type='text' value=''></input>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>身份</view>
+    <input disabled type='text' value=''></input>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>职务</view>
+    <input disabled type='text' value=''></input>
+  </view>
+</view>
+<view class='gap'></view>

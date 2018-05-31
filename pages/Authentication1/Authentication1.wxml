@@ -1,0 +1,31 @@
+<!--pages/Authentication1/Authentication1.wxml-->
+<view class='gap' style='font-size:32rpx;color:#9C9C9C;padding-top:30rpx;padding-bottom:30rpx;font-weight:bold'>
+  设置基本信息
+</view>
+<view class='pl-md user_list'>
+  <label class='u_item'>
+    <label class='u_li'>真实姓名</label>
+    <input bindblur='blurUserName' type='text' value='{{user_name}}'></input>
+  </label>
+  <view class='u_item'>
+    <view class='u_li'>联系电话</view>
+    <input disabled type='number' value='{{user_phone}}'></input>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>身份证号</view>
+    <input bindblur='blurIDnumber' type='idcard' value='{{user_id}}'></input>
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>您的身份</view>
+    <picker style='width:300rpx;' bindchange="bindPickerChange" value="{{index}}" range="{{identity}}">
+      <view style='font-size:30rpx;'>
+        {{identity[index]}}
+      </view>
+    </picker>
+  </view>
+</view>
+<view class='txt-center'>
+  <view catchtap='OnNextStepTap' class='bm'>
+    下一步
+  </view>
+</view>

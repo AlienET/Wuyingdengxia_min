@@ -1,0 +1,30 @@
+<!--pages/Authentication3/Authentication3.wxml-->
+<view class='gap' style='font-size:32rpx;color:#9C9C9C;padding-top:30rpx;padding-bottom:30rpx;font-weight:bold'>
+  上传认证材料
+</view>
+<view class='pl-md user_list'>
+  <view class='u_item'>
+    <view class='u_li'>
+      选择材料
+      <text style='margin-left:50rpx;font-size:28rpx;color:#999'>身份证+护士资格证+工作证或胸卡</text>
+    </view>
+    <!-- <input disabled type='text' value='身份证+护士资格证+工作证或胸卡'></input> -->
+  </view>
+  <view class='u_item'>
+    <view class='u_li'>上传图片</view>
+    <view class='inline-block' style='margin-left:50rpx;'>
+      <view class='inline-block' catchtap='OnAddImgTap'>
+        <image class='ver-middle' style='width:125rpx;' mode='widthFix' src='/images/icon/addimg.png'></image>
+        <text class='ver-middle' style='color:#999;font-size:28rpx;margin-left:20rpx;'>添加照片</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='txt-center'>
+  <view catchtap='OnNextStepTap' class='bm'>
+    下一步
+  </view>
+  <view catchtap='OnlastStepTap' class='bm mt-n' style='color:#515151;background:#fff'>
+    上一步
+  </view>
+</view>
