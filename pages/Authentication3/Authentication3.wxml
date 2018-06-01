@@ -13,13 +13,18 @@
   <view class='u_item'>
     <view class='u_li'>上传图片</view>
     <view class='inline-block' style='margin-left:50rpx;'>
-      <view class='inline-block' catchtap='OnAddImgTap'>
+      <view class='pice_item inline-block ver-middle' style='margin-right:8rpx;' wx:for='{{tempFilePaths}}'>
+        <image catchtap='imgDelete' data-deleteimg='{{index}}' class='img_delete' src='/images/icon/cha.png'></image>
+        <image class='img_item' src='{{item}}' mode='aspectFill'></image>
+      </view>
+      <view class='inline-block ver-middle' catchtap='addImg' wx:if='{{tempFilePaths.length<3}}'>
         <image class='ver-middle' style='width:125rpx;' mode='widthFix' src='/images/icon/addimg.png'></image>
-        <text class='ver-middle' style='color:#999;font-size:28rpx;margin-left:20rpx;'>添加照片</text>
+        <text class='ver-middle' wx:if='{{tempFilePaths.length == 0}}' style='color:#999;font-size:28rpx;margin-left:20rpx;'>添加照片</text>
       </view>
     </view>
   </view>
 </view>
+<view class='pad20' style='color:#999;font-size:22rpx;'>注：请放心上传，您的信息不会从本平台泄漏</view>
 <view class='txt-center'>
   <view catchtap='OnNextStepTap' class='bm'>
     下一步

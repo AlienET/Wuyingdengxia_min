@@ -23,8 +23,10 @@ Page({
     // tab切换  
     currentTab: '',
     // tab切换的当前key_id
-    tabActiveKeyId: []
-
+    tabActiveKeyId: [],
+    // -------------------------------
+    userInfo:'',
+    hasUserInfo:''
   },
   //事件处理函数
 
@@ -131,33 +133,37 @@ Page({
 
   onLoad: function () {
     var that = this;
-    console.log(app.InterfaceUrl)
-    // if (app.globalData.userInfo) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (this.data.canIUse){
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-    //   }
-    // } else {
-    //   // 在没有 open-type=getUserInfo 版本的兼容处理
-    //   wx.getUserInfo({
-    //     success: res => {
-    //       app.globalData.userInfo = res.userInfo
-    //       this.setData({
-    //         userInfo: res.userInfo,
-    //         hasUserInfo: true
-    //       })
-    //     }
-    //   })
-    // }
+    // app.onLaunch();
+    // console.log(app.globalData)
+    // console.log(app.InterfaceUrl)
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse){
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+    console.log(that.data.userInfo)
+    console.log(that.data.hasUserInfo)
     // banner图
     wx.request({
       url: app.InterfaceUrl + 'get_allbanner', //仅为示例，并非真实的接口地址

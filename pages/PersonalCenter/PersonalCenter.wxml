@@ -89,7 +89,7 @@
     </view>
     <image src='/images/icon/jiantouhui.png'></image>
   </view>
-  <view class='mLi'>
+  <view catchtap='onMyCollectionTap' class='mLi'>
     <view>
       <image  mode='{{bGmode}}' src='/images/icon/wodeshoucang.png'></image>
       我的收藏

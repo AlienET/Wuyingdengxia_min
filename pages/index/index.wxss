@@ -36,65 +36,7 @@ swiper swiper-item image {
   height: 36rpx;
 }
 
-.summarys {
-  margin-left: 20rpx;
-}
 
-.abs_item {
-  padding: 10rpx 20rpx 10rpx 0;
-  border-bottom: 1px solid #e7e7e7;
-}
-
-.abs_item_author {
-  margin-bottom: 10rpx;
-}
-
-.abs_item_author image {
-  border-radius: 100%;
-  width: 52rpx;
-  height: 52rpx;
-  vertical-align: middle;
-}
-
-.abs_item_author text {
-  vertical-align: middle;
-  font-size: 26rpx;
-  color: #999;
-  margin-left: 20rpx;
-}
-
-.abs_item_title {
-  font-size: 34rpx;
-  font-weight: 600;
-  margin-bottom: 8rpx;
-}
-
-.abs_item_content image {
-  width: 100%;
-}
-
-.abs_item_content .content_txt {
-  font-size: 28rpx;
-  color: #999;
-  margin-bottom: 10rpx;
-}
-
-.summarys .txt-r view {
-  font-size: 22rpx;
-  vertical-align: middle;
-  margin-left: 30rpx;
-  display: inline-block;
-}
-
-.summarys .txt-r view image {
-  vertical-align: middle;
-  margin-right: 8rpx;
-}
-
-.summarys .txt-r view text {
-  vertical-align: middle;
-  color: #bdbdbd;
-}
 
 
 /*  标签切换  */

@@ -1,0 +1,112 @@
+<!--pages/MyCollection/MyCollection.wxml-->
+<view class='section'>
+  <view class='action'>
+    <view bindtap="onBackTap" data-current="0" class='{{flag==0?"active":""}}'>
+      文章
+      <view class='default'>
+        <view></view>
+      </view>
+    </view>
+    <view bindtap="onBackTap" data-current="1" class='{{flag==1?"active":""}}'>
+      问答
+      <view class='default'>
+        <view></view>
+      </view>
+    </view>
+    <view bindtap="onBackTap" data-current="2" class='{{flag==2?"active":""}}'>
+      视频
+      <view class='default'>
+        <view></view>
+      </view>
+    </view>
+  </view>
+  <swiper current='{{flag}}' class='summarys' style="height:{{flag==0?310*Article.length:flag==1?310*Question.length:310*Video.length}}px" bindchange='bindChange'>
+    <swiper-item>
+      <scroll-view scroll-y='true'>
+        <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{Article}}' data-postid='{{item}}'>
+          <!-- wx:if='{{tabActiveKeyId}}'  -->
+          <view class='abs_item_author'>
+            <image src='{{item.heading?item.heading:"/images/black.jpg"}}'></image>
+            <text>{{item.article_author}}</text>
+          </view>
+          <view>
+            <view class='abs_item_title'>
+              {{item.article_title}}
+            </view>
+            <view class='abs_item_content'>
+              <view class='content_txt  text-hide'>
+                {{item.article_content}}
+              </view>
+            </view>
+          </view>
+          <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""}}'>
+            <image wx:for='{{item.article_img_path}}' wx:for-item="itm" src='{{itm}}' mode='aspectFill' style='width:{{item.article_img_path.length == 3?"33%":"100%"}};height:100%'></image>
+          </view>
+          <view class='txt-r'>
+            <view>
+              <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
+              <text>{{item.overlook_num}}</text>
+            </view>
+            <view>
+              <image src='/images/icon/icon_reply.png' style='width:28rpx;height:26rpx;'></image>
+              <text>{{item.recom_num}}</text>
+            </view>
+            <view>
+              <image src='/images/icon/icon_like.png' style='width:24rpx;height:24rpx;'></image>
+              <text>{{item.support_num}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <view catchtap='onProblemDetailsTap' class='quiz_item' wx:for='{{Question}}' data-quesid='{{item.question_id}}'>
+        <view>
+          <image src='{{item.headimg}}' style='border-radius:100%;width:52rpx;height:52rpx;vertical-align:middle;'></image>
+          <text style='font-size:26rpx;color:#999;vertical-align:middle;margin-left:15rpx;'>{{item.user_name}}</text>
+        </view>
+        <view class='item_title' style='margin-bottom:10rpx;'>
+          <text>{{item.question_title}}</text>
+          <view>
+            <image class='ver-middle' style='margin-right:10rpx;' src='/images/icon/icon_moon.png'></image>
+            <text class='ver-middle'>{{item.moon_cash}}</text>
+          </view>
+        </view>
+        <view class='quiz_item_inner text-hide'>
+          {{item.question_content}}
+        </view>
+        <view class='quiz_foot'>
+          <text>{{item.ctime}}   ·   已回答 {{item.answer_num}}</text>
+          <view>
+            <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
+            <text class='ver-middle'>回答</text>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view wx:if='{{Video.length==0}}'>还没有收藏视频...</view>
+      <view wx:for='{{Video}}' catchtap='onPastVideoTap' data-postid='{{item.replay_sub_id}}' class='v_item'>
+        <image src='/images/black.jpg'></image>
+        <view class='item_xx'>
+          <view class='fs-30'>{{item.meeting_title}}</view>
+          <view class='xx_user'>主讲：{{item.meeting_specialist}}</view>
+          <view class='txt-r mt-md'>
+            <view class='inline-block ml-md'>
+              <image class='ver-middle' src='/images/icon/icon_watch.png' style='width:27rpx;height:22.8rpx;'></image>
+              <text>{{item.play_num}}</text>
+            </view>
+            <view class='inline-block ml-md'>
+              <image class='ver-middle' src='/images/icon/icon_reply.png' style='width:26rpx;height:24rpx;'></image>
+              <text>{{item.support_num}}</text>
+            </view>
+            <view class='inline-block ml-md'>
+              <image class='ver-middle' src='/images/icon/icon_like.png' style='width:23rpx;height:23.2rpx;'></image>
+              <text>{{item.comment_num}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

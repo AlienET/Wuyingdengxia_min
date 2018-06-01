@@ -93,7 +93,8 @@ body, view, text {
 .txt-r {
   text-align: right;
 }
-.txt-l{
+
+.txt-l {
   text-align: left;
 }
 
@@ -284,7 +285,8 @@ body, view, text {
 .fs-30 {
   font-size: 30rpx;
 }
-.fs24{
+
+.fs24 {
   font-size: 24rpx;
 }
 
@@ -295,16 +297,19 @@ body, view, text {
 .pad20 {
   padding: 20rpx;
 }
-.pl-md{
-  padding-left:20rpx;
+
+.pl-md {
+  padding-left: 20rpx;
 }
 
 .inline-block {
   display: inline-block !important;
 }
+
 .text-muted {
-    color: #949699 !important;
+  color: #949699 !important;
 }
+
 /*  灰条  */
 
 .gap {
@@ -395,7 +400,9 @@ body, view, text {
 .tag.tj {
   border: 1px solid #ddd;
 }
+
 /*举报  */
+
 .report {
   position: absolute;
   border: 1rpx solid #b9b9b9;
@@ -406,4 +413,192 @@ body, view, text {
   width: 70rpx;
   text-align: center;
   border-radius: 5rpx;
+}
+
+/*  添加上传图片  */
+
+.pice_item {
+  position: relative;
+}
+
+.img_item {
+  width: 132rpx;
+  height: 132rpx;
+  margin: 5rpx;
+}
+
+.img_delete {
+  position: absolute;
+  right: -5rpx;
+  top: -5rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+/*  切换列表  */
+.abs_item {
+  padding: 10rpx 20rpx 10rpx 0;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.abs_item_author {
+  margin-bottom: 10rpx;
+}
+
+.abs_item_author image {
+  border-radius: 100%;
+  width: 52rpx;
+  height: 52rpx;
+  vertical-align: middle;
+}
+
+.abs_item_author text {
+  vertical-align: middle;
+  font-size: 26rpx;
+  color: #999;
+  margin-left: 20rpx;
+}
+
+.abs_item_title {
+  font-size: 34rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.abs_item_content image {
+  width: 100%;
+}
+
+.abs_item_content .content_txt {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+.summarys {
+  margin-left: 20rpx;
+}
+
+
+
+.summarys .txt-r view {
+  font-size: 22rpx;
+  vertical-align: middle;
+  margin-left: 30rpx;
+  display: inline-block;
+}
+
+.summarys .txt-r view image {
+  vertical-align: middle;
+  margin-right: 8rpx;
+}
+
+.summarys .txt-r view text {
+  vertical-align: middle;
+  color: #bdbdbd;
+}
+/*  问题列表  */
+.quiz_item {
+  padding: 24rpx;
+  padding-left: 0rpx;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.quiz_item .item_title>text {
+  font-weight: 600;
+  font-size: 34rpx;
+}
+
+.quiz_item .item_title>view {
+  float: right;
+  color: #fcba2a;
+}
+
+.quiz_item .item_title>view>image {
+  width: 25.8rpx;
+  height: 27.8rpx;
+  margin-top: 6rpx;
+}
+
+.quiz_item .item_title>view>text {
+  font-weight: 600;
+  color: #fcba2a;
+  font-size: 30rpx;
+}
+
+.quiz_item_inner {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.quiz_foot>text {
+  color: #c8c8c8;
+  font-size: 22rpx;
+}
+
+.quiz_foot>view {
+  float: right;
+  color: #fcba2a;
+}
+
+.quiz_foot>view image {
+  width: 27.2rpx;
+  height: 29.8rpx;
+  margin-top: 6rpx;
+}
+
+.quiz_foot>view text {
+  font-weight: 600;
+  color: #fcba2a;
+  font-size: 30rpx;
+  margin-left: 10rpx;
+}
+
+.quiz_user image {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+}
+
+.quiz_user text {
+  color: #999;
+  font-size: 26rpx;
+}
+
+.quiz_item_img image {
+  width: 220rpx;
+  height: 140rpx;
+  margin-right: 20rpx;
+}
+
+.quiz_item_img image:last-child {
+  margin-right: 0rpx;
+}
+/*  视频列表  */
+.video_list {
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.v_item {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #f3f3f3;
+  padding: 20rpx 0;
+}
+
+.v_item>image {
+  width: 200rpx;
+  height: 150rpx;
+}
+
+.item_xx {
+  margin-left: 20rpx;
+  width: 100%;
+  padding-right: 30rpx;
+}
+
+.xx_user {
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 10rpx;
 }

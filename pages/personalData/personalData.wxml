@@ -7,7 +7,7 @@
   </view>
   <view class='u_item'>
     <view class='u_li'>手机号</view>
-    <input type='number' placeholder='请输入正确的手机号' value='13770681106'></input>
+    <input type='number' disabled placeholder='请输入正确的手机号' value='13770681106'></input>
   </view>
   <view class='u_item'>
     <view class='u_li'>昵称</view>
@@ -35,7 +35,7 @@
     <!-- <input type='text' placeholder='请输入所在城市' value='北京'></input> -->
     <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
       <view>
-        {{region[0]}} {{region[1]}} {{region[2]}}
+        <!-- {{region[0]}} --> {{region[1]}} <!-- {{region[2]}} -->
       </view>
     </picker>
   </view>

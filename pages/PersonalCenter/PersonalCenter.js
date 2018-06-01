@@ -12,6 +12,12 @@ Page({
     // 背景图片
     bGmode: 'widthFix'
   },
+  // 我的收藏
+  onMyCollectionTap:function(){
+    wx.navigateTo({
+      url: '../MyCollection/MyCollection',
+    })
+  },
   // 我的投稿
   onMySubmissionTap:function(){
     wx.navigateTo({
