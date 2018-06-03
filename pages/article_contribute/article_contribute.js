@@ -74,12 +74,11 @@ Page({
       data: that.data.tempFilePaths[0]
     }
     wx.uploadFile({
-      url: app.InterfaceUrl + 'upload', //仅为示例，非真实的接口地址
+      url: app.InterfaceUrl + 'upload?type=1', //仅为示例，非真实的接口地址
       filePath: that.data.tempFilePaths[0],
       name: 'image_file',
-      // header: {'content-type':'multipart/form-data'},
+      header: {'content-type':'multipart/form-data'},
       formData: {
-        'type': 1,
         'data': data
       },
       success: function (res) {

@@ -18,6 +18,11 @@ Page({
       url: '../MyCollection/MyCollection',
     })
   },
+  onMyActivityTap:function(){
+    wx.navigateTo({
+      url: '../MyActivity/MyActivity',
+    })
+  },
   // 我的投稿
   onMySubmissionTap:function(){
     wx.navigateTo({

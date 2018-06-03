@@ -1,0 +1,25 @@
+<!--pages/MyActivity/MyActivity.wxml-->
+<view class='section'>
+  <view class='action'>
+    <view bindtap="onBackTap" data-current="0" class='{{flag==0?"active":""}}'>
+      未开始
+      <view class='default'>
+        <view></view>
+      </view>
+    </view>
+    <view bindtap="onBackTap" data-current="1" class='{{flag==1?"active":""}}'>
+      已结束
+      <view class='default'>
+        <view></view>
+      </view>
+    </view>
+  </view>
+  <swiper current='{{flag}}' class='summarys' style="height:{{flag==0?310*Article.length:flag==1?310*Question.length:310*Video.length}}px;min-height:100%" bindchange='bindChange'>
+    <swiper-item>
+      <view>未开始</view>
+    </swiper-item>
+    <swiper-item>
+      <view>已结束</view>
+    </swiper-item>
+  </swiper>
+</view>

@@ -19,9 +19,28 @@ Page({
     // 收藏问题 列表
     Question: [],
     // 收藏视频 列表
-    Video:[]
+    Video: []
   },
-
+  // 收藏文章详情
+  onArticleDetailTap: function (item) {
+    console.log(item.currentTarget.dataset.postid.article_id)
+    wx.navigateTo({
+      url: '../article_detail/article_detail?userid=10003&articleid=' + item.currentTarget.dataset.postid.article_id,
+    })
+  },
+  // 收藏问答详情
+  onProblemDetailsTap: function (item) {
+    console.log(item.currentTarget.dataset.quesid.question_id);
+    wx.navigateTo({
+      url: '../problemDetails/problemDetails?userid=10003&quesid=' + item.currentTarget.dataset.quesid.question_id,
+    })
+  },
+  // 收藏视频详情
+  onPastVideoTap:function(videoid){
+    wx.navigateTo({
+      url: '../pastVideo/pastVideo?userid=10003&replay_sub_id=' + videoid.currentTarget.dataset.postid,
+    })
+  },
   // 点击切换
   onBackTap: function (e) {
     var that = this;

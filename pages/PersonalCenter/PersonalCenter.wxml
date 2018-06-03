@@ -82,7 +82,7 @@
     </view>
     <image src='/images/icon/jiantouhui.png'></image>
   </view>
-  <view class='mLi'>
+  <view catchtap='onMyActivityTap' class='mLi'>
     <view>
       <image  mode='{{bGmode}}' src='/images/icon/wodehuodong.png'></image>
       我的活动

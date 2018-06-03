@@ -1,12 +1,11 @@
-/* pages/MyCollection/MyCollection.wxss */
-
+/* pages/MyActivity/MyActivity.wxss */
 .action {
   margin: 0 20rpx;
 }
 
 .action > view {
   display: inline-block;
-  width: 33%;
+  width: 50%;
   text-align: center;
   font-size: 34rpx;
   padding: 15rpx 0;

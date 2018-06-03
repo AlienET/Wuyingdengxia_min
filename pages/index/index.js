@@ -100,6 +100,15 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
+          for (var i = res.data.data.length - 1; i >= 0; i--) {
+            // console.log(res.data.data[i].article_img_path)//split(',');
+            if (res.data.data[i].article_img_path == '') {
+              res.data.data[i].article_img_path = res.data.data[i].article_img_path
+            } else {
+              res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+            }
+          };
+          console.log(res.data.data)
           that.setData({
             tabActiveKeyId: res.data.data,
           });
@@ -123,6 +132,14 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
+        for (var i = res.data.data.length - 1; i >= 0; i--) {
+          // console.log(res.data.data[i].article_img_path)//split(',');
+          if (res.data.data[i].article_img_path == '') {
+            res.data.data[i].article_img_path = res.data.data[i].article_img_path
+          } else {
+            res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+          }
+        };
         console.log(e);
         that.setData({
           tabActiveKeyId: res.data.data,

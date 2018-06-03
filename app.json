@@ -40,6 +40,7 @@
     "pages/Authentication2/Authentication2",
     "pages/Authentication3/Authentication3",
     "pages/MyCollection/MyCollection",
+    "pages/MyActivity/MyActivity",
     "pages/logs/logs"
   ],
   "window":{
