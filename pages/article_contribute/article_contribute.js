@@ -22,19 +22,27 @@ Page({
     // 本地图片路径集合
     tempFilePaths: [],
     // 标签列 数据
-    labels:[]
+    labels: [],
+    // 上传成功返回图片URL集合
+    imgUrl: []
   },
   // 添加标签
-  addLabel:function(){
+  addLabel: function () {
     var that = this;
     wx.navigateTo({
       url: '../myNavEdit/myNavEdit',
     })
     wx.request({
-      url: app.InterfaceUrl + 'get_labels?type=1&userid='+that.data.userid,
-      success:function(res){
+      url: app.InterfaceUrl + 'get_labels?type=1&userid=' + that.data.userid,
+      success: function (res) {
         console.log(res.data.data)
-        that.setData({labels:res.data.data})
+        var labelName = [];
+        for (var i = res.data.data.length - 1; i >= 0; i--) {
+          labelName.push(res.data.data[i].name)
+        }
+        // labelName = labelName.join(',');
+        that.setData({ labels: labelName })
+        console.log(that.data.labels)
       }
     })
   },
@@ -62,34 +70,69 @@ Page({
     var tempFilePaths = that.data.tempFilePaths;
     tempFilePaths.splice(e.currentTarget.dataset.deleteimg, 1);
     that.setData({ tempFilePaths: tempFilePaths })
-    console.log(that.data.tempFilePaths)  
+    console.log(that.data.tempFilePaths)
   },
   // 投稿
   Submission: function () {
     var that = this;
     console.log(this.data.titleText)
     console.log(this.data.innerText)
-    // 图片转码
-    var data = {
-      data: that.data.tempFilePaths[0]
-    }
-    wx.uploadFile({
-      url: app.InterfaceUrl + 'upload?type=1', //仅为示例，非真实的接口地址
-      filePath: that.data.tempFilePaths[0],
-      name: 'image_file',
-      header: {'content-type':'multipart/form-data'},
-      formData: {
-        'data': data
-      },
-      success: function (res) {
-        var data = res.data
-        console.log(res);
-        //do something
-      },
-      fail:function(error){
-        console.log(error)
+    if (that.data.isSubmission) {
+      // 判断图片
+      if (that.data.tempFilePaths.length > 0) {
+        // 图片转码
+        for (var i = that.data.tempFilePaths.length - 1; i >= 0; i--) {
+          var data = { data: that.data.tempFilePaths[i] }
+          wx.uploadFile({
+            url: app.InterfaceUrl + 'upload?type=1', //仅为示例，非真实的接口地址
+            filePath: that.data.tempFilePaths[i],
+            name: 'image_file',
+            header: { 'content-type': 'multipart/form-data' },
+            formData: {
+              'data': data
+            },
+            success: function (res) {
+              var imgUrl = JSON.parse(res.data).data.url
+              that.data.imgUrl.push(imgUrl);
+              that.setData({ imgUrl: that.data.imgUrl });
+              console.log(that.data.imgUrl);
+            },
+            fail: function (error) {
+              console.log(error)
+            }
+          });
+        }
       }
-    });
+      var labels = that.data.labels.join(',');
+      //投稿
+      wx.request({
+        url: app.InterfaceUrl + 'post_article',
+        data: {
+          userid: that.data.userid,
+          articleTitle: that.data.titleText,
+          articleContent: that.data.innerText,
+          articleType: '',
+          articleClass: labels,
+          articleImg: that.data.imgUrl
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        success: function (res) {
+          if(res.data.code == '1'){
+            wx.navigateTo({
+              url: '../contribute_error/contribute_error?code=1',
+            })
+          }else{
+            wx.navigateTo({
+              url: '../contribute_error/contribute_error?code=0',
+            })
+          }
+        }
+      })
+    }
+
   },
   // 内容监听
   isinnertext: function (e) {
@@ -120,6 +163,9 @@ Page({
         titleText: e.detail.value
       })
     }
+    if (that.data.isInner && that.data.isTit) {
+      that.setData({ isSubmission: true })
+    } else { that.setData({ isSubmission: false }) }
   },
   /**
    * 生命周期函数--监听页面加载

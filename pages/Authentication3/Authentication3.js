@@ -8,7 +8,9 @@ Page({
    */
   data: {
     // 添加照片列
-    tempFilePaths: []
+    tempFilePaths: [],
+    // 上传成功过返回图片URL
+    imgUrl: []
   },
   // 添加图片
   addImg: function () {
@@ -39,18 +41,46 @@ Page({
   // 下一步
   OnNextStepTap: function () {
     var that = this;
-    wx.uploadFile({
-      url: app.InterfaceUrl + 'upload', //仅为示例，非真实的接口地址
-      filePath: that.data.tempFilePaths[0],
-      name: 'file',
-      formData: {
-        type: 1
+    var imgUrl = [];
+    for (var i = that.data.tempFilePaths.length - 1; i >= 0; i--) {
+      wx.uploadFile({
+        url: app.InterfaceUrl + 'upload?type=1', //仅为示例，非真实的接口地址
+        filePath: that.data.tempFilePaths[i],
+        name: 'file',
+        formData: {
+          'data': that.data.tempFilePaths[i]
+        },
+        success: function (res) {
+          console.log(res)
+          var data = JSON.parse(res.data).data.url;
+          console.log(data)
+          imgUrl.push(data);
+          console.log(imgUrl)
+          debugger
+          if(i==0){
+            imgUrl = imgUrl.join(',');
+            console.log(imgUrl)
+          }
+          //do something
+        }
+      })
+    }
+    
+    wx.request({
+      url: app.InterfaceUrl + 'post_usercerti',
+      data: {
+        userid: that.data.userid,
+        imgpath: imgUrl,
+        certtype:1
       },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
       success: function (res) {
-        console.log(res)
-        var data = res.data
-        //do something
-      }
+        console.log(res);
+
+      },
     })
   },
   // 上一步

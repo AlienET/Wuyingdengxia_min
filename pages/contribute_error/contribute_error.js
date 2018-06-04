@@ -7,14 +7,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    // 成功与否
+    code:''
   },
-
+  // 返回
+  callback:function(){
+    var that = this;
+    if(that.data.code==1){
+      wx.navigateBack({
+        delta: 2
+      })
+    }else{
+      wx.navigateBack({
+        delta: 1
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    console.log(options.code)
+    that.setData({code:options.code})
   },
 
   /**
