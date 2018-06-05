@@ -1,0 +1,9 @@
+<!--pages/MSSubSuccess/MSSubSuccess.wxml-->
+<view class='txt-center' style='margin-top:30%'>
+  <image class='ver-middle' mode='widthFix' src='/images/icon/cgicon.png' style='width:70rpx;margin-right:30rpx;'></image>
+  <text class='ver-middle' style='font-size:44rpx;color:#40CE7D;display:inline-block;'>材料提交成功</text>
+  <view style='font-size:24rpx;color:#C5C5C5;margin-top:40rpx;'>
+    我们会在最快的时间内确认您的身份信息
+  </view>
+  <view catchtap='onDetermineTap' class='bm'  style='margin-top:35%'>确 \t 定</view>
+</view>

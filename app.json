@@ -41,6 +41,7 @@
     "pages/Authentication3/Authentication3",
     "pages/MyCollection/MyCollection",
     "pages/MyActivity/MyActivity",
+    "pages/MSSubSuccess/MSSubSuccess",
     "pages/logs/logs"
   ],
   "window":{

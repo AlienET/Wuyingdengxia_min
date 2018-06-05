@@ -41,47 +41,75 @@ Page({
   // 下一步
   OnNextStepTap: function () {
     var that = this;
-    var imgUrl = [];
-    for (var i = that.data.tempFilePaths.length - 1; i >= 0; i--) {
-      wx.uploadFile({
-        url: app.InterfaceUrl + 'upload?type=1', //仅为示例，非真实的接口地址
-        filePath: that.data.tempFilePaths[i],
-        name: 'file',
-        formData: {
-          'data': that.data.tempFilePaths[i]
-        },
-        success: function (res) {
-          console.log(res)
-          var data = JSON.parse(res.data).data.url;
-          console.log(data)
-          imgUrl.push(data);
-          console.log(imgUrl)
-          debugger
-          if(i==0){
-            imgUrl = imgUrl.join(',');
-            console.log(imgUrl)
-          }
-          //do something
-        }
+    if (that.data.tempFilePaths.length == 0) {
+      wx.showToast({
+        title: '请添加认证材料',
+        icon: 'none',
+        duration: 1500
       })
-    }
-    
-    wx.request({
-      url: app.InterfaceUrl + 'post_usercerti',
-      data: {
-        userid: that.data.userid,
-        imgpath: imgUrl,
-        certtype:1
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res);
+    } else {
+      wx.showLoading({
+        title: '提交中',
+      })
+      var imgUrl = [];
+      for (var i = that.data.tempFilePaths.length - 1; i >= 0; i--) {
+        wx.uploadFile({
+          url: app.InterfaceUrl + 'upload?type=1', //仅为示例，非真实的接口地址
+          filePath: that.data.tempFilePaths[i],
+          name: 'file',
+          formData: {
+            'data': that.data.tempFilePaths[i]
+          },
+          success: function (res) {
+            console.log(res)
+            var data = JSON.parse(res.data).data.url;
+            console.log(data)
+            imgUrl.push(data);
+            console.log(imgUrl)
+            //do something
+          }
+        })
+      }
 
-      },
-    })
+      var timer = setInterval(function () {
+        if (imgUrl.length == that.data.tempFilePaths.length) {
+          imgUrl = imgUrl.join(',');
+          console.log(imgUrl)
+          wx.request({
+            url: app.InterfaceUrl + 'post_usercerti',
+            data: {
+              userid: that.data.userid,
+              imgpath: imgUrl,
+              certtype: 1,
+              user_token: ''//                                      缺token
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res);
+              if (res.data.code == '0') {
+                wx.showToast({
+                  title: '提交失败',
+                  icon: 'none',
+                  duration: 1500
+                })
+              } else {
+                wx.navigateTo({
+                  url: '../MSSubSuccess/MSSubSuccess',
+                })
+              }
+            },
+          })
+          clearInterval(timer);
+        }
+      }
+        , 500)
+
+
+      wx.hideLoading()
+    }
   },
   // 上一步
   OnlastStepTap: function () {

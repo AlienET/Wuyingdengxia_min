@@ -27,7 +27,7 @@
 <view class='pad20' style='color:#999;font-size:22rpx;'>注：请放心上传，您的信息不会从本平台泄漏</view>
 <view class='txt-center'>
   <view catchtap='OnNextStepTap' class='bm'>
-    下一步
+    提 \t \t 交
   </view>
   <view catchtap='OnlastStepTap' class='bm mt-n' style='color:#515151;background:#fff'>
     上一步
