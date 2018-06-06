@@ -23,6 +23,7 @@
   <swiper current='{{flag}}' class='summarys' style="height:{{flag==0?310*Article.length:flag==1?310*Question.length:310*Video.length}}px;min-height:100%" bindchange='bindChange'>
     <swiper-item>
       <scroll-view scroll-y='true'>
+      <image wx:if='{{Article.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/Empty/wushoucang.png'></image>
         <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{Article}}' data-postid='{{item}}'>
           <!-- wx:if='{{tabActiveKeyId}}'  -->
           <view class='abs_item_author'>
@@ -60,6 +61,7 @@
       </scroll-view>
     </swiper-item>
     <swiper-item>
+    <image wx:if='{{Question.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/Empty/wushoucang.png'></image>
       <view catchtap='onProblemDetailsTap' class='quiz_item' wx:for='{{Question}}' data-quesid='{{item}}'>
         <view>
           <image src='{{item.headimg}}' style='border-radius:100%;width:52rpx;height:52rpx;vertical-align:middle;'></image>
@@ -85,7 +87,8 @@
       </view>
     </swiper-item>
     <swiper-item>
-      <view class='txt-center' wx:if='{{Video == null}}' style='margin-top:20rpx;font-size:30rpx;color:#999'>还没有收藏视频...</view>
+      <!-- <view class='txt-center' wx:if='{{Video == null}}' style='margin-top:20rpx;font-size:30rpx;color:#999'>还没有收藏视频...</view> -->
+      <image wx:if='{{Video == null}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/Empty/wushoucang.png'></image>
       <view wx:for='{{Video}}' catchtap='onPastVideoTap' data-postid='{{item.replay_sub_id}}' class='v_item'>
         <image src='/images/black.jpg'></image>
         <view class='item_xx'>

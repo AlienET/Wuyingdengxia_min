@@ -80,6 +80,7 @@ page {
 
 .gifts .gift .gift_mess {
   font-size: 26rpx;
+  -webkit-line-clamp:1
 }
 
 .gifts .gift .gift_dh .dhj {

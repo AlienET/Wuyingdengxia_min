@@ -8,7 +8,9 @@ Page({
    */
   data: {
     // 背景图片
-    bGmode: 'widthFix'
+    bGmode: 'widthFix',
+    // 兑换礼物列
+    goods:[]
   },
   // 兑换礼物详情
   ongiftDetailsTap:function(){
@@ -16,11 +18,38 @@ Page({
       url: '../giftDetails/giftDetails',
     })
   },
+  // 签到领币
+  onSignTap:function(){
+    wx.request({
+      url: app.InterfaceUrl + 'post_sign',
+      data:{
+        userid:'10003',
+        type:1,
+        toid:0
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      success:function(res){
+        console.log(res);
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    // 兑换礼物列表
+    wx.request({
+      url: app.InterfaceUrl + 'get_allgoods',
+      data:{},
+      success:function(res){
+        console.log(res.data.data)
+        that.setData({goods:res.data.data})
+      }
+    })
   },
 
   /**

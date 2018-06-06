@@ -1,4 +1,6 @@
 // pages/MyActivity/MyActivity.js
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -12,6 +14,10 @@ Page({
     winHeight: 0,
     // tab切换
     flag: 0,
+    // 未开始
+    NotBeginning:[],
+    // 已结束
+    Finished:[]
   },
   // 点击切换
   onBackTap: function (e) {
@@ -38,7 +44,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that =this;
+    wx.request({
+      url: app.InterfaceUrl + 'get_mymetting?userid=10003',
+      data: {},
+      header: { 'content-type': 'application/json' },
+      success: function (res) {
+        console.log(res.data.data);
+        for(var i = res.data.data.length-1;i>=0;i--){
+          if (res.data.data[i].isfinish == '1'){
+            that.data.Finished.unshift(res.data.data[i]);
+            that.setData({ Finished: that.data.Finished})
+          }else{
+            that.data.NotBeginning.unshift(res.data.data[i])
+            that.setData({ NotBeginning: that.data.NotBeginning })
+          }
+        }
+        console.log(that.data.NotBeginning)
+        console.log(that.data.Finished)
+      }
+    })
   },
 
   /**
