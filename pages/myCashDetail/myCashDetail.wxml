@@ -1,12 +1,12 @@
 <!--pages/myCashDetail/myCashDetail.wxml 我的兑换详情-->
 <view class='pad20 bg-white'>
-  <image src='/images/black.jpg' mode='{{imgMode}}' style='width:176rpx;'></image>
-  <view class='inline-block pad20'>
-    <view class='fs-30 lw_color'>星巴克 拿铁1杯</view>
+  <image class='ver-middle' src='{{goods.goods_img}}' mode='aspectFill' style='width:176rpx;height:144rpx;'></image>
+  <view class='inline-block pad20 ver-middle' style='width:65%'>
+    <view class='fs-30 lw_color text-hide'>{{goods.goods_name}}</view>
     <view class='mt-sm fs24 text-muted'>数量 x 1</view>
     <view>
       <text class='fs24 text-muted'>兑换价</text>
-      <text class='lw_num'>40</text>
+      <text class='lw_num'>{{goods.moon_cash}}</text>
       <text class='fs24'>月亮币</text>
     </view>
   </view>
@@ -14,21 +14,21 @@
 <view class='bg-white lw_dhm'>
   <view class='inline-block ver-middle lh15'>
     <text class='text-muted lw_nav'>兑换码：</text>
-    <text class='lw_nav_code'>AE92893487473578</text>
+    <text class='lw_nav_code'>{{goods.exchange_code}}</text>
   </view>
   <view bindtap='copy' class='inline-block ver-middle lw_copy'>复制</view>
 </view>
 <view class='bg-white lw_list'>
   <view class='ml-md'>
     <text class='text-muted lw_nav'>订单号：</text>
-    <text class='lw_nav_code'>2392893487473578</text>
+    <text class='lw_nav_code'>{{goods.order_num}}</text>
   </view>
   <view class='ml-md'>
     <text class='text-muted lw_nav'>下单时间：</text>
-    <text class='lw_nav_code'>2018年3月21日</text>
+    <text class='lw_nav_code'>{{goods.exchange_time}}</text>
   </view>
   <view class='ml-md'>
     <text class='text-muted lw_nav'>有效期：</text>
-    <text class='lw_nav_code'>2018年3月1日-2018年12月31日</text>
+    <text class='lw_nav_code'>{{goods.begin_time}}-{{goods.end_time}}</text>
   </view>
 </view>

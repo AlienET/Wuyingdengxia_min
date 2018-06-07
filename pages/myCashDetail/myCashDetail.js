@@ -7,16 +7,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgMode: 'widthFix'
+    imgMode: 'widthFix',
+    // 兑换商品详情
+    goods:[]
   },
   // 复制
   copy: function () {
+    var that = this;
     wx.setClipboardData({
-      data: 'data',
+      data: that.data.goods.exchange_code,
       success: function (res) {
         wx.getClipboardData({
           success: function (res) {
             console.log(res.data) // data
+            wx.showToast({
+              title: '复制成功',
+              icon: 'success',
+              duration: 1500
+            })
           }
         })
       }
@@ -26,7 +34,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    // console.log(options)
+    // wx.request({
+    //   url: app.InterfaceUrl + 'get_goods_byid?goods_id=' + options.goods_id,
+    //   success:function(res){
+    //     console.log(res.data.data)
+    //     that.setData({goods:res.data.data})
+    //   }
+    // })
+    wx.getStorage({
+      key: 'goods',
+      success: function (res) {
+        console.log(res.data)
+        that.setData({ goods: res.data })
+      }
+    })
   },
 
   /**

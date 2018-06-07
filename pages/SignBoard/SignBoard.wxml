@@ -21,14 +21,14 @@
     </view>
   </view>
   <view catchtap='onSignTap' class='inline-block ver-middle clickSign'>
-    签到领币
+    {{isSign==0?'签到领币':'已签到'}}
   </view>
 </view>
 <view class='section'>
   <view class='head_tit'>兑换礼物</view>
   <view class='mt-sm gifts'>
     <view catchtap='ongiftDetailsTap' class='txt-center mb-md gift' wx:for='{{goods}}' data-postid='{{item.goods_id}}'>
-      <image class='gift_img' src='{{item.goods_img}}' mode='{{bGmode}}'></image>
+      <image class='gift_img' src='{{item.goods_img}}' mode='aspectFill'></image>
       <view class='txt-l pl-md'>
         <view class='gift_mess text-hide'>{{item.goods_name}}</view>
         <view class='gift_dh'>

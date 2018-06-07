@@ -15,6 +15,9 @@ Page({
   // 问题详情
   OnMyQuestionTap:function(e){
     console.log(e.currentTarget.dataset.questionid);
+    // wx.navigateTo({
+    //   url: '../',
+    // })
   },
   /**
    * 生命周期函数--监听页面加载

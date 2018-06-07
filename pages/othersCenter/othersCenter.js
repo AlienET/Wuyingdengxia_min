@@ -1,48 +1,18 @@
-// pages/ForSuccessful/ForSuccessful.js
-//获取应用实例
-const app = getApp()
+// pages/othersCenter/othersCenter.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // 背景图片
-    bGmode: 'widthFix',
-    // 礼物名称
-    goods_name:'',
-    // 兑换价
-    moon_cash:'',
-    // 卷码
-    courtesy_code:'',
-    // 订单号
-    order_num:''
+  
   },
-  // 返回
-  onBackTap:function(){
-    wx.navigateBack({
-      delta: 1
-    })
-  },
-  // 兑换记录
-  onMyChangeTap:function(){
-    wx.redirectTo({
-      url: '../myChange/myChange'
-      // giftDetails
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    console.log(options);
-    that.setData({
-      goods_name: options.goods_name,
-      moon_cash: options.moon_cash,
-      courtesy_code: options.courtesy_code,
-      order_num: options.order_num
-    })
+  
   },
 
   /**

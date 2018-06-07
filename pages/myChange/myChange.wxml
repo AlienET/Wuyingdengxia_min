@@ -1,50 +1,18 @@
 <!--pages/myChange/myChange.wxml 我的兑换-->
-<view catchtap='onMyCashDetailTap' class='change_item'>
+<view catchtap='onMyCashDetailTap' class='change_item' wx:for='{{goodsList}}' data-id='{{item}}'>
   <view class='ci_title'>
-    <text class='orderNumber' decode="{{true}}">订单号 &nbsp; Y201712012092839</text>
+    <text class='orderNumber' decode="{{true}}">订单号 &nbsp; {{item.order_num}}</text>
     <text class='ci_state_warn'>待使用</text>
+    <!-- <text class='ci_state_default'>已过期</text> -->
+    <!-- <text class='ci_state_success'>已使用</text> -->
   </view>
   <view class='ci_inner'>
-    <image class='ver-middle' src='/images/black.jpg' mode='bGmode'></image>
-    <view class='ver-middle inline-block pad20'>
-      <view class='ci_name'>星巴克 拿铁1杯</view>
+    <image class='ver-middle' src='{{item.goods_img}}' mode='aspectFill'></image>
+    <view class='ver-middle inline-block pad20' style='width:65%'>
+      <view class='ci_name text-hide'>{{item.goods_name}}</view>
       <view style='mt-sm'>
         <text class='fs24 ci_dhj'>兑换价</text>
-        <text class='ci_state_warn ci_num'>40</text>
-        <text class='ci_state_warn fs24'>月亮币</text>
-      </view>
-    </view>
-  </view>
-</view>
-<view class='change_item'>
-  <view class='ci_title'>
-    <text class='orderNumber' decode="{{true}}">订单号 &nbsp; Y201712012092839</text>
-    <text class='ci_state_default'>已过期</text>
-  </view>
-  <view class='ci_inner'>
-    <image class='ver-middle' src='/images/black.jpg' mode='bGmode'></image>
-    <view class='ver-middle inline-block pad20'>
-      <view class='ci_name'>星巴克 拿铁1杯</view>
-      <view style='mt-sm'>
-        <text class='fs24 ci_dhj'>兑换价</text>
-        <text class='ci_state_warn ci_num'>40</text>
-        <text class='ci_state_warn fs24'>月亮币</text>
-      </view>
-    </view>
-  </view>
-</view>
-<view class='change_item'>
-  <view class='ci_title'>
-    <text class='orderNumber' decode="{{true}}">订单号 &nbsp; Y201712012092839</text>
-    <text class='ci_state_success'>已使用</text>
-  </view>
-  <view class='ci_inner'>
-    <image class='ver-middle' src='/images/black.jpg' mode='bGmode'></image>
-    <view class='ver-middle inline-block pad20'>
-      <view class='ci_name'>星巴克 拿铁1杯</view>
-      <view style='mt-sm'>
-        <text class='fs24 ci_dhj'>兑换价</text>
-        <text class='ci_state_warn ci_num'>40</text>
+        <text class='ci_state_warn ci_num'>{{item.moon_cash}}</text>
         <text class='ci_state_warn fs24'>月亮币</text>
       </view>
     </view>

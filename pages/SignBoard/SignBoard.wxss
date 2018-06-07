@@ -76,6 +76,7 @@ page {
 
 .gifts .gift .gift_img {
   width: 332rpx;
+  height: 280rpx;
 }
 
 .gifts .gift .gift_mess {

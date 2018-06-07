@@ -1,20 +1,20 @@
 <!--pages/ForSuccessful/ForSuccessful.wxml 兑换结果-->
 <view class='suc_box'>
   <image src='/images/icon/duihuanchenggong.png'></image>
-  <view class='suc_gift_name mt-md'>星巴克 拿铁1杯</view>
+  <view class='suc_gift_name mt-md'>{{goods_name}}</view>
   <view>
     <view class='suc_b'>
       <text class='suc_xx'>兑换价</text>
-      <text class='suc_xx_num'>40</text>
+      <text class='suc_xx_num'>{{moon_cash}}</text>
       <text class='suc_xx_b'>月亮币</text>
     </view>
     <view>
       <text class='suc_xx'>卷码</text>
-      <text class='suc_xx_code'>314AD0DKDHD23123</text>
+      <text class='suc_xx_code'>{{courtesy_code}}</text>
     </view>
     <view>
       <text class='suc_xx'>订单号</text>
-      <text class='suc_xx_code'>1232436767787</text>
+    <text class='suc_xx_code'>{{order_num}}</text>
     </view>
   </view>
   <view class='txt-center'>

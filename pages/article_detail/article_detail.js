@@ -72,7 +72,7 @@ Page({
         that.setData({ inputTxt: '' });
       },
       fail: function (error) {
-        console.log(errpr);
+        console.log(error);
       }
 
     })
