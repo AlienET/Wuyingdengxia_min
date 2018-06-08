@@ -1,6 +1,5 @@
 {
   "pages":[
-    "pages/othersCenter/othersCenter",
     "pages/index/index",
     "pages/search/search",
     "pages/article_detail/article_detail",

@@ -1,4 +1,5 @@
 /* pages/othersCenter/othersCenter.wxss */
+
 .p_rel>image {
   width: 100%;
   position: absolute;
@@ -35,14 +36,9 @@
   margin-left: 10rpx;
 }
 
-.ylb .ver-middle {
-  font-size: 28rpx;
-  color: #fcba2a;
-}
-
-.ylb image {
-  margin-right: 10rpx;
-  vertical-align: middle;
+.ylb{
+  color: #fff;
+  font-size: 24rpx;
 }
 
 .att {
@@ -56,7 +52,7 @@
 }
 
 .att>view text {
-  color: #fcba2a;
+  color: #fff;
   margin-left: 10rpx;
 }
 
@@ -68,62 +64,25 @@
 }
 
 .link_r {
-  width: 14rpx;
-  height: 28rpx;
   vertical-align: middle;
-  margin-left: 270rpx;
-}
-
-.myFun {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  background: #fff;
-  padding: 30rpx;
-  border-radius: 20rpx 20rpx 0 0;
-  /* margin-top: 20rpx; */
-}
-
-.myFun>view {
-  display: flex;
-  flex-direction: column;
-}
-
-.myFun>view image {
-  width: 84rpx;
-  height: 84rpx;
-  margin: 0 auto;
-}
-
-.myFun>view view {
-  font-size: 26rpx;
-  margin-top: 15rpx;
-}
-
-.lists {
-  padding: 0 30rpx;
-}
-
-.lists .mLi {
-  padding: 30rpx 0;
-  border-bottom: 1px solid #f2f2f2;
-  font-size: 30rpx;
-}
-
-.lists .mLi>view {
+  margin-left: 170rpx;
+  background: #fcba2a;
+  padding: 8rpx 25rpx;
+  border-radius: 200rpx;
+  font-size: 24rpx;
+  color: #fff;
   display: inline-block;
-  width: 97%;
 }
-
-.lists .mLi>view>image {
-  width: 36rpx;
-  /* height: 40rpx; */
-  vertical-align: middle;
-  margin-right: 15rpx;
+.txt-r view{
+  display: inline-block;
 }
-
-.lists .mLi>image {
-  width: 14rpx;
-  height: 24rpx;
+.txt-r view text{
+  color: #BDBDBD;
+  font-size: 22rpx;
+  margin-right: 20rpx;
+  margin-left: 6rpx;
   vertical-align: middle;
+}
+.txt-r view:last-child text{
+  margin-right: 0rpx;
 }

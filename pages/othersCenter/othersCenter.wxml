@@ -1,36 +1,75 @@
 <!--pages/othersCenter/othersCenter.wxml-->
 <view class='p_rel'>
-  <image src='/images/icon/grzxbg.png' mode='{{bGmode}}'></image>
-  <view class='txt-r'>
-    <image src='/images/icon/yaoqing.png' mode='{{bGmode}}' style='width:36.4rpx;'></image>
-    <image src='/images/icon/xiaoxi.png' mode='{{bGmode}}' style='width:37.4rpx;'></image>
-    <image src='/images/icon/shezhi.png' mode='{{bGmode}}' style='width:37.8rpx;'></image>
-  </view>
-  <view catchtap='OnUserTap' class='pad20' style='padding-left:30rpx;'>
+  <image src='/images/icon/grzxbg.png' mode='widthFix'></image>
+  <!-- <view class='txt-r'>
+    <image src='/images/icon/yaoqing.png' mode='widthFix' style='width:36.4rpx;'></image>
+    <image src='/images/icon/xiaoxi.png' mode='widthFix' style='width:37.4rpx;'></image>
+    <image src='/images/icon/shezhi.png' mode='widthFix' style='width:37.8rpx;'></image>
+  </view> -->
+  <view catchtap='OnUserTap' class='pad20' style='padding-left:30rpx;padding-top:50rpx;'>
     <view class='inline-block'>
-      <image src='/images/black.jpg'></image>
+      <image src='{{information.headimg}}'></image>
     </view>
     <view class='inline-block ml-md ver-middle'>
       <view>
-        <text class='user ver-middle'>李鲫鱼</text>
-        <image class='zs' src='/images/icon/vn.png' mode='{{bGmode}}' style='width:38rpx;'></image>
+        <text class='user ver-middle'>{{information.username}}</text>
+        <image class='zs' src='{{information.isV==null?"/images/icon/vn.png":"/images/icon/v.png"}}' mode='widthFix' style='width:38rpx;'></image>
       </view>
       <view class='ylb'>
-        <image src='/images/icon/icon_moon.png' style='width:28rpx;height:28rpx;'></image>
-        <text class='ver-middle'>15456</text>
+        职务：{{information.userPost}}
       </view>
       <view class='att'>
         <view>
           粉丝
-          <text>312</text>
+          <text>{{information.fansnum}}</text>
         </view>
         <text>|</text>
         <view>
           获赞
-          <text>312</text>
+          <text>{{information.supportnum}}</text>
         </view>
       </view>
     </view>
-    <image class='link_r' src='/images/icon/jiantou4.png'></image>
+    <!-- <image class='link_r' src='/images/icon/jiantou4.png'></image> -->
+    <view catchtap='onfollowTap' class='link_r' style='background:{{information.is_follow>0?"#e9e9e9":""}}'>{{information.is_follow>0?'已关注':'关注'}}</view>
+  </view>
+</view>
+<view class='sheet' style='border-bottom:1rpx solid #F0F0F0;margin-top:70rpx;padding-left:20rpx;'>
+  <text class='active'>文章</text>
+</view>
+<view style='margin-left:20rpx;'>
+  <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{articleList}}' data-articleid='{{item.article_id}}'>
+    <!-- wx:if='{{tabActiveKeyId}}'  -->
+    <view class='abs_item_author'>
+      <image src='{{information.headimg}}'></image>
+      <text>{{item.article_author}}</text>
+    </view>
+    <view>
+      <view class='abs_item_title'>
+        {{item.article_title}}
+      </view>
+      <view class='abs_item_content'>
+        <view class='content_txt  text-hide'>
+          {{item.article_content}}
+        </view>
+      </view>
+    </view>
+    <!-- <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""}}'>
+    <image wx:for='{{item.article_img_path}}' wx:for-item="itm" src='{{itm}}' mode='aspectFill' style='width:{{item.article_img_path.length == 3?"33%":"100%"}};height:100%'></image>
+  </view> -->
+    <view class='txt-r'>
+      <view>
+        <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
+        <text>{{item.overlook_num}}</text>
+      </view>
+      <view>
+        <image src='/images/icon/icon_reply.png' style='width:28rpx;height:26rpx;'></image>
+        <text>{{item.recom_num}}</text>
+      </view>
+      <view>
+        <image src='/images/icon/icon_like.png' style='width:24rpx;height:24rpx;'></image>
+        <text>{{item.support_num}}</text>
+      </view>
+    </view>
   </view>
 </view>

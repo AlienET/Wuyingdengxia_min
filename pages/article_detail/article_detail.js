@@ -335,7 +335,7 @@ Page({
       articleid: options.articleid
     });
     wx.request({
-      url: app.InterfaceUrl + 'get_articleinfo_byid?articleid=' + options.articleid + '&userid=' + options.userid,
+      url: app.InterfaceUrl + 'get_articleinfo_byid?articleid=' + options.articleid + '&userid=10003',
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
