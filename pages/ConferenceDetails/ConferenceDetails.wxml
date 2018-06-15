@@ -1,6 +1,6 @@
 <!--pages/ConferenceDetails/ConferenceDetails.wxml  会议资讯详情-->
 <view class='img_tit'>
-  <image src='/images/black.jpg'></image>
+  <image src='{{aboutData.meeting_image}}'></image>
 </view>
 <view class='pad20'>
   <view class='meet_'>
@@ -28,7 +28,7 @@
 <view class='gap'></view>
 <view class='pad20'>
   <view class='meets'>会议日程</view>
-  <view class='meet_txt pt-n'>
+  <view class='meet_txt pt-n' wx:if='{{schedule != ""}}'>
     <view class='table'>
       <view class='tr mt-md' wx:for='{{schedule}}' wx:if='{{isSchedule?true:index<2}}'>
         <view class='td_t'>{{item.meet_class_begin}} — {{item.meet_class_end}}</view>

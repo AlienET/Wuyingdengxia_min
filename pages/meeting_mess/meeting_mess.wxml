@@ -25,7 +25,7 @@
         </view>
         <view class='mt-md'>
           <view catchtap='onConferenceDetailsTap' data-postid='{{item.meet_id}}' class='mb-md' wx:for='{{meetingList}}'>
-            <image src='/images/black.jpg'></image>
+            <image src='{{item.meeting_image}}'></image>
             <view class='meeting_msg'>
               <text class='meet_tit'>{{item.meet_title}}</text>
               <text wx:if='{{item.isfinish > 0}}' class='meet_state z'>报名中</text>

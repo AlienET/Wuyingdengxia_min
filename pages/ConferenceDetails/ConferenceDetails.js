@@ -50,7 +50,7 @@ Page({
           aboutData: res.data.data,
           schedule: res.data.data.meet_date[0].meet_class
         });
-        console.log(that.data.aboutData.meet_date[0].meet_class);
+        console.log(res.data.data);
       }
     })
   },

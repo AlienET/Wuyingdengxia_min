@@ -10,6 +10,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log('1')
       }
     })
     // 获取用户信息
@@ -79,5 +80,5 @@ App({
     return result;
   },
   // 接口
-  InterfaceUrl : 'http://39.106.2.216/index.php/API/',
+  InterfaceUrl : 'http://yszg.org/index.php/API/',
 })

@@ -179,8 +179,10 @@ Page({
         }
       })
     }
+    console.log('-------------------------------')
     console.log(that.data.userInfo)
     console.log(that.data.hasUserInfo)
+    console.log('-------------------------------')
     // banner图
     wx.request({
       url: app.InterfaceUrl + 'get_allbanner', //仅为示例，并非真实的接口地址
