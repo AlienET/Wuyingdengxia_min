@@ -53,8 +53,7 @@ Page({
               time = time.replace(/-/g, '/');
               time = new Date(time).getTime();
               res.data.data.user_dis[i].ctime = app.getDateDiff(time);
-
-              arrReverse.push(res.data.data.user_dis[i]);
+              arrReverse.unshift(res.data.data.user_dis[i]);
             }
             that.setData({
               DiscussListsData: arrReverse

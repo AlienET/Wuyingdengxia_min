@@ -9,7 +9,7 @@
     <text catchtap='onContributeTap' class='contribute ver-middle' style='float:right;margin-top:14rpx;'>投稿</text>
   </view>
   <view>
-    <swiper previous-margin='10rpx' style='height:360rpx' next-margin='20rpx' vertical='{{false}}' indicator-dots autoplay interval="5000" duration="1000" circular indicator-color="rgba(256,256,256,0.5)" indicator-active-color="rgba(256,256,256,0.8)">
+    <swiper previous-margin='10rpx' style='height:300rpx' next-margin='20rpx' vertical='{{false}}' indicator-dots autoplay interval="5000" duration="1000" circular indicator-color="rgba(256,256,256,0.5)" indicator-active-color="rgba(256,256,256,0.8)">
       <swiper-item wx:for='{{bannerList}}' style='text-align:center'>
         <image style='margin:0 15rpx;' catchtap='onBannerImgTap' data-postid="{{item}}" src='{{item.banner_imgpath}}' mode='widthFix'></image>
       </swiper-item>

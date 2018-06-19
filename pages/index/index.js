@@ -241,7 +241,7 @@ Page({
     });
     // 正在讨论列
     wx.request({
-      url: app.InterfaceUrl + 'get_hot_labelList?key_id=6', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'get_hot_labelList?key_id=0', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -251,7 +251,7 @@ Page({
           discusslist: res.data.data,
         });
         console.log('正在讨论列');
-        console.log(that.data.discusslist);
+        console.log(res);
       }
     });
     /** 
