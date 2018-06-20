@@ -25,8 +25,6 @@ Page({
     // tab切换的当前key_id
     tabActiveKeyId: [],
     // -------------------------------
-    userInfo:'',
-    hasUserInfo:''
   },
   //事件处理函数
 
@@ -42,11 +40,11 @@ Page({
     wx.navigateTo({
       url: '../article_detail/article_detail?articleid=' + item.currentTarget.dataset.postid.article_id + '&userid=' + this.data.userid
     });
-    console.log(item.currentTarget.dataset.postid.article_id);
+    // console.log(item.currentTarget.dataset.postid.article_id);
   },
   // 讨论详情
   onDiscussDetailsTap: function (event) {
-    console.log(event.currentTarget.dataset.postid.key_dis_id);
+    // console.log(event.currentTarget.dataset.postid.key_dis_id);
     wx.navigateTo({
       url: '../discuss_details/discuss_details?key_dis_id=' + event.currentTarget.dataset.postid.key_dis_id,
     })
@@ -78,6 +76,9 @@ Page({
   // 点击banner
   onBannerImgTap: function (event) {
     console.log(event.currentTarget.dataset.postid)
+    wx.navigateTo({
+      url: event.currentTarget.dataset.postid.banner_link,
+    })
   },
 
 
@@ -108,13 +109,13 @@ Page({
               res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
             }
           };
-          console.log(res.data.data)
+          // console.log(res.data.data)
           that.setData({
             tabActiveKeyId: res.data.data,
           });
         }
       });
-      console.log(this.data.labellist[e.target.dataset.current].key_name);
+      // console.log(this.data.labellist[e.target.dataset.current].key_name);
     }
   },
   /** 
@@ -140,7 +141,7 @@ Page({
             res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
           }
         };
-        console.log(e);
+        // console.log(e);
         that.setData({
           tabActiveKeyId: res.data.data,
         });
@@ -150,15 +151,13 @@ Page({
 
   onLoad: function () {
     var that = this;
-    // app.onLaunch();
-    // console.log(app.globalData)
-    // console.log(app.InterfaceUrl)
+    console.log(this.data.canIUse)
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -167,8 +166,10 @@ Page({
           hasUserInfo: true
         })
       }
+      console.log(1212)
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
+      console.log(12131)
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
@@ -194,8 +195,8 @@ Page({
         that.setData({
           bannerList: res.data.data,
         });
-        console.log('banner图');
-        console.log(that.data.bannerList);
+        // console.log('banner图');
+        // console.log(that.data.bannerList);
       }
     });
     // 标签列表
@@ -227,16 +228,16 @@ Page({
                 res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
               }
             };
-            console.log(res.data.data)
+            // console.log(res.data.data)
             that.setData({
               tabActiveKeyId: res.data.data,
             });
-            console.log('文章列');
-            console.log(that.data.tabActiveKeyId);
+            // console.log('文章列');
+            // console.log(that.data.tabActiveKeyId);
           }
         });
-        console.log('标签列');
-        console.log(that.data.labellist);
+        // console.log('标签列');
+        // console.log(that.data.labellist);
       }
     });
     // 正在讨论列
@@ -250,8 +251,8 @@ Page({
         that.setData({
           discusslist: res.data.data,
         });
-        console.log('正在讨论列');
-        console.log(res);
+        // console.log('正在讨论列');
+        // console.log(res);
       }
     });
     /** 
@@ -259,7 +260,6 @@ Page({
     */
     wx.getSystemInfo({
       success: function (res) {
-
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
@@ -269,20 +269,20 @@ Page({
     });
 
     // // 文章列\
-    // wx.request({
-    //   url: app.InterfaceUrl + 'get_article_bylabel?label=' + this.data.labellist[0].key_name + '&sortby=1',
-    //   data: {},
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success: function (res) {
-    //     console.log(that.data.labellist[0].key_name)
-    //     that.setData({
-    //       tabActiveKeyId: res.data.data,
-    //     });
-    //     console.log('文章列');
-    //     console.log(that.data.tabActiveKeyId);
-    //   }
+      // wx.request({
+      //   url: app.InterfaceUrl + 'get_article_bylabel?label=' + this.data.labellist[0].key_name + '&sortby=1',
+      //   data: {},
+      //   header: {
+      //     'content-type': 'application/json' // 默认值
+      //   },
+      //   success: function (res) {
+      //     console.log(that.data.labellist[0].key_name)
+      //     that.setData({
+      //       tabActiveKeyId: res.data.data,
+      //     });
+      //     console.log('文章列');
+      //     console.log(that.data.tabActiveKeyId);
+      //   }
     // })
   },
   /**
@@ -291,12 +291,12 @@ Page({
   onReady: function () {
 
   },
-  // getUserInfo: function(e) {
-  //   console.log(e)
-  //   app.globalData.userInfo = e.detail.userInfo
-  //   this.setData({
-  //     userInfo: e.detail.userInfo,
-  //     hasUserInfo: true
-  //   })
-  // }
+  getUserInfo: function (e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  }
 })

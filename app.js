@@ -7,8 +7,24 @@ App({
     wx.setStorageSync('logs', logs)
     // 登录
     wx.login({
-      success: res => {
+      success: function (res) {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res)
+        var code = res.code; //返回code
+        var appId = 'wx7e96a7078376a079';
+        var secret = '1016c9384874287ac02b51008c3fe7ef';
+        wx.request({
+          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + secret + '&js_code=' + code + '&grant_type=authorization_code',
+          data: {},
+          header: {
+            'content-type': 'json'
+          },
+          success: function (e) {
+            var openid = e.data.openid //返回openid
+            console.log(e);
+            console.log(openid)
+          }
+        })
       }
     })
     // 获取用户信息
@@ -20,7 +36,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              console.log(this.globalData.userInfo)
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -35,6 +51,9 @@ App({
   globalData: {
     userInfo: null
   },
+
+
+
   // 时间戳
   getDateDiff: function (dateTimeStamp) {
     var result;
@@ -78,5 +97,5 @@ App({
     return result;
   },
   // 接口
-  InterfaceUrl : 'http://yszg.org/index.php/API/',
+  InterfaceUrl: 'https://yszg.org/index.php/API/',
 })
