@@ -17,7 +17,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.InterfaceUrl + 'get_myarticle?userid=10003',
+      url: app.InterfaceUrl + 'get_myarticle?userid=10026',
       success:function(res){
         console.log(res.data.data);
         var arrReverse = [];

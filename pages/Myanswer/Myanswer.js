@@ -8,7 +8,7 @@ Page({
    */
   data: {
     // 当前用户id
-    userid: '10003',
+    userid: '10018',
     aboutData: []
   },
 

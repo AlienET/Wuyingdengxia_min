@@ -151,7 +151,6 @@ Page({
 
   onLoad: function () {
     var that = this;
-    console.log(this.data.canIUse)
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -169,7 +168,6 @@ Page({
       console.log(1212)
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
-      console.log(12131)
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo

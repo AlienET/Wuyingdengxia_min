@@ -16,7 +16,7 @@ Page({
     // 输入框value
     inputTxt: '',
     // 当前用户id
-    userid:'10003'
+    userid: '10018'
   },
   // 评论输入框
   commentInput: function (event) {
@@ -48,16 +48,34 @@ Page({
             var time = '';
             console.log(res.data.data);
             for (var i = res.data.data.user_dis.length - 1; i >= 0; i--) {
-              res.data.data.user_dis[i].jubao = false;
-              time = res.data.data.user_dis[i].ctime.substring(0, 19);
-              time = time.replace(/-/g, '/');
-              time = new Date(time).getTime();
-              res.data.data.user_dis[i].ctime = app.getDateDiff(time);
-              arrReverse.unshift(res.data.data.user_dis[i]);
+              // res.data.data.user_dis[i].jubao = false;
+              // time = res.data.data.user_dis[i].ctime.substring(0, 19);
+              // time = time.replace(/-/g, '/');
+              // time = new Date(time).getTime();
+              // res.data.data.user_dis[i].ctime = app.getDateDiff(time);
+              // arrReverse.unshift(res.data.data.user_dis[i]);
+              if (res.data.data.user_dis[i].user_id = that.data.userid) {
+                console.log(111)
+                if (res.data.data.user_dis[i].key_dis_content = event.detail.value) {
+                  console.log(res.data.data.user_dis[i])
+                  res.data.data.user_dis[i].jubao = false;
+                  res.data.data.user_dis[i].ctime = '刚刚';
+
+                  var refresh = [];
+                  refresh = res.data.data.user_dis.splice(i, 1);
+                  // this.DiscussListsData.unshift(refresh[0]);
+
+                  that.data.DiscussListsData.unshift(refresh[0]);
+                  arrReverse = that.data.DiscussListsData;
+                  console.log(arrReverse)
+                  that.setData({
+                    DiscussListsData: arrReverse
+                  });
+                  return;
+                }
+              }
             }
-            that.setData({
-              DiscussListsData: arrReverse
-            });
+            
           }
         });
         that.setData({ inputTxt: '' });
@@ -139,7 +157,7 @@ Page({
     // console.log(index.currentTarget.dataset.postid);
     var jubao = 'DiscussListsData[' + index.currentTarget.dataset.postid + '].jubao';
     var Fjubao = that.data.DiscussListsData[index.currentTarget.dataset.postid].jubao;
-    if (Fjubao) { 
+    if (Fjubao) {
       that.setData({
         [jubao]: false
       })
@@ -190,7 +208,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(options.key_dis_id);
+    // console.log(options.key_dis_id);
     that.setData({
       key_dis_id: options.key_dis_id
     })
@@ -202,7 +220,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        var arrReverse = [];
+        // var arrReverse = [];
         var time = '';
         for (var i = res.data.data.user_dis.length - 1; i >= 0; i--) {
           time = res.data.data.user_dis[i].ctime.substring(0, 19);
@@ -211,14 +229,14 @@ Page({
           res.data.data.user_dis[i].jubao = false;
           res.data.data.user_dis[i].ctime = app.getDateDiff(time);
 
-          console.log(res.data.data);
-          console.log(res.data.data.user_dis[i]);
-          console.log(time);
-          arrReverse.push(res.data.data.user_dis[i]);
+          // console.log(res.data.data);
+          // console.log(res.data.data.user_dis[i]);
+          // console.log(time);
+          // arrReverse.push(res.data.data.user_dis[i]);
         }
         that.setData({
           aboutData: res.data.data,
-          DiscussListsData: arrReverse
+          DiscussListsData: res.data.data.user_dis
         });
       }
     });
