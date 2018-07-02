@@ -165,7 +165,6 @@ Page({
           hasUserInfo: true
         })
       }
-      console.log(1212)
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
@@ -178,10 +177,6 @@ Page({
         }
       })
     }
-    console.log('-------------------------------')
-    console.log(that.data.userInfo)
-    console.log(that.data.hasUserInfo)
-    console.log('-------------------------------')
     // banner图
     wx.request({
       url: app.InterfaceUrl + 'get_allbanner', //仅为示例，并非真实的接口地址

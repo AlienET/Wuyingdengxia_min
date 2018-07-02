@@ -42,6 +42,7 @@
     "pages/MyCollection/MyCollection",
     "pages/MyActivity/MyActivity",
     "pages/MSSubSuccess/MSSubSuccess",
+    "pages/login/login",
     "pages/logs/logs"
   ],
   "window":{
