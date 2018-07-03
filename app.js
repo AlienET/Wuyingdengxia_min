@@ -5,7 +5,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    var that = this;
     // 登录
     wx.login({
       success: res => {
@@ -15,31 +15,41 @@ App({
         var that = this;
         wx.request({
           url: 'https://api.weixin.qq.com/sns/jscode2session',
-          data:{
-            appid:'wx8dbc9156e40232a7',
-            secret:'fbbe5e0c28ca909f74e0c2fa636fdf68',
-            js_code:code,
-            grant_type:'authorization_code'
+          data: {
+            appid: 'wx8dbc9156e40232a7',
+            secret: 'fbbe5e0c28ca909f74e0c2fa636fdf68',
+            js_code: code,
+            grant_type: 'authorization_code'
           },
-          method:'GET',
+          method: 'GET',
           header: { 'content-type': 'application/json' },
-          success:function(res){
+          success: function (res) {
             console.log(res);
             var openid = res.data.openid;
+            that.wechat_open_id = openid;
             var session_key = res.data.session_key;
             var unionid = res.data.unionid;
             wx.request({
-              url: that.InterfaceUrl + 'wechat_login?wechat_open_id='+openid,
-              data:{
-                wechat_open_id:openid
+              url: that.InterfaceUrl + 'wechat_login',
+              data: {
+                wechat_open_id: openid
               },
-              method:'GET',
-              success:function(res){
-                console.log(res);
+              method: 'GET',
+              success: function (res) {
+                console.log(res)
+                if (that.authSetting && res.data.msg == '请完善信息') {
+                  console.log(res.data.msg)
+                  wx.redirectTo({
+                    url: '/pages/verifyPhone/verifyPhone',
+                  })
+                }else{
+                  that.userData = res.data.data
+                  console.log(that.userData)
+                }
               }
             })
           },
-          fail:function(error){
+          fail: function (error) {
             console.log(error)
           }
         })
@@ -48,6 +58,7 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
+        that.authSetting = res.authSetting['scope.userInfo']
         if (res.authSetting['scope.userInfo']) {
           console.log('获取用户信息 - 已授权')
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
@@ -56,7 +67,7 @@ App({
               // 可以将 res 发送给后台解码出 unionId
               console.log(res.userInfo)
               this.globalData.userInfo = res.userInfo
-              
+
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -64,10 +75,10 @@ App({
               }
             }
           })
-        }else{
+        } else {
           console.log('获取用户信息 - 未授权')
-          wx.navigateTo({
-            url: 'login/login',
+          wx.redirectTo({
+            url: '/pages/login/login',
           })
         }
       }
@@ -123,4 +134,10 @@ App({
   },
   // 接口
   InterfaceUrl: 'https://www.yszg.org/index.php/API/',
+  // 已授权
+  authSetting: false,
+  // openid
+  wechat_open_id: null,
+  // 用户信息
+  userData:null
 })

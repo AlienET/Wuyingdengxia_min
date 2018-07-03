@@ -1,86 +1,14 @@
-// pages/index/article_detail/article_detail.js
+// pages/replay/replay.js
 //获取应用实例
-const app = getApp();
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //当前用户id
-    userid: '',
-    // 文章id
-    articleid: '',
-    // 文章内容
-    aboutData: [],
-    // 评论 数据列
-    commentData: [],
-    // 评论输入框
-    inputTxt: ''
-  },
-  // 评论输入框
-  commentInput: function (event) {
-    var that = this;
-    console.log(event.detail.value);
-    wx.request({
-      url: app.InterfaceUrl + 'post_comment',
-      data: {
-        userid: that.data.userid,
-        toid: that.data.aboutData.article_id,
-        comType: 0,
-        comContent: event.detail.value,
-        comment_to_type: 0
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res);
-        console.log(that.data.key_dis_id);
-
-        // 获取评论数据
-        wx.request({
-          url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.articleid + '&comType=0&comment_to_type=0',
-          data: {},
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            console.log(res.data.data);
-            var arrReverse = [];
-            var time = '';
-            for (var i = res.data.data.length - 1; i >= 0; i--) {
-              if (res.data.data[i].user_id == that.data.userid) {
-                if (res.data.data[i].comment_content == event.detail.value) {
-                  console.log(res.data.data[i])
-                  res.data.data[i].jubao = false;
-                  res.data.data[i].ctime = '刚刚';
-
-                  var refresh = [];
-                  refresh = res.data.data.splice(i, 1);
-                  // this.DiscussListsData.unshift(refresh[0]);
-
-                  that.data.commentData.unshift(refresh[0]);
-                  arrReverse = that.data.commentData;
-                  console.log(arrReverse)
-                  that.setData({
-                    commentData: arrReverse
-                  });
-                  return;
-                }
-              }
-            }
-            // console.log(that.data.commentData)
-          }
-        })
-        that.setData({ inputTxt: '' });
-      },
-      fail: function (error) {
-        console.log(error);
-      }
-
-    })
+    aboutData: null,
+    commentData:[]
   },
   // 关注
   follow: function () {
@@ -89,7 +17,7 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_cel_follow',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           befollid: that.data.aboutData.user_id
         },
         header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -109,7 +37,7 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_follow',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           befollid: that.data.aboutData.user_id
         },
         header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -135,13 +63,13 @@ Page({
     var isSupportM = 'commentData[' + index.currentTarget.dataset.postid + '].is_support';
     var isSupport = that.data.commentData[index.currentTarget.dataset.postid].is_support;
     var comment_id = that.data.commentData[index.currentTarget.dataset.postid].comment_id;
-    if (isSupport>0) {
+    if (isSupport > 0) {
       wx.request({
         url: app.InterfaceUrl + 'post_cel_support',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           toid: comment_id,
-          supType: 5
+          supType: 1
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -166,9 +94,9 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'get_support',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           toid: that.data.commentData[index.currentTarget.dataset.postid].comment_id,
-          supType: 5
+          supType: 1
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -215,9 +143,10 @@ Page({
     wx.request({
       url: app.InterfaceUrl + 'post_report',
       data: {
-        user_id: that.data.userid,
+        user_id: app.userData.user_id,
         to_id: item.currentTarget.dataset.postid.user_id,
-        type: 1,
+        type: 0,
+        to_type: 3,
         content: item.currentTarget.dataset.postid.comment_content
       },
       header: {
@@ -235,7 +164,7 @@ Page({
         }
         // 提示框
         wx.showToast({
-          title: '举报成功',
+          title: res.data.msg,
           duration: 1000,
         })
       },
@@ -244,129 +173,26 @@ Page({
       }
     })
   },
-  // 文章点赞
-  wzdz: function () {
-    var that = this;
-    if (that.data.aboutData.is_support > 0) {
-      wx.request({
-        url: app.InterfaceUrl + 'post_cel_support',
-        data: {
-          userid: that.data.userid,
-          toid: that.data.aboutData.article_id,
-          supType: 1
-        },
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-        method: 'POST',
-        success: function (res) {
-          console.log(res);
-          that.setData({
-            'aboutData.is_support': 0
-          })
-        }
-      })
-    } else {
-      wx.request({
-        url: app.InterfaceUrl + 'get_support?userid=' + that.data.userid + '&toid=' + that.data.aboutData.article_id + '&supType=1',
-        data: {},
-        header: { 'content-type': 'application/json' },
-        success: function (res) {
-          console.log(res);
-          that.setData({
-            'aboutData.is_support': 1
-          });
-        }
-      })
-    }
-  },
-  // 文章收藏
-  wzsc: function () {
-    var that = this;
-    if (that.data.aboutData.is_collection > 0) {
-      wx.request({
-        url: app.InterfaceUrl + 'post_cel_collect',
-        data: {
-          userid: that.data.userid,
-          toid: that.data.aboutData.article_id,
-          type: 1
-        },
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-        method: 'POST',
-        success: function (res) {
-          console.log(res);
-          that.setData({
-            'aboutData.is_collection': 0
-          })
-        }
-      })
-    } else {
-      wx.request({
-        url: app.InterfaceUrl + 'post_collection',
-        data: {
-          userid: that.data.userid,
-          type: 1,
-          toid: that.data.aboutData.article_id
-        },
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-        method: 'POST',
-        success: function (res) {
-          console.log(res);
-          that.setData({
-            'aboutData.is_collection': 1
-          });
-        }
-      })
-    }
-  },
-  // 分享
-  onShareTop: function () {
-    wx.showToast({
-      title: '请点击右上方第一个按钮',
-      icon: 'none',
-      duration: 3000
-    })
-  },
-  // 回复
-  replay:function(item){
-    console.log(item.currentTarget.dataset.item.comment_id)
-    wx.navigateTo({
-      url: '../replay/replay?comment_id=' + item.currentTarget.dataset.item.comment_id,
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    console.log(options.comment_id)
     var that = this;
     that.setData({
-      userid: app.userData.user_id,
-      articleid: options.articleid
-    });
+      comment_id: options.comment_id
+    })
     wx.request({
-      url: app.InterfaceUrl + 'get_articleinfo_byid?articleid=' + options.articleid + '&userid='+that.data.userid,
-      data: {},
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
+      url: app.InterfaceUrl + 'get_comment_detail?comment_id=' + options.comment_id+'&userid='+app.userData.user_id,
       success: function (res) {
-        console.log(res.data.data);
-        res.data.data.article_tags = res.data.data.article_tags.split(',');
-        that.setData({
-          aboutData: res.data.data
-        });
-        // article_tags  
-        console.log(that.data.aboutData.article_tags)
+        that.setData({ aboutData: res.data.data })
+        console.log(that.data.aboutData)
       }
-    });
-    // 获取评论数据
+    })
     wx.request({
-      url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.articleid + '&comType=0&comment_to_type=0&user_id='+that.data.userid,
-      data: {},
-      header: {
-        'content-type': 'application/json'
-      },
+      url: app.InterfaceUrl + 'get_allcomment_byid?toid='+options.comment_id+'&comType=1&comment_to_type=3',
       success: function (res) {
-        console.log(res.data.data);
+        console.log(res.data.data)
         var arrReverse = [];
         var time = '';
         for (var i = res.data.data.length - 1; i >= 0; i--) {
@@ -431,6 +257,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
+  }
 })

@@ -6,7 +6,7 @@
     </view>
     <view class='author'>
       <view class='author_img'>
-        <image src='{{aboutData.heading}}'></image>
+        <image src='{{aboutData.headimg}}'></image>
       </view>
       <view class='author_mess'>
         <view>{{aboutData.article_author}}</view>
@@ -29,7 +29,7 @@
     <view class='comment_list'>
       <view class='column' wx:for='{{commentData}}'>
         <view class='column_img'>
-          <image src='{{item.heading?heading:"/images/black.jpg"}}'></image>
+          <image src='{{item.headimg}}'></image>
         </view>
         <view class='column_inner'>
           <view class='column_user'>
@@ -43,9 +43,9 @@
                 </view>
               </view>
 
-              <image wx:if='{{item.is_support}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
+              <image wx:if='{{item.is_support>0}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
               <image wx:else catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>{{item.support_num}}</text>
+              <text>{{item.comment_support_num}}</text>
             </view>
           </view>
           <view class='column_text'>
@@ -53,7 +53,7 @@
           </view>
           <view class='column_tr'>
             <text class='column_time'>{{item.ctime}} ·</text>
-            <text class='column_replay'>回复</text>
+            <text class='column_replay' catchtap='replay' data-item='{{item}}'>回复</text>
           </view>
         </view>
       </view>

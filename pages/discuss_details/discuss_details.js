@@ -16,7 +16,7 @@ Page({
     // 输入框value
     inputTxt: '',
     // 当前用户id
-    userid: '10018'
+    userid: null
   },
   // 评论输入框
   commentInput: function (event) {
@@ -46,17 +46,10 @@ Page({
           success: function (res) {
             var arrReverse = [];
             var time = '';
-            console.log(res.data.data);
+            // console.log(res.data.data);
             for (var i = res.data.data.user_dis.length - 1; i >= 0; i--) {
-              // res.data.data.user_dis[i].jubao = false;
-              // time = res.data.data.user_dis[i].ctime.substring(0, 19);
-              // time = time.replace(/-/g, '/');
-              // time = new Date(time).getTime();
-              // res.data.data.user_dis[i].ctime = app.getDateDiff(time);
-              // arrReverse.unshift(res.data.data.user_dis[i]);
-              if (res.data.data.user_dis[i].user_id = that.data.userid) {
-                console.log(111)
-                if (res.data.data.user_dis[i].key_dis_content = event.detail.value) {
+              if (res.data.data.user_dis[i].user_id == that.data.userid) {
+                if (res.data.data.user_dis[i].key_dis_content == event.detail.value) {
                   console.log(res.data.data.user_dis[i])
                   res.data.data.user_dis[i].jubao = false;
                   res.data.data.user_dis[i].ctime = '刚刚';
@@ -100,7 +93,7 @@ Page({
         data: {
           userid: that.data.userid,
           toid: that.data.DiscussListsData[index.currentTarget.dataset.postid].key_dis_list_id,
-          supType: 5
+          supType: 7
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -127,7 +120,7 @@ Page({
         data: {
           userid: that.data.userid,
           toid: that.data.DiscussListsData[index.currentTarget.dataset.postid].key_dis_list_id,
-          supType: 5
+          supType: 7
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -176,7 +169,8 @@ Page({
       data: {
         user_id: that.data.userid,
         to_id: item.currentTarget.dataset.postid.key_dis_list_id,
-        type: 5,
+        type: 0,
+        to_type: 1,
         content: item.currentTarget.dataset.postid.key_dis_content
       },
       header: {
@@ -194,7 +188,7 @@ Page({
         }
         // 提示框
         wx.showToast({
-          title: '举报成功',
+          title: res.data.msg,
           duration: 1000,
         })
       },
@@ -210,11 +204,12 @@ Page({
     var that = this;
     // console.log(options.key_dis_id);
     that.setData({
-      key_dis_id: options.key_dis_id
+      key_dis_id: options.key_dis_id,
+      userid : app.userData.user_id
     })
     // get_hot_labelList_detail
     wx.request({
-      url: app.InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + options.key_dis_id,
+      url: app.InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + options.key_dis_id +'&user_id='+that.data.userid,
       data: {},
       header: {
         'content-type': 'application/json' // 默认值

@@ -8,16 +8,16 @@ Page({
    */
   data: {
     // 用户id
-    userid:'',
+    userid: '',
     // 导航推荐
-    tjlabel:[],
+    tjlabel: [],
     // 我的导航
-    mylabel:[],
+    mylabel: [],
     // 是否编辑
-    isEdit:false
+    isEdit: false
   },
   // 换一批 刷新导航推荐
-  refresh:function(){
+  refresh: function () {
     var that = this;
     // 导航推荐
     wx.request({
@@ -38,55 +38,63 @@ Page({
     });
   },
   // 删除 我的导航中某一项
-  deleteItem:function(index){
+  deleteItem: function (index) {
     var that = this;
     console.log(index.currentTarget.dataset.postid);
     var mylabel = that.data.mylabel;
-    mylabel.splice(index.currentTarget.dataset.postid,1);
+    mylabel.splice(index.currentTarget.dataset.postid, 1);
     console.log(mylabel)
     that.setData({
-      mylabel:mylabel
+      mylabel: mylabel
     })
   },
   // 编辑
-  Edit:function(){
+  Edit: function () {
     var that = this;
-    var is_edit = !that.data.isEdit
+    var is_edit = !that.data.isEdit;
+    var labelName_arr =[]; 
+    if (that.data.isEdit){
+      for (var i = that.data.mylabel.length-1;i>=0;i--){
+        labelName_arr.unshift(that.data.mylabel[i].name)
+      }
+      labelName_arr = labelName_arr.join(',')
+      console.log(labelName_arr)
+      wx.request({
+        url: app.InterfaceUrl + 'post_addMyLabel',
+        data: {
+          userId: app.userData,
+          labelname: labelName_arr,
+          type:1
+        },
+        method:'POST',
+        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        success:function(res){
+          console.log(res)
+        }
+      })
+    }
+    
     that.setData({
-      isEdit:is_edit
+      isEdit: is_edit
     })
   },
   // 从 导航推荐 中选取 添加向 我的导航
-  addlabel:function(item){
+  addlabel: function (items) {
     var that = this;
-    var item = item.currentTarget.dataset.item;
-    if (that.data.isEdit){
-      wx.request({
-        url: app.InterfaceUrl + 'post_user_key',
-        data:{
-          user_id:that.data.userid,
-          key_id: item.label_id
-        },
-        header: { 'content-type': 'application/x-www-form-urlencoded'},
-        method:'GET',
-        success:function(res){
-          console.log(res);
-          // 我的导航标签
-          wx.request({
-            url: app.InterfaceUrl + 'get_labels',
-            data: {
-              user_id: that.data.userid,
-              type: 1,
-            },
-            header: { 'content-type': 'application/json' },
-            success: function (res) {
-              console.log(res.data.data);
-              that.setData({ mylabel: res.data.data })
-            }
-          });
-        }
+    console.log(items)
+    var item = items.currentTarget.dataset.item;
+    if (that.data.isEdit) {
+      item.name = item.label_name;
+      that.data.mylabel.push(item);
+      var addlabel = that.data.mylabel
+      // 
+      that.data.tjlabel.splice(items.currentTarget.dataset.idx,1);
+      var tjlabel = that.data.tjlabel
+      that.setData({
+        mylabel: addlabel,
+        tjlabel: tjlabel
       })
-    }else{
+    } else {
       return;
     }
   },
@@ -95,26 +103,27 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.setData({userid:options.userid});
+
+    that.setData({ userid: options.userid });
     // 我的导航标签
     wx.request({
       url: app.InterfaceUrl + 'get_labels',
-      data:{
+      data: {
         userid: that.data.userid,
-        type:1,
+        type: 1,
       },
-      header: { 'content-type': 'application/json'},
-      success:function(res){
+      header: { 'content-type': 'application/json' },
+      success: function (res) {
         console.log(res.data.data);
-        that.setData({mylabel:res.data.data})
+        that.setData({ mylabel: res.data.data })
       }
     });
     // 导航推荐
     wx.request({
       url: app.InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
       data: {
-        limit:10,
-        type:1,
+        limit: 10,
+        type: 1,
       },
       header: {
         'content-type': 'application/json' // 默认值

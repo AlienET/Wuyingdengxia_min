@@ -43,6 +43,8 @@
     "pages/MyActivity/MyActivity",
     "pages/MSSubSuccess/MSSubSuccess",
     "pages/login/login",
+    "pages/verifyPhone/verifyPhone",
+    "pages/replay/replay",
     "pages/logs/logs"
   ],
   "window":{

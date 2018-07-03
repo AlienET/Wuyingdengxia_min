@@ -1,0 +1,14 @@
+<!--pages/verifyPhone/verifyPhone.wxml-->
+<view style='padding:20rpx 40rpx'>
+  <view style='font-size:72rpx;'>绑定手机号</view>
+  <view style='font-size:26rpx;margin-top:40rpx;margin-bottom:80rpx;'>为了获得更好的服务，您需要绑定一个手机号。</view>
+  <input placeholder='请输入手机号' type='number' bindblur='phone'></input>
+  <view style='position: relative;'>
+    <input placeholder='请输入验证码' type='number' bindblur='yzmNum'></input>
+    <text class='yzm {{yzm?"yzm-a":"yzm-d"}}' catchtap='onYzmtap'>{{yzm?'获取验证码':'验证码已发送'}}</text>
+  </view>
+  <input placeholder='请设置密码' password bindblur='password'></input>
+  <view class='txt-center' style='margin-top:20%;'>
+    <view class='bm' catchtap='imBind'>立即绑定</view>
+  </view>
+</view>

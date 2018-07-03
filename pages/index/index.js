@@ -15,7 +15,7 @@ Page({
     // 首页标签列
     labellist: [],
     // 当前用户id
-    userid: '10003',
+    userid: null,
     // 正在讨论列
     discusslist: [],
     winWidth: 0,
@@ -151,19 +151,22 @@ Page({
 
   onLoad: function () {
     var that = this;
+    // that.setData({ userid: app.userData.user_id})
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        hasUserInfo: true,
       })
+      console.log(app.userData)
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
-          hasUserInfo: true
+          hasUserInfo: true,
         })
+        console.log(app.userData)
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -172,8 +175,9 @@ Page({
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
-            hasUserInfo: true
+            hasUserInfo: true,
           })
+          console.log(app.userData)
         }
       })
     }
@@ -194,7 +198,7 @@ Page({
     });
     // 标签列表
     wx.request({
-      url: app.InterfaceUrl + 'get_labels?userid=' + this.data.userid + '&type=1', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'get_labels?userid=' + that.data.userid + '&type=1', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
@@ -203,7 +207,7 @@ Page({
         that.setData({
           labellist: res.data.data,
           currentTab: 0
-        });
+        }); 
         var initActive = that.data.labellist[0].name;
         // 文章列
         wx.request({
@@ -282,7 +286,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
   getUserInfo: function (e) {
     console.log(e)

@@ -1,0 +1,32 @@
+/* pages/verifyPhone/verifyPhone.wxss */
+
+.input-placeholder {
+  font-size: 26rpx;
+  color: #cbcbcb;
+}
+
+input {
+  border-bottom: 1rpx solid #f0f0f0;
+  padding: 10rpx 5rpx;
+  margin-top: 20rpx;
+}
+
+.yzm {
+  position: absolute;
+  z-index: 99;
+  display: inline-block;
+  right: 0rpx;
+  top: 0rpx;
+  font-size: 26rpx;
+  border-radius: 100rpx;
+  padding: 10rpx;
+}
+
+.yzm-a {
+  background: #fcba2a;
+  color: #fff;
+}
+.yzm-d{
+  background: #ddd;
+  color: #999;
+}
