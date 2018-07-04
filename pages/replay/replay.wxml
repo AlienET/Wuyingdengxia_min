@@ -15,7 +15,7 @@
 <view class='gap'></view>
 <view class='comment'>
   <view class='comment_all'>全部回复
-    <text>{{commentData.length}}</text>
+    <text>{{commentData.length}}</text> 
   </view>
   <view class='comment_list'>
     <view class='column' wx:for='{{commentData}}'>
@@ -50,6 +50,7 @@
     </view>
   </view>
 </view>
-<view class='fill_comment'>
-  <input placeholder='阿三大王大师'></input>
+<view class='fill_comment' style='background:#F9F9F9'>
+  <input bindblur='commentInput' bindconfirm='confirmtxt' value='{{inputTxt}}' confirm-type='send' maxlength='-1' style='display:inline-block;width:432rpx;padding:10rpx 0;margin-right:40rpx;font-size:26rpx;vertical-align:middle;background:#EDEDED;border-radius:100rpx;padding:10rpx 20rpx;margin:0 10rpx;width:75%' placeholder='请输入想要评论的内容' placeholder-style='font-size:26rpx;'></input>
+  <text class='fb' catchtap='onfb'>发布</text>
 </view>

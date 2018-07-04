@@ -82,6 +82,13 @@ Page({
 
     })
   },
+  // 个人页
+  onauthorTap:function(e){
+    console.log(e.currentTarget.dataset.userid)
+    wx.navigateTo({
+      url: '../authorInfo/authorInfo?userid=' + e.currentTarget.dataset.userid,
+    })
+  },
   // 关注
   follow: function () {
     var that = this;

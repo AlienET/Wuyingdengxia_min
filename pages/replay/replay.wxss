@@ -9,3 +9,6 @@
   margin-top: 20rpx;
   background:#FCBA2A;
 }
+.fb{
+  color:#0A93FF;font-size:30rpx;vertical-align:middle;margin-left:25rpx;
+}

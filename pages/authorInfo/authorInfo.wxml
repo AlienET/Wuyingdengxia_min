@@ -1,0 +1,21 @@
+<!--pages/authorInfo/authorInfo.wxml-->
+<view class='p_rel'>
+  <image mode='widthFix' src='/images/icon/grzxbg.png' style='width:100%;position:absolute;z-index:-1;'></image>
+  <view class='pad20' style='padding-left:30rpx;padding-top:50rpx;'>
+    <view class='inline-block ver-middle'>
+      <image src='/images/black.jpg' style='width:96rpx;height:96rpx;border-radius:50%;vertical-align:middle'></image>
+    </view>
+    <view class='inline-block ml-md ver-middle'>
+      <view>
+        <text class='ver-middle' style='color:#fff;margin-right:15rpx;'>谁谁谁</text>
+        <image class='ver-middle' src='/images/icon/vn.png' style='width:38rpx;height:32rpx;'></image>
+      </view>
+      <view style='font-size:24rpx;color:#fff;margin-top:5rpx;margin-bottom:-5rpx;'>
+        职务：护士长
+      </view>
+      <text style='font-size:24rpx;color:#fff;margin-right:20rpx;'>粉丝  243</text>
+      <text style='font-size:24rpx;color:#fff'>获赞  10345</text>
+    </view>
+    <view class='ver-middle inline-block' style='margin-left:35%;font-size:24rpx;color:#fff;background:#FCBA2A;padding:6rpx 18rpx;border-radius:100rpx;'>关 注</view>
+  </view>
+</view>

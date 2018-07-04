@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/authorInfo/authorInfo",
     "pages/index/index",
     "pages/search/search",
     "pages/article_detail/article_detail",

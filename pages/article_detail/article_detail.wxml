@@ -5,10 +5,10 @@
       {{aboutData.article_title}}
     </view>
     <view class='author'>
-      <view class='author_img'>
+      <view class='author_img' catchtap='onauthorTap' data-userid='{{aboutData.user_id}}'>
         <image src='{{aboutData.headimg}}'></image>
       </view>
-      <view class='author_mess'>
+      <view class='author_mess' catchtap='onauthorTap' data-userid='{{aboutData.user_id}}'>
         <view>{{aboutData.article_author}}</view>
         <text>{{aboutData.ctime}}</text>
       </view>
@@ -29,11 +29,11 @@
     <view class='comment_list'>
       <view class='column' wx:for='{{commentData}}'>
         <view class='column_img'>
-          <image src='{{item.headimg}}'></image>
+          <image src='{{item.headimg}}' catchtap='onauthorTap' data-userid='{{item.user_id}}'></image>
         </view>
         <view class='column_inner'>
           <view class='column_user'>
-            <text>{{item.user_name}}</text>
+            <text catchtap='onauthorTap' data-userid='{{item.user_id}}'>{{item.user_name}}</text>
             <view class='column_btn'>
 
               <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">

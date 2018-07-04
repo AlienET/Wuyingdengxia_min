@@ -8,7 +8,8 @@ Page({
    */
   data: {
     aboutData: null,
-    commentData:[]
+    commentData: [],
+    inputTxt: ''
   },
   // 关注
   follow: function () {
@@ -173,6 +174,139 @@ Page({
       }
     })
   },
+  commentInput: function (event) {
+    var that = this;
+    console.log(event.detail.value)
+    that.setData({ inputTxt: event.detail.value })
+  },
+  confirmtxt: function (event) {
+    var that = this;
+    wx.request({
+      url: app.InterfaceUrl + 'post_comment',
+      data: {
+        userid: app.userData.user_id,
+        toid: that.data.aboutData.comment_id,
+        comType: 1,
+        comContent: event.detail.value,
+        comment_to_type: 3
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res);
+
+        // 获取评论数据
+        wx.request({
+          url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.comment_id + '&comType=1&comment_to_type=3',
+          data: {},
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            console.log(res.data.data);
+            var arrReverse = [];
+            var time = '';
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              if (res.data.data[i].user_id == app.userData.user_id) {
+
+                if (res.data.data[i].comment_content == event.detail.value) {
+                  console.log(res.data.data[i])
+                  res.data.data[i].jubao = false;
+                  res.data.data[i].ctime = '刚刚';
+
+                  var refresh = [];
+                  refresh = res.data.data.splice(i, 1);
+                  // this.DiscussListsData.unshift(refresh[0]);
+
+                  that.data.commentData.unshift(refresh[0]);
+                  arrReverse = that.data.commentData;
+                  console.log(arrReverse)
+                  that.setData({
+                    commentData: arrReverse
+                  });
+                  return;
+                }
+              }
+            }
+            // console.log(that.data.commentData)
+          }
+        })
+        that.setData({ inputTxt: '' });
+      },
+      fail: function (error) {
+        console.log(error);
+      }
+
+    })
+  },
+  onfb: function () {
+    var that = this;
+    // 获取评论数据
+    var inputTxt = that.data.inputTxt;
+    console.log(that.data.inputTxt)
+    wx.request({
+      url: app.InterfaceUrl + 'post_comment',
+      data: {
+        userid: app.userData.user_id,
+        toid: that.data.aboutData.comment_id,
+        comType: 1,
+        comContent: that.data.inputTxt,
+        comment_to_type: 3
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res);
+
+        // 获取评论数据
+        wx.request({
+          url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.comment_id + '&comType=1&comment_to_type=3',
+          data: {},
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            console.log(res.data.data);
+            var arrReverse = [];
+            var time = '';
+            console.log(inputTxt)
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              if (res.data.data[i].user_id == app.userData.user_id) {
+
+                if (res.data.data[i].comment_content == inputTxt) {
+                  console.log(res.data.data[i])
+                  res.data.data[i].jubao = false;
+                  res.data.data[i].ctime = '刚刚';
+
+                  var refresh = [];
+                  refresh = res.data.data.splice(i, 1);
+                  // this.DiscussListsData.unshift(refresh[0]);
+
+                  that.data.commentData.unshift(refresh[0]);
+                  arrReverse = that.data.commentData;
+                  console.log(arrReverse)
+                  that.setData({
+                    commentData: arrReverse
+                  });
+                  return;
+                }
+              }
+            }
+            // console.log(that.data.commentData)
+          }
+        })
+        that.setData({ inputTxt: '' });
+      },
+      fail: function (error) {
+        console.log(error);
+      }
+
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -183,14 +317,14 @@ Page({
       comment_id: options.comment_id
     })
     wx.request({
-      url: app.InterfaceUrl + 'get_comment_detail?comment_id=' + options.comment_id+'&userid='+app.userData.user_id,
+      url: app.InterfaceUrl + 'get_comment_detail?comment_id=' + options.comment_id + '&userid=' + app.userData.user_id,
       success: function (res) {
         that.setData({ aboutData: res.data.data })
         console.log(that.data.aboutData)
       }
     })
     wx.request({
-      url: app.InterfaceUrl + 'get_allcomment_byid?toid='+options.comment_id+'&comType=1&comment_to_type=3',
+      url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + options.comment_id + '&comType=1&comment_to_type=3',
       success: function (res) {
         console.log(res.data.data)
         var arrReverse = [];
