@@ -1,7 +1,7 @@
 <!--pages/pastVideoList/pastVideoList.wxml  往期视频列表-->
 <view class='video_list'>
   <view wx:for='{{subReplay}}' catchtap='onPastVideoTap' data-postid='{{item.replay_sub_id}}' class='v_item'>
-    <image src='/images/black.jpg'></image>
+    <video style='width:200rpx;height:150rpx' src='{{item.video_url}}'></video>
     <view class='item_xx'>
       <view class='fs-30'>{{item.meeting_title}}</view>
       <view class='xx_user'>主讲：{{item.meeting_specialist}}</view>
