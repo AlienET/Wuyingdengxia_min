@@ -1,21 +1,59 @@
 <!--pages/authorInfo/authorInfo.wxml-->
 <view class='p_rel'>
   <image mode='widthFix' src='/images/icon/grzxbg.png' style='width:100%;position:absolute;z-index:-1;'></image>
-  <view class='pad20' style='padding-left:30rpx;padding-top:50rpx;'>
+  <view class='pad20' style='padding-left:30rpx;padding-top:80rpx;'>
     <view class='inline-block ver-middle'>
-      <image src='/images/black.jpg' style='width:96rpx;height:96rpx;border-radius:50%;vertical-align:middle'></image>
+      <image src='{{aboutData.headimg}}' style='width:96rpx;height:96rpx;border-radius:50%;vertical-align:middle'></image>
     </view>
     <view class='inline-block ml-md ver-middle'>
       <view>
-        <text class='ver-middle' style='color:#fff;margin-right:15rpx;'>谁谁谁</text>
-        <image class='ver-middle' src='/images/icon/vn.png' style='width:38rpx;height:32rpx;'></image>
+        <text class='ver-middle' style='color:#fff;margin-right:15rpx;'>{{aboutData.username}}</text>
+        <image class='ver-middle' src='{{aboutData.isfinishCer>0?"/images/icon/v.png":"/images/icon/vn.png"}}' style='width:38rpx;height:32rpx;'></image>
       </view>
-      <view style='font-size:24rpx;color:#fff;margin-top:5rpx;margin-bottom:-5rpx;'>
-        职务：护士长
+      <view style='font-size:24rpx;color:#fff;margin-top:10rpx;margin-bottom:-5rpx;'>
+        职务：{{aboutData.userPost}}
       </view>
-      <text style='font-size:24rpx;color:#fff;margin-right:20rpx;'>粉丝  243</text>
-      <text style='font-size:24rpx;color:#fff'>获赞  10345</text>
+      <text style='font-size:24rpx;color:#fff;margin-right:20rpx;'>粉丝  {{aboutData.fansnum == null?'0':aboutData.fansnum}}</text>
+      <text style='font-size:24rpx;color:#fff'>获赞  {{aboutData.supportnum	 == null?'0':aboutData.supportnum	}}</text>
     </view>
-    <view class='ver-middle inline-block' style='margin-left:35%;font-size:24rpx;color:#fff;background:#FCBA2A;padding:6rpx 18rpx;border-radius:100rpx;'>关 注</view>
+    <view class='ver-middle inline-block ygz' catchtap='follow' style='{{aboutData.is_follow>0?"background:#eee;color:#999":""}}'>{{aboutData.is_follow>0?'已关注':'关 注'}}</view>
+  </view>
+</view>
+<view style='margin-top:50rpx;padding-left:20rpx;'>
+  <view style='border-bottom:1rpx solid #F0F0F0;padding:10rpx 30rpx;'>
+    <text style='color:#0A93FF;font-size:34rpx;padding:10rpx;border-bottom:4rpx solid #0A93FF'>文章</text>
+  </view>
+  <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{articleList}}' data-postid='{{item.article_id}}'>
+    <view class='abs_item_author'>
+      <image src='{{aboutData.headimg}}'></image>
+      <text>{{item.article_author}}</text>
+    </view>
+    <view>
+      <view class='abs_item_title'>
+        {{item.article_title}}
+      </view>
+      <view class='abs_item_content'>
+        <view class='content_txt  text-hide'>
+          {{item.article_content}}
+        </view>
+      </view>
+    </view>
+    <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""}}'>
+      <image wx:for='{{item.article_img_path}}' wx:for-item="itm" src='{{itm}}' mode='aspectFill' style='width:{{item.article_img_path.length == 3?"33%":"100%"}};height:100%'></image>
+    </view>
+    <view class='txt-r'>
+      <view>
+        <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
+        <text style='font-size:22rpx;color:#BDBDBD;'>{{item.overlook_num}}</text>
+      </view>
+      <view>
+        <image src='/images/icon/icon_reply.png' style='width:28rpx;height:26rpx;'></image>
+        <text style='font-size:22rpx;color:#BDBDBD;'>{{item.comment_num}}</text>
+      </view>
+      <view>
+        <image src='/images/icon/icon_like.png' style='width:24rpx;height:24rpx;'></image>
+        <text style='font-size:22rpx;color:#BDBDBD;'>{{item.support_num}}</text>
+      </view>
+    </view>
   </view>
 </view>

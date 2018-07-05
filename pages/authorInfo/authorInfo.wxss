@@ -1,1 +1,29 @@
 /* pages/authorInfo/authorInfo.wxss */
+
+.ygz {
+  margin-left: 35%;
+  font-size: 24rpx;
+  color: #fff;
+  background: #fcba2a;
+  padding: 6rpx 18rpx;
+  border-radius: 100rpx;
+}
+
+.txt-r view {
+  display: inline-block;
+  margin-right: 15rpx;
+}
+.txt-r view:last-child{
+  margin-right: 0rpx;
+}
+
+.txt-r view text {
+  font-size: 22rpx;
+  color: #bdbdbd;
+  vertical-align: middle;
+}
+
+.txt-r view image {
+  margin-right: 6rpx;
+  vertical-align: middle;
+}
