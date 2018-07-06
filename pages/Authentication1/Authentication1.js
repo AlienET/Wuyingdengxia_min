@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    aboutData: [],
     // 当前用户id
     userid: '',
     // 真实姓名
@@ -43,7 +44,7 @@ Page({
           wx.request({
             url: app.InterfaceUrl + 'post_change_myinfo',
             data: {
-              userid: that.data.userid,
+              userid: app.userData.user_id,
               realName: that.data.user_name,//真实姓名,
               useridcard: that.data.user_id,//身份证号
               userposition: that.data.identity[that.data.index]//您的身份
@@ -77,7 +78,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    that.setData({
+      aboutData: app.userData,
+      user_id: app.userData.userIdcard,
+      user_name: app.userData.userReal_name
+    })
+    
+    for (var i = that.data.identity.length - 1; i >= 0; i--) {
+      if (that.data.identity[i] == app.userData.userPosition) {
+        that.setData({
+          index: i
+        })
+        return;
+      }
+    }
   },
 
   /**

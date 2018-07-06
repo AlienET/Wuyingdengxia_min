@@ -28,7 +28,7 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_sign',
         data: {
-          userid: '10003',
+          userid: app.userData.user_id,
           type: 1,
           toid: 0
         },
@@ -38,9 +38,17 @@ Page({
         method: 'POST',
         success: function (res) {
           console.log(res);
+          var moon_cash = parseInt(that.data.aboutData.moon_cash) + 5;
+          app.userData.moon_cash = parseInt(app.userData.moon_cash) +5;
+          that.setData({ 'aboutData.moon_cash': moon_cash })
+          wx.showToast({
+            title: '签到成功',
+            icon: 'success',
+            duration: 1500
+          })
         }
       })
-    }else{
+    } else {
       wx.showToast({
         title: '今天已签到',
         icon: 'none',
@@ -53,6 +61,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    that.setData({ aboutData: app.userData })
     // 兑换礼物列表
     wx.request({
       url: app.InterfaceUrl + 'get_allgoods',
@@ -64,7 +73,7 @@ Page({
     });
     // 今天是否签到
     wx.request({
-      url: app.InterfaceUrl + 'get_singdata?userid=10003',
+      url: app.InterfaceUrl + 'get_singdata?userid='+app.userData.user_id,
       data: {},
       success: function (res) {
         console.log(res.data.data)

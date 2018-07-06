@@ -18,6 +18,20 @@ Page({
     // 问题id
     quesid: ''
   },
+  // 回复
+  replay: function (item) {
+    console.log(item.currentTarget.dataset.item.answer_id)
+    wx.navigateTo({
+      url: '../replay/replay?comment_id=' + item.currentTarget.dataset.item.answer_id,
+    })
+  },
+  // 个人页
+  onauthorTap: function (e) {
+    console.log(e.currentTarget.dataset.userid)
+    wx.navigateTo({
+      url: '../authorInfo/authorInfo?userid=' + e.currentTarget.dataset.userid,
+    })
+  },
   // 评论输入框
   commentInput: function (event) {
     var that = this;
@@ -25,9 +39,9 @@ Page({
     wx.request({
       url: app.InterfaceUrl + 'post_anwser',
       data: {
-        userid: that.data.userid,
-        quesid:that.data.quesid,
-        anwContent:event.detail.value
+        userid: app.userData.user_id,
+        quesid: that.data.quesid,
+        anwContent: event.detail.value
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -38,7 +52,7 @@ Page({
         // 获取评论数据
         // 回复
         wx.request({
-          url: app.InterfaceUrl + 'get_answer_list?quesid=' + that.data.quesid + '&userid=' + that.data.userid,
+          url: app.InterfaceUrl + 'get_answer_list?quesid=' + that.data.quesid + '&userid=' + app.userData.user_id,
           data: {},
           header: { 'content-type': 'application/json' },
           success: function (res) {
@@ -46,18 +60,30 @@ Page({
             var arrReverse = [];
             var time = '';
             for (var i = res.data.data.length - 1; i >= 0; i--) {
-              time = res.data.data[i].ctime.substring(0, 19);
+              if (res.data.data[i].user_id == app.userData.user_id) {
+                if (res.data.data[i].answer_content == event.detail.value) {
+                  console.log(res.data.data[i])
+                  res.data.data[i].jubao = false;
+                  res.data.data[i].ctime = '刚刚';
 
-              time = time.replace(/-/g, '/');
-              time = new Date(time).getTime();
-              res.data.data[i].jubao = false;
-              res.data.data[i].ctime = app.getDateDiff(time);
+                  var refresh = [];
+                  refresh = res.data.data.splice(i, 1);
+                  // this.DiscussListsData.unshift(refresh[0]);
 
-              arrReverse.push(res.data.data[i]);
+                  that.data.commentData.unshift(refresh[0]);
+                  arrReverse = that.data.commentData;
+                  console.log(arrReverse)
+                  that.setData({
+                    commentData: arrReverse
+                  });
+                  that.setData({
+                    commentData: arrReverse
+                  });
+                  return;
+                }
+              }
             }
-            that.setData({
-              commentData: arrReverse
-            });
+            
 
           }
         });
@@ -72,20 +98,20 @@ Page({
   // 问题收藏
   wzsc: function () {
     var that = this;
-    if (that.data.aboutData.is_collection) {
+    if (that.data.aboutData.is_collection != null) {
       wx.request({
         url: app.InterfaceUrl + 'post_cel_collect',
         data: {
-          userid: that.data.userid,
-          toid: that.data.aboutData.articleid,
-          supType: 1
+          userid: app.userData.user_id,
+          toid: that.data.aboutData.question_id,
+          supType: 4
         },
         header: { 'content-type': 'application/x-www-form-urlencoded' },
         method: 'POST',
         success: function (res) {
           console.log(res);
           that.setData({
-            'aboutData.is_collection': 0
+            'aboutData.is_collection': null
           })
         }
       })
@@ -93,9 +119,9 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_collection',
         data: {
-          userid: that.data.userid,
-          type: 1,
-          toid: that.data.aboutData.articleid
+          userid: app.userData.user_id,
+          type: 4,
+          toid: that.data.aboutData.question_id
         },
         header: { 'content-type': 'application/x-www-form-urlencoded' },
         method: 'POST',
@@ -110,14 +136,10 @@ Page({
   },
   // 分享
   onShareTop: function () {
-    wx.showActionSheet({
-      itemList: ['分享给微信好友', '分享到朋友圈'],
-      success: function (res) {
-        console.log(res.tapIndex)
-      },
-      fail: function (res) {
-        console.log(res.errMsg)
-      }
+    wx.showToast({
+      title: '请点击右上方第一个按钮',
+      icon: 'none',
+      duration: 3000
     })
   },
   // 评论列点赞
@@ -128,14 +150,14 @@ Page({
     var supportNum = 'commentData[' + index.currentTarget.dataset.postid + '].support_num';
     var isSupportM = 'commentData[' + index.currentTarget.dataset.postid + '].is_support';
     var isSupport = that.data.commentData[index.currentTarget.dataset.postid].is_support;
-    var user_id = that.data.commentData[index.currentTarget.dataset.postid].user_id;
-    if (isSupport>0) {
+    var answer_id = that.data.commentData[index.currentTarget.dataset.postid].answer_id;
+    if (isSupport > 0) {
       wx.request({
         url: app.InterfaceUrl + 'post_cel_support',
         data: {
-          userid: that.data.userid,
-          toid: user_id,
-          supType: 1
+          userid: app.userData.user_id,
+          toid: answer_id,
+          supType: 6
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -160,9 +182,9 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'get_support',
         data: {
-          userid: that.data.userid,
-          toid: that.data.commentData[index.currentTarget.dataset.postid].user_id,
-          supType: 5
+          userid: app.userData.user_id,
+          toid: that.data.commentData[index.currentTarget.dataset.postid].answer_id,
+          supType: 6
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -209,10 +231,11 @@ Page({
     wx.request({
       url: app.InterfaceUrl + 'post_report',
       data: {
-        user_id: that.data.userid,
-        to_id: item.currentTarget.dataset.postid.user_id,
-        type: 1,
-        content: item.currentTarget.dataset.postid.comment_content
+        user_id: app.userData.user_id,
+        to_id: item.currentTarget.dataset.postid.answer_id,
+        type: 0,
+        to_type: 5,
+        content: item.currentTarget.dataset.postid.answer_content
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -229,8 +252,8 @@ Page({
         }
         // 提示框
         wx.showToast({
-          title: '举报成功',
-          duration: 1000,
+          title: res.data.msg,
+          duration: 1500,
         })
       },
       fail: function (error) {
@@ -264,7 +287,7 @@ Page({
     });
     // 回复
     wx.request({
-      url: app.InterfaceUrl + 'get_answer_list?quesid=' + options.quesid + '&userid=' + that.data.userid,
+      url: app.InterfaceUrl + 'get_answer_list?quesid=' + options.quesid + '&userid=' + app.userData.user_id,
       data: {},
       header: { 'content-type': 'application/json' },
       success: function (res) {
@@ -279,10 +302,9 @@ Page({
           res.data.data[i].jubao = false;
           res.data.data[i].ctime = app.getDateDiff(time);
 
-          arrReverse.push(res.data.data[i]);
         }
         that.setData({
-          commentData: arrReverse
+          commentData: res.data.data
         });
 
       }

@@ -16,7 +16,7 @@
   </view>
   <swiper current='{{flag}}' class='summarys' style="height:{{flag==0?310*Article.length:flag==1?310*Question.length:310*Video.length}}px;min-height:100%" bindchange='bindChange'>
     <swiper-item>
-      <image wx:if='{{NotBeginning.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/Empty/wuhuodong.png'></image>
+      <image wx:if='{{NotBeginning.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wuhuodong.png'></image>
       <view wx:for='{{NotBeginning}}'>
         <image class='ver-middle' style='width:198rpx;height:154rpx;margin-right:10rpx;' src='{{item.meeting_image}}'></image>
         <view class='ver-middle inline-block'>
@@ -29,7 +29,7 @@
       </view>
     </swiper-item>
     <swiper-item>
-      <image wx:if='{{Finished.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/Empty/wuhuodong.png'></image>
+      <image wx:if='{{Finished.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wuhuodong.png'></image>
       <view wx:for='{{Finished}}'>
         <image class='ver-middle' style='width:198rpx;height:154rpx;margin-right:10rpx;' src='{{item.meeting_image}}'></image>
         <view class='ver-middle inline-block'>

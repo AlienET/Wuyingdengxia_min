@@ -1,0 +1,4 @@
+<!--pages/adminTool/adminTool.wxml-->
+<view style='text-align:center;padding-top:35%;'>
+  <image style='width:70%' mode='widthFix' src='/images/kong/bg.png'></image>
+</view>

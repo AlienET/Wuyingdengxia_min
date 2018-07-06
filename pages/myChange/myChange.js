@@ -33,7 +33,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.InterfaceUrl + 'get_goods_by_userid?user_id=10003',
+      url: app.InterfaceUrl + 'get_goods_by_userid?user_id='+app.userData.user_id,
       data: {},
       success: function (res) {
         console.log(res.data.data);

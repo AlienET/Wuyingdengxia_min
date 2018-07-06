@@ -9,7 +9,7 @@
   </label>
   <view class='u_item'>
     <view class='u_li'>联系电话</view>
-    <input disabled type='number' value='{{user_phone}}'></input>
+    <input disabled type='number' value='{{aboutData.phoneNum}}'></input>
   </view>
   <view class='u_item'>
     <view class='u_li'>身份证号</view>

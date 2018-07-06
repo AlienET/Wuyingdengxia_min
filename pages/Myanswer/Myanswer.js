@@ -8,17 +8,22 @@ Page({
    */
   data: {
     // 当前用户id
-    userid: '10018',
+    userid: '10026',
     aboutData: []
   },
-
+  onanswer:function(e){
+    console.log(e.currentTarget.dataset.postid)
+    wx.navigateTo({
+      url: '../problemDetails/problemDetails?quesid=' + e.currentTarget.dataset.postid,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.InterfaceUrl + 'get_myanswer?userid=' + that.data.userid,
+      url: app.InterfaceUrl + 'get_myanswer?userid=' + app.userData.user_id,
       data: {},
       success: function (res) {
         console.log(res.data.data);

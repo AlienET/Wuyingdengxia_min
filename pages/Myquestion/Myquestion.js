@@ -8,16 +8,16 @@ Page({
    */
   data: {
     // 当前用户id
-    userid: '10018',
+    userid: '10017',
     // 数据列
     aboutData: []
   },
   // 问题详情
   OnMyQuestionTap:function(e){
     console.log(e.currentTarget.dataset.questionid);
-    // wx.navigateTo({
-    //   url: '../',
-    // })
+    wx.navigateTo({
+      url: '../problemDetails/problemDetails?quesid=' + e.currentTarget.dataset.questionid,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -25,7 +25,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.InterfaceUrl + 'get_question_byuserid?userid='+that.data.userid,
+      url: app.InterfaceUrl + 'get_question_byuserid?userid='+app.userData.user_id,
       success: function (res) {
         console.log(res.data.data);
         var arrReverse = [];

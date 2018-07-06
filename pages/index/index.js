@@ -81,7 +81,15 @@ Page({
     })
   },
 
-
+  // 扫一扫
+  onRCtap: function () {
+    // 允许从相机和相册扫码
+    wx.scanCode({
+      success: (res) => {
+        console.log(res)
+      }
+    })
+  },
   /** 
    * 点击tab切换
    */
@@ -207,7 +215,7 @@ Page({
         that.setData({
           labellist: res.data.data,
           currentTab: 0
-        }); 
+        });
         var initActive = that.data.labellist[0].name;
         // 文章列
         wx.request({
@@ -266,27 +274,27 @@ Page({
     });
 
     // // 文章列\
-      // wx.request({
-      //   url: app.InterfaceUrl + 'get_article_bylabel?label=' + this.data.labellist[0].key_name + '&sortby=1',
-      //   data: {},
-      //   header: {
-      //     'content-type': 'application/json' // 默认值
-      //   },
-      //   success: function (res) {
-      //     console.log(that.data.labellist[0].key_name)
-      //     that.setData({
-      //       tabActiveKeyId: res.data.data,
-      //     });
-      //     console.log('文章列');
-      //     console.log(that.data.tabActiveKeyId);
-      //   }
+    // wx.request({
+    //   url: app.InterfaceUrl + 'get_article_bylabel?label=' + this.data.labellist[0].key_name + '&sortby=1',
+    //   data: {},
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success: function (res) {
+    //     console.log(that.data.labellist[0].key_name)
+    //     that.setData({
+    //       tabActiveKeyId: res.data.data,
+    //     });
+    //     console.log('文章列');
+    //     console.log(that.data.tabActiveKeyId);
+    //   }
     // })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
   getUserInfo: function (e) {
     console.log(e)

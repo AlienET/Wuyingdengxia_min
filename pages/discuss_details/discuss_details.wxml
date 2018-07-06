@@ -23,11 +23,11 @@
     <view class='comment_list'>
       <view class='column' wx:for='{{DiscussListsData}}'>
         <view class='column_img'>
-          <image src='{{item.headimg}}'></image>
+          <image  catchtap='onauthorTap' data-userid='{{item.user_id}}' src='{{item.headimg}}'></image>
         </view>
         <view class='column_inner'>
           <view class='column_user'>
-            <text>{{item.user_name}}</text>
+            <text  catchtap='onauthorTap' data-userid='{{item.user_id}}'>{{item.user_name}}</text>
             <view class='column_btn'>
 
               <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">

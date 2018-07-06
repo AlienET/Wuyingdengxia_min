@@ -1,4 +1,7 @@
 <!--pages/myChange/myChange.wxml 我的兑换-->
+<view wx:if='{{goodsList.length==0}}' style='text-align:center;padding-top:35%'>
+  <image mode='widthFix' style='width:75%' src='/images/kong/wuduihuan.png'></image>
+</view>
 <view catchtap='onMyCashDetailTap' class='change_item' wx:for='{{goodsList}}' data-id='{{item}}'>
   <view class='ci_title'>
     <text class='orderNumber' decode="{{true}}">订单号 &nbsp; {{item.order_num}}</text>

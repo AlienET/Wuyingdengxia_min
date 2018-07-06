@@ -78,10 +78,10 @@ Page({
           wx.request({
             url: app.InterfaceUrl + 'post_usercerti',
             data: {
-              userid: that.data.userid,
+              userid: app.userData.user_id,
               imgpath: imgUrl,
               certtype: 1,
-              user_token: ''//                                      缺token
+              user_token: app.userData.user_token//                缺token
             },
             header: {
               'content-type': 'application/x-www-form-urlencoded'
@@ -105,7 +105,7 @@ Page({
           clearInterval(timer);
         }
       }
-        , 500)
+        , 1500)
 
 
       wx.hideLoading()

@@ -46,6 +46,8 @@
     "pages/verifyPhone/verifyPhone",
     "pages/replay/replay",
     "pages/authorInfo/authorInfo",
+    "pages/adminTool/adminTool",
+    "pages/officBookcase/officBookcase",
     "pages/logs/logs"
   ],
   "window":{
@@ -79,7 +81,7 @@
       "text": "问答"
     },
     {
-      "pagePath": "pages/index/index",
+      "pagePath": "pages/adminTool/adminTool",
       "iconPath": "images/icon/tool_n.png",
       "selectedIconPath": "images/icon/tool.png",
       "text": "管理工具"

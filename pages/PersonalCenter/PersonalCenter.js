@@ -10,7 +10,8 @@ Page({
     // 当前用户id
     userid:'10003',
     // 背景图片
-    bGmode: 'widthFix'
+    bGmode: 'widthFix',
+    aboutData:[]
   },
   // 我的收藏
   onMyCollectionTap:function(){
@@ -21,6 +22,12 @@ Page({
   onMyActivityTap:function(){
     wx.navigateTo({
       url: '../MyActivity/MyActivity',
+    })
+  },
+  // 科室书架
+  onKeshishujiaTap:function(){
+    wx.navigateTo({
+      url: '../officBookcase/officBookcase',
     })
   },
   // 我的投稿
@@ -75,7 +82,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      var that = this;
+      that.setData({aboutData:app.userData})
+      console.log(that.data.aboutData)
   },
 
   /**

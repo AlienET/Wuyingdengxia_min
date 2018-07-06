@@ -25,20 +25,20 @@ Page({
   onArticleDetailTap: function (item) {
     console.log(item.currentTarget.dataset.postid.article_id)
     wx.navigateTo({
-      url: '../article_detail/article_detail?userid=10003&articleid=' + item.currentTarget.dataset.postid.article_id,
+      url: '../article_detail/article_detail?userid='+app.userData.user_id+'&articleid=' + item.currentTarget.dataset.postid.article_id,
     })
   },
   // 收藏问答详情
   onProblemDetailsTap: function (item) {
     console.log(item.currentTarget.dataset.quesid.question_id);
     wx.navigateTo({
-      url: '../problemDetails/problemDetails?userid=10003&quesid=' + item.currentTarget.dataset.quesid.question_id,
+      url: '../problemDetails/problemDetails?userid='+app.userData.user_id+'&quesid=' + item.currentTarget.dataset.quesid.question_id,
     })
   },
   // 收藏视频详情
   onPastVideoTap:function(videoid){
     wx.navigateTo({
-      url: '../pastVideo/pastVideo?userid=10003&replay_sub_id=' + videoid.currentTarget.dataset.postid,
+      url: '../pastVideo/pastVideo?userid='+app.userData.user_id+'&replay_sub_id=' + videoid.currentTarget.dataset.postid,
     })
   },
   // 点击切换
@@ -96,7 +96,7 @@ Page({
     });
     // 我的收藏
     wx.request({
-      url: app.InterfaceUrl + 'get_mycollection?userid=10003',
+      url: app.InterfaceUrl + 'get_mycollection?userid='+app.userData.user_id,
       data: {},
       header: { 'content-type': 'application/json' },
       success: function (res) {

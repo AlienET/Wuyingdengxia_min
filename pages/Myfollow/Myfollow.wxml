@@ -1,12 +1,15 @@
 <!--pages/Myfollow/Myfollow.wxml-->
+<view wx:if='{{aboutData.length == 0}}' style='text-align:center;padding-top:35%;'>
+  <image src='/images/kong/wuguanzhu.png' mode='widthFix' style='width:75%'></image>
+</view>
 <view class='sub_list'>
   <view class='sub_item ml-md pad20' wx:for='{{aboutData}}'>
     <view class='ver-middle'>
-      <image class='ver-middle portrait' src='{{item.followhead}}'></image>
+      <image class='ver-middle portrait' src='{{item.headimg}}'></image>
       <view class='ver-middle ml-md inline-block'>
         <text class='ver-middle fs-30'>{{item.followname}}</text>
-        <image class='ver-middle ml-md' src='/images/icon/lzs.png' style='width:38rpx;height:32rpx;'></image>
-        <view class='position'>{{item.user_post}} 粉丝 {{item.fans_num}}</view>
+        <image class='ver-middle ml-md' src='{{item.isfinish_cert>0?"/images/icon/v.png":"/images/icon/vn.png"}}' style='width:38rpx;height:32rpx;'></image>
+        <view class='position'>职务 {{item.user_post}} 粉丝 {{item.fans_num}}</view>
       </view>
     </view>
     <view class='ver-middle' style='padding-top:20rpx;'>

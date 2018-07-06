@@ -23,6 +23,7 @@ Page({
     tempFilePaths: '',
     // 昵称
     username: '李鲫鱼',
+    aboutData:[]
   },
   // 医护认证 
   AuthenticationTap:function(){
@@ -74,9 +75,10 @@ Page({
             'data': res.tempFilePaths[0]
           },
           success:function(res){
-            console.log(res.data);
+            console.log(res);
             var imgUrl = JSON.parse(res.data).data.url
-            that.setData({ tempFilePaths: imgUrl })
+            console.log(imgUrl)
+            that.setData({'aboutData.headimg':imgUrl})
           }
         })
 
@@ -88,6 +90,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    that.setData({aboutData:app.userData})
+    console.log(that.data.aboutData)
     // 当前日期
     var date = util.formatTime(new Date);
     that.setData({ date: date })
@@ -116,7 +120,7 @@ Page({
     wx.request({
       url: app.InterfaceUrl + 'post_change_myinfo',
       data: {
-        userid: that.data.userid,
+        userid: app.userData.user_id,
         username: that.data.username,//昵称,
         usersex: that.data.sex[that.data.index],//性别
         usercity: that.data.region//城市

@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class='container'>
   <view class='section mt-n'>
-    <image class='RC' src='/images/icon/icon_RichScan.png'></image>
+    <image catchtap='onRCtap' class='RC' src='/images/icon/icon_RichScan.png'></image>
     <label class='search'>
       <image class='i-search' src='/images/icon/icon_search.png'></image>
       <input catchtap="onSearchTap" type='text' disabled='true' placeholder='输入想要搜索的关键词' maxlength='20'></input>

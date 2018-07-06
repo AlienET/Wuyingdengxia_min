@@ -1,11 +1,11 @@
 <!--pages/WishDetails/WishDetails.wxml  愿望详情-->
 <view class='section'>
-  谁能帮我找一找国外的文献，最好是手术室器械类相关的，
+  {{aboutData.wish_content}}
   <view class='mt-sm'>
-    <text>2018-04-09</text>
+    <text>{{aboutData.ctime}}</text>
     <view class='fl-r'>
       <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
-      <text class='ver-middle'>15</text>
+      <text class='ver-middle'>{{aboutData.moon_cash}}</text>
     </view>
   </view>
 </view>

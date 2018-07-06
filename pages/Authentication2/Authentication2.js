@@ -37,7 +37,7 @@ Page({
           wx.request({
             url: app.InterfaceUrl + 'post_change_myinfo',
             data: {
-              userid: that.data.userid,
+              userid: app.userData.user_id,
               userhospital: that.data.user_hospital,//医院,
               useroffice: that.data.user_office,//科室
               userpost: that.data.user_post//职务
@@ -74,7 +74,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    that.setData({
+      // 医院
+      user_hospital: app.userData.userHospital,
+      // 科室
+      user_office: app.userData.userOffice,
+      // 职务
+      user_post: app.userData.userPost
+    })
   },
 
   /**

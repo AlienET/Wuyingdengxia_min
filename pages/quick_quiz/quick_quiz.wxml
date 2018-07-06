@@ -11,32 +11,16 @@
   <view class='mt-sm p_rel'>
     <image catchtap='onNavEditTap' src='/images/icon/icon_addSheet.png'></image>
     <view class='sheet section mb-n'>
-      <!-- <text class='active'>头条</text>
-      <text>热门</text>
-      <text>热门</text>
-      <text>热门</text>
-      <text>热门</text>
-      <text>热门</text>
-      <text>热门</text>
-      <text>热门</text>
-      <text>热门</text>
-      <text>啊啊</text> -->
-      <!--
-       <text wx:for='{{labellist}}' class="swiper-tab-list {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" bindtap="swichNav">{{item.key_name}}</text>
-      -->
       <text class=" {{currentTab==index ? 'active' : ''}}" wx:for='{{labellist}}' data-current="{{index}}" bindtap="swichNav">{{item.
       name}}</text>
     </view>
   </view>
-  <!--
-     current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange"
-  -->
   <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{150*tabActiveKeyId.length}}px">
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
       <scroll-view style='height:100%;' scroll-y=" ">
         <view class='ml-md'>
           <view catchtap='onProblemDetailsTap' class='quiz_item' wx:for='{{tabActiveKeyId}}' data-quesid='{{item.question_id}}'>
-            <view>
+            <view wx:if='{{item.is_anony>0}}'>
               <image src='{{item.headimg}}' style='border-radius:100%;width:52rpx;height:52rpx;vertical-align:middle;'></image>
               <text style='font-size:26rpx;color:#999;vertical-align:middle;margin-left:15rpx;'>{{item.user_name}}</text>
             </view>

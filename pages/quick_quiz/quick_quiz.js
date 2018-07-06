@@ -41,6 +41,7 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
+          console.log(res.data.data)
           that.setData({
             tabActiveKeyId: res.data.data,
           });
@@ -88,13 +89,13 @@ Page({
   onProblemDetailsTap: function (q) {
     console.log(q.currentTarget.dataset.quesid)
     wx.navigateTo({
-      url: '../problemDetails/problemDetails?quesid=' + q.currentTarget.dataset.quesid + '&userid=' + this.data.userid,
+      url: '../problemDetails/problemDetails?quesid=' + q.currentTarget.dataset.quesid + '&userid=' + app.userData.user_id,
     })
   },
   //搜索
   onSearchTap: function () {
     wx.navigateTo({
-      url: '../search/search?userid=' + this.data.userid
+      url: '../search/search?userid=' + app.userData.user_id
     })
   },
   // 我的提问
@@ -110,7 +111,7 @@ Page({
     var that = this;
     // 标签列表
     wx.request({
-      url: app.InterfaceUrl + 'get_labels?userid' + this.data.userid + '&type=3', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'get_labels?userid' + app.userData.user_id + '&type=3', //仅为示例，并非真实的接口地址
       data: {},
       header: {
         'content-type': 'application/json' // 默认值

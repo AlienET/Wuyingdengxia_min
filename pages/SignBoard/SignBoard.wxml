@@ -2,9 +2,9 @@
 <view class='p_rel'>
   <image src='/images/icon/qiandaobg.png' mode='{{bGmode}}'></image>
   <view class='txt-center' style='padding-top:50rpx;'>
-    <image class='user_img' src='/images/avatar.png'></image>
+    <image class='user_img' src='{{aboutData.headimg}}'></image>
     <view class='moonN'>
-      <text class='ver-middle'>15456</text>
+      <text class='ver-middle'>{{aboutData.moon_cash}}</text>
       <image class='ver-middle' src='/images/icon/icon_moon.png'></image>
     </view>
   </view>

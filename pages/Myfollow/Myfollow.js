@@ -24,7 +24,7 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_cel_follow',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           befollid: e.currentTarget.dataset.item.followid
         },
         header: {
@@ -41,7 +41,7 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_follow',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           befollid: e.currentTarget.dataset.item.followid
         },
         header: {
@@ -62,7 +62,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.InterfaceUrl + 'get_myfollow?userid=' + that.data.userid,
+      url: app.InterfaceUrl + 'get_myfollow?userid=' + app.userData.user_id,
       data: {},
       success: function (res) {
         console.log(res.data.data);

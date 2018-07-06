@@ -3,12 +3,12 @@
 <view class='section' style='display:box;'>
   <view>
     <view class='inline-block'>
-      <image class='ver-middle' src='/images/avatar.png' mode='{{imgMode}}' style='width:76rpx;'></image>
+      <image class='ver-middle' src='{{aboutData.headimg}}' mode='{{imgMode}}' style='width:76rpx;border-radius:50%'></image>
       <view class='inline-block ver-middle mt-sm'>
-        <view class='ww_name'>李鲫鱼</view>
+        <view class='ww_name'>{{aboutData.username}}</view>
         <view class='ww_moon'>
           <image src='/images/icon/meiriqiandao.png'></image>
-          <text>456</text>
+          <text>{{aboutData.moon_cash}}</text>
         </view>
       </view>
     </view>

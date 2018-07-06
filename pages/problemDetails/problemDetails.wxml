@@ -10,13 +10,13 @@
     </view>
   </view>
   <!--  匿名  -->
-  <view wx:if='{{aboutData.is_public == 0}}' class='time'>
+  <view wx:if='{{aboutData.is_anony == 0}}' class='time'>
     {{aboutData.ctime}}
   </view>
   <!--  未匿名  -->
   <view wx:else class='author mt-md'>
-    <image src='{{aboutData.headimg}}'></image>
-    <view>
+    <image src='{{aboutData.headimg}}' catchtap='onauthorTap' data-userid='{{aboutData.user_id}}'></image>
+    <view catchtap='onauthorTap' data-userid='{{item.user_id}}'>
       <view class='author_name'>{{aboutData.username}}</view>
       <view class='time'>{{aboutData.ctime}}</view>
     </view>
@@ -37,11 +37,11 @@
   <view wx:else class='comment_list'>
     <view class='column' wx:for='{{commentData}}'>
       <view class='column_img'>
-        <image src='{{item.headimg}}'></image>
+        <image src='{{item.headimg}}' catchtap='onauthorTap' data-userid='{{item.user_id}}'></image>
       </view>
       <view class='column_inner'>
         <view class='column_user'>
-          <text>{{item.user_name}}</text>
+          <text catchtap='onauthorTap' data-userid='{{item.user_id}}'>{{item.user_name}}</text>
           <view class='column_btn'>
             <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">
               <image catchtap='luelue' data-postid='{{index}}' style="vertical-align: middle;" style='width:28rpx;' src="/images/icon/luelue.png" mode='widthFix'></image>
@@ -60,7 +60,7 @@
         </view>
         <view class='column_tr'>
           <text class='column_time'>{{item.ctime}} ·</text>
-          <text class='column_replay'>回复</text>
+          <text class='column_replay' catchtap='replay' data-item='{{item}}'>回复</text>
         </view>
       </view>
     </view>

@@ -18,6 +18,13 @@ Page({
     // 当前用户id
     userid: null
   },
+  // 个人页
+  onauthorTap:function(e){
+    console.log(e.currentTarget.dataset.userid)
+    wx.navigateTo({
+      url: '../authorInfo/authorInfo?userid=' + e.currentTarget.dataset.userid,
+    })
+  },
   // 评论输入框
   commentInput: function (event) {
     var that = this;

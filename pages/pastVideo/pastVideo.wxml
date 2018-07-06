@@ -38,7 +38,7 @@
     <view class='comment_list'>
       <view class='column' wx:for='{{commentData}}'>
         <view class='column_img'>
-          <image src='{{item.heading?heading:"/images/black.jpg"}}'></image>
+          <image src='{{item.headimg}}'></image>
         </view>
         <view class='column_inner'>
           <view class='column_user'>

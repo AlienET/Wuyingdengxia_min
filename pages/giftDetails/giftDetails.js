@@ -30,7 +30,7 @@ Page({
   // 确认兑换
   onShowModalTap: function () {
     var that = this;
-    if (that.data.goods.moon_cash > 100) {
+    if (parseInt(that.data.goods.moon_cash) > parseInt(app.userData.moon_cash)) {
       wx.showToast({
         title: '您的月亮币不足',
         icon: 'none',
@@ -46,7 +46,7 @@ Page({
             wx.request({
               url: app.InterfaceUrl + 'post_exchange_goods',
               data: {
-                user_id: '10003',
+                user_id: app.userData.user_id,
                 goods_id: that.data.goods.goods_id
               },
               header: {
@@ -63,6 +63,7 @@ Page({
                     duration: 1500
                   })
                 } else {
+                  app.userData.moon_cash = app.userData.moon_cash - that.data.goods.moon_cash;
                   wx.navigateTo({
                     url: '../ForSuccessful/ForSuccessful?goods_name=' + that.data.goods.goods_name + '&moon_cash=' + that.data.goods.moon_cash + '&order_num=' + res.data.data.order_num + '&courtesy_code=' + res.data.data.courtesy_code,
                   })

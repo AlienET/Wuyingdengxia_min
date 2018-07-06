@@ -74,7 +74,14 @@ Page({
             res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
           }
         }
-        that.setData({ articleList: res.data.data })
+        var arr = [];
+        for (var i = res.data.data.length-1;i>=0;i--){
+          if (res.data.data[i].is_check == '1'){
+            arr.push(res.data.data[i])
+          }
+        }
+        console.log(res.data.data)
+        that.setData({ articleList: arr })
         console.log(that.data.articleList)
 
       }

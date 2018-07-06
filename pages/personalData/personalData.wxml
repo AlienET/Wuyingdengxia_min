@@ -2,21 +2,21 @@
 <view class='gap'></view>
 <view class='pl-md user_list'>
   <view class='u_item'>
-    <image bindtap='BindImage' src='{{tempFilePaths?tempFilePaths:"/images/black.jpg"}}'></image>
-    <view catchtap='AuthenticationTap' class='bm'>医护认证</view>
+    <image bindtap='BindImage' src='{{aboutData.headimg}}'></image>
+    <view catchtap='AuthenticationTap' class='bm'>{{aboutData.isV == null?'医护认证':'已认证'}}</view>
   </view>
   <view class='u_item'>
     <view class='u_li'>手机号</view>
-    <input type='number' disabled placeholder='请输入正确的手机号' value='13770681106'></input>
+    <input type='number' disabled placeholder='请输入正确的手机号' value='{{aboutData.phoneNum}}'></input>
   </view>
   <view class='u_item'>
     <view class='u_li'>昵称</view>
-    <input bindblur='blurNC' type='text' placeholder='请输入您的昵称' value='{{username}}'></input>
+    <input bindblur='blurNC' type='text' placeholder='请输入您的昵称' value='{{aboutData.username}}'></input>
   </view>
   <view class='u_item'>
     <view class='u_li'>性别</view>
     <!-- <input type='text' placeholder='请输入您的性别' value='男'></input> -->
-    <picker style='width:300rpx;' bindchange="bindPickerChange" value="{{index}}" range="{{sex}}">
+    <picker style='width:300rpx;' bindchange="bindPickerChange" value="{{usersex}}">
       <view style='font-size:30rpx;'>
         {{sex[index]}}
       </view>
@@ -44,19 +44,19 @@
 <view class='pl-md user_list'>
   <label class='u_item'>
     <label class='u_li'>医院</label>
-    <input disabled type='text' value=''></input>
+    <input disabled type='text' value='{{aboutData.isV!=null?aboutData.userHospital:""}}'></input>
   </label>
   <view class='u_item'>
     <view class='u_li'>科室</view>
-    <input disabled type='text' value=''></input>
+    <input disabled type='text' value='{{aboutData.isV!=null?aboutData.userMajor:""}}'></input>
   </view>
   <view class='u_item'>
     <view class='u_li'>身份</view>
-    <input disabled type='text' value=''></input>
+    <input disabled type='text' value='{{aboutData.isV!=null?aboutData.userPost:""}}'></input>
   </view>
   <view class='u_item'>
     <view class='u_li'>职务</view>
-    <input disabled type='text' value=''></input>
+    <input disabled type='text' value='{{aboutData.isV!=null?aboutData.userOffice:""}}'></input>
   </view>
 </view>
 <view class='gap'></view>

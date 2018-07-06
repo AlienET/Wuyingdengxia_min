@@ -10,14 +10,19 @@ Page({
     // 列 数据
     aboutData:[]
   },
-
+  myArticle:function(e){
+    console.log(e.currentTarget.dataset.postid);
+    wx.navigateTo({
+      url: '../article_detail/article_detail?articleid=' + e.currentTarget.dataset.postid,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.InterfaceUrl + 'get_myarticle?userid=10026',
+      url: app.InterfaceUrl + 'get_myarticle?userid='+app.userData.user_id,
       success:function(res){
         console.log(res.data.data);
         var arrReverse = [];

@@ -1,5 +1,8 @@
 <!--pages/Myquestion/Myquestion.wxml   我的提问-->
 <view class='sub_list'>
+  <view style='text-align:center' wx:if='{{aboutData.length == 0}}'>
+    <image style='width:75%;' mode='widthFix' src='/images/kong/wutiwen.png'></image>
+  </view>
   <view catchtap='OnMyQuestionTap' class='sub_item ml-md pad20' wx:for='{{aboutData}}' data-questionid='{{item.question_id}}'>
     <view class='sub_tit'>{{item.question_title}}</view>
     <view class='text-hide mt-sm'>

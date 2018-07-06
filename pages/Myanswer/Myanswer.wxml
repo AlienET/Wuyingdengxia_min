@@ -1,6 +1,9 @@
 <!--pages/Myanswer/Myanswer.wxml 我的回答-->
-<view class='sub_list'>
-  <view class='sub_item ml-md pad20' wx:for='{{aboutData}}'>
+<view wx:if='{{aboutData.length == 0}}' style='text-align:center;padding-top:35%'>
+  <image mode='widthFix' style='width:75%' src='/images/kong/wuhuida.png'></image>
+</view>
+<view wx:else class='sub_list'>
+  <view class='sub_item ml-md pad20' wx:for='{{aboutData}}' catchtap='onanswer' data-postid='{{item.question_id}}'>
     <view class='sub_tit'>{{item.question_title}}</view>
     <view class='text-hide mt-sm'>
       {{item.question_content}}
