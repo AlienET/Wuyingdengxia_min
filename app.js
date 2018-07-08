@@ -133,7 +133,7 @@ App({
     return result;
   },
   // 接口
-  InterfaceUrl: 'https://cloud.yszg.org/index.php/API/',
+  InterfaceUrl: 'https://yszg.org/index.php/API/',
   // 已授权
   authSetting: false,
   // openid
