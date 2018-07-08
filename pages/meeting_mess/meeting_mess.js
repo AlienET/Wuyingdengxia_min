@@ -19,7 +19,12 @@ Page({
     // 往期回顾
     replayList:[]
   },
-
+  // 搜索页
+  onSearchTap: function () {
+    wx.navigateTo({
+      url: '../search/search?userid=' + this.data.userid
+    })
+  },
   // 点击切换
   onBackTap: function (e) {
     var that = this;

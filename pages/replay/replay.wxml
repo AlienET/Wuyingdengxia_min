@@ -1,11 +1,11 @@
 <!--pages/replay/replay.wxml-->
 <view style='display: flex;flex-direction: row;padding:20rpx;padding-top:0rpx;'>
   <view style='display:inline-block;margin-top:15rpx;'>
-    <image src='{{aboutData.headimg}}' style='width:56rpx;height:56rpx;border-radius:50%;vertical-align:middle;'></image>
+    <image src='{{aboutData.headimg}}' catchtap='onauthorTap' data-userid='{{aboutData.user_id}}' style='width:56rpx;height:56rpx;border-radius:50%;vertical-align:middle;'></image>
   </view>
   <view style='width:100%;padding:10rpx;padding-top:0rpx;'>
     <view style='overflow: hidden;vertical-align:middle;'>
-      <text style='font-size:26rpx;color:#666;'>{{aboutData.user_name}}</text>
+      <text style='font-size:26rpx;color:#666;' catchtap='onauthorTap' data-userid='{{aboutData.user_id}}'>{{aboutData.user_name}}</text>
       <view class='follow' style='{{aboutData.is_follow > 0?"background:#E9E9E9":""}}' catchtap='follow'>{{aboutData.is_follow > 0 ?'已关注':'关注'}}</view>
       <view style='color: #B9B9B9;font-size:22rpx;'>{{aboutData.ctime}}</view>
       <view style='font-size:28rpx;color: #333333;margin-top:10rpx;'>{{aboutData.comment_content}}</view>
@@ -20,11 +20,11 @@
   <view class='comment_list'>
     <view class='column' wx:for='{{commentData}}'>
       <view class='column_img'>
-        <image src='{{item.headimg}}'></image>
+        <image src='{{item.headimg}}' catchtap='onauthorTap' data-userid='{{item.user_id}}'></image>
       </view>
       <view class='column_inner'>
         <view class='column_user'>
-          <text>{{item.user_name}}</text>
+          <text catchtap='onauthorTap' data-userid='{{item.user_id}}'>{{item.user_name}}</text>
           <view class='column_btn'>
 
             <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">

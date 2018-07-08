@@ -13,7 +13,7 @@
 
       <image catchtap='collection' wx:if='{{aboutData.is_collection > 0}}' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;margin-left:40rpx;'></image>
       <image catchtap='collection' wx:else src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;margin-left:40rpx;'></image>
-      <image src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;margin-left:40rpx;'></image>
+      <image catchtap='onfxTap' src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;margin-left:40rpx;'></image>
     </view>
   </view>
 </view>
@@ -24,7 +24,7 @@
     </view>
     <view class='video-list'>
       <view wx:for='{{VideoList}}' catchtap='{{item.Vactive?return:"VideoItem"}}' data-postid='{{index}}' class='{{item.Vactive?"active":""}}'>
-        {{item.meeting_title}}
+        {{item.tit}}
       </view>
     </view>
   </view>
@@ -38,7 +38,7 @@
     <view class='comment_list'>
       <view class='column' wx:for='{{commentData}}'>
         <view class='column_img'>
-          <image src='{{item.headimg}}'></image>
+          <image src='{{item.headimg}}' catchtap='onauthorTap' data-userid='{{item.user_id}}'></image>
         </view>
         <view class='column_inner'>
           <view class='column_user'>
@@ -52,9 +52,9 @@
                 </view>
               </view>
 
-              <image wx:if='{{item.is_support}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
+              <image wx:if='{{item.is_support>0}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
               <image wx:else catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>{{item.support_num}}</text>
+              <text>{{item.comment_support_num}}</text>
             </view>
           </view>
           <view class='column_text'>
@@ -62,7 +62,7 @@
           </view>
           <view class='column_tr'>
             <text class='column_time'>{{item.ctime}} ·</text>
-            <text class='column_replay'>回复</text>
+            <text class='column_replay' catchtap='replay' data-item='{{item}}'>回复</text>
           </view>
         </view>
       </view>

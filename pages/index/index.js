@@ -272,29 +272,54 @@ Page({
       }
 
     });
-
-    // // 文章列\
-    // wx.request({
-    //   url: app.InterfaceUrl + 'get_article_bylabel?label=' + this.data.labellist[0].key_name + '&sortby=1',
-    //   data: {},
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success: function (res) {
-    //     console.log(that.data.labellist[0].key_name)
-    //     that.setData({
-    //       tabActiveKeyId: res.data.data,
-    //     });
-    //     console.log('文章列');
-    //     console.log(that.data.tabActiveKeyId);
-    //   }
-    // })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that = this;
+    // 标签列表
+    wx.request({
+      url: app.InterfaceUrl + 'get_labels?userid=' + app.userData.user_id + '&type=1', //仅为示例，并非真实的接口地址
+      data: {},
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        that.setData({
+          labellist: res.data.data,
+          currentTab: 0
+        });
+        var initActive = that.data.labellist[0].name;
+        // 文章列
+        wx.request({
+          url: app.InterfaceUrl + 'get_article_bylabel?label=' + initActive + '&sortby=1',
+          data: {},
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: function (res) {
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              // console.log(res.data.data[i].article_img_path)//split(',');
+              if (res.data.data[i].article_img_path == '') {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path
+              } else {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+              }
+            };
+            that.setData({
+              tabActiveKeyId: res.data.data,
+            });
+          }
+        });
+      }
+    });
   },
   getUserInfo: function (e) {
     console.log(e)

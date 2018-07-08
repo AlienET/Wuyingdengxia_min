@@ -1,1 +1,13 @@
 /* pages/login/login.wxss */
+page{
+  height: 100%;
+}
+.wiit{
+  margin-top: 20%
+}
+.wiit view{
+  color: #fff;
+  font-size: 36rpx;
+  text-align: left;
+  margin-top: 20rpx;
+}

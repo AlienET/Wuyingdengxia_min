@@ -18,7 +18,7 @@ Page({
     // 视频地址
     VideoUrl: '',
     // 评论列数据
-    commentData:[],
+    commentData: [],
     // 评论输入框
     inputTxt: ''
   },
@@ -29,7 +29,7 @@ Page({
     wx.request({
       url: app.InterfaceUrl + 'post_comment',
       data: {
-        userid: that.data.userid,
+        userid: app.userData.user_id,
         toid: that.data.aboutData.replay_sub_id,
         comType: 0,
         comContent: event.detail.value,
@@ -43,7 +43,7 @@ Page({
         console.log(res);
         // 获取评论数据
         wx.request({
-          url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.aboutData.replay_sub_id + '&comType=0&comment_to_type=4',
+          url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.aboutData.replay_sub_id + '&comType=0&comment_to_type=4&user_id=' + app.userData.user_id,
           data: {},
           header: {
             'content-type': 'application/json'
@@ -53,18 +53,22 @@ Page({
             var arrReverse = [];
             var time = '';
             for (var i = res.data.data.length - 1; i >= 0; i--) {
-              // console.log(res.data.data);
-              time = res.data.data[i].ctime.substring(0, 19);
-              // debugger;
-              time = time.replace(/-/g, '/');
-              time = new Date(time).getTime();
-              res.data.data[i].jubao = false;
-              res.data.data[i].ctime = that.getDateDiff(time);
-              arrReverse.push(res.data.data[i]);
+              if (res.data.data[i].user_id == app.userData.user_id) {
+                if (res.data.data[i].comment_content == event.detail.value) {
+                  res.data.data[i].jubao = false;
+                  res.data.data[i].ctime = '刚刚';
+                  var refresh = [];
+                  refresh = res.data.data.splice(i, 1);
+                  that.data.commentData.unshift(refresh[0]);
+                  arrReverse = that.data.commentData;
+                  console.log(arrReverse)
+                  that.setData({
+                    commentData: arrReverse
+                  });
+                  return;
+                }
+              }
             }
-            that.setData({
-              commentData: arrReverse
-            });
           }
         })
         that.setData({ inputTxt: '' });
@@ -78,7 +82,6 @@ Page({
   // 视频切换
   VideoItem: function (e) {
     var that = this;
-    console.log(e.currentTarget.dataset.postid);
     var url = that.data.VideoAddress[e.currentTarget.dataset.postid];
     var active = 'VideoList[' + e.currentTarget.dataset.postid + '].Vactive';
     for (var i = 0; i < that.data.VideoList.length; i++) {
@@ -89,7 +92,6 @@ Page({
       VideoUrl: url,
       [active]: true
     });
-    console.log(that.data.VideoUrl)
   },
   // 视频点赞
   support: function () {
@@ -98,7 +100,7 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_cel_support',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           toid: that.data.aboutData.replay_sub_id,
           supType: 3
         },
@@ -113,7 +115,7 @@ Page({
       })
     } else {
       wx.request({
-        url: app.InterfaceUrl + 'get_support?userid=' + that.data.userid + '&toid=' + that.data.aboutData.replay_sub_id + '&supType=3',
+        url: app.InterfaceUrl + 'get_support?userid=' + app.userData.user_id + '&toid=' + that.data.aboutData.replay_sub_id + '&supType=3',
         data: {},
         header: { 'content-type': 'application/json' },
         success: function (res) {
@@ -132,7 +134,7 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_cel_collect',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           toid: that.data.aboutData.replay_sub_id,
           supType: 3
         },
@@ -149,7 +151,7 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_collection',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           type: 3,
           toid: that.data.aboutData.replay_sub_id
         },
@@ -167,28 +169,27 @@ Page({
   // 评论列点赞
   like: function (index) {
     var that = this;
-    console.log(that.data.commentData[index.currentTarget.dataset.postid].user_id)
     // 获取点赞数 key_dis_list_id
-    var supportNum = 'commentData[' + index.currentTarget.dataset.postid + '].support_num';
+    var supportNum = 'commentData[' + index.currentTarget.dataset.postid + '].comment_support_num';
     var isSupportM = 'commentData[' + index.currentTarget.dataset.postid + '].is_support';
     var isSupport = that.data.commentData[index.currentTarget.dataset.postid].is_support;
     var user_id = that.data.commentData[index.currentTarget.dataset.postid].user_id;
-    if (isSupport) {
+    if (isSupport > 0) {
       wx.request({
         url: app.InterfaceUrl + 'post_cel_support',
         data: {
-          userid: that.data.userid,
-          toid: user_id,
-          supType: 3
+          userid: app.userData.user_id,
+          toid: that.data.commentData[index.currentTarget.dataset.postid].comment_id,
+          supType: 5
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
         method: 'POST',
         success: function (res) {
-          console.log(res);
+          console.log(res.data);
           // 点赞 + 1
-          var addNum = parseInt(that.data.commentData[index.currentTarget.dataset.postid].support_num) - 1;
+          var addNum = parseInt(that.data.commentData[index.currentTarget.dataset.postid].comment_support_num) - 1;
           // 根据 讨论列数组下标修改点赞数
           that.setData({
             [supportNum]: [addNum],
@@ -204,9 +205,9 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'get_support',
         data: {
-          userid: that.data.userid,
-          toid: that.data.commentData[index.currentTarget.dataset.postid].user_id,
-          supType: 3
+          userid: app.userData.user_id,
+          toid: that.data.commentData[index.currentTarget.dataset.postid].comment_id,
+          supType: 5
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -215,10 +216,10 @@ Page({
         success: function (res) {
           console.log(res.data);
           // 点赞 + 1
-          var addNum = parseInt(that.data.commentData[index.currentTarget.dataset.postid].support_num) + 1;
+          var addNum = parseInt(that.data.commentData[index.currentTarget.dataset.postid].comment_support_num) + 1;
           // 根据 讨论列数组下标修改点赞数
           that.setData({
-            [supportNum]: [addNum],
+            [supportNum]: addNum,
             [isSupportM]: 1
           })
         },
@@ -226,14 +227,12 @@ Page({
           console.log(error)
         }
       })
-
     }
 
   },
   // 举报切换
   luelue: function (index) {
     var that = this;
-    // console.log(index.currentTarget.dataset.postid);
     var jubao = 'commentData[' + index.currentTarget.dataset.postid + '].jubao';
     var Fjubao = that.data.commentData[index.currentTarget.dataset.postid].jubao;
     if (Fjubao) {
@@ -248,14 +247,14 @@ Page({
   },
   // 举报
   report: function (item) {
-    console.log(item.currentTarget.dataset.postid.jubao);
     var that = this;
     wx.request({
       url: app.InterfaceUrl + 'post_report',
       data: {
-        user_id: that.data.userid,
-        to_id: item.currentTarget.dataset.postid.user_id,
-        type: 4,
+        user_id: app.userData.user_id,
+        to_id: item.currentTarget.dataset.postid.comment_id,
+        type: 0,
+        to_type: 4,
         content: item.currentTarget.dataset.postid.comment_content
       },
       header: {
@@ -273,13 +272,35 @@ Page({
         }
         // 提示框
         wx.showToast({
-          title: '举报成功',
+          title: res.data.msg,
           duration: 1000,
         })
       },
       fail: function (error) {
         console.log(error);
       }
+    })
+  },
+  // 视频分享
+  onfxTap: function () {
+    wx.showToast({
+      title: '请点击右上方第一个按钮',
+      icon: 'none',
+      duration: 3000
+    })
+  },
+  // 回复
+  replay: function (item) {
+    console.log(item.currentTarget.dataset.item.comment_id)
+    wx.navigateTo({
+      url: '../replay/replay?comment_id=' + item.currentTarget.dataset.item.comment_id,
+    })
+  },
+  // 个人页
+  onauthorTap: function (e) {
+    console.log(e.currentTarget.dataset.userid)
+    wx.navigateTo({
+      url: '../authorInfo/authorInfo?userid=' + e.currentTarget.dataset.userid,
     })
   },
   /**
@@ -289,30 +310,36 @@ Page({
     var that = this;
     // 视频详情数据
     var VideoAddress = [];
-    console.log(options.replay_sub_id);
     wx.request({
-      url: app.InterfaceUrl + 'get_replay_detail?replay_sub_id=' + options.replay_sub_id,
+      url: app.InterfaceUrl + 'get_replay_detail?replay_sub_id=' + options.replay_sub_id + '&user_id=' + app.userData.user_id,
       data: {},
       success: function (res) {
-        console.log(res.data.data.active);
-        for (var i = res.data.data.relative.length - 1; i >= 0; i--) {
-          res.data.data.relative[i].Vactive = false;
-          res.data.data.relative[0].Vactive = true;
-          VideoAddress.push(res.data.data.relative[i].video_url);
+        console.log(res)
+        var Videol = res.data.data.active.cutting_title.split(',');
+        Videol[0] == '' ? Videol = [] : Videol;
+        Videol.unshift(res.data.data.active.meeting_title)
+        var VideoList = [];
+        for (var i = Videol.length - 1; i >= 0; i--) {
+          VideoList[i] = { tit: Videol[i] }
         }
+        var Vurl = res.data.data.active.cutting_url.split(',');
+        Vurl[0] == '' ? Vurl = [] : Vurl;
+        Vurl.unshift(res.data.data.active.video_url);
+        for (var i = Vurl.length - 1; i >= 0; i--) {
+          VideoList[i].Vactive = false;
+        }
+        VideoList[0].Vactive = true;
         that.setData({
           aboutData: res.data.data.active,
-          VideoList: res.data.data.relative,
-          VideoAddress: VideoAddress,
-          VideoUrl: VideoAddress[0]
+          VideoList: VideoList,
+          VideoAddress: Vurl,
+          VideoUrl: Vurl[0]
         });
-        console.log(that.data.VideoUrl);
-        console.log(that.data.VideoAddress)
       }
     });
     // 获取评论数据
     wx.request({
-      url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + options.replay_sub_id + '&comType=0&comment_to_type=4',
+      url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + options.replay_sub_id + '&comType=0&comment_to_type=4&user_id=' + app.userData.user_id,
       data: {},
       header: {
         'content-type': 'application/json'
@@ -328,9 +355,8 @@ Page({
           time = new Date(time).getTime();
           res.data.data[i].jubao = false;
           res.data.data[i].ctime = that.getDateDiff(time);
-
-          arrReverse.push(res.data.data[i]);
         }
+        arrReverse = res.data.data;
         that.setData({
           commentData: arrReverse
         });

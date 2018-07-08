@@ -1,2 +1,10 @@
 <!--pages/login/login.wxml-->
-<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">获取用户信息</button>
+<view style='background:#0E95EF;height:100%;text-align:center;padding:50rpx;'>
+<view class='wiit'>
+  <view>最热的内容咨询，轻松获取；</view>
+  <view>个人中心，许愿签到奖励等你拿；</view>
+  <view>你问我答，互动交流涨姿势；</view>
+  <view>热门会议信息，视频回放一手掌握；</view>
+</view>
+<button class='bm' style='margin-top:40%;padding:10rpx 150rpx' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">微信授权</button>
+</view>

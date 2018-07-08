@@ -1,7 +1,7 @@
 <!--pages/pastVideoList/pastVideoList.wxml  往期视频列表-->
 <view class='video_list'>
-  <view wx:for='{{subReplay}}' catchtap='onPastVideoTap' data-postid='{{item.replay_sub_id}}' class='v_item'>
-    <video style='width:200rpx;height:150rpx' src='{{item.video_url}}'></video>
+  <view wx:for='{{subReplay}}' style='position:relative' catchtap='onPastVideoTap' data-postid='{{item.replay_sub_id}}' class='v_item'>
+    <video controls="false" style='width:200rpx;height:150rpx' src='{{item.video_url}}'></video>
     <view class='item_xx'>
       <view class='fs-30'>{{item.meeting_title}}</view>
       <view class='xx_user'>主讲：{{item.meeting_specialist}}</view>
@@ -20,5 +20,6 @@
         </view>
       </view>
     </view>
+    <view style='position:absolute;top:0;left:0;width:100%;height:100%;z-index:99;background:rgba(0,0,0,0)'></view>
   </view>
 </view>
