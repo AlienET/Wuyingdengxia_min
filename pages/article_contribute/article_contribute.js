@@ -30,21 +30,9 @@ Page({
   addLabel: function () {
     var that = this;
     wx.navigateTo({
-      url: '../myNavEdit/myNavEdit',
+      url: '../myNavEdit/myNavEdit?who=0',
     })
-    wx.request({
-      url: app.InterfaceUrl + 'get_labels?type=1&userid=' + that.data.userid,
-      success: function (res) {
-        console.log(res.data.data)
-        var labelName = [];
-        for (var i = res.data.data.length - 1; i >= 0; i--) {
-          labelName.push(res.data.data[i].name)
-        }
-        // labelName = labelName.join(',');
-        that.setData({ labels: labelName })
-        console.log(that.data.labels)
-      }
-    })
+
   },
   // 添加图片
   addImg: function () {
@@ -77,6 +65,9 @@ Page({
     var that = this;
     console.log(this.data.titleText)
     console.log(this.data.innerText)
+    if (that.data.isInner && that.data.isTit && that.data.labels != '') {
+      that.setData({ isSubmission: true })
+    } else { that.setData({ isSubmission: false }) }
     if (that.data.isSubmission) {
       // 判断图片
       if (that.data.tempFilePaths.length > 0) {
@@ -108,7 +99,7 @@ Page({
       wx.request({
         url: app.InterfaceUrl + 'post_article',
         data: {
-          userid: that.data.userid,
+          userid: app.userData.user_id,
           articleTitle: that.data.titleText,
           articleContent: that.data.innerText,
           articleType: '',
@@ -120,11 +111,11 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          if(res.data.code == '1'){
+          if (res.data.code == '1') {
             wx.navigateTo({
               url: '../contribute_error/contribute_error?code=1',
             })
-          }else{
+          } else {
             wx.navigateTo({
               url: '../contribute_error/contribute_error?code=0',
             })
@@ -147,7 +138,7 @@ Page({
 
       })
     }
-    if (that.data.isInner && that.data.isTit) {
+    if (that.data.isInner && that.data.isTit && that.data.labels != '') {
       that.setData({ isSubmission: true })
     } else { that.setData({ isSubmission: false }) }
   },
@@ -163,7 +154,7 @@ Page({
         titleText: e.detail.value
       })
     }
-    if (that.data.isInner && that.data.isTit) {
+    if (that.data.isInner && that.data.isTit && that.data.labels != '') {
       that.setData({ isSubmission: true })
     } else { that.setData({ isSubmission: false }) }
   },
@@ -171,7 +162,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.labels = '';
   },
 
   /**
@@ -185,7 +176,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    if (app.labels != '') {
+      console.log(app.labels)
+      // var labelName = app.labels.join(',');
+      that.setData({ labels: app.labels })
+      console.log(that.data.labels)
+    }
+    if (that.data.isInner && that.data.isTit && that.data.labels != '') {
+      that.setData({ isSubmission: true })
+    } else { that.setData({ isSubmission: false }) }
   },
 
   /**

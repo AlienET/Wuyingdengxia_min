@@ -59,7 +59,7 @@ Page({
   // 我的导航编辑
   onNavEditTap: function () {
     wx.navigateTo({
-      url: '../myNavEdit/myNavEdit?userid=' + this.data.userid,
+      url: '../myNavEdit/myNavEdit?userid=' + this.data.userid + '&who=1',
     })
   },
   // 活动页

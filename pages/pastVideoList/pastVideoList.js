@@ -8,7 +8,7 @@ Page({
    */
   data: {
     // 数据列
-    subReplay:[],
+    subReplay:[]
   },
   // 往期视频详情页
   onPastVideoTap:function(e){

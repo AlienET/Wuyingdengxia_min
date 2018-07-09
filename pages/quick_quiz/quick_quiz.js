@@ -75,7 +75,7 @@ Page({
   // 我的导航编辑
   onNavEditTap: function () {
     wx.navigateTo({
-      url: '../myNavEdit/myNavEdit',
+      url: '../myNavEdit/myNavEdit?who=3',
     })
   },
   // 提问
@@ -152,7 +152,38 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    // 标签列表
+    wx.request({
+      url: app.InterfaceUrl + 'get_labels?userid=' + app.userData.user_id + '&type=3', //仅为示例，并非真实的接口地址
+      data: {},
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          labellist: res.data.data,
+          currentTab: 0
+        });
+        var initActive = that.data.labellist[0].name;
+        console.log(initActive)
+        // 文章列
+        wx.request({
+          url: app.InterfaceUrl + 'get_question_bylabel?label=' + initActive,
+          data: {},
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: function (res) {
+            that.setData({
+              tabActiveKeyId: res.data.data,
+            });
+            console.log(that.data.tabActiveKeyId)
+          }
+        });
+      }
+    });
   },
 
   /**

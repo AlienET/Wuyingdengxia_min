@@ -76,8 +76,28 @@ Page({
           },
           success:function(res){
             console.log(res);
-            var imgUrl = JSON.parse(res.data).data.url
+            var imgUrl = JSON.parse(res.data).data.complete_url
             console.log(imgUrl)
+
+            wx.request({
+              url: app.InterfaceUrl + 'post_change_myinfo',
+              data: {
+                userid: app.userData.user_id,
+                head_img: imgUrl //头像url
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              method: 'POST',
+              success: function (res) {
+                console.log(res);
+                app.userData.headimg = imgUrl;
+              },
+              fail: function (error) {
+                console.log(error)
+              }
+            })
+
             that.setData({'aboutData.headimg':imgUrl})
           }
         })

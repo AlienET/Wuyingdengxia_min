@@ -139,5 +139,7 @@ App({
   // openid
   wechat_open_id: null,
   // 用户信息
-  userData:null
+  userData:null,
+  // 标签存储
+  labels:''
 })

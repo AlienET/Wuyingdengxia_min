@@ -10,7 +10,7 @@ Page({
     userid: '10003',
     imgSrc: '',
     // 当前月亮币
-    currentMoonY: 40,
+    currentMoonY: '',
     // 当前月亮币数额
     moonNum: { num: '￥', active: false },
     // 选择悬赏月亮币 [0,10,20,50,100]
@@ -27,7 +27,63 @@ Page({
     // 提问 - 标题
     quesTitle: '',
     // 是否匿名
-    conceal: true
+    conceal: true,
+    labels: [],
+    textarea: '',
+    imgUrl:''
+  },
+  tijiao: function () {
+    var that = this;
+    console.log('11111111111111111')
+    if (that.data.labels != '' && that.data.moonNum.num != '￥' && that.data.textarea != '') {
+      var labels = that.data.labels.join(',')
+      wx.request({
+        url: app.InterfaceUrl + 'post_question',
+        data: {
+          userid: app.userData.user_id,
+          quesTitle: that.data.quesTitle,
+          moonCash: that.data.moonNum.num,
+          quesContent: that.data.textarea,
+          quesType:1,
+          img_path:that.data.imgUrl,
+          questags:labels
+        },
+        method: 'POST',
+        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        success: function (res) {
+          console.log(res)
+          if (res.data.code == '1'){
+            wx.showToast({
+              title: '提交成功',
+              icon: 'success',
+              duration: 2000,
+              success:function(){
+                wx.switchTab({
+                  url: '../quick_quiz/quick_quiz'
+                })
+              }
+            })
+          }else{
+            wx.showToast({
+              title: '提交失败...',
+              icon: 'none',
+              duration: 2000,
+            })
+          }
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '请完善填写项目',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+  textareaTap: function (event) {
+    var that = this;
+    that.setData({ textarea: event.detail.value })
+    console.log(that.data.textarea)
   },
   // 切换 选取状态
   moonTap: function () {
@@ -64,7 +120,7 @@ Page({
   // 标签选取
   onAddLabelTap: function () {
     wx.navigateTo({
-      url: '../addLabel/addLabel',
+      url: '../myNavEdit/myNavEdit?who=4',//addLabel
     })
   },
   // 选取照片
@@ -94,7 +150,8 @@ Page({
     var that = this;
     console.log(options.quesTitle);
     that.setData({
-      quesTitle: options.quesTitle
+      quesTitle: options.quesTitle,
+      currentMoonY: app.userData.moon_cash
     })
   },
 
@@ -109,7 +166,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    if (app.labels != '') {
+      console.log(app.labels)
+      // var labelName = app.labels.join(',');
+      that.setData({ labels: app.labels })
+      console.log(that.data.labels)
+    }
   },
 
   /**

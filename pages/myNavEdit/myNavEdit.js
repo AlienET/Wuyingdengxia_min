@@ -14,7 +14,8 @@ Page({
     // 我的导航
     mylabel: [],
     // 是否编辑
-    isEdit: false
+    isEdit: false,
+    isType:''
   },
   // 换一批 刷新导航推荐
   refresh: function () {
@@ -24,7 +25,7 @@ Page({
       url: app.InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
       data: {
         limit: 10,
-        type: 1,
+        type: that.data.isType,
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -57,14 +58,16 @@ Page({
       for (var i = that.data.mylabel.length-1;i>=0;i--){
         labelName_arr.unshift(that.data.mylabel[i].name)
       }
+      //-------------------------------------------------------------------------------888888888888888888888888888888
+      if (that.data.isType == 0 || that.data.isType == 4) { app.labels = labelName_arr}
       labelName_arr = labelName_arr.join(',')
       console.log(labelName_arr)
       wx.request({
         url: app.InterfaceUrl + 'post_addMyLabel',
         data: {
-          userId: app.userData,
+          userId: app.userData.user_id,
           labelname: labelName_arr,
-          type:1
+          type: that.data.isType
         },
         method:'POST',
         header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -103,38 +106,76 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
-    that.setData({ userid: options.userid });
-    // 我的导航标签
-    wx.request({
-      url: app.InterfaceUrl + 'get_labels',
-      data: {
-        userid: that.data.userid,
-        type: 1,
-      },
-      header: { 'content-type': 'application/json' },
-      success: function (res) {
-        console.log(res.data.data);
-        that.setData({ mylabel: res.data.data })
-      }
-    });
-    // 导航推荐
-    wx.request({
-      url: app.InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
-      data: {
-        limit: 10,
-        type: 1,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data.data);
-        that.setData({
-          tjlabel: res.data.data,
-        });
-      }
-    });
+    console.log(options)
+    that.setData({isType:options.who})
+    if(that.data.isType == '0'){
+      // 导航推荐
+      wx.request({
+        url: app.InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
+        data: {
+          limit: 10,
+          type: 1,
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: function (res) {
+          console.log(res.data.data);
+          that.setData({
+            tjlabel: res.data.data,
+          });
+        }
+      });
+    }else if(that.data.isType == '4'){
+      // 导航推荐
+      wx.request({
+        url: app.InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
+        data: {
+          limit: 10,
+          type: 3,
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: function (res) {
+          console.log(res.data.data);
+          that.setData({
+            tjlabel: res.data.data,
+          });
+        }
+      });
+    }else{
+      // 我的导航标签
+      wx.request({
+        url: app.InterfaceUrl + 'get_labels',
+        data: {
+          userid: app.userData.user_id,
+          type: that.data.isType,
+        },
+        header: { 'content-type': 'application/json' },
+        success: function (res) {
+          console.log(res.data.data);
+          that.setData({ mylabel: res.data.data })
+        }
+      });
+      // 导航推荐
+      wx.request({
+        url: app.InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
+        data: {
+          limit: 10,
+          type: that.data.isType,
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: function (res) {
+          console.log(res.data.data);
+          that.setData({
+            tjlabel: res.data.data,
+          });
+        }
+      });
+    }
   },
 
   /**
@@ -162,7 +203,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    // this.data.isType == '0'?
   },
 
   /**

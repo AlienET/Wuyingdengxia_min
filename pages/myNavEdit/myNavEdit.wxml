@@ -1,17 +1,17 @@
 <!--pages/myNavEdit/myNavEdit.wxml-->
 <view class='section'>
   <view class='navbar'>
-    <text class='fs-30'>我的导航</text>
+    <text class='fs-30'>{{isType==0||isType==4?'选中标签':'我的导航'}}</text>
     <text class='fs-30 banji' catchtap='Edit'>{{isEdit?'完成':'编辑'}}</text>
   </view>
-  <view>
+  <view style='min-height:300rpx;'>
     <view class='tag m' wx:for='{{mylabel}}'>
       {{item.name}}
       <image wx:if='{{isEdit}}' catchtap='deleteItem' data-postid='{{index}}' style='position:absolute;width:26.6rpx;height:26.6rpx;top:-5rpx;right:-5rpx;' src='/images/icon/label_delete.png'></image>
     </view>
   </view>
   <view class='navbar mt-md'>
-    <text class='fs-30 ver-middle'>导航推荐</text>
+    <text class='fs-30 ver-middle'>{{isType == 0||isType==4?'推荐标签':'导航推荐'}}</text>
     <image catchtap='refresh' src='/images/icon/huanyipi.png' class='ver-middle' style='height:30rpx;width:120rpx;'></image>
   </view>
   <text catchtap='addlabel' data-item='{{item}}' data-idx='{{index}}' class='tag tj' wx:for='{{tjlabel}}'>{{item.label_name}}</text>
