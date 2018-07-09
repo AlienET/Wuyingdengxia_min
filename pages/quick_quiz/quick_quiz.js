@@ -75,7 +75,7 @@ Page({
   // 我的导航编辑
   onNavEditTap: function () {
     wx.navigateTo({
-      url: '../myNavEdit/myNavEdit?who=3',
+      url: '../myNavEdit/myNavEdit?who=1',
     })
   },
   // 提问
