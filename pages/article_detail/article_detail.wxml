@@ -1,4 +1,5 @@
 <!--pages/index/article_detail/article_detail.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
 <view class='container'>
   <view class='section'>
     <view class='title'>
@@ -15,7 +16,8 @@
       <view class='attention' style='{{aboutData.is_follow > 0?"background:#E9E9E9":""}}' catchtap='follow'>{{aboutData.is_follow > 0 ?'已关注':'关注'}}</view>
     </view>
     <view class='content'>
-      {{aboutData.article_content}}
+      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+      <!-- {{aboutData.article_content}} -->
       <view class='content_label'>
         <text wx:for='{{aboutData.article_tags}}'>{{item}}</text>
       </view>

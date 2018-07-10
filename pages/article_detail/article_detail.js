@@ -1,6 +1,7 @@
 // pages/index/article_detail/article_detail.js
 //获取应用实例
 const app = getApp();
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -16,7 +17,8 @@ Page({
     // 评论 数据列
     commentData: [],
     // 评论输入框
-    inputTxt: ''
+    inputTxt: '',
+    article: '',
   },
   // 评论输入框
   commentInput: function (event) {
@@ -347,7 +349,7 @@ Page({
     var that = this;
     that.setData({
       userid: app.userData.user_id,
-      articleid: options.articleid
+      articleid: options.articleid,
     });
     wx.request({
       url: app.InterfaceUrl + 'get_articleinfo_byid?articleid=' + options.articleid + '&userid='+that.data.userid,
@@ -356,10 +358,14 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.log(res.data.data);
+        // console.log(res.data.data.article_content);
+        that.setData({ article: res.data.data.article_content})
+        console.log(that.data.article)
+        var temp = WxParse.wxParse('article', 'html', that.data.article, that, 5);
         res.data.data.article_tags = res.data.data.article_tags.split(',');
         that.setData({
-          aboutData: res.data.data
+          aboutData: res.data.data,
+          article:temp
         });
         // article_tags  
         console.log(that.data.aboutData.article_tags)

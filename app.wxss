@@ -1,5 +1,6 @@
 /**app.wxss**/
-
+/* 在使用的Wxss中引入WxParse.css,可以在app.wxss */
+@import "/wxParse/wxParse.wxss";
 /* .container {
   height: 100%;
   display: flex;
