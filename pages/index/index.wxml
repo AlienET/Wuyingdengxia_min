@@ -28,7 +28,7 @@
       {{item.key_dis_title}}
     </view>
   </view>
-  <swiper current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{20+tabActiveKeyId.length*138}}px" bindchange="bindChange">
+  <swiper current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{20+tabActiveKeyId.length*140}}px" bindchange="bindChange">
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
       <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}'>
         <!-- wx:if='{{tabActiveKeyId}}'  -->
