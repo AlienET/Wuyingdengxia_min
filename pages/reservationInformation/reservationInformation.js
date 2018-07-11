@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    begin_time: '',
+    end_time: '',
+    meet_title:'',
   },
   // 报名提交页面 跳转
   onBmtjTap: function () {
@@ -19,7 +21,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+    var that = this;
+    that.setData({
+      begin_time: options.begin_time,
+      end_time: options.end_time,
+      meet_title: options.meet_title,
+      aboutData:app.userData
+    })
   },
 
   /**

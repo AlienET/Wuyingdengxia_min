@@ -5,7 +5,7 @@
 <view class='pad20'>
   <view class='meet_'>
     <image src='/images/icon/didian.png' style='width:36rpx;height:36rpx;'></image>
-    <text>会议时间</text>
+    <text>{{aboutData.meet_title}}</text>
   </view>
   <text class='meet_inner'><!--2018-03-21 至 2018-03-21-->{{aboutData.begin_time}}</text>
   <view class='meet_ mt-md'>
@@ -17,12 +17,13 @@
 <view class='gap'></view>
 <view class='pad20'>
   <view class='meets'>会议介绍</view>
-  <view class='meet_txt text-hide'>
+  <view class='meet_txt text-hide' style='{{isIntroduce?"-webkit-line-clamp:initial;":"-webkit-line-clamp:2;"}}'>
     {{aboutData.meet_content}}
-    <view class='txt-center mt-md'>
-      <text catchtap='isIntroduce' class='unAll'>{{isIntroduce?'点击收起 ∧':'展开全部 ∨'}}</text>
-      <!-- 展开全部后 ∧ -->
-    </view>
+
+  </view>
+  <view class='txt-center mt-md'>
+    <text catchtap='isIntroduce' class='unAll'>{{isIntroduce?'点击收起 ∧':'展开全部 ∨'}}</text>
+    <!-- 展开全部后 ∧ -->
   </view>
 </view>
 <view class='gap'></view>

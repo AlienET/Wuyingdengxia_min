@@ -10,7 +10,7 @@ Page({
     yzm: true,
     phoneNum: null,
     yzmNum: null,
-    password:null
+    password: null
   },
   phone: function (e) {
     var that = this;
@@ -24,7 +24,7 @@ Page({
       })
     }
   },
-  password:function(e){
+  password: function (e) {
     var that = this;
     that.setData({ password: e.detail.value })
     console.log(that.data.password)
@@ -49,14 +49,14 @@ Page({
       })
     }
   },
-  imBind:function(){
+  imBind: function () {
     var that = this;
     app.globalData.userInfo.gender == 1 ?
-      app.globalData.userInfo.gender = '男':
+      app.globalData.userInfo.gender = '男' :
       app.globalData.userInfo.gender = '女';
     wx.request({
       url: app.InterfaceUrl + 'wechat_bind_userinfo',
-      data:{
+      data: {
         userphone: that.data.phoneNum,
         sms_code: that.data.yzmNum,
         nickname: app.globalData.userInfo.nickName,
@@ -65,13 +65,34 @@ Page({
         wechat_openid: app.wechat_open_id,
         password: that.data.password
       },
-      method:'POST',
+      method: 'POST',
       header: { 'content-type': 'application/x-www-form-urlencoded' },
-      success:function(res){
+      success: function (res) {
         console.log(res)
-        wx.switchTab({
-          url: '../index/index',
-        })
+        if (res.data.code == '1') {
+
+          wx.request({
+            url: app.InterfaceUrl + 'wechat_login',
+            data: {
+              wechat_open_id: app.wechat_open_id,
+            },
+            method: 'GET',
+            success: function (res) {
+              console.log(res)
+              app.userData = res.data.data
+              console.log(app.userData)
+              wx.switchTab({
+                url: '../index/index',
+              })
+            },
+          })
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
       }
     })
   },

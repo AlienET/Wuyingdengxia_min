@@ -3,11 +3,11 @@
   <view class='table'>
     <view class='tr'>
       <view class='td td_t'>参会名称</view>
-      <view class='td td_i'>苏州医疗器械装备交流会</view>
+      <view class='td td_i'>{{meet_title}}</view>
     </view>
     <view class='tr'>
       <view class='td td_t'>参会时间</view>
-      <view class='td td_i'>2018-03-21 至 2018-03-21</view>
+      <view class='td td_i'>{{begin_time}} 至 {{end_time}}</view>
     </view>
   </view>
 </view>
@@ -16,31 +16,31 @@
   <view class='table'>
     <view class='tr'>
       <view class='td td_t'>参会人</view>
-      <view class='td td_i'>李鲫鱼</view>
+      <view class='td td_i'>{{aboutData.userReal_name}}</view>
     </view>
     <view class='tr'>
       <view class='td td_t'>联系方式</view>
-      <view class='td td_i'>18239498731</view>
+      <view class='td td_i'>{{aboutData.phoneNum}}</view>
     </view>
     <view class='tr'>
       <view class='td td_t'>身份证</view>
-      <view class='td td_i'>202394199304109980</view>
+      <view class='td td_i'>{{aboutData.userIdcard}}</view>
     </view>
     <view class='tr'>
       <view class='td td_t'>性别</view>
-      <view class='td td_i'>男</view>
+      <view class='td td_i'>{{aboutData.usersex}}</view>
     </view>
     <view class='tr'>
       <view class='td td_t'>单位</view>
-      <view class='td td_i'>北京中日友好医院</view>
+      <view class='td td_i'>{{aboutData.userPost}}</view>
     </view>
     <view class='tr'>
       <view class='td td_t'>部门</view>
-      <view class='td td_i'>神经外科</view>
+      <view class='td td_i'>{{aboutData.userOffice}}</view>
     </view>
     <view class='tr'>
       <view class='td td_t'>职务</view>
-      <view class='td td_i'>护士长</view>
+      <view class='td td_i'>{{aboutData.userPost}}</view>
     </view>
   </view>
 </view>
