@@ -1,4 +1,5 @@
 <!--pages/problemDetails/problemDetails.wxml  问题详情-->
+<import src="../../wxParse/wxParse.wxml"/>
 <view class='section'>
   <view>
     <view class='title'>
@@ -22,7 +23,8 @@
     </view>
   </view>
   <view class='content mt-md'>
-    {{aboutData.question_content}}
+    <!-- {{aboutData.question_content}} -->
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
     <view class='content_label'>
       <text wx:for='{{aboutData.question_tags}}'>{{item}}</text>
     </view>

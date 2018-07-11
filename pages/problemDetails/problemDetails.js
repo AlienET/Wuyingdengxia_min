@@ -1,6 +1,7 @@
 // pages/problemDetails/problemDetails.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -16,7 +17,8 @@ Page({
     // 评论输入框
     inputTxt: '',
     // 问题id
-    quesid: ''
+    quesid: '',
+    article: '',
   },
   // 回复
   replay: function (item) {
@@ -278,9 +280,13 @@ Page({
       header: { 'content-type': 'application/json' },
       success: function (res) {
         console.log(res.data.data);
+        that.setData({ article: res.data.data.question_content });
+        console.log(that.data.article)
+        var temp = WxParse.wxParse('article', 'html', that.data.article, that, 5);
         res.data.data.question_tags = res.data.data.question_tags.split(',');
         that.setData({
-          aboutData: res.data.data
+          aboutData: res.data.data,
+          article: temp
         })
         console.log(that.data.aboutData);
       }
