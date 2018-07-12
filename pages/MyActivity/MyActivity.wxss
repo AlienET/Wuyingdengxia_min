@@ -1,4 +1,7 @@
 /* pages/MyActivity/MyActivity.wxss */
+page{
+  min-height: 100%
+}
 .action {
   margin: 0 20rpx;
 }

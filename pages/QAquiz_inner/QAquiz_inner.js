@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userid: '10003',
+    userid: '',
     imgSrc: '',
     // 当前月亮币
     currentMoonY: '',
@@ -15,7 +15,7 @@ Page({
     moonNum: { num: '￥', active: false },
     // 选择悬赏月亮币 [0,10,20,50,100]
     moonY: [
-      { num: 0, active: false },
+      { num: 5, active: false },
       { num: 10, active: false },
       { num: 20, active: false },
       { num: 50, active: false },

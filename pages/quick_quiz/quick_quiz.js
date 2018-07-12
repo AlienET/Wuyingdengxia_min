@@ -95,7 +95,7 @@ Page({
   //搜索
   onSearchTap: function () {
     wx.navigateTo({
-      url: '../search/search?userid=' + app.userData.user_id
+      url: '../search/search?userid=' + app.userData.user_id+'&shui=3'
     })
   },
   // 我的提问

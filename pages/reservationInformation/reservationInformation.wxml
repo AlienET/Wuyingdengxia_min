@@ -52,31 +52,43 @@
       <text class='ver-middle'>乘车信息选择</text>
     </view>
     <view class='tr tr_bor'>
-      <view class='th'>北京</view>
       <view class='th'>
-        <image src='/images/icon/qiehuan.png' style='width:68rpx;height:68rpx;'></image>
+        <view catchtap='cccx' data-w='0'>{{originating}}</view>
       </view>
-      <view class='th'>苏州</view>
+      <view class='th'>
+        <image catchtap='onhuanTap' src='/images/icon/qiehuan.png' style='width:68rpx;height:68rpx;'></image>
+      </view>
+      <view class='th'>
+        <view catchtap='cccx' data-w='1'>{{terminus}}</view>
+      </view>
     </view>
     <view class='tr tr_bor'>
       <view class='td td_t'>乘车日期</view>
-      <view class='td td_i'>4月20日</view>
+      <view class='td td_i'>
+        <picker mode="date" value="{{date}}" start="{{date}}" bindchange="bindDateChange">
+          <view class="picker">
+            {{date}}
+          </view>
+        </picker>
+      </view>
     </view>
     <view class='tr tr_bor'>
       <view class='td td_t'>车次选择</view>
-      <view class='td td_i'>G20</view>
+      <view catchtap='cccx' data-w='2' class='td td_i'>{{train_no}}</view>
     </view>
     <view class='tr tr_bor'>
       <view class='td td_t'>备选车次</view>
-      <view class='td td_i'>D23 D34</view>
+      <view catchtap='cccx' data-w='3' class='td td_i'>{{trainAll==''?'备选车次':trainAll}}</view>
     </view>
     <view class='tr tr_bor'>
       <view class='td td_t'>备注</view>
-      <view class='td td_i'>最好要靠窗的座位</view>
+      <view class='td td_i'>
+        <input value='{{inputTxt}}' placeholder='如有需要请备注' bindfocus='bzxx'></input>
+      </view>
     </view>
-    <view class='tr txt-center'>
+    <!-- <view class='tr txt-center'>
       <view class='td' style='color:#2DA3FF;'>+ 添加乘车信息</view>
-    </view>
+    </view> -->
   </view>
   <view class='table mt-sm'>
     <view class='tr'>
@@ -86,19 +98,29 @@
     <view class='tr tr_bor'>
       <view class='th'>
         <text class='ic'>入住</text>
-        <view>4月20日</view>
+        <picker mode="date" value="{{rzdate}}" start="{{date}}" bindchange="bindruzhuChange">
+          <view class="picker">
+            {{rzdate}}
+          </view>
+        </picker>
       </view>
       <view class='th'>
-        <text class='th_day'>共3晚</text>
+        <text class='th_day' catchtap='onjiTap'>共{{ji}}晚</text>
       </view>
       <view class='th'>
         <text class='ic'>离开</text>
-        <view>4月20日</view>
+        <picker mode="date" value="{{lkdate}}" start="{{date}}" bindchange="bindlikaiChange">
+          <view class="picker">
+            {{lkdate}}
+          </view>
+        </picker>
       </view>
     </view>
     <view class='tr tr_bor'>
       <view class='td td_t'>备注</view>
-      <view class='td td_i'>最好提供单人间</view>
+      <view class='td td_i'>
+        <input value='{{inputTxtR}}' placeholder='如有需要请备注' bindfocus='bzxxR'></input>
+      </view>
     </view>
   </view>
 </view>

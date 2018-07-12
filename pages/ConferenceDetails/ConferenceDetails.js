@@ -31,11 +31,13 @@ Page({
   // 报名 预定信息填写
   onEnrollTap: function () {
     var that = this;
-    if (app.userData.isfinishCer == '1'){
-      wx.navigateTo({
-        url: '../reservationInformation/reservationInformation?meet_title=' + that.data.aboutData.meet_title + '&begin_time=' + that.data.aboutData.begin_time + '&end_time=' + that.data.aboutData.end_time
-      })
-    }else{
+    if (app.userData.isfinishCer == '1') {
+      if (that.data.aboutData.is_attend == 1) {
+        wx.navigateTo({
+          url: '../reservationInformation/reservationInformation?meet_title=' + that.data.aboutData.meet_title + '&begin_time=' + that.data.aboutData.begin_time + '&end_time=' + that.data.aboutData.end_time + '&meet_id=' + that.data.aboutData.meet_id
+        })
+      }
+    } else {
       wx.navigateTo({
         url: '../Authentication1/Authentication1',
       })

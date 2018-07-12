@@ -20,9 +20,9 @@ Page({
     replayList:[]
   },
   // 搜索页
-  onSearchTap: function () {
+  onSearchTap: function (e) {
     wx.navigateTo({
-      url: '../search/search?userid=' + this.data.userid
+      url: '../search/search?userid=' + this.data.userid + '&shui=' + e.currentTarget.dataset.shui
     })
   },
   // 点击切换

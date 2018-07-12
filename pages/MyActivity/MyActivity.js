@@ -40,13 +40,18 @@ Page({
     that.setData({ flag: e.detail.current });
 
   },
+  onweikaishi:function(e){
+    wx.navigateTo({
+      url: '../ConferenceDetails/ConferenceDetails?meet_id='+e.currentTarget.dataset.id,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that =this;
     wx.request({
-      url: app.InterfaceUrl + 'get_mymetting?userid=10003',
+      url: app.InterfaceUrl + 'get_mymetting?userid='+app.userData.user_id,
       data: {},
       header: { 'content-type': 'application/json' },
       success: function (res) {

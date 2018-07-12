@@ -11,7 +11,7 @@
     • 报名提交成功，请等待审核，可在我的培训中查看进度
   </view>
   <view class='box_btns'>
-    <text  class='box_btn back'>返回</text> <!-- wx.redirectTo 关闭当前页面 -->
-    <text class='box_btn check'>查看进度</text>
+    <text  class='box_btn back' catchtap='back'>返回</text> <!-- wx.redirectTo 关闭当前页面 -->
+    <text class='box_btn check' catchtap='chakan'>查看进度</text>
   </view>
 </view>

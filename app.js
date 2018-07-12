@@ -141,5 +141,11 @@ App({
   // 用户信息
   userData:null,
   // 标签存储
-  labels:''
+  labels:'',
+  // 火车票站点
+  staName:'终点',
+  // 始发
+  originating:'始发',
+  // 谁
+  j:null
 })

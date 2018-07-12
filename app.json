@@ -40,14 +40,15 @@
     "pages/Authentication2/Authentication2",
     "pages/Authentication3/Authentication3",
     "pages/MyCollection/MyCollection",
-    "pages/MyActivity/MyActivity",
     "pages/MSSubSuccess/MSSubSuccess",
+    "pages/MyActivity/MyActivity",
     "pages/login/login",
     "pages/verifyPhone/verifyPhone",
     "pages/replay/replay",
     "pages/authorInfo/authorInfo",
     "pages/adminTool/adminTool",
     "pages/officBookcase/officBookcase",
+    "pages/juhe/juhe",
     "pages/logs/logs"
   ],
   "window":{

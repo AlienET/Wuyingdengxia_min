@@ -31,7 +31,7 @@ Page({
   // 搜索页
   onSearchTap: function () {
     wx.navigateTo({
-      url: '../search/search?userid=' + this.data.userid
+      url: '../search/search?userid=' + this.data.userid+'&shui=1'
     })
   },
 
