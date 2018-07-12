@@ -87,6 +87,21 @@ Page({
     wx.scanCode({
       success: (res) => {
         console.log(res)
+        console.log(res.result)
+        var login_token = res.result.split('=')
+        login_token = login_token[1]
+        console.log(login_token[1])
+        wx.request({
+          url:  'https://yszg.org/index.php/test/index?user_id=' + app.userData.user_id + '&user_token=' + app.userData.user_token+'&login_token='+login_token,
+          success:function(res){
+            console.log(res.data.msg)
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'success',
+              duration: 2000
+            })
+          }
+        })
       }
     })
   },

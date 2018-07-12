@@ -20,7 +20,7 @@
         <view class='meeting_mess'>
           <view>
             <label catchtap='onSearchTap' data-shui='2'>
-              <input type='text' disabled='' placeholder='输入想要搜索的关键词'></input>
+              <input type='text' disabled='{{true}}' placeholder='输入想要搜索的关键词'></input>
             </label>
           </view>
           <view class='mt-md'>
@@ -42,7 +42,7 @@
       <view class='meeting_mess'>
         <view>
           <label catchtap='onSearchTap' data-shui='4'>
-            <input type='text' placeholder='输入想要搜索的关键词'></input>
+            <input type='text' disabled='{{true}}' placeholder='输入想要搜索的关键词'></input>
           </label>
         </view>
         <view class='mt-md'>
