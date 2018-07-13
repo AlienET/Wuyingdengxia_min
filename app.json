@@ -85,7 +85,7 @@
       "pagePath": "pages/adminTool/adminTool",
       "iconPath": "images/icon/tool_n.png",
       "selectedIconPath": "images/icon/tool.png",
-      "text": "管理工具"
+      "text": "直播"
     },
     {
       "pagePath": "pages/PersonalCenter/PersonalCenter",

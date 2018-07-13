@@ -15,7 +15,7 @@
       name}}</text>
     </view>
   </view>
-  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{150*tabActiveKeyId.length}}px">
+  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{150*tabActiveKeyId.length}}px;min-height:800rpx;">
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
       <scroll-view style='height:100%;' scroll-y=" ">
         <view class='ml-md'>

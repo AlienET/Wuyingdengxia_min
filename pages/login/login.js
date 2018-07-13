@@ -32,13 +32,8 @@ Page({
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
                 var code = res.code;
                 wx.request({
-                  url: 'https://api.weixin.qq.com/sns/jscode2session',
-                  data: {
-                    appid: 'wx8dbc9156e40232a7',
-                    secret: 'fbbe5e0c28ca909f74e0c2fa636fdf68',
-                    js_code: code,
-                    grant_type: 'authorization_code'
-                  },
+                  url: app.InterfaceUrl + 'H5_login_wx?js_code=' + code,
+                  data: {},
                   method: 'GET',
                   header: { 'content-type': 'application/json' },
                   success: function (res) {

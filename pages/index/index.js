@@ -15,7 +15,7 @@ Page({
     // 首页标签列
     labellist: [],
     // 当前用户id
-    userid: null,
+    userid: '',
     // 正在讨论列
     discusslist: [],
     winWidth: 0,
