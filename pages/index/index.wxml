@@ -1,12 +1,12 @@
 <!--index.wxml-->
 <view class='container'>
   <view class='section mt-n'>
-    <image catchtap='onRCtap' class='RC' src='/images/icon/icon_RichScan.png'></image>
+    <image catchtap='onRCtap' mode='widthFix' class='RC' src='/images/icon/icon_RichScan.png'></image>
     <label class='search'>
-      <image class='i-search' src='/images/icon/icon_search.png'></image>
+      <image class='i-search' mode='widthFix' src='/images/icon/icon_search.png'></image>
       <input catchtap="onSearchTap" type='text' disabled='true' placeholder='输入想要搜索的关键词' maxlength='20'></input>
     </label>
-    <text catchtap='onContributeTap' class='contribute ver-middle' style='float:right;margin-top:14rpx;'>投稿</text>
+    <text catchtap='onContributeTap' class='contribute ver-middle' style='float:right;margin-top:8rpx;'>投稿</text>
   </view>
   <view>
     <swiper previous-margin='10rpx' style='height:300rpx' next-margin='20rpx' vertical='{{false}}' indicator-dots autoplay interval="5000" duration="1000" circular indicator-color="rgba(256,256,256,0.5)" indicator-active-color="rgba(256,256,256,0.8)">
@@ -16,7 +16,7 @@
     </swiper>
   </view>
   <view class=' p_rel'>
-    <image catchtap='onNavEditTap' src='/images/icon/icon_addSheet.png'></image>
+    <image catchtap='onNavEditTap' mode='widthFix' src='/images/icon/icon_addSheet.png'></image>
     <view class='sheet section mb-n swiper-tab'>
       <text wx:for='{{labellist}}' class="swiper-tab-list {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" bindtap="swichNav">{{item.name}}</text>
       <!-- active -->
@@ -24,7 +24,8 @@
   </view>
   <view class='sheet dis_matter'>
     <view class='item' catchtap='onDiscussDetailsTap' data-postid="{{item}}" wx:for='{{discusslist}}'>
-      <image src='/images/icon/icon_underDiscussion.png'></image>
+      <image wx:if='{{item.type < 1}}' mode='widthFix' src='/images/icon/icon_underDiscussion.png'></image>
+      <image wx:else  mode='widthFix' src='/images/icon/wtzj.png'></image>
       {{item.key_dis_title}}
     </view>
   </view>

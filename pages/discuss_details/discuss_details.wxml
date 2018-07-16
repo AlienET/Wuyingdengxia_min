@@ -1,7 +1,7 @@
 <!--pages/discuss_details/discuss_details.wxml-->
 <view class='container'>
   <view class='section'>
-    <text class='discussion'>正在讨论</text>
+    <text class='discussion' style='{{type>0?"border-color:#FCBA2A;color:#FCBA2A;":""}}'>{{type>0?'问题征集':'正在讨论'}}</text>
     <view class='title'>
       {{aboutData.key_dis_title}}
     </view>

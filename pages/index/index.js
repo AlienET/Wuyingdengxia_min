@@ -44,9 +44,9 @@ Page({
   },
   // 讨论详情
   onDiscussDetailsTap: function (event) {
-    // console.log(event.currentTarget.dataset.postid.key_dis_id);
+    console.log(event.currentTarget.dataset.postid.type);
     wx.navigateTo({
-      url: '../discuss_details/discuss_details?key_dis_id=' + event.currentTarget.dataset.postid.key_dis_id,
+      url: '../discuss_details/discuss_details?key_dis_id=' + event.currentTarget.dataset.postid.key_dis_id + '&type=' + event.currentTarget.dataset.postid.type,
     })
 
   },
@@ -268,6 +268,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
+        console.log(res)
         that.setData({
           discusslist: res.data.data,
         });

@@ -16,10 +16,11 @@ Page({
     // 输入框value
     inputTxt: '',
     // 当前用户id
-    userid: null
+    userid: null,
+    type: 0
   },
   // 个人页
-  onauthorTap:function(e){
+  onauthorTap: function (e) {
     console.log(e.currentTarget.dataset.userid)
     wx.navigateTo({
       url: '../authorInfo/authorInfo?userid=' + e.currentTarget.dataset.userid,
@@ -75,7 +76,7 @@ Page({
                 }
               }
             }
-            
+
           }
         });
         that.setData({ inputTxt: '' });
@@ -209,14 +210,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // console.log(options.key_dis_id);
+    console.log(options);
     that.setData({
       key_dis_id: options.key_dis_id,
-      userid : app.userData.user_id
+      userid: app.userData.user_id,
+      type: options.type
     })
     // get_hot_labelList_detail
     wx.request({
-      url: app.InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + options.key_dis_id +'&user_id='+that.data.userid,
+      url: app.InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + options.key_dis_id + '&user_id=' + that.data.userid,
       data: {},
       header: {
         'content-type': 'application/json' // 默认值

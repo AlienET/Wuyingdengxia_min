@@ -44,7 +44,7 @@ Page({
                     wx.request({
                       url: app.InterfaceUrl + 'wechat_login',
                       data: {
-                        wechat_open_id: openid
+                        wechat_open_id: unionid
                       },
                       method: 'GET',
                       success: function (res) {

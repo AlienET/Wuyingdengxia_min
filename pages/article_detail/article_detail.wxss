@@ -78,5 +78,7 @@
 .fill_comment .ver-middle {
   margin-right: 40rpx;
 }
-
+.content view,.content text{
+  font-size: 32rpx !important;
+}
 

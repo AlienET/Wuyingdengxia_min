@@ -21,13 +21,13 @@ App({
           success: function (res) {
             console.log(res);
             var openid = res.data.openid;
-            that.wechat_open_id = openid;
             var session_key = res.data.session_key;
             var unionid = res.data.unionid;
+            that.wechat_open_id = unionid;
             wx.request({
               url: that.InterfaceUrl + 'wechat_login',
               data: {
-                wechat_open_id: openid
+                wechat_open_id: unionid
               },
               method: 'GET',
               success: function (res) {
