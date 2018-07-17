@@ -49,6 +49,7 @@
     "pages/adminTool/adminTool",
     "pages/officBookcase/officBookcase",
     "pages/juhe/juhe",
+    "pages/bannerTo/bannerTo",
     "pages/logs/logs"
   ],
   "window":{

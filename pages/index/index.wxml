@@ -4,7 +4,7 @@
     <image catchtap='onRCtap' mode='widthFix' class='RC' src='/images/icon/icon_RichScan.png'></image>
     <label class='search'>
       <image class='i-search' mode='widthFix' src='/images/icon/icon_search.png'></image>
-      <input catchtap="onSearchTap" type='text' disabled='true' placeholder='输入想要搜索的关键词' maxlength='20'></input>
+      <input catchtap="onSearchTap" placeholder-style='font-size:24rpx;' style='width:88%' type='text' disabled='true' placeholder='输入想要搜索的关键词' maxlength='20'></input>
     </label>
     <text catchtap='onContributeTap' class='contribute ver-middle' style='float:right;margin-top:8rpx;'>投稿</text>
   </view>

@@ -1,6 +1,7 @@
 // pages/discuss_details/discuss_details.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -17,7 +18,8 @@ Page({
     inputTxt: '',
     // 当前用户id
     userid: null,
-    type: 0
+    type: 0,
+    article:''
   },
   // 个人页
   onauthorTap: function (e) {
@@ -216,7 +218,6 @@ Page({
       userid: app.userData.user_id,
       type: options.type
     })
-    // get_hot_labelList_detail
     wx.request({
       url: app.InterfaceUrl + 'get_hot_labelList_detail?key_dis_id=' + options.key_dis_id + '&user_id=' + that.data.userid,
       data: {},
@@ -224,23 +225,23 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        // var arrReverse = [];
+        console.log(res.data.data)
         var time = '';
-        for (var i = res.data.data.user_dis.length - 1; i >= 0; i--) {
-          time = res.data.data.user_dis[i].ctime.substring(0, 19);
-          time = time.replace(/-/g, '/');
-          time = new Date(time).getTime();
-          res.data.data.user_dis[i].jubao = false;
-          res.data.data.user_dis[i].ctime = app.getDateDiff(time);
-
-          // console.log(res.data.data);
-          // console.log(res.data.data.user_dis[i]);
-          // console.log(time);
-          // arrReverse.push(res.data.data.user_dis[i]);
+        that.setData({ article: res.data.data.content })
+        var temp = WxParse.wxParse('article', 'html', that.data.article, that, 5);
+        if (res.data.data.user_dis.length > 0) {
+          for (var i = res.data.data.user_dis.length - 1; i >= 0; i--) {
+            time = res.data.data.user_dis[i].ctime.substring(0, 19);
+            time = time.replace(/-/g, '/');
+            time = new Date(time).getTime();
+            res.data.data.user_dis[i].jubao = false;
+            res.data.data.user_dis[i].ctime = app.getDateDiff(time);
+          }
         }
         that.setData({
           aboutData: res.data.data,
-          DiscussListsData: res.data.data.user_dis
+          DiscussListsData: res.data.data.user_dis,
+          article: temp
         });
       }
     });

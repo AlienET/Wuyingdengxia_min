@@ -23,6 +23,7 @@ App({
             var openid = res.data.openid;
             var session_key = res.data.session_key;
             var unionid = res.data.unionid;
+            console.log(unionid)
             that.wechat_open_id = unionid;
             wx.request({
               url: that.InterfaceUrl + 'wechat_login',
@@ -142,5 +143,7 @@ App({
   // 始发
   originating:'始发',
   // 谁
-  j:null
+  j:null,
+  //banner URl
+  bannerUrl:''
 })

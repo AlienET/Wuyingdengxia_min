@@ -59,19 +59,26 @@ input {
 
 .meeting_msg .meet_state {
   padding: 5rpx 10rpx;
-  border: 1px solid ;
+  border: 1px solid;
   border-radius: 100rpx;
   font-size: 20rpx;
   /* color: #f5a623; */
   vertical-align: middle;
 }
-.meeting_msg .meet_state.z{
+
+.meeting_msg .meet_state.z {
   border-color: #f5a623;
-  color:  #f5a623;
+  color: #f5a623;
 }
-.meeting_msg .meet_state.w{
-  border-color: #C6C6C6;
-  color:  #C6C6C6;
+
+.meeting_msg .meet_state.w {
+  border-color: #c6c6c6;
+  color: #c6c6c6;
+}
+
+.meeting_msg .meet_state.v {
+  border-color: #0a93ff;
+  color: #0a93ff;
 }
 
 .meeting_msg view {

@@ -25,6 +25,7 @@
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
+  vertical-align: middle;
 }
 
 .video-list .active {

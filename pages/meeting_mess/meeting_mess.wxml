@@ -28,8 +28,9 @@
               <image mode='aspectFill' style='height:300rpx;' src='{{item.meeting_image}}'></image>
               <view class='meeting_msg'>
                 <text class='meet_tit'>{{item.meet_title}}</text>
-                <text wx:if='{{item.isfinish > 0}}' class='meet_state z'>报名中</text>
-                <text wx:else class='meet_state w'>未开始</text>
+                <text wx:if='{{item.isfinish == "0"}}' class='meet_state z'>未开始</text>
+                <text wx:elif='{{item.isfinish == "1"}}' class='meet_state v'>报名中</text>
+                <text wx:else class='meet_state w'>已结束</text>
                 <view>{{item.begin_time}}</view>
               </view>
             </view>

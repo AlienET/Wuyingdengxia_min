@@ -43,5 +43,5 @@
   </view>
 </view>
 <view class='txt-center' style='padding:50rpx;'>
-  <text catchtap='onEnrollTap' class='bm' style='{{aboutData.is_attend==0?"background:#eee;color:#999":""}}'>报 名</text>
+  <text catchtap='onEnrollTap' class='bm' style='{{aboutData.isfinish=="1"?"":"background:#eee;color:#999"}}'>报 名</text>
 </view>

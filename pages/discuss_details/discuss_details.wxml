@@ -1,4 +1,5 @@
 <!--pages/discuss_details/discuss_details.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
 <view class='container'>
   <view class='section'>
     <text class='discussion' style='{{type>0?"border-color:#FCBA2A;color:#FCBA2A;":""}}'>{{type>0?'问题征集':'正在讨论'}}</text>
@@ -9,7 +10,8 @@
       <text>{{aboutData.key_ctime}}</text>
     </view>
     <view class='content'>
-      {{aboutData.key_dis_content}}
+     <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+      <!-- {{aboutData.content}} -->
     </view>
   </view>
   <view style='height:30rpx;background-color:#F3F4F8;'></view>
@@ -17,7 +19,7 @@
     <view class='comment_all'>全部评论
       <text>{{DiscussListsData.length}}</text>
     </view>
-    <view wx:if="{{!DiscussListsData.length}}" style="text-align:center;padding:20rpx;color: #B9B9B9;font-size:30rpx;">
+    <view wx:if="{{!DiscussListsData.length == 0}}" style="text-align:center;padding:20rpx;color: #B9B9B9;font-size:30rpx;">
       暂无评论 ...
     </view>
     <view class='comment_list'>

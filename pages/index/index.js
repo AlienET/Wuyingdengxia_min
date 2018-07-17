@@ -75,9 +75,10 @@ Page({
   },
   // 点击banner
   onBannerImgTap: function (event) {
-    console.log(event.currentTarget.dataset.postid)
+    console.log(event.currentTarget.dataset.postid.banner_link)
+    app.bannerUrl = event.currentTarget.dataset.postid.banner_link;
     wx.navigateTo({
-      url: event.currentTarget.dataset.postid.banner_link,
+      url: '../bannerTo/bannerTo?userid='+app.userData.user_id,
     })
   },
 

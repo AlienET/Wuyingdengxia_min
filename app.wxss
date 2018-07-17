@@ -157,8 +157,8 @@ body, view, text {
 
 .column .column_inner text {
   vertical-align: middle;
-  font-size: 26rpx;
-  color: #666;
+  font-size: 22rpx;
+  color: rgb(180, 180, 180);
 }
 
 .column .column_btn {
@@ -379,6 +379,7 @@ body, view, text {
   color: #999;
   padding: 6rpx 20rpx;
   margin-right: 20rpx;
+  margin-bottom: 20rpx;
 }
 
 /* //标签 */
