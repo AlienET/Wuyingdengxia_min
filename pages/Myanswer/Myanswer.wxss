@@ -1,7 +1,7 @@
 /* pages/Myanswer/Myanswer.wxss */
 .sub_item {
   padding-left: 0rpx;
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 1rpx solid #ebebeb;
 }
 
 .sub_tit {

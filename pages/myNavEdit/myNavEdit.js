@@ -21,11 +21,12 @@ Page({
   refresh: function () {
     var that = this;
     // 导航推荐
+    var types = that.data.isType =='0'?parseInt(that.data.isType)+1:that.data.isType;
     wx.request({
       url: app.InterfaceUrl + 'get_labels_rand', //仅为示例，并非真实的接口地址
       data: {
         limit: 10,
-        type: that.data.isType,
+        type: types,
       },
       header: {
         'content-type': 'application/json' // 默认值

@@ -60,7 +60,7 @@ page {
 }
 
 .suc_btn.suc_btn_back {
-  border: 1px solid #ddd;
+  border: 1rpx solid #ddd;
   margin-right: 50rpx;
 }
 

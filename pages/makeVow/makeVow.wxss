@@ -14,7 +14,7 @@ textarea {
 }
 
 .bottom_nav text.txt-center {
-  border: 1px solid #666;
+  border: 1rpx solid #666;
   font-size: 28rpx;
   color: #666;
   border-radius: 50%;

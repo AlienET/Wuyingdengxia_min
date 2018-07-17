@@ -5,7 +5,7 @@
 }
 
 .table .td_i {
-  border-top: 1px solid #f1f1f1;
+  border-top: 1rpx solid #f1f1f1;
   width: 80%;
 }
 
@@ -24,7 +24,6 @@
 
 .table .th {
   padding: 25rpx 0;
-  /* border-bottom:1px solid #F1F1F1; */
   display: inline-block;
   width: 33%;
   text-align: center;
@@ -38,7 +37,7 @@
 }
 
 .table .tr_bor {
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1rpx solid #f1f1f1;
 }
 
 .table .tr_bor .td_i {
@@ -60,7 +59,7 @@
 
 .th_day {
   font-size: 20rpx;
-  border: 1px solid #d7d7d7;
+  border: 1rpx solid #d7d7d7;
   border-radius: 50px;
   color: #666;
   padding: 5rpx 10rpx;

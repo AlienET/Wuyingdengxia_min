@@ -55,9 +55,12 @@ Page({
       url: app.InterfaceUrl + 'get_meeting_byid?meet_id=' + options.meet_id,
       data: {},
       success: function (res) {
+        console.log(res)
+        var meet_class = res.data.data.meet_date.length==0?'':res.data.data.meet_date[0].meet_class;
+        console.log()
         that.setData({
           aboutData: res.data.data,
-          schedule: res.data.data.meet_date[0].meet_class
+          schedule: meet_class
         });
         console.log(res.data.data);
       }

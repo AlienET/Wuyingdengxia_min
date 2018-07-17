@@ -226,8 +226,9 @@ Page({
       },
       success: function (res) {
         console.log(res.data.data)
+        var article = options.type>0?res.data.data.key_dis_content:res.data.data.content;
         var time = '';
-        that.setData({ article: res.data.data.content })
+        that.setData({ article: article })
         var temp = WxParse.wxParse('article', 'html', that.data.article, that, 5);
         if (res.data.data.user_dis.length > 0) {
           for (var i = res.data.data.user_dis.length - 1; i >= 0; i--) {

@@ -1,7 +1,7 @@
 /* pages/index/quick_quiz/quick_quiz.wxss */
 
 .p_rel {
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1rpx solid #e8e8e8;
 }
 
 

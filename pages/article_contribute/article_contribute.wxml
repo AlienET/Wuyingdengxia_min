@@ -9,8 +9,8 @@
     </view>
   </view>
   <view style='padding:20rpx 40rpx;background:#F8F8F8;box-sizing:border-box'>
-    <image catchtap='addImg' src='/images/icon/tupian.png' style='width:40rpx;height:34rpx;margin-right:40rpx;'></image>
-    <view catchtap='addLabel' style='display:inline-block;position:relative'>
+    <image catchtap='addImg' src='/images/icon/tupian.png' style='width:40rpx;height:34rpx;margin-right:40rpx;vertical-align:middle;'></image>
+    <view catchtap='addLabel' style='display:inline-block;position:relative;vertical-align:middle;'>
       <text wx:if='{{labels.length}}' style='display:inline-block;background:#EF5555;color:#fff;border-radius:50%;position: absolute;top:0rpx;right:-5rpx;font-size:18rpx;width:20rpx;height:20rpx;text-align:center;line-height:20rpx;'>{{labels.length}}</text>
       <image catchtap='addLabel' src='/images/icon/biaoqian.png' style='width:36rpx;height:36rpx;'></image>
     </view>

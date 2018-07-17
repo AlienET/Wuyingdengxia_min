@@ -1,6 +1,6 @@
 <!--pages/pastVideo/pastVideo.wxml  往期视频详情页-->
 <video src='{{VideoUrl}}' style='width:100%;'></video>
-<view style='padding:20rpx;padding-bottom:30rpx;border-bottom:1px solid #f3f3f3;'>
+<view style='padding:20rpx;padding-bottom:30rpx;border-bottom:1rpx solid #f3f3f3;'>
   <view style='title' style='font-size:30rpx;'>
     {{aboutData.meeting_title}}
   </view>

@@ -22,7 +22,7 @@
 
 .add-subtract {
   color: #979797;
-  border: 1px solid #f1f1f1;
+  border: 1rpx solid #f1f1f1;
   vertical-align: middle;
   width: 46rpx;
   height: 46rpx;
@@ -35,7 +35,7 @@
   display: inline-block;
   width: 104rpx;
   height: 46rpx;
-  border: 1px solid #f1f1f1;
+  border: 1rpx solid #f1f1f1;
   vertical-align: middle;
   font-size: 34rpx;
   text-align: center;

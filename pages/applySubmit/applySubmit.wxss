@@ -46,7 +46,7 @@ page {
 }
 
 .box_btn.back {
-  border: 1px solid #ddd;
+  border: 1rpx solid #ddd;
 }
 
 .box_btn.check {

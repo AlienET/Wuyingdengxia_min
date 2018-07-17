@@ -57,7 +57,7 @@ page {
 }
 .past_search_list view{
   background: #fff;
-  border-bottom: 1px solid #F1F1F1;
+  border-bottom: 1rpx solid #F1F1F1;
   padding: 20rpx;
   color: #333;
   font-size: 30rpx;

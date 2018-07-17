@@ -46,7 +46,7 @@
 
 .meeting_msg .meet_state {
   padding: 5rpx 10rpx;
-  border: 1px solid;
+  border: 1rpx solid;
   border-radius: 100rpx;
   font-size: 20rpx;
   /* color: #f5a623; */

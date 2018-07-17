@@ -1,6 +1,6 @@
 /* pages/makeVowRecord/makeVowRecord.wxss */
 .text-hide{-webkit-line-clamp: 1;}
-.r_item{border-bottom:1px solid #EBEBEB;}
+.r_item{border-bottom:1rpx solid #EBEBEB;}
 .r_tit{width:85%;}
 .r_tit .text-hide{
   font-size:34rpx;

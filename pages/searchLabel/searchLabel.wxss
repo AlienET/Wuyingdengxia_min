@@ -4,7 +4,7 @@
   position: relative;
   padding-left: 20rpx;
   padding-bottom: 20rpx;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1rpx solid #ddd;
 }
 
 .seach input {
@@ -35,6 +35,6 @@
 .labelList{
   padding-left: 20rpx;
 }
-.labelList .item{display:block;font-size:30rpx;border-bottom:1px solid #F3F3F3;padding:20rpx 30rpx 20rpx 0;}
+.labelList .item{display:block;font-size:30rpx;border-bottom:1rpx solid #F3F3F3;padding:20rpx 30rpx 20rpx 0;}
 .labelList .item checkbox .wx-checkbox-input{width:32rpx;height:32rpx;border-radius: 50%;}
  /* .labelList .item checked{border-radius: 50%;}  */

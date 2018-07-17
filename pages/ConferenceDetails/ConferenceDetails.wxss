@@ -36,7 +36,7 @@
 .meet_txt {
   font-size: 28rpx;
   color: #666;
-  border-top: 1px solid #f1f1f1;
+  border-top: 1rpx solid #f1f1f1;
   padding-top: 20rpx;
   margin-top: 20rpx;
 }
