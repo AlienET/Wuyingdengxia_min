@@ -72,7 +72,7 @@
   </view>
   <view class='fill_comment'>
     <view style='vertical-align:middle;'>
-      <input bindconfirm='commentInput' value='{{inputTxt}}' placeholder='我来回答' maxlength='-1' confirm-type='send' style='font-size:26rpx;'></input>
+      <input bindconfirm='commentInput' value='{{inputTxt}}' placeholder='我来回答' maxlength='-1' confirm-type='send' style='font-size:26rpx;' placeholder-style='text-align:center;font-size:26rpx;background:#ededed url(/images/icon/huidahei.png) no-repeat 35% ;background-size:26.4rpx 27.8rpx;'></input>
     </view>
     <image wx:if='{{aboutData.is_collection}}' catchtap='wzsc' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
     <image wx:else catchtap='wzsc' src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;'></image>
