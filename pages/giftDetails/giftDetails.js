@@ -30,55 +30,64 @@ Page({
   // 确认兑换
   onShowModalTap: function () {
     var that = this;
-    if (parseInt(that.data.goods.moon_cash) > parseInt(app.userData.moon_cash)) {
-      wx.showToast({
-        title: '您的月亮币不足',
-        icon: 'none',
-        duration: 1500
+    if (app.userData.isV == null) {
+      wx.navigateTo({
+        url: '../Authentication1/Authentication1',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
       })
     } else {
-      wx.showModal({
-        title: '确定使用' + this.data.goods.moon_cash + '月亮币兑换？',
-        cancelColor: '#979797',
-        confirmColor: '#1397FF',
-        success: function (res) {
-          if (res.confirm) {
-            wx.request({
-              url: app.InterfaceUrl + 'post_exchange_goods',
-              data: {
-                user_id: app.userData.user_id,
-                goods_id: that.data.goods.goods_id
-              },
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              method: 'POST',
-              success: function (res) {
-                console.log(res.data.code)
-                console.log(res.data.data)
-                if (res.data.code == 0) {
-                  wx.showToast({
-                    title: '兑换失败...',
-                    icon: 'none',
-                    duration: 1500
-                  })
-                } else {
-                  app.userData.moon_cash = app.userData.moon_cash - that.data.goods.moon_cash;
-                  wx.navigateTo({
-                    url: '../ForSuccessful/ForSuccessful?goods_name=' + that.data.goods.goods_name + '&moon_cash=' + that.data.goods.moon_cash + '&order_num=' + res.data.data.order_num + '&courtesy_code=' + res.data.data.courtesy_code,
-                  })
+      if (parseInt(that.data.goods.moon_cash) > parseInt(app.userData.moon_cash)) {
+        wx.showToast({
+          title: '您的月亮币不足',
+          icon: 'none',
+          duration: 1500
+        })
+      } else {
+        wx.showModal({
+          title: '确定使用' + this.data.goods.moon_cash + '月亮币兑换？',
+          cancelColor: '#979797',
+          confirmColor: '#1397FF',
+          success: function (res) {
+            if (res.confirm) {
+              wx.request({
+                url: app.InterfaceUrl + 'post_exchange_goods',
+                data: {
+                  user_id: app.userData.user_id,
+                  goods_id: that.data.goods.goods_id
+                },
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                success: function (res) {
+                  console.log(res.data.code)
+                  console.log(res.data.data)
+                  if (res.data.code == 0) {
+                    wx.showToast({
+                      title: '兑换失败...',
+                      icon: 'none',
+                      duration: 1500
+                    })
+                  } else {
+                    app.userData.moon_cash = app.userData.moon_cash - that.data.goods.moon_cash;
+                    wx.navigateTo({
+                      url: '../ForSuccessful/ForSuccessful?goods_name=' + that.data.goods.goods_name + '&moon_cash=' + that.data.goods.moon_cash + '&order_num=' + res.data.data.order_num + '&courtesy_code=' + res.data.data.courtesy_code,
+                    })
+                  }
+                },
+                fail: function (error) {
+                  console.log(error);
                 }
-              },
-              fail: function (error) {
-                console.log(error);
-              }
-            })
+              })
 
-          } else if (res.cancel) {
-            console.log('用户点击取消')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
           }
-        }
-      })
+        })
+      }
     }
   },
   /**

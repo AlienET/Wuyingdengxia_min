@@ -2,7 +2,7 @@
 
 .img_tit {
   background: #f3f4f8;
-  padding: 10rpx 15rpx;
+  padding: 10rpx 20rpx;
 }
 
 .img_tit image {

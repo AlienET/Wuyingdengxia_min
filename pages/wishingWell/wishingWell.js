@@ -11,9 +11,16 @@ Page({
   },
   // 我要许愿
   onmakeVowTap: function () {
-    wx.navigateTo({
-      url: '../makeVow/makeVow',
-    })
+    var that = this;
+    if (that.data.aboutData.isV == null) {
+      wx.navigateTo({
+        url: '../Authentication1/Authentication1',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../makeVow/makeVow',
+      })
+    }
   },
   // 许愿记录
   onMakeVowRecordTap: function () {
@@ -26,7 +33,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.setData({aboutData:app.userData})
+    that.setData({ aboutData: app.userData })
   },
 
   /**

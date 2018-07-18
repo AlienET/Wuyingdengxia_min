@@ -42,6 +42,16 @@ Page({
         },
         success: function (res) {
           console.log(res.data.data)
+
+          var time = '';
+          for (var i = res.data.data.length - 1; i >= 0; i--) {
+            time = res.data.data[i].ctime.substring(0, 19);
+
+            time = time.replace(/-/g, '/');
+            time = new Date(time).getTime();
+            res.data.data[i].ctime = app.getDateDiff(time);
+
+          }
           that.setData({
             tabActiveKeyId: res.data.data,
           });
@@ -66,6 +76,15 @@ Page({
       },
       success: function (res) {
         console.log(e);
+        var time = '';
+        for (var i = res.data.data.length - 1; i >= 0; i--) {
+          time = res.data.data[i].ctime.substring(0, 19);
+
+          time = time.replace(/-/g, '/');
+          time = new Date(time).getTime();
+          res.data.data[i].ctime = app.getDateDiff(time);
+
+        }
         that.setData({
           tabActiveKeyId: res.data.data,
         });
@@ -95,7 +114,7 @@ Page({
   //搜索
   onSearchTap: function () {
     wx.navigateTo({
-      url: '../search/search?userid=' + app.userData.user_id+'&shui=3'
+      url: '../search/search?userid=' + app.userData.user_id + '&shui=3'
     })
   },
   // 我的提问
@@ -131,6 +150,17 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success: function (res) {
+
+            var time = '';
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              time = res.data.data[i].ctime.substring(0, 19);
+
+              time = time.replace(/-/g, '/');
+              time = new Date(time).getTime();
+              res.data.data[i].ctime = app.getDateDiff(time);
+
+            }
+
             that.setData({
               tabActiveKeyId: res.data.data,
             });
@@ -164,9 +194,9 @@ Page({
         console.log(res)
         that.setData({
           labellist: res.data.data,
-          currentTab: 0
+          currentTab: app.QQcurrentTab
         });
-        var initActive = that.data.labellist[0].name;
+        var initActive = that.data.labellist[app.QQcurrentTab].name;
         console.log(initActive)
         // 文章列
         wx.request({
@@ -176,6 +206,17 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success: function (res) {
+
+            var time = '';
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              time = res.data.data[i].ctime.substring(0, 19);
+
+              time = time.replace(/-/g, '/');
+              time = new Date(time).getTime();
+              res.data.data[i].ctime = app.getDateDiff(time);
+
+            }
+
             that.setData({
               tabActiveKeyId: res.data.data,
             });
@@ -184,20 +225,21 @@ Page({
         });
       }
     });
+    
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    app.QQcurrentTab = this.data.currentTab;
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    console.log('xiasd')
   },
 
   /**

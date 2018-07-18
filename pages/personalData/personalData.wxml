@@ -3,7 +3,7 @@
 <view class='pl-md user_list'>
   <view class='u_item'>
     <image bindtap='BindImage' src='{{aboutData.headimg}}'></image>
-    <view catchtap='AuthenticationTap' class='bm'>{{aboutData.isfinishCer == null?'医护认证':'已认证'}}</view>
+    <view catchtap='AuthenticationTap' class='bm'>{{aboutData.isV == null?'医护认证':'已认证'}}</view>
   </view>
   <view class='u_item'>
     <view class='u_li'>手机号</view>

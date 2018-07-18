@@ -1,5 +1,5 @@
 <!--pages/problemDetails/problemDetails.wxml  问题详情-->
-<import src="../../wxParse/wxParse.wxml"/>
+<import src="../../wxParse/wxParse.wxml" />
 <view class='section'>
   <view>
     <view class='title'>
@@ -24,10 +24,10 @@
   </view>
   <view class='content mt-md'>
     <!-- {{aboutData.question_content}} -->
-    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
-    <view class='content_label'>
-      <text wx:for='{{aboutData.question_tags}}'>{{item}}</text>
-    </view>
+    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+  </view>
+  <view class='content_label'>
+    <text wx:for='{{aboutData.question_tags}}'>{{item}}</text>
   </view>
 </view>
 <view class='gap'></view>
@@ -35,9 +35,9 @@
   <view class='comment_all'>全部回答 {{commentData.length}}</view>
   <view wx:if='{{commentData.length == 0}}' style='text-align:center;color:#999999;font-size:30rpx;padding:30rpx;'>
     暂无回答 . . .
-  </view> 
+  </view>
   <view wx:else class='comment_list'>
-    <view class='column' wx:for='{{commentData}}'>
+    <view class='column p_rel' wx:for='{{commentData}}'>
       <view class='column_img'>
         <image src='{{item.headimg}}' catchtap='onauthorTap' data-userid='{{item.user_id}}'></image>
       </view>
@@ -65,12 +65,15 @@
           <text class='column_replay' catchtap='replay' data-item='{{item}}'>回复</text>
         </view>
       </view>
+      <view>
+        <image wx:if='{{item.is_take}}' mode='widthFix' style='width:100rpx;position: absolute;bottom:19.5rpx;right:0rpx;' src='/images/icon/cainaicon.png'></image>
+      </view>
     </view>
   </view>
   <view class='fill_comment'>
-     <view style='vertical-align:middle;'>
-     <input bindconfirm='commentInput' value='{{inputTxt}}' placeholder='我来回答' maxlength='-1' confirm-type='send' style='font-size:26rpx;'></input> 
-     </view> 
+    <view style='vertical-align:middle;'>
+      <input bindconfirm='commentInput' value='{{inputTxt}}' placeholder='我来回答' maxlength='-1' confirm-type='send' style='font-size:26rpx;'></input>
+    </view>
     <image wx:if='{{aboutData.is_collection}}' catchtap='wzsc' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
     <image wx:else catchtap='wzsc' src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;'></image>
     <image catchtap='onShareTop' src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;'></image>

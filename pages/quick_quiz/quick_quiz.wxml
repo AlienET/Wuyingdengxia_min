@@ -5,7 +5,8 @@
       <image src='/images/icon/icon_search.png'></image>
       输入想要搜索的关键词
     </view>
-    <text class='i_blue' catchtap='onQuizTap'>提问</text>
+    <text class='i_blue' style='margin-left:30rpx;' catchtap='onQuizTap'>提问</text>
+    <text style='font-size:28rpx;color:#EAEAEA;margin:0rpx 15rpx;'>|</text>
     <text class='i_blue' catchtap='onMyQuestionTap'>我的提问</text>
   </view>
   <view class='mt-sm p_rel'>
@@ -15,7 +16,7 @@
       name}}</text>
     </view>
   </view>
-  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{150*tabActiveKeyId.length}}px;min-height:800rpx;">
+  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{90*tabActiveKeyId.length}}px;min-height:800rpx;">
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
       <scroll-view style='height:100%;' scroll-y=" ">
         <view class='ml-md'>

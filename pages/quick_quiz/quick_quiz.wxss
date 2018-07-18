@@ -14,7 +14,7 @@
   color: #adadad;
   background: #f6f5f5;
   border-radius: 100rpx;
-  padding: 20rpx 30rpx;
+  padding: 15rpx 30rpx;
   width: 50%;
   vertical-align: middle;
 }
@@ -29,6 +29,6 @@
 .i_blue {
   color: #1397ff;
   font-size: 34rpx;
-  margin-left: 30rpx;
+  /* margin-left: 30rpx; */
   vertical-align: middle;
 }

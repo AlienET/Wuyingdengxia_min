@@ -1,5 +1,5 @@
 <!--pages/index/article_detail/article_detail.wxml-->
-<import src="../../wxParse/wxParse.wxml"/>
+<import src="../../wxParse/wxParse.wxml" />
 <view class='container'>
   <view class='section'>
     <view class='title'>
@@ -16,11 +16,12 @@
       <view class='attention' style='{{aboutData.is_follow > 0?"background:#E9E9E9":""}}' catchtap='follow'>{{aboutData.is_follow > 0 ?'已关注':'关注'}}</view>
     </view>
     <view class='content'>
-      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
       <!-- {{aboutData.article_content}} -->
-      <view class='content_label'>
-        <text wx:for='{{aboutData.article_tags}}'>{{item}}</text>
-      </view>
+
+    </view>
+    <view class='content_label'>
+      <text wx:for='{{aboutData.article_tags}}'>{{item}}</text>
     </view>
   </view>
   <view style='height:30rpx;background-color:#F3F4F8;'></view>
@@ -68,7 +69,7 @@
 
     <image catchtap='wzsc' wx:if='{{aboutData.is_collection > 0}}' class='ver-middle' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
     <image catchtap='wzsc' wx:else class='ver-middle' src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;'></image>
-    
+
     <image catchtap='onShareTop' class='ver-middle' src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;'></image>
   </view>
 </view>

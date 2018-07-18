@@ -38,7 +38,7 @@
       <view style='font-size:34rpx;color:#333;'>
         {{item.title}}
       </view>
-      <view class='text-hide mt-sm' style='font-size:28rpx;color:#999;'>{{item.content}}</view>
+      <!-- <view class='text-hide mt-sm' style='font-size:28rpx;color:#999;'>{{item.content}}</view> -->
     </view>
     <view wx:if='{{shui==2}}' catchtap="onArticleDetailTap" style='border-bottom:1rpx solid #F3F3F3;padding:20rpx;padding-left:0rpx' wx:for='{{tabActiveKeyId}}' data-postid='{{item.meet_id}}'>
       <view style='font-size:34rpx;color:#333;'>

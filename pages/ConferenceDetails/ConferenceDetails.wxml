@@ -1,6 +1,6 @@
 <!--pages/ConferenceDetails/ConferenceDetails.wxml  会议资讯详情-->
 <view class='img_tit'>
-  <image src='{{aboutData.meeting_image}}'></image>
+  <image mode='widthFix' src='{{aboutData.meeting_image}}'></image>
 </view>
 <view class='pad20'>
   <view class='meet_'>
@@ -22,8 +22,8 @@
 
   </view>
   <view class='txt-center mt-md'>
-    <text catchtap='isIntroduce' class='unAll'>{{isIntroduce?'点击收起 ∧':'展开全部 ∨'}}</text>
-    <!-- 展开全部后 ∧ -->
+    <text catchtap='isIntroduce' class='unAll'>{{isIntroduce?'点击收起':'展开全部'}}</text>
+    <!-- 展开全部后 -->
   </view>
 </view>
 <view class='gap'></view>
@@ -37,8 +37,8 @@
       </view>
     </view>
     <view class='txt-center mt-md'>
-      <text catchtap='isSchedule' class='unAll'>{{isSchedule?'点击收起 ∧':'展开全部 ∨'}}</text>
-      <!-- 展开全部后 ∧ -->
+      <text catchtap='isSchedule' class='unAll'>{{isSchedule?'点击收起':'展开全部'}}</text>
+      <!-- 展开全部后 -->
     </view>
   </view>
 </view>

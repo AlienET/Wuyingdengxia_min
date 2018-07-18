@@ -190,7 +190,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true,
         })
-        console.log(app.userData)
+        console.log(app.userData)  
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -311,9 +311,10 @@ Page({
       success: function (res) {
         that.setData({
           labellist: res.data.data,
-          currentTab: 0
+          currentTab: app.ADcurrentTab
         });
-        var initActive = that.data.labellist[0].name;
+        var initActive = that.data.labellist[app.ADcurrentTab].name;
+        console.log(initActive)
         // 文章列
         wx.request({
           url: app.InterfaceUrl + 'get_article_bylabel?label=' + initActive + '&sortby=1',
@@ -337,6 +338,12 @@ Page({
         });
       }
     });
+  },
+  /**
+ * 生命周期函数--监听页面隐藏
+ */
+  onHide: function () {
+    app.ADcurrentTab = this.data.currentTab
   },
   getUserInfo: function (e) {
     console.log(e)

@@ -145,5 +145,9 @@ App({
   // 谁
   j:null,
   //banner URl
-  bannerUrl:''
+  bannerUrl:'',
+  // 快速问答 得 currentTab 
+  QQcurrentTab:0,
+  // Index 的 currentTab
+  ADcurrentTab:0
 })
