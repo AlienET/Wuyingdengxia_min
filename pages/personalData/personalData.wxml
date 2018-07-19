@@ -3,7 +3,7 @@
 <view class='pl-md user_list'>
   <view class='u_item'>
     <image bindtap='BindImage' src='{{aboutData.headimg}}'></image>
-    <view catchtap='AuthenticationTap' class='bm'>{{aboutData.isV == null?'医护认证':'已认证'}}</view>
+    <view catchtap='AuthenticationTap' class='bm'>{{aboutData.isfinishCer == 0?'医护认证':'已认证'}}</view>
   </view>
   <view class='u_item'>
     <view class='u_li'>手机号</view>
@@ -44,19 +44,19 @@
 <view class='pl-md user_list'>
   <label class='u_item'>
     <label class='u_li'>医院</label>
-    <input disabled type='text' value='{{aboutData.isV!=null?aboutData.userHospital:""}}'></input>
+    <input disabled type='text' value='{{aboutData.isfinishCer!=0?aboutData.userHospital:""}}'></input>
   </label>
   <view class='u_item'>
     <view class='u_li'>科室</view>
-    <input disabled type='text' value='{{aboutData.isV!=null?aboutData.userMajor:""}}'></input>
+    <input disabled type='text' value='{{aboutData.isfinishCer!=0?aboutData.userOffice:""}}'></input>
   </view>
   <view class='u_item'>
     <view class='u_li'>身份</view>
-    <input disabled type='text' value='{{aboutData.isV!=null?aboutData.userPost:""}}'></input>
+    <input disabled type='text' value='{{aboutData.isfinishCer!=0?aboutData.userPosition:""}}'></input>
   </view>
   <view class='u_item'>
     <view class='u_li'>职务</view>
-    <input disabled type='text' value='{{aboutData.isV!=null?aboutData.userOffice:""}}'></input>
+    <input disabled type='text' value='{{aboutData.isfinishCer!=0?aboutData.userOffice:""}}'></input>
   </view>
 </view>
 <view class='gap'></view>

@@ -12,7 +12,7 @@ Page({
   // 我要许愿
   onmakeVowTap: function () {
     var that = this;
-    if (that.data.aboutData.isV == null) {
+    if (that.data.aboutData.isfinishCer == 0) {
       wx.navigateTo({
         url: '../Authentication1/Authentication1',
       })

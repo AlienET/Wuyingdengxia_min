@@ -30,7 +30,7 @@ Page({
   // 确认兑换
   onShowModalTap: function () {
     var that = this;
-    if (app.userData.isV == null) {
+    if (app.userData.isfinishCer == 0) {
       wx.navigateTo({
         url: '../Authentication1/Authentication1',
         success: function (res) { },
@@ -62,11 +62,11 @@ Page({
                 },
                 method: 'POST',
                 success: function (res) {
-                  console.log(res.data.code)
+                  console.log(res)
                   console.log(res.data.data)
                   if (res.data.code == 0) {
                     wx.showToast({
-                      title: '兑换失败...',
+                      title: res.data.msg,
                       icon: 'none',
                       duration: 1500
                     })

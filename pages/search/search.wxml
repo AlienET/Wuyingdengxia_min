@@ -34,7 +34,7 @@
   </view>
   <view wx:if='{{!isShow}}' style='padding-left:20rpx;background:#fff;'>   
   <!-- text-hide -->
-    <view wx:if='{{shui==1}}' catchtap="onArticleDetailTap" style='border-bottom:1rpx solid #F3F3F3;padding:20rpx;padding-left:0rpx' wx:for='{{tabActiveKeyId}}' data-postid='{{item.id}}'>
+    <view wx:if='{{shui==1}}' catchtap="onArticleDetailTap" style='border-bottom:1rpx solid #F3F3F3;padding:20rpx;padding-left:0rpx' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}'>
       <view style='font-size:34rpx;color:#333;'>
         {{item.title}}
       </view>

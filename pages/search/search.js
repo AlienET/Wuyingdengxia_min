@@ -130,23 +130,35 @@ Page({
     })
   },
   onArticleDetailTap: function (e) {
-    var that =this;
+    var that = this;
     if (that.data.shui == '1') {
-      wx.navigateTo({
-        url: '../article_detail/article_detail?articleid=' + e.currentTarget.dataset.postid,
-      })
-    } else if (that.data.shui == '2') {
+      console.log(e.currentTarget.dataset.postid.type)//id
+      if (e.currentTarget.dataset.postid.type == 1) {
         wx.navigateTo({
-          url: '../ConferenceDetails/ConferenceDetails?meet_id=' + e.currentTarget.dataset.postid,
+          url: '../article_detail/article_detail?articleid=' + e.currentTarget.dataset.postid.id,
         })
+      } else if (e.currentTarget.dataset.postid.type == 2){
+        wx.navigateTo({
+          url: '../problemDetails/problemDetails?quesid=' + e.currentTarget.dataset.postid.id,
+        })
+      }else{
+        wx.navigateTo({
+          url: '../ConferenceDetails/ConferenceDetails?meet_id=' + e.currentTarget.dataset.postid.id,
+        })
+      }
+
+    } else if (that.data.shui == '2') {
+      wx.navigateTo({
+        url: '../ConferenceDetails/ConferenceDetails?meet_id=' + e.currentTarget.dataset.postid.id,
+      })
     } else if (that.data.shui == '3') {
       wx.navigateTo({
-        url: '../problemDetails/problemDetails?quesid=' + e.currentTarget.dataset.postid,
+        url: '../problemDetails/problemDetails?quesid=' + e.currentTarget.dataset.postid.id,
       })
     } else {
-        wx.navigateTo({
-          url: '../pastVideoList/pastVideoList?replay_id=' + e.currentTarget.dataset.postid,
-        })
+      wx.navigateTo({
+        url: '../pastVideoList/pastVideoList?replay_id=' + e.currentTarget.dataset.postid,
+      })
     }
   },
   // input
@@ -160,24 +172,24 @@ Page({
     }
     if (that.data.shui == '1') {
       wx.request({
-      url: app.InterfaceUrl + 'searchall?user_id=' + app.userData.user_id + '&key=' + event.detail.value,
-      success: function (res) {
-        console.log(res)
-        var tabActiveKeyId = [];
-        if (res.data.data.length > 10) {
-          for (var i = 9; i >= 0; i--) {
-            tabActiveKeyId.push(res.data.data[i])
+        url: app.InterfaceUrl + 'searchall?user_id=' + app.userData.user_id + '&key=' + event.detail.value,
+        success: function (res) {
+          console.log(res)
+          var tabActiveKeyId = [];
+          if (res.data.data.length > 10) {
+            for (var i = 9; i >= 0; i--) {
+              tabActiveKeyId.push(res.data.data[i])
+            }
+          } else {
+            tabActiveKeyId = res.data.data
           }
-        } else {
-          tabActiveKeyId = res.data.data
+          that.setData({ tabActiveKeyId: tabActiveKeyId })
+          console.log(that.data.tabActiveKeyId)
         }
-        that.setData({ tabActiveKeyId: tabActiveKeyId })
-        console.log(that.data.tabActiveKeyId)
-      }
-    })
+      })
     } else if (that.data.shui == '2') {
       wx.request({
-        url: app.InterfaceUrl + 'get_search_meeting?user_id=' + app.userData.user_id + '&key='+ event.detail.value,
+        url: app.InterfaceUrl + 'get_search_meeting?user_id=' + app.userData.user_id + '&key=' + event.detail.value,
         success: function (res) {
           console.log(res)
           var tabActiveKeyId = [];
@@ -213,7 +225,7 @@ Page({
       })
     } else {
       wx.request({
-        url: app.InterfaceUrl + 'get_allreplay_bytitle?replay_title=' + event.detail.value+'&user_id='+app.userData.user_id,
+        url: app.InterfaceUrl + 'get_allreplay_bytitle?replay_title=' + event.detail.value + '&user_id=' + app.userData.user_id,
         success: function (res) {
           console.log(res)
           var tabActiveKeyId = [];

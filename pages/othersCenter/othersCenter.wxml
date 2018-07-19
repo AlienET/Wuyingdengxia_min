@@ -13,7 +13,7 @@
     <view class='inline-block ml-md ver-middle'>
       <view>
         <text class='user ver-middle'>{{information.username}}</text>
-        <image class='zs' src='{{information.isV==null?"/images/icon/vn.png":"/images/icon/v.png"}}' mode='widthFix' style='width:38rpx;'></image>
+        <image class='zs' src='{{information.isfinishCer==0?"/images/icon/vn.png":"/images/icon/v.png"}}' mode='widthFix' style='width:38rpx;'></image>
       </view>
       <view class='ylb'>
         职务：{{information.userPost}}
