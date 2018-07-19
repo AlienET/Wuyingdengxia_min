@@ -16,7 +16,7 @@ Page({
   // },
   getUserInfo: function (e) {
     var that = this;
-    // console.log(e)
+    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     console.log(app.globalData.userInfo)
     wx.authorize({

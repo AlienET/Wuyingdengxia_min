@@ -35,7 +35,7 @@
         <!-- wx:if='{{tabActiveKeyId}}'  -->
         <view class='abs_item_author'>
           <image src='{{item.headimg}}'></image>
-          <text>{{item.article_author}}</text>
+          <text>{{item.user_name}}</text>
         </view>
         <view>
           <view class='abs_item_title'>

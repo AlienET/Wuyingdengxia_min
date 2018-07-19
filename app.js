@@ -23,7 +23,7 @@ App({
             var openid = res.data.openid;
             var session_key = res.data.session_key;
             var unionid = res.data.unionid;
-            console.log(unionid)
+            console.log(res.data.unionid)
             that.wechat_open_id = unionid;
             wx.request({
               url: that.InterfaceUrl + 'wechat_login',
@@ -61,7 +61,7 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
-              console.log(res.userInfo)
+              console.log(res)
               this.globalData.userInfo = res.userInfo
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
