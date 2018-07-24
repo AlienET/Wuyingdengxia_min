@@ -23,10 +23,10 @@ Page({
     tempFilePaths: '',
     // 昵称
     username: '李鲫鱼',
-    aboutData:[]
+    aboutData: []
   },
   // 医护认证 
-  AuthenticationTap:function(){
+  AuthenticationTap: function () {
     wx.navigateTo({
       url: '../Authentication1/Authentication1',
     })
@@ -74,7 +74,7 @@ Page({
           formData: {
             'data': res.tempFilePaths[0]
           },
-          success:function(res){
+          success: function (res) {
             console.log(res);
             var imgUrl = JSON.parse(res.data).data.complete_url
             console.log(imgUrl)
@@ -98,7 +98,7 @@ Page({
               }
             })
 
-            that.setData({'aboutData.headimg':imgUrl})
+            that.setData({ 'aboutData.headimg': imgUrl })
           }
         })
 
@@ -110,7 +110,17 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.setData({aboutData:app.userData})
+    if (app.userData.usersex == '男') {
+      that.setData({
+        aboutData: app.userData,
+        index: 0
+      })
+    } else {
+      that.setData({
+        aboutData: app.userData,
+        index: 1
+      })
+    }
     console.log(that.data.aboutData)
     // 当前日期
     var date = util.formatTime(new Date);

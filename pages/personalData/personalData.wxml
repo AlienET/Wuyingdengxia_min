@@ -16,7 +16,7 @@
   <view class='u_item'>
     <view class='u_li'>性别</view>
     <!-- <input type='text' placeholder='请输入您的性别' value='男'></input> -->
-    <picker style='width:300rpx;' bindchange="bindPickerChange" value="{{usersex}}">
+    <picker style='width:300rpx;' range="{{sex}}" bindchange="bindPickerChange" value="{{usersex}}">
       <view style='font-size:30rpx;'>
         {{sex[index]}}
       </view>

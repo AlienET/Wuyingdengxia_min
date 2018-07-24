@@ -24,16 +24,16 @@ App({
             var session_key = res.data.session_key;
             var unionid = res.data.unionid;
             console.log(res.data.unionid)
-            that.wechat_open_id = unionid;
+            that.mini_openid = openid;
             wx.request({
-              url: that.InterfaceUrl + 'wechat_login',
+              url: that.InterfaceUrl + 'mini_wechat_login',
               data: {
-                wechat_open_id: unionid
+                mini_openid: openid
               },
               method: 'GET',
               success: function (res) {
                 console.log(res)
-                if (that.authSetting && res.data.msg == '请完善信息') {
+                if (that.authSetting && res.data.msg == '请绑定手机号') {
                   console.log(res.data.msg)
                   wx.redirectTo({
                     url: '/pages/verifyPhone/verifyPhone',
@@ -133,7 +133,7 @@ App({
   // 已授权
   authSetting: false,
   // openid
-  wechat_open_id: null,
+  mini_openid: null,
   // 用户信息
   userData:null,
   // 标签存储

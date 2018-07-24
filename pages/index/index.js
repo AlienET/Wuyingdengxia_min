@@ -31,7 +31,7 @@ Page({
   // 搜索页
   onSearchTap: function () {
     wx.navigateTo({
-      url: '../search/search?userid=' + this.data.userid+'&shui=1'
+      url: '../search/search?userid=' + this.data.userid + '&shui=1'
     })
   },
 
@@ -78,7 +78,7 @@ Page({
     console.log(event.currentTarget.dataset.postid.banner_link)
     app.bannerUrl = event.currentTarget.dataset.postid.banner_link;
     wx.navigateTo({
-      url: '../bannerTo/bannerTo?userid='+app.userData.user_id,
+      url: '../bannerTo/bannerTo?userid=' + app.userData.user_id,
     })
   },
 
@@ -93,8 +93,8 @@ Page({
         login_token = login_token[1]
         console.log(login_token[1])
         wx.request({
-          url:  'https://yszg.org/index.php/test/index?user_id=' + app.userData.user_id + '&user_token=' + app.userData.user_token+'&login_token='+login_token,
-          success:function(res){
+          url: 'https://yszg.org/index.php/test/index?user_id=' + app.userData.user_id + '&user_token=' + app.userData.user_token + '&login_token=' + login_token,
+          success: function (res) {
             console.log(res.data.msg)
             wx.showToast({
               title: res.data.msg,
@@ -125,18 +125,37 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
-          for (var i = res.data.data.length - 1; i >= 0; i--) {
-            // console.log(res.data.data[i].article_img_path)//split(',');
-            if (res.data.data[i].article_img_path == '') {
-              res.data.data[i].article_img_path = res.data.data[i].article_img_path
-            } else {
-              res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
-            }
-          };
+          if (res.data.data.length < 100) {
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              // console.log(res.data.data[i].article_img_path)//split(',');
+              if (res.data.data[i].article_img_path == '') {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path
+              } else {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+              }
+            };
+            that.setData({
+              tabActiveKeyId: res.data.data,
+            });
+          }else{
+            var arr = [];
+            for (var i = 99; i >= 0; i--) {
+              // console.log(res.data.data[i].article_img_path)//split(',');
+              if (res.data.data[i].article_img_path == '') {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path;
+                arr.unshift(res.data.data[i])
+              } else {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+                arr.unshift(res.data.data[i])
+              }
+            };
+            that.setData({
+              tabActiveKeyId: arr,
+            });
+          }
           // console.log(res.data.data)
-          that.setData({
-            tabActiveKeyId: res.data.data,
-          });
+          
+          console.log(that.data.tabActiveKeyId)
         }
       });
       // console.log(this.data.labellist[e.target.dataset.current].key_name);
@@ -157,18 +176,34 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        for (var i = res.data.data.length - 1; i >= 0; i--) {
-          // console.log(res.data.data[i].article_img_path)//split(',');
-          if (res.data.data[i].article_img_path == '') {
-            res.data.data[i].article_img_path = res.data.data[i].article_img_path
-          } else {
-            res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
-          }
-        };
-        // console.log(e);
-        that.setData({
-          tabActiveKeyId: res.data.data,
-        });
+        if (res.data.data.length < 40) {
+          for (var i = res.data.data.length - 1; i >= 0; i--) {
+            // console.log(res.data.data[i].article_img_path)//split(',');
+            if (res.data.data[i].article_img_path == '') {
+              res.data.data[i].article_img_path = res.data.data[i].article_img_path
+            } else {
+              res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+            }
+          };
+          that.setData({
+            tabActiveKeyId: res.data.data,
+          });
+        } else {
+          var arr = [];
+          for (var i = 39; i >= 0; i--) {
+            // console.log(res.data.data[i].article_img_path)//split(',');
+            if (res.data.data[i].article_img_path == '') {
+              res.data.data[i].article_img_path = res.data.data[i].article_img_path;
+              arr.unshift(res.data.data[i])
+            } else {
+              res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+              arr.unshift(res.data.data[i])
+            }
+          };
+          that.setData({
+            tabActiveKeyId: arr,
+          });
+        }
       }
     });
   },
@@ -190,7 +225,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true,
         })
-        console.log(app.userData)  
+        console.log(app.userData)
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -241,20 +276,34 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success: function (res) {
-            for (var i = res.data.data.length - 1; i >= 0; i--) {
-              // console.log(res.data.data[i].article_img_path)//split(',');
-              if (res.data.data[i].article_img_path == '') {
-                res.data.data[i].article_img_path = res.data.data[i].article_img_path
-              } else {
-                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
-              }
-            };
-            // console.log(res.data.data)
-            that.setData({
-              tabActiveKeyId: res.data.data,
-            });
-            // console.log('文章列');
-            // console.log(that.data.tabActiveKeyId);
+            if (res.data.data.length < 100) {
+              for (var i = res.data.data.length - 1; i >= 0; i--) {
+                // console.log(res.data.data[i].article_img_path)//split(',');
+                if (res.data.data[i].article_img_path == '') {
+                  res.data.data[i].article_img_path = res.data.data[i].article_img_path
+                } else {
+                  res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+                }
+              };
+              that.setData({
+                tabActiveKeyId: res.data.data,
+              });
+            } else {
+              var arr = [];
+              for (var i = 99; i >= 0; i--) {
+                // console.log(res.data.data[i].article_img_path)//split(',');
+                if (res.data.data[i].article_img_path == '') {
+                  res.data.data[i].article_img_path = res.data.data[i].article_img_path;
+                  arr.unshift(res.data.data[i])
+                } else {
+                  res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+                  arr.unshift(res.data.data[i])
+                }
+              };
+              that.setData({
+                tabActiveKeyId: arr,
+              });
+            }
           }
         });
         // console.log('标签列');
@@ -294,7 +343,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
   /**
    * 生命周期函数--监听页面显示

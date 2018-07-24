@@ -55,14 +55,14 @@ Page({
       app.globalData.userInfo.gender = '男' :
       app.globalData.userInfo.gender = '女';
     wx.request({
-      url: app.InterfaceUrl + 'wechat_bind_userinfo',
+      url: app.InterfaceUrl + 'mini_wechat_bind_userinfo',
       data: {
         userphone: that.data.phoneNum,
         sms_code: that.data.yzmNum,
         nickname: app.globalData.userInfo.nickName,
         headimg: app.globalData.userInfo.avatarUrl,
         sex: app.globalData.userInfo.gender,
-        wechat_openid: app.wechat_open_id,
+        mini_openid: app.mini_openid,
         password: that.data.password
       },
       method: 'POST',
@@ -72,9 +72,9 @@ Page({
         if (res.data.code == '1') {
 
           wx.request({
-            url: app.InterfaceUrl + 'wechat_login',
+            url: app.InterfaceUrl + 'mini_wechat_login',
             data: {
-              wechat_open_id: app.wechat_open_id,
+              mini_openid: app.mini_openid,
             },
             method: 'GET',
             success: function (res) {
