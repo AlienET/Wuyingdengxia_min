@@ -17,8 +17,11 @@ Page({
     // 身份证号
     user_id: '',
     // 您的身份
-    index: 0,
-    identity: ['普通', '行业专家', '主委', '委员', '核心组']
+    index: 6,
+    identity: ['主任委员', '副主任委员', '常务副主任委员', '秘书', '青年委员','行业专家','普通'],
+    // 专委会
+    indexs: 0,
+    zhuan: ['手术装备与材料专业委员会', '内镜装备与材料专业委员会', '护理设备专业委员会', '耗材管理专业委员会', '血液净化装备与材料专业委员会', '区域器材灭菌管理专业委员会', '安全防护专业委员会', '康复与老年护理专业委员会', '介入装备与材料专业委员会','重症医学装备与材料专业委员会']
   },
   // 真实姓名
   blurUserName: function (e) {
@@ -32,6 +35,11 @@ Page({
   bindPickerChange: function (e) {
     // event.detail = {value: value}
     this.setData({ index: e.detail.value })
+  },
+  // 专委会
+  bindzhuanChange: function (e) {
+    // event.detail = {value: value}
+    this.setData({ indexs: e.detail.value })
   },
   // 下一步
   OnNextStepTap: function () {
@@ -47,7 +55,8 @@ Page({
               userid: app.userData.user_id,
               realName: that.data.user_name,//真实姓名,
               useridcard: that.data.user_id,//身份证号
-              userposition: that.data.identity[that.data.index]//您的身份
+              user_identity: that.data.index,//您的身份
+              special_committee: that.data.indexs//委员
             },
             header: {
               'content-type': 'application/x-www-form-urlencoded'

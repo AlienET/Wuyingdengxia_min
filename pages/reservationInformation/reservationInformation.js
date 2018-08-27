@@ -29,7 +29,14 @@ Page({
     rzdate: '',
     // 离开
     lkdate: '',
-    ji: '3'
+    ji: '3',
+    // 
+    info:[],
+    // 房型
+    index:0,
+    fangxin: ['大床房','标准间','标准间拼住'],
+    // 是否帮忙
+    isSwitch:false
   },
   // 车次查询
   cccx: function (e) {
@@ -58,6 +65,11 @@ Page({
       })
     }
   },
+  // 房型选择
+  bindPickerChange:function(e){
+    var that = this;
+    that.setData({ index: e.detail.value})
+  },
   // 报名提交页面 跳转
   onBmtjTap: function (e) {
     var that = this;
@@ -85,7 +97,9 @@ Page({
           special2: '',
           begin_time: that.data.rzdate,
           end_time: that.data.lkdate,
-          remark: that.data.inputTxtR
+          remark: that.data.inputTxtR,
+          together_people: that.data.inputTxtR,
+          room_type:that.data.index
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -170,6 +184,12 @@ Page({
   onjiTap: function () {
     console.log('1')
   },
+  // 是否订票 切换
+  switchChange:function(e){
+    var that =this;
+    console.log(e.detail.value)
+    that.setData({ isSwitch: e.detail.value})
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -181,6 +201,32 @@ Page({
       rzdate: date,
       lkdate: date,
       meet_id: options.meet_id
+    })
+    wx.request({
+      url: app.InterfaceUrl + 'get_myinfo?userid=' + app.userData.user_id + '&current_userid=' + app.userData.user_id ,
+      data: {},
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success:function(res){
+        console.log(res.data.data)
+        if (res.data.data.user_identity == 0){
+          res.data.data.user_identity = '主任委员'
+        } else if (res.data.data.user_identity == 1){
+          res.data.data.user_identity = '副主任委员'
+        } else if (res.data.data.user_identity == 2) {
+          res.data.data.user_identity = '常务副主任委员'
+        } else if (res.data.data.user_identity == 3) {
+          res.data.data.user_identity = '秘书'
+        } else if (res.data.data.user_identity == 4) {
+          res.data.data.user_identity = '青年委员'
+        } else if (res.data.data.user_identity == 5) {
+          res.data.data.user_identity = '行业专家'
+        }else{
+          res.data.data.user_identity = '普通'
+        }
+        that.setData({info:res.data.data})
+      },
     })
     that.setData({
       begin_time: options.begin_time,

@@ -49,7 +49,7 @@ Page({
                       method: 'GET',
                       success: function (res) {
                         console.log(res);
-                        if (res.data.msg == '请绑定手机号') {
+                        if (res.data.msg == '请完善信息') {
                           wx.redirectTo({
                             url: '../verifyPhone/verifyPhone',
                           })

@@ -56,7 +56,7 @@
   </view>
   <view class='u_item'>
     <view class='u_li'>职务</view>
-    <input disabled type='text' value='{{aboutData.isfinishCer!=0?aboutData.userOffice:""}}'></input>
+    <input disabled type='text' value='{{aboutData.isfinishCer!=0?aboutData.userPost:""}}'></input>
   </view>
 </view>
 <view class='gap'></view>

@@ -111,6 +111,21 @@ Page({
   onLoad: function (options) {
     var that = this;
     if (app.userData.usersex == '男') {
+      if (app.userData.userPosition == 0){
+        app.userData.userPosition = '主任委员'
+      } else if (app.userData.userPosition == 1){
+        app.userData.userPosition = '副主任委员'
+      } else if (app.userData.userPosition == 2) {
+        app.userData.userPosition = '常务副主任委员'
+      } else if (app.userData.userPosition == 3) {
+        app.userData.userPosition = '秘书'
+      } else if (app.userData.userPosition == 4) {
+        app.userData.userPosition = '青年委员'
+      } else if (app.userData.userPosition == 5) {
+        app.userData.userPosition = '行业专家'
+      }else{
+        app.userData.userPosition = '普通'
+      }
       that.setData({
         aboutData: app.userData,
         index: 0

@@ -42,6 +42,11 @@
     </view>
   </view>
 </view>
-<view class='txt-center' style='padding:50rpx;'>
-  <text catchtap='onEnrollTap' class='bm' style='{{aboutData.isfinish=="1"?"":"background:#eee;color:#999"}}'>报 名</text>
+<view class='flex-b'>
+   <!-- <text catchtap='onEnrollTap' class='bm' style='{{aboutData.isfinish=="1"?"":"background:#eee;color:#999"}}'>报 名</text>  -->
+  <view class='lxhw' catchtap='onCallTap'>
+    <image src='/images/icon/huiwu.png' style='vertical-align:middle;width:40rpx;margin-right:10rpx;' mode='widthFix'></image>
+    <text style='vertical-align:middle;font-size:32rpx;'>联系会务</text>
+  </view>
+  <view class='baom' catchtap='onEnrollTap' style='{{aboutData.is_attend=="0"?"":"background:#eee;color:#999"}}'>{{aboutData.is_attend=='0'?'报 名':'已报名'}}</view>
 </view>

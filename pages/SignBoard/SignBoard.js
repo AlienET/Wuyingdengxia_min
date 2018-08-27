@@ -44,7 +44,10 @@ Page({
           wx.showToast({
             title: '签到成功',
             icon: 'success',
-            duration: 1500
+            duration: 1500,
+            success:function(res){
+              that.setData({isSign:1})
+            }
           })
         }
       })

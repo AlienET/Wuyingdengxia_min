@@ -16,6 +16,14 @@
     <input bindblur='blurIDnumber' type='idcard' value='{{user_id}}'></input>
   </view>
   <view class='u_item'>
+    <view class='u_li'>专委会</view>
+    <picker style='min-width:300rpx;' bindchange="bindzhuanChange" value="{{indexs}}" range="{{zhuan}}">
+      <view style='font-size:30rpx;'>
+        {{zhuan[indexs]}}
+      </view>
+    </picker>
+  </view>
+  <view class='u_item'>
     <view class='u_li'>您的身份</view>
     <picker style='width:300rpx;' bindchange="bindPickerChange" value="{{index}}" range="{{identity}}">
       <view style='font-size:30rpx;'>

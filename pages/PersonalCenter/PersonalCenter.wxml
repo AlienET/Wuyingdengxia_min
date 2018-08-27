@@ -27,7 +27,7 @@
         <text>|</text>
         <view>
           获赞
-          <text>{{aboutData.follownum}}</text>
+          <text>{{aboutData.supportnum}}</text>
         </view>
       </view>
     </view>

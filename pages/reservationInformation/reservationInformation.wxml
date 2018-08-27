@@ -7,7 +7,7 @@
     </view>
     <view class='tr'>
       <view class='td td_t'>参会时间</view>
-      <view class='td td_i'>{{begin_time}} 至 {{end_time}}</view>
+      <view class='td td_i'>{{begin_time}}</view>
     </view>
   </view>
 </view>
@@ -32,21 +32,25 @@
     </view>
     <view class='tr'>
       <view class='td td_t'>单位</view>
-      <view class='td td_i'>{{aboutData.userPost}}</view>
+      <view class='td td_i'>{{aboutData.userHospital}}</view>
     </view>
     <view class='tr'>
       <view class='td td_t'>部门</view>
       <view class='td td_i'>{{aboutData.userOffice}}</view>
     </view>
     <view class='tr'>
-      <view class='td td_t'>职务</view>
-      <view class='td td_i'>{{aboutData.userPost}}</view>
+      <view class='td td_t'>专委会</view>
+      <view class='td td_i'>{{info.special_committee}}</view>
+    </view>
+    <view class='tr'>
+      <view class='td td_t'>身份</view>
+      <view class='td td_i'>{{info.user_identity}}</view>
     </view>
   </view>
 </view>
 <view class='gap'></view>
 <view class='section'>
-  <view class='table'>
+  <view wx:if="{{info.user_identity != '普通'&& info.user_identity != '行业专家'}}" class='table'>
     <view class='tr'>
       <image class='ver-middle' src='/images/icon/jiaotong.png'></image>
       <text class='ver-middle'>乘车信息选择</text>
@@ -91,35 +95,48 @@
     </view> -->
   </view>
   <view class='table mt-sm'>
-    <view class='tr'>
+    <view class='tr' style='margin-top:10rpx;'>
       <image class='ver-middle' src='/images/icon/zhusu.png'></image>
-      <text class='ver-middle'>住宿信息</text>
+      <text class='ver-middle'>是否需要帮忙订票</text>
+      <switch bindchange="switchChange" style='float:right;margin-top:-9rpx;'></switch>
     </view>
-    <view class='tr tr_bor'>
-      <view class='th'>
-        <text class='ic'>入住</text>
-        <picker mode="date" value="{{rzdate}}" start="{{date}}" bindchange="bindruzhuChange">
-          <view class="picker">
-            {{rzdate}}
-          </view>
-        </picker>
+    <view wx:if='{{isSwitch}}'>
+      <view class='tr tr_bor'>
+        <view class='th'>
+          <text class='ic'>入住</text>
+          <picker mode="date" value="{{rzdate}}" start="{{date}}" bindchange="bindruzhuChange">
+            <view class="picker">
+              {{rzdate}}
+            </view>
+          </picker>
+        </view>
+        <view class='th'>
+          <text class='th_day' catchtap='onjiTap'>共{{ji}}晚</text>
+        </view>
+        <view class='th'>
+          <text class='ic'>离开</text>
+          <picker mode="date" value="{{lkdate}}" start="{{date}}" bindchange="bindlikaiChange">
+            <view class="picker">
+              {{lkdate}}
+            </view>
+          </picker>
+        </view>
       </view>
-      <view class='th'>
-        <text class='th_day' catchtap='onjiTap'>共{{ji}}晚</text>
+      <view class='tr tr_bor'>
+        <view class='td td_t'>选择房型</view>
+        <view class='td td_i'>
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{fangxin}}">
+            <view class="picker">
+              {{fangxin[index]}}
+            </view>
+          </picker>
+        </view>
       </view>
-      <view class='th'>
-        <text class='ic'>离开</text>
-        <picker mode="date" value="{{lkdate}}" start="{{date}}" bindchange="bindlikaiChange">
-          <view class="picker">
-            {{lkdate}}
-          </view>
-        </picker>
-      </view>
-    </view>
-    <view class='tr tr_bor'>
-      <view class='td td_t'>备注</view>
-      <view class='td td_i'>
-        <input value='{{inputTxtR}}' placeholder='如有需要请备注' bindfocus='bzxxR'></input>
+      <view class='tr tr_bor'>
+        <view class='td td_t'>拼住人</view>
+        <view class='td td_i'>
+          <input value='{{inputTxtR}}' placeholder='' bindfocus='bzxxR'></input>
+        </view>
       </view>
     </view>
   </view>

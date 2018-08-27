@@ -125,7 +125,7 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
-          if (res.data.data.length < 100) {
+          if (res.data.data.length < 30) {
             for (var i = res.data.data.length - 1; i >= 0; i--) {
               // console.log(res.data.data[i].article_img_path)//split(',');
               if (res.data.data[i].article_img_path == '') {
@@ -137,9 +137,9 @@ Page({
             that.setData({
               tabActiveKeyId: res.data.data,
             });
-          }else{
+          } else {
             var arr = [];
-            for (var i = 99; i >= 0; i--) {
+            for (var i = 30; i >= 0; i--) {
               // console.log(res.data.data[i].article_img_path)//split(',');
               if (res.data.data[i].article_img_path == '') {
                 res.data.data[i].article_img_path = res.data.data[i].article_img_path;
@@ -154,7 +154,7 @@ Page({
             });
           }
           // console.log(res.data.data)
-          
+
           console.log(that.data.tabActiveKeyId)
         }
       });
@@ -176,7 +176,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        if (res.data.data.length < 40) {
+        if (res.data.data.length < 30) {
           for (var i = res.data.data.length - 1; i >= 0; i--) {
             // console.log(res.data.data[i].article_img_path)//split(',');
             if (res.data.data[i].article_img_path == '') {
@@ -190,7 +190,7 @@ Page({
           });
         } else {
           var arr = [];
-          for (var i = 39; i >= 0; i--) {
+          for (var i = 30; i >= 0; i--) {
             // console.log(res.data.data[i].article_img_path)//split(',');
             if (res.data.data[i].article_img_path == '') {
               res.data.data[i].article_img_path = res.data.data[i].article_img_path;
@@ -276,7 +276,7 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success: function (res) {
-            if (res.data.data.length < 100) {
+            if (res.data.data.length < 30) {
               for (var i = res.data.data.length - 1; i >= 0; i--) {
                 // console.log(res.data.data[i].article_img_path)//split(',');
                 if (res.data.data[i].article_img_path == '') {
@@ -290,7 +290,7 @@ Page({
               });
             } else {
               var arr = [];
-              for (var i = 99; i >= 0; i--) {
+              for (var i = 30; i >= 0; i--) {
                 // console.log(res.data.data[i].article_img_path)//split(',');
                 if (res.data.data[i].article_img_path == '') {
                   res.data.data[i].article_img_path = res.data.data[i].article_img_path;
@@ -372,17 +372,34 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success: function (res) {
-            for (var i = res.data.data.length - 1; i >= 0; i--) {
-              // console.log(res.data.data[i].article_img_path)//split(',');
-              if (res.data.data[i].article_img_path == '') {
-                res.data.data[i].article_img_path = res.data.data[i].article_img_path
-              } else {
-                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
-              }
-            };
-            that.setData({
-              tabActiveKeyId: res.data.data,
-            });
+            if (res.data.data.length < 30) {
+              for (var i = res.data.data.length - 1; i >= 0; i--) {
+                // console.log(res.data.data[i].article_img_path)//split(',');
+                if (res.data.data[i].article_img_path == '') {
+                  res.data.data[i].article_img_path = res.data.data[i].article_img_path
+                } else {
+                  res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+                }
+              };
+              that.setData({
+                tabActiveKeyId: res.data.data,
+              });
+            } else {
+              var arr = [];
+              for (var i = 30; i >= 0; i--) {
+                // console.log(res.data.data[i].article_img_path)//split(',');
+                if (res.data.data[i].article_img_path == '') {
+                  res.data.data[i].article_img_path = res.data.data[i].article_img_path;
+                  arr.unshift(res.data.data[i])
+                } else {
+                  res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+                  arr.unshift(res.data.data[i])
+                }
+              };
+              that.setData({
+                tabActiveKeyId: arr,
+              });
+            }
           }
         });
       }

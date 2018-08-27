@@ -28,9 +28,9 @@ Page({
     that.setData({w:options.w})
     var dz = ''
     if(options.w == '0'||options.w=='1'){
-      dz = 'http://apis.juhe.cn/train/station.list.php?key=ba31b08d5a33f101ba2193f2daaf3492'
+      dz = 'https://apis.juhe.cn/train/station.list.php?key=ba31b08d5a33f101ba2193f2daaf3492'
     } else if (options.w == '2' || options.w == '3'){
-      dz = 'http://apis.juhe.cn/train/s2swithprice?start=' + options.start + '&end=' + options.end + '&date=' + options.date +'&key=ba31b08d5a33f101ba2193f2daaf3492'
+      dz = 'https://apis.juhe.cn/train/s2swithprice?start=' + options.start + '&end=' + options.end + '&date=' + options.date +'&key=ba31b08d5a33f101ba2193f2daaf3492'
     }
     wx.request({
       url: dz,
