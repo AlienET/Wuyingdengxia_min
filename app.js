@@ -149,5 +149,24 @@ App({
   // 快速问答 得 currentTab 
   QQcurrentTab:0,
   // Index 的 currentTab
-  ADcurrentTab:0
+  ADcurrentTab:0,
+  // 认证信息
+  rzxx:{
+    // 真实姓名
+    realName:'',
+    // 联系电话
+    useridcard:'',
+    // 身份证号
+    useridcard:'',
+    // 专委会
+    user_identity:'',
+    // 您的身份
+    special_committee:'',
+    // 医院
+    userhospital:'',
+    // 科室
+    useroffice:'',
+    // 职务
+    userpost:''
+  }
 })

@@ -50,6 +50,31 @@ Page({
     } else {
       wx.showLoading({
         title: '提交中',
+        success:function(e){
+          wx.request({
+            url: app.InterfaceUrl + 'post_change_myinfo',
+            data:{
+              userid:app.userData.user_id,
+              realName: app.rzxx.realName,
+              useridcard: app.rzxx.useridcard,
+              user_identity: app.rzxx.user_identity,
+              special_committee: app.rzxx.special_committee,
+              userhospital: app.rzxx.userhospital,
+              useroffice: app.rzxx.useroffice,
+              userpost: app.rzxx.userpost
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res);
+            },
+            fail: function (error) {
+              console.log(error)
+            }
+          })
+        }
       })
       var imgUrl = [];
       for (var i = that.data.tempFilePaths.length - 1; i >= 0; i--) {

@@ -34,26 +34,9 @@ Page({
       wx.navigateTo({
         url: '../Authentication3/Authentication3',
         success: function () {
-          wx.request({
-            url: app.InterfaceUrl + 'post_change_myinfo',
-            data: {
-              userid: app.userData.user_id,
-              userhospital: that.data.user_hospital,//医院,
-              useroffice: that.data.user_office,//科室
-              userpost: that.data.user_post//职务
-            },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded'
-            },
-            method: 'POST',
-            success: function (res) {
-              console.log(res);
-
-            },
-            fail: function (error) {
-              console.log(error)
-            }
-          })
+          app.rzxx.userhospital = that.data.user_hospital,//医院,
+          app.rzxx.useroffice = that.data.user_office,//科室
+          app.rzxx.userpost = that.data.user_post//职务
         }
       })
     } else {
@@ -65,7 +48,7 @@ Page({
     }
   },
   // 上一步
-  OnlastStepTap:function(){
+  OnlastStepTap: function () {
     wx.navigateBack({
       delta: 1
     })
