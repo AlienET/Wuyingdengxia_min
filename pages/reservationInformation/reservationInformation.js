@@ -23,20 +23,24 @@ Page({
     trainAll: '',
     // 车次备注
     inputTxt: '',
-    // 住房备注
+    // 专委会
     inputTxtR: '',
+    // 入住备注
+    inputRemark:'',
     // 入住
     rzdate: '',
     // 离开
     lkdate: '',
     ji: '3',
     // 
-    info:[],
+    info: [],
     // 房型
-    index:0,
-    fangxin: ['大床房','标准间','标准间拼住'],
+    index: 0,
+    fangxin: ['大床房', '标准间单住', '标准间拼住'],
     // 是否帮忙
-    isSwitch:false
+    isSwitch: false,
+    // 专委判断
+    remark: true
   },
   // 车次查询
   cccx: function (e) {
@@ -66,9 +70,9 @@ Page({
     }
   },
   // 房型选择
-  bindPickerChange:function(e){
+  bindPickerChange: function (e) {
     var that = this;
-    that.setData({ index: e.detail.value})
+    that.setData({ index: e.detail.value })
   },
   // 报名提交页面 跳转
   onBmtjTap: function (e) {
@@ -97,9 +101,9 @@ Page({
           special2: '',
           begin_time: that.data.rzdate,
           end_time: that.data.lkdate,
-          remark: that.data.inputTxtR,
+          remark: that.data.inputRemark,
           together_people: that.data.inputTxtR,
-          room_type:that.data.index
+          room_type: that.data.index
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -107,11 +111,11 @@ Page({
         method: 'POST',
         success: function (res) {
           console.log(res);
-          if(res.data.code ==1){
-          wx.navigateTo({
-            url: '../applySubmit/applySubmit',
-          })
-          }else{
+          if (res.data.code == 1) {
+            wx.navigateTo({
+              url: '../applySubmit/applySubmit',
+            })
+          } else {
             wx.showToast({
               title: '提交失败...',
               icon: 'none',
@@ -175,20 +179,25 @@ Page({
     console.log(event.detail.value)
     that.setData({ inputTxt: event.detail.value })
   },
+  // 住房备注
+  zfbz:function(e){
+    var that = this;
+    that.setData({ inputRemark:e.detail.value})
+  },
   bzxxR: function (event) {
     var that = this;
     console.log(event.detail.value)
-    that.setData({ inputTxtR: event.detail.value })
+    that.setData({inputTxtR : event.detail.value })
   },
   //几晚
   onjiTap: function () {
     console.log('1')
   },
   // 是否订票 切换
-  switchChange:function(e){
-    var that =this;
+  switchChange: function (e) {
+    var that = this;
     console.log(e.detail.value)
-    that.setData({ isSwitch: e.detail.value})
+    that.setData({ isSwitch: e.detail.value })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -203,16 +212,22 @@ Page({
       meet_id: options.meet_id
     })
     wx.request({
-      url: app.InterfaceUrl + 'get_myinfo?userid=' + app.userData.user_id + '&current_userid=' + app.userData.user_id ,
+      url: app.InterfaceUrl + 'get_myinfo?userid=' + app.userData.user_id + '&current_userid=' + app.userData.user_id,
       data: {},
       header: {
         'content-type': 'application/json' // 默认值
       },
-      success:function(res){
+      success: function (res) {
         console.log(res.data.data)
-        if (res.data.data.user_identity == 0){
+        if (res.data.data.user_identity < 5) {
+          that.setData({
+            isSwitch:true,
+            remark:false
+          })
+        }
+        if (res.data.data.user_identity == 0) {
           res.data.data.user_identity = '主任委员'
-        } else if (res.data.data.user_identity == 1){
+        } else if (res.data.data.user_identity == 1) {
           res.data.data.user_identity = '副主任委员'
         } else if (res.data.data.user_identity == 2) {
           res.data.data.user_identity = '常务副主任委员'
@@ -222,10 +237,10 @@ Page({
           res.data.data.user_identity = '青年委员'
         } else if (res.data.data.user_identity == 5) {
           res.data.data.user_identity = '行业专家'
-        }else{
+        } else {
           res.data.data.user_identity = '普通'
         }
-        that.setData({info:res.data.data})
+        that.setData({ info: res.data.data })
       },
     })
     that.setData({
