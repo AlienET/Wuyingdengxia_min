@@ -461,7 +461,7 @@ body, view, text {
 }
 
 .abs_item_title {
-  font-size: 34rpx;
+  font-size: 30rpx;
   font-weight: 600;
   margin-bottom: 8rpx;
 }
@@ -484,7 +484,7 @@ body, view, text {
 .summarys .txt-r view {
   font-size: 22rpx;
   vertical-align: middle;
-  margin-left: 30rpx;
+  margin-right: 30rpx;
   display: inline-block;
 }
 

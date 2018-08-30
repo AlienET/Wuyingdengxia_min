@@ -60,6 +60,7 @@
 .lxhw{
   border-top:1rpx solid #eee;
   line-height: 45rpx;
+  background: #fff;
 }
 .baom{
   background:#2da3ff;

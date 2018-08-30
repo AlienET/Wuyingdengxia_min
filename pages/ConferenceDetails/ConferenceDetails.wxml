@@ -27,7 +27,7 @@
   </view>
 </view>
 <view class='gap'></view>
-<view class='pad20'>
+<view class='pad20' style='margin-bottom:90rpx;'>
   <view class='meets'>会议日程</view>
   <view class='meet_txt pt-n' wx:if='{{schedule != ""}}'>
     <view class='table'>

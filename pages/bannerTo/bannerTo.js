@@ -16,7 +16,13 @@ Page({
   onLoad: function (options) {
     var that = this;
     console.log(options.url)
-    var url = 'https://' + app.bannerUrl+'&user_id='+options.userid;
+    var url = '';
+    var yszg = app.bannerUrl.substr(0,4);
+    if(yszg == 'yszg'){
+      url = 'https://' + app.bannerUrl + '&user_id=' + options.userid;
+    }else{
+      url = 'https://' + app.bannerUrl;
+    }
     console.log(url)
     that.setData({
       url: url,

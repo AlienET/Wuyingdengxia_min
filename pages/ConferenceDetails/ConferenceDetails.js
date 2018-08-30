@@ -60,7 +60,7 @@ Page({
     console.log(options.meet_id)
     // 获取会议详情
     wx.request({
-      url: app.InterfaceUrl + 'get_meeting_byid?meet_id=' + options.meet_id + '& user_id=' + app.userData.user_id,
+      url: app.InterfaceUrl + 'get_meeting_byid?meet_id=' + options.meet_id + '&user_id=' + app.userData.user_id,
       data: {},
       success: function (res) {
         console.log(res)
