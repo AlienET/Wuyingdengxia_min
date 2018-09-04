@@ -14,7 +14,9 @@ Page({
     // 日程 展开收起
     isSchedule: false,
     // 介绍 展开/收起
-    isIntroduce: false
+    isIntroduce: false,
+    // 会议是否 正在报名
+    isfinish: ''
   },
   // 介绍 展开/收起
   isIntroduce: function () {
@@ -38,16 +40,16 @@ Page({
   onEnrollTap: function () {
     var that = this;
     if (that.data.aboutData.is_attend == '0') {
-      if (app.userData.isfinishCer == '1') {
-        if (that.data.aboutData.isfinish == "1") {
+      if (that.data.isfinish == '1') {
+        if (app.userData.isfinishCer == "1") {
           wx.navigateTo({
             url: '../reservationInformation/reservationInformation?meet_title=' + that.data.aboutData.meet_title + '&begin_time=' + that.data.aboutData.begin_time + '&end_time=' + that.data.aboutData.end_time + '&meet_id=' + that.data.aboutData.meet_id
           })
+        } else {
+          wx.navigateTo({
+            url: '../Authentication1/Authentication1',
+          })
         }
-      } else {
-        wx.navigateTo({
-          url: '../Authentication1/Authentication1',
-        })
       }
     }
   },
@@ -57,18 +59,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(options.meet_id)
     // 获取会议详情
     wx.request({
       url: app.InterfaceUrl + 'get_meeting_byid?meet_id=' + options.meet_id + '&user_id=' + app.userData.user_id,
       data: {},
       success: function (res) {
-        console.log(res)
         var meet_class = res.data.data.meet_date.length == 0 ? '' : res.data.data.meet_date[0].meet_class;
-        console.log()
         that.setData({
           aboutData: res.data.data,
-          schedule: meet_class
+          schedule: meet_class,
+          isfinish: options.isfinish
         });
         console.log(res.data.data);
       }

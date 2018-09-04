@@ -76,10 +76,16 @@ Page({
   // 点击banner
   onBannerImgTap: function (event) {
     console.log(event.currentTarget.dataset.postid.banner_link)
-    app.bannerUrl = event.currentTarget.dataset.postid.banner_link;
-    wx.navigateTo({
-      url: '../bannerTo/bannerTo?userid=' + app.userData.user_id,
-    })
+    if (event.currentTarget.dataset.postid.banner_link == 'yszg.org/Wuyingdengxia/meetingDetails.html?meet_id=142&isBao=0') {
+      wx.switchTab({
+        url: '../meeting_mess/meeting_mess',
+      })
+    } else {
+      app.bannerUrl = event.currentTarget.dataset.postid.banner_link;
+      wx.navigateTo({
+        url: '../bannerTo/bannerTo?userid=' + app.userData.user_id,
+      })
+    }
   },
 
   // 扫一扫

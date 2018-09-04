@@ -48,7 +48,7 @@ Page({
   onConferenceDetailsTap: function (e) {
     var that = this;
     wx.navigateTo({
-      url: '../ConferenceDetails/ConferenceDetails?meet_id='+e.currentTarget.dataset.postid,
+      url: '../ConferenceDetails/ConferenceDetails?meet_id='+e.currentTarget.dataset.item.meet_id+'&isfinish='+e.currentTarget.dataset.item.isfinish,
     })
 
   },
@@ -85,7 +85,11 @@ Page({
       header: { 'content-type': 'application/json'},
       success:function(res){
         console.log(res.data.data);
-        that.setData({ meetingList:res.data.data})
+        var meets = []
+        for (var i = res.data.data.length - 1; i >= 0; i--){
+          meets.push(res.data.data[i])
+        }
+        that.setData({ meetingList: meets})
       }
     });
     // 往期回顾列
