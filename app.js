@@ -38,7 +38,7 @@ App({
                   wx.redirectTo({
                     url: '/pages/verifyPhone/verifyPhone',
                   })
-                }else{
+                } else {
                   that.userData = res.data.data
                   console.log(that.userData)
                 }
@@ -78,6 +78,23 @@ App({
           })
         }
       }
+    })
+    // 更新
+    const updateManager = wx.getUpdateManager()
+
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      console.log(res.hasUpdate)
+    })
+
+    updateManager.onUpdateReady(function () {
+      // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+      updateManager.applyUpdate()
+
+    })
+    updateManager.onUpdateFailed(function () {
+      // 新的版本下载失败
+      console.log('失败')
     })
   },
   globalData: {
@@ -135,38 +152,38 @@ App({
   // openid
   mini_openid: null,
   // 用户信息
-  userData:null,
+  userData: null,
   // 标签存储
-  labels:'',
+  labels: '',
   // 火车票站点
-  staName:'终点',
+  staName: '终点',
   // 始发
-  originating:'始发',
+  originating: '始发',
   // 谁
-  j:null,
+  j: null,
   //banner URl
-  bannerUrl:'',
+  bannerUrl: '',
   // 快速问答 得 currentTab 
-  QQcurrentTab:0,
+  QQcurrentTab: 0,
   // Index 的 currentTab
-  ADcurrentTab:0,
+  ADcurrentTab: 0,
   // 认证信息
-  rzxx:{
+  rzxx: {
     // 真实姓名
-    realName:'',
+    realName: '',
     // 联系电话
-    useridcard:'',
+    useridcard: '',
     // 身份证号
-    useridcard:'',
+    useridcard: '',
     // 专委会
-    user_identity:'',
+    user_identity: '',
     // 您的身份
-    special_committee:'',
+    special_committee: '',
     // 医院
-    userhospital:'',
+    userhospital: '',
     // 科室
-    useroffice:'',
+    useroffice: '',
     // 职务
-    userpost:''
+    userpost: ''
   }
 })

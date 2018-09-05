@@ -15,6 +15,8 @@ Page({
     isSchedule: false,
     // 介绍 展开/收起
     isIntroduce: false,
+    //  专家 展开/收起
+    iszjjs:false,
     // 会议是否 正在报名
     isfinish: ''
   },
@@ -35,6 +37,12 @@ Page({
     var that = this;
     var is_schedule = !that.data.isSchedule;
     that.setData({ isSchedule: is_schedule })
+  },
+  // 专家 展开/收起
+  iszjjs: function () {
+    var that = this;
+    var is_iszjjs = !that.data.iszjjs;
+    that.setData({ iszjjs: is_iszjjs })
   },
   // 报名 预定信息填写
   onEnrollTap: function () {
@@ -68,7 +76,7 @@ Page({
         that.setData({
           aboutData: res.data.data,
           schedule: meet_class,
-          isfinish: options.isfinish
+          isfinish: res.data.data.isfinish
         });
         console.log(res.data.data);
       }

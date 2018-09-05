@@ -48,7 +48,7 @@ Page({
   onConferenceDetailsTap: function (e) {
     var that = this;
     wx.navigateTo({
-      url: '../ConferenceDetails/ConferenceDetails?meet_id='+e.currentTarget.dataset.item.meet_id+'&isfinish='+e.currentTarget.dataset.item.isfinish,
+      url: '../ConferenceDetails/ConferenceDetails?meet_id='+e.currentTarget.dataset.item.meet_id,
     })
 
   },

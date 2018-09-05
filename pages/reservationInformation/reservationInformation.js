@@ -31,6 +31,8 @@ Page({
     rzdate: '',
     // 离开
     lkdate: '',
+    // 初始时间
+    startDate:'',
     ji: '3',
     // 
     info: [],
@@ -204,11 +206,13 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var date = util.formatTime(new Date);
+    var startDate = util.formatTime(new Date);
+    console.log(startDate)
     that.setData({
-      date: date,
-      rzdate: date,
-      lkdate: date,
+      startDate: startDate,
+      date: startDate,
+      rzdate: startDate,
+      lkdate: startDate,
       meet_id: options.meet_id
     })
     wx.request({

@@ -27,9 +27,12 @@
   </view>
 </view>
 <view class='gap'></view>
-<view class='pad20' style='margin-bottom:90rpx;'>
+<view class='pad20'>
   <view class='meets'>会议日程</view>
-  <view class='meet_txt pt-n' wx:if='{{schedule != ""}}'>
+  <view wx:if='{{schedule == ""}}' style="text-align: center;color: #999;margin-top: 15px;font-size: 16px;">
+    暂无日程安排....
+  </view>
+  <view wx:else class='meet_txt pt-n'>
     <view class='table'>
       <view class='tr mt-md' wx:for='{{schedule}}' wx:if='{{isSchedule?true:index<2}}'>
         <view class='td_t'>{{item.meet_class_begin}} — {{item.meet_class_end}}</view>
@@ -42,11 +45,42 @@
     </view>
   </view>
 </view>
+<view class='gap'></view>
+<view class='pad20' style='margin-bottom:90rpx;'>
+  <view class='meets'>专家介绍</view>
+  <view wx:if='{{aboutData.meet_talk == null}}' style="text-align: center;color: #999;margin-top: 15px;font-size: 16px;">
+    暂无嘉宾安排....
+  </view>
+  <view wx:else class='meet_txt pt-n'>
+    <view class='table'>
+      <view class='tr mt-md' wx:for='{{aboutData.meet_talk}}' wx:if='{{iszjjs?true:index<2}}' style="display: flex;flex-direction:row;margin-bottom: 10rpx;">
+        <view>
+          <view style="display: inline-block;overflow: hidden;width: 84px;height: 210rpx;line-height: 210rpx;">
+            <image src='{{item.specialist_image}}' style='width:84px' mode='widthFix'></image>
+          </view>
+        </view>
+        <view style='margin-left:20rpx;'>
+          <view style="font-size: 30rpx;color: #343434;position: relative;display: inline-block;">
+            {{item.meet_talk_name}}
+            <image style="position: absolute;right: -15px;bottom: -5px;width: 50px;z-index: -1" src="/images/icon/name.png" mode='widthFix'></image>
+          </view>
+          <view style="font-size: 26rpx;color: #646464;margin-top: 24rpx;line-height: 1.5em">
+            {{item.meet_talk_content}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='txt-center mt-md'>
+      <text catchtap='iszjjs' class='unAll'>{{iszjjs?'点击收起':'展开全部'}}</text>
+      <!-- 展开全部后 -->
+    </view>
+  </view>
+</view>
 <view class='flex-b'>
-   <!-- <text catchtap='onEnrollTap' class='bm' style='{{aboutData.isfinish=="1"?"":"background:#eee;color:#999"}}'>报 名</text>  -->
+  <!-- <text catchtap='onEnrollTap' class='bm' style='{{aboutData.isfinish=="1"?"":"background:#eee;color:#999"}}'>报 名</text>  -->
   <view class='lxhw' catchtap='onCallTap'>
     <image src='/images/icon/huiwu.png' style='vertical-align:middle;width:40rpx;margin-right:10rpx;' mode='widthFix'></image>
     <text style='vertical-align:middle;font-size:32rpx;'>联系会务</text>
   </view>
-  <view class='baom' catchtap='onEnrollTap' style='{{(aboutData.is_attend=="0"&&isfinish=="1")?"":"background:#eee;color:#999"}}'>{{(aboutData.is_attend=="0"&&isfinish=="1")?'报 名':'已报名'}}</view>
+  <view class='baom' catchtap='onEnrollTap' style='{{(aboutData.is_attend=="0"&&isfinish=="1")?"":"background:#eee;color:#999"}}'>{{(aboutData.is_attend=="0")?'报 名':'已报名'}}</view>
 </view>

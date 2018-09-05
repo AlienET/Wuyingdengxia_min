@@ -76,10 +76,20 @@ Page({
   // 点击banner
   onBannerImgTap: function (event) {
     console.log(event.currentTarget.dataset.postid.banner_link)
-    if (event.currentTarget.dataset.postid.banner_link == 'yszg.org/Wuyingdengxia/meetingDetails.html?meet_id=142&isBao=0') {
-      wx.switchTab({
-        url: '../meeting_mess/meeting_mess',
-      })
+    var arra = event.currentTarget.dataset.postid.banner_link.split('?');
+    if (arra[0] == 'yszg.org/Wuyingdengxia/meetingDetails.html') {
+      var canshu = arra[1].split('&');
+      var canshuname = '';
+      var canshuzhi = '';
+      for (var i = canshu.length - 1; i >= 0; i--){
+        var canshuArr = canshu[i].split('=');
+        if (canshuArr[0] == 'meet_id'){
+          console.log(canshuArr)
+          wx.navigateTo({
+            url: '../ConferenceDetails/ConferenceDetails?meet_id=' + canshuArr[1],
+          })
+        }
+      }
     } else {
       app.bannerUrl = event.currentTarget.dataset.postid.banner_link;
       wx.navigateTo({
