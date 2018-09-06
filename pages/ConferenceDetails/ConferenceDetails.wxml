@@ -46,7 +46,7 @@
   </view>
 </view>
 <view class='gap'></view>
-<view class='pad20' style='margin-bottom:90rpx;'>
+<view class='pad20'>
   <view class='meets'>专家介绍</view>
   <view wx:if='{{aboutData.meet_talk == null}}' style="text-align: center;color: #999;margin-top: 15px;font-size: 16px;">
     暂无嘉宾安排....
@@ -60,9 +60,9 @@
           </view>
         </view>
         <view style='margin-left:20rpx;'>
-          <view style="font-size: 30rpx;color: #343434;position: relative;display: inline-block;">
+          <view style="font-size: 30rpx;color: #343434;position: relative;width:500rpx;">
             {{item.meet_talk_name}}
-            <image style="position: absolute;right: -15px;bottom: -5px;width: 50px;z-index: -1" src="/images/icon/name.png" mode='widthFix'></image>
+            <image style="position: absolute;right: 75%;bottom: -5px;width: 50px;z-index: -1" src="/images/icon/name.png" mode='widthFix'></image>
           </view>
           <view style="font-size: 26rpx;color: #646464;margin-top: 24rpx;line-height: 1.5em">
             {{item.meet_talk_content}}
@@ -76,6 +76,7 @@
     </view>
   </view>
 </view>
+<view style='height:120rpx;'></view>
 <view class='flex-b'>
   <!-- <text catchtap='onEnrollTap' class='bm' style='{{aboutData.isfinish=="1"?"":"background:#eee;color:#999"}}'>报 名</text>  -->
   <view class='lxhw' catchtap='onCallTap'>
