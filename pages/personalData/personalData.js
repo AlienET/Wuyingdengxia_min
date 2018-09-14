@@ -123,8 +123,10 @@ Page({
         app.userData.userPosition = '青年委员'
       } else if (app.userData.userPosition == 5) {
         app.userData.userPosition = '行业专家'
-      }else{
+      } else if (app.userData.userPosition == 6) {
         app.userData.userPosition = '普通'
+      }else{
+        app.userData.userPosition = '委员'
       }
       that.setData({
         aboutData: app.userData,

@@ -26,13 +26,13 @@ Page({
     // 专委会
     inputTxtR: '',
     // 入住备注
-    inputRemark:'',
+    inputRemark: '',
     // 入住
     rzdate: '',
     // 离开
     lkdate: '',
     // 初始时间
-    startDate:'',
+    startDate: '',
     ji: '3',
     // 
     info: [],
@@ -79,8 +79,65 @@ Page({
   // 报名提交页面 跳转
   onBmtjTap: function (e) {
     var that = this;
-    if (that.data.terminus != '终点' && that.data.originating != '始发' && that.data.train_no != '选择车次') {
-
+    if (that.data.info.user_identity != '普通' && that.data.info.user_identity != '行业专家') {
+      if (that.data.terminus != '终点' && that.data.originating != '始发' && that.data.train_no != '选择车次') {
+        wx.request({
+          url: app.InterfaceUrl + 'post_attend',
+          data: {
+            user_id: app.userData.user_id,
+            meet_id: that.data.meet_id,
+            take_type: '火车',
+            car_num1: that.data.train_no,
+            from1: that.data.originating,
+            to1: that.data.terminus,
+            car_num1b: that.data.trainAll,
+            from1b: '',
+            to1b: '',
+            car_num2: '',
+            from2: '',
+            to2: '',
+            car_num2b: '',
+            from2b: '',
+            to2b: '',
+            special1: that.data.inputTxt,
+            special2: '',
+            begin_time: that.data.rzdate,
+            end_time: that.data.lkdate,
+            remark: that.data.inputRemark,
+            together_people: that.data.inputTxtR,
+            room_type: that.data.index
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          success: function (res) {
+            console.log(res);
+            if (res.data.code == 1) {
+              wx.navigateTo({
+                url: '../applySubmit/applySubmit',
+              })
+            } else {
+              wx.showToast({
+                title: '提交失败...',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          },
+          fail: function (error) {
+            console.log(error)
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '请完善信息',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    }else{
+      console.log(1)
       wx.request({
         url: app.InterfaceUrl + 'post_attend',
         data: {
@@ -129,12 +186,6 @@ Page({
           console.log(error)
         }
       })
-    } else {
-      wx.showToast({
-        title: '请完善信息',
-        icon: 'none',
-        duration: 2000
-      })
     }
   },
   // 日期
@@ -182,14 +233,14 @@ Page({
     that.setData({ inputTxt: event.detail.value })
   },
   // 住房备注
-  zfbz:function(e){
+  zfbz: function (e) {
     var that = this;
-    that.setData({ inputRemark:e.detail.value})
+    that.setData({ inputRemark: e.detail.value })
   },
   bzxxR: function (event) {
     var that = this;
     console.log(event.detail.value)
-    that.setData({inputTxtR : event.detail.value })
+    that.setData({ inputTxtR: event.detail.value })
   },
   //几晚
   onjiTap: function () {
@@ -225,8 +276,8 @@ Page({
         console.log(res.data.data)
         if (res.data.data.user_identity < 5) {
           that.setData({
-            isSwitch:true,
-            remark:false
+            isSwitch: true,
+            remark: false
           })
         }
         if (res.data.data.user_identity == 0) {
@@ -241,8 +292,10 @@ Page({
           res.data.data.user_identity = '青年委员'
         } else if (res.data.data.user_identity == 5) {
           res.data.data.user_identity = '行业专家'
-        } else {
+        } else if (res.data.data.user_identity == 6) {
           res.data.data.user_identity = '普通'
+        } else {
+          res.data.data.user_identity = '委员'
         }
         that.setData({ info: res.data.data })
       },
