@@ -11,10 +11,24 @@ Page({
     begin_time: '',
     end_time: '',
     meet_title: '',
+    //去程
     // 终点
     terminus: '',
     // 始发
     originating: '',
+    //返程
+    // 终点
+    f_terminus: '',
+    // 始发
+    f_originating: '',
+    //车次选择
+    f_train_no: '',
+    //备选车次
+    f_trainAll: '',
+    // 日期
+    f_date: '',
+    //备注
+    FinputTxt:'',
     // 日期
     date: '',
     // 车次
@@ -45,15 +59,15 @@ Page({
     remark: true
   },
   // 车次查询
-  cccx: function (e) {
+  cccx: function(e) {
     var that = this;
     if (e.currentTarget.dataset.w == '2' || e.currentTarget.dataset.w == '3') {
       if (that.data.originating != '始发' && that.data.terminus != '终点') {
         wx.navigateTo({
           url: '../juhe/juhe?w=' + e.currentTarget.dataset.w + '&start=' + that.data.originating + '&end=' + that.data.terminus + '&date=' + that.data.date,
-          success: function (res) { },
-          fail: function (res) { },
-          complete: function (res) { },
+          success: function(res) {},
+          fail: function(res) {},
+          complete: function(res) {},
         })
       } else {
         wx.showToast({
@@ -65,22 +79,51 @@ Page({
     } else if (e.currentTarget.dataset.w == '0' || e.currentTarget.dataset.w == '1') {
       wx.navigateTo({
         url: '../juhe/juhe?w=' + e.currentTarget.dataset.w,
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) { },
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    }
+  },
+  // 车次查询
+  Fcccx: function(e) {
+    var that = this;
+    if (e.currentTarget.dataset.w == '6' || e.currentTarget.dataset.w == '7') {
+      if (that.data.f_originating != '始发' && that.data.f_terminus != '终点') {
+        wx.navigateTo({
+          url: '../juhe/juhe?w=' + e.currentTarget.dataset.w + '&start=' + that.data.f_originating + '&end=' + that.data.f_terminus + '&date=' + that.data.f_date,
+          success: function(res) {},
+          fail: function(res) {},
+          complete: function(res) {},
+        })
+      } else {
+        wx.showToast({
+          title: '请选择城市',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    } else if (e.currentTarget.dataset.w == '4' || e.currentTarget.dataset.w == '5') {
+      wx.navigateTo({
+        url: '../juhe/juhe?w=' + e.currentTarget.dataset.w,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
       })
     }
   },
   // 房型选择
-  bindPickerChange: function (e) {
+  bindPickerChange: function(e) {
     var that = this;
-    that.setData({ index: e.detail.value })
+    that.setData({
+      index: e.detail.value
+    })
   },
   // 报名提交页面 跳转
-  onBmtjTap: function (e) {
+  onBmtjTap: function(e) {
     var that = this;
     if (that.data.info.user_identity != '普通' && that.data.info.user_identity != '行业专家') {
-      if (that.data.terminus != '终点' && that.data.originating != '始发' && that.data.train_no != '选择车次') {
+      if (that.data.terminus != '终点' && that.data.originating != '始发' && that.data.train_no != '选择车次' && that.data.f_terminus != '终点' && that.data.f_originating != '始发' && that.data.f_train_no != '') {
         wx.request({
           url: app.InterfaceUrl + 'post_attend',
           data: {
@@ -93,14 +136,14 @@ Page({
             car_num1b: that.data.trainAll,
             from1b: '',
             to1b: '',
-            car_num2: '',
-            from2: '',
-            to2: '',
-            car_num2b: '',
+            car_num2: that.data.f_train_no,
+            from2: that.data.f_originating,
+            to2: that.data.f_terminus,
+            car_num2b: that.data.f_trainAll,
             from2b: '',
             to2b: '',
             special1: that.data.inputTxt,
-            special2: '',
+            special2: that.data.FinputTxt,
             begin_time: that.data.rzdate,
             end_time: that.data.lkdate,
             remark: that.data.inputRemark,
@@ -111,7 +154,7 @@ Page({
             'content-type': 'application/x-www-form-urlencoded'
           },
           method: 'POST',
-          success: function (res) {
+          success: function(res) {
             console.log(res);
             if (res.data.code == 1) {
               wx.navigateTo({
@@ -125,7 +168,7 @@ Page({
               })
             }
           },
-          fail: function (error) {
+          fail: function(error) {
             console.log(error)
           }
         })
@@ -136,7 +179,7 @@ Page({
           duration: 2000
         })
       }
-    }else{
+    } else {
       console.log(1)
       wx.request({
         url: app.InterfaceUrl + 'post_attend',
@@ -150,14 +193,14 @@ Page({
           car_num1b: that.data.trainAll,
           from1b: '',
           to1b: '',
-          car_num2: '',
-          from2: '',
-          to2: '',
-          car_num2b: '',
+          car_num2: that.data.f_train_no,
+          from2: that.data.f_originating,
+          to2: that.data.f_terminus,
+          car_num2b: that.data.f_trainAll,
           from2b: '',
           to2b: '',
           special1: that.data.inputTxt,
-          special2: '',
+          special2: that.data.FinputTxt,
           begin_time: that.data.rzdate,
           end_time: that.data.lkdate,
           remark: that.data.inputRemark,
@@ -168,7 +211,7 @@ Page({
           'content-type': 'application/x-www-form-urlencoded'
         },
         method: 'POST',
-        success: function (res) {
+        success: function(res) {
           console.log(res);
           if (res.data.code == 1) {
             wx.navigateTo({
@@ -182,34 +225,41 @@ Page({
             })
           }
         },
-        fail: function (error) {
+        fail: function(error) {
           console.log(error)
         }
       })
     }
   },
   // 日期
-  bindDateChange: function (e) {
+  bindDateChange: function(e) {
     var that = this;
     this.setData({
       date: e.detail.value
     })
   },
-  bindruzhuChange: function (e) {
+  // 日期
+  FbindDateChange: function (e) {
+    var that = this;
+    this.setData({
+      f_date: e.detail.value
+    })
+  },
+  bindruzhuChange: function(e) {
     var that = this;
     this.setData({
       rzdate: e.detail.value
     })
     console.log(that.data.rzdate)
   },
-  bindlikaiChange: function (e) {
+  bindlikaiChange: function(e) {
     var that = this;
     this.setData({
       lkdate: e.detail.value
     })
     console.log(that.data.lkdate)
   },
-  onhuanTap: function () {
+  onhuanTap: function() {
     var that = this;
     var terminus = that.data.terminus;
     var originating = that.data.originating;
@@ -227,41 +277,58 @@ Page({
     }
   },
   // 备注
-  bzxx: function (event) {
+  bzxx: function(event) {
     var that = this;
     console.log(event.detail.value)
-    that.setData({ inputTxt: event.detail.value })
+    that.setData({
+      inputTxt: event.detail.value
+    })
+  },
+  // fan备注
+  Fbzxx: function (event) {
+    var that = this;
+    console.log(event.detail.value)
+    that.setData({
+      FinputTxt: event.detail.value
+    })
   },
   // 住房备注
-  zfbz: function (e) {
+  zfbz: function(e) {
     var that = this;
-    that.setData({ inputRemark: e.detail.value })
+    that.setData({
+      inputRemark: e.detail.value
+    })
   },
-  bzxxR: function (event) {
+  bzxxR: function(event) {
     var that = this;
     console.log(event.detail.value)
-    that.setData({ inputTxtR: event.detail.value })
+    that.setData({
+      inputTxtR: event.detail.value
+    })
   },
   //几晚
-  onjiTap: function () {
+  onjiTap: function() {
     console.log('1')
   },
   // 是否订票 切换
-  switchChange: function (e) {
+  switchChange: function(e) {
     var that = this;
     console.log(e.detail.value)
-    that.setData({ isSwitch: e.detail.value })
+    that.setData({
+      isSwitch: e.detail.value
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
     var startDate = util.formatTime(new Date);
     console.log(startDate)
     that.setData({
       startDate: startDate,
       date: startDate,
+      f_date: startDate,
       rzdate: startDate,
       lkdate: startDate,
       meet_id: options.meet_id
@@ -272,7 +339,7 @@ Page({
       header: {
         'content-type': 'application/json' // 默认值
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data.data)
         if (res.data.data.user_identity < 5) {
           that.setData({
@@ -297,7 +364,9 @@ Page({
         } else {
           res.data.data.user_identity = '委员'
         }
-        that.setData({ info: res.data.data })
+        that.setData({
+          info: res.data.data
+        })
       },
     })
     that.setData({
@@ -306,66 +375,92 @@ Page({
       meet_title: options.meet_title,
       aboutData: app.userData,
       originating: app.originating,
-      terminus: app.staName
+      terminus: app.staName,
+      f_originating: app.f_originating,
+      f_terminus: app.f_staName
     })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     var that = this;
     console.log(app.staName)
     if (app.j == '0') {
-      that.setData({ originating: app.staName })
+      that.setData({
+        originating: app.staName
+      })
     } else if (app.j == '1') {
-      that.setData({ terminus: app.staName })
+      that.setData({
+        terminus: app.staName
+      })
     } else if (app.j == '2') {
-      that.setData({ train_no: app.staName })
+      that.setData({
+        train_no: app.staName
+      })
     } else if (app.j == '3') {
-      that.setData({ trainAll: app.staName })
+      that.setData({
+        trainAll: app.staName
+      })
+    } else if (app.j == '4') {
+      that.setData({
+        f_originating: app.staName
+      })
+    } else if (app.j == '5') {
+      that.setData({
+        f_terminus: app.staName
+      })
+    } else if (app.j == '6') {
+      that.setData({
+        f_train_no: app.staName
+      })
+    } else if (app.j == '7') {
+      that.setData({
+        f_trainAll: app.staName
+      })
     }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -1,5 +1,5 @@
 <!--pages/juhe/juhe.wxml-->
 <view style='padding-left:20rpx;'>
-  <view wx:if='{{w==1||w==0}}' catchtap='oncstap' data-name='{{item.sta_name}}' style='border-bottom:1rpx solid #eee;padding:20rpx;font-size:30rpx;' wx:for='{{cs}}'>{{item.sta_name}}</view>
-  <view wx:if='{{w==2||w==3}}' catchtap='oncstap' data-name='{{item.train_no}}' style='border-bottom:1rpx solid #eee;padding:20rpx;font-size:30rpx;' wx:for='{{cs.list}}'>{{item.train_no}}</view>
+  <view wx:if='{{w==1||w==0||w==4||w==5}}' catchtap='oncstap' data-name='{{item.sta_name}}' style='border-bottom:1rpx solid #eee;padding:20rpx;font-size:30rpx;' wx:for='{{cs}}'>{{item.sta_name}}</view>
+  <view wx:if='{{w==2||w==3||w==6||w==7}}' catchtap='oncstap' data-name='{{item.train_no}}' style='border-bottom:1rpx solid #eee;padding:20rpx;font-size:30rpx;' wx:for='{{cs.list}}'>{{item.train_no}}</view>
 </view>

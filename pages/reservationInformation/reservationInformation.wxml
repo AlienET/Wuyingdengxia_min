@@ -40,7 +40,8 @@
     </view>
     <view class='tr'>
       <view class='td td_t'>专委会</view>
-      <view class='td td_i'>{{info.special_committee}}</view>
+      <view class='td td_i' wx:if='{{info.special_committee == null}}'>无</view>
+      <view class='td td_i' wx:else>{{info.special_committee}}</view>
     </view>
     <view class='tr'>
       <view class='td td_t'>身份</view>
@@ -53,7 +54,7 @@
   <view wx:if="{{info.user_identity != '普通'&& info.user_identity != '行业专家'}}" class='table'>
     <view class='tr'>
       <image class='ver-middle' src='/images/icon/jiaotong.png'></image>
-      <text class='ver-middle'>乘车信息选择</text>
+      <text class='ver-middle'>去程选择</text>
     </view>
     <view class='tr tr_bor'>
       <view class='th'>
@@ -88,6 +89,50 @@
       <view class='td td_t'>备注</view>
       <view class='td td_i'>
         <input value='{{inputTxt}}' placeholder='如有需要请备注' bindfocus='bzxx'></input>
+      </view>
+    </view>
+    <!-- <view class='tr txt-center'>
+      <view class='td' style='color:#2DA3FF;'>+ 添加乘车信息</view>
+    </view> -->
+  </view>
+  <view wx:if="{{info.user_identity != '普通'&& info.user_identity != '行业专家'}}" class='table' style='margin-top:20rpx;'>
+    <view class='tr'>
+      <image class='ver-middle' src='/images/icon/jiaotong.png'></image>
+      <text class='ver-middle'>返程选择</text>
+    </view> 
+    <view class='tr tr_bor'>
+      <view class='th'>
+        <view catchtap='Fcccx' data-w='4'>{{f_originating}}</view>
+      </view>
+      <view class='th'>
+        <image catchtap='onhuanTap' src='/images/icon/qiehuan.png' style='width:68rpx;height:68rpx;'></image>
+      </view>
+      <view class='th'>
+        <view catchtap='Fcccx' data-w='5'>{{f_terminus}}</view>
+      </view>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='td td_t'>乘车日期</view>
+      <view class='td td_i'>
+        <picker mode="date" value="{{f_date}}" start="{{startDate}}" bindchange="FbindDateChange">
+          <view class="picker">
+            {{f_date}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='td td_t'>车次选择</view>
+      <view catchtap='Fcccx' data-w='6' class='td td_i'>{{f_train_no==''?'选择车次':f_train_no}}</view>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='td td_t'>备选车次</view>
+      <view catchtap='Fcccx' data-w='7' class='td td_i'>{{f_trainAll==''?'备选车次':f_trainAll}}</view>
+    </view>
+    <view class='tr tr_bor'>
+      <view class='td td_t'>备注</view>
+      <view class='td td_i'>
+        <input value='{{FinputTxt}}' placeholder='如有需要请备注' bindfocus='Fbzxx'></input>
       </view>
     </view>
     <!-- <view class='tr txt-center'>

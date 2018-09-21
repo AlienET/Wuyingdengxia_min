@@ -159,6 +159,10 @@ App({
   staName: '终点',
   // 始发
   originating: '始发',
+  // 火车票站点
+  f_staName: '终点',
+  // 始发
+  f_originating: '始发',
   // 谁
   j: null,
   //banner URl

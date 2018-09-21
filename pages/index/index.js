@@ -141,6 +141,7 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
+          console.log(res.data.data)
           if (res.data.data.length < 30) {
             for (var i = res.data.data.length - 1; i >= 0; i--) {
               // console.log(res.data.data[i].article_img_path)//split(',');
