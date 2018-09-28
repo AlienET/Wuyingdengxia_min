@@ -1,5 +1,24 @@
 <!--pages/juhe/juhe.wxml-->
 <view style='padding-left:20rpx;'>
   <view wx:if='{{w==1||w==0||w==4||w==5}}' catchtap='oncstap' data-name='{{item.sta_name}}' style='border-bottom:1rpx solid #eee;padding:20rpx;font-size:30rpx;' wx:for='{{cs}}'>{{item.sta_name}}</view>
-  <view wx:if='{{w==2||w==3||w==6||w==7}}' catchtap='oncstap' data-name='{{item.train_no}}' style='border-bottom:1rpx solid #eee;padding:20rpx;font-size:30rpx;' wx:for='{{cs.list}}'>{{item.train_no}}</view>
+  <view wx:if='{{w==2||w==3||w==6||w==7}}'>
+    <view style='background-color:#358CDB;text-align:center;padding:30rpx 0;margin-left:-20rpx;'>
+      <view style='color:#fff;font-size:36rpx;font-weight:bold;'>{{start}} - {{end}}</view>
+      <view style='color:#fff;margin-top:20rpx;font-size:30rpx;'>{{date}}</view>
+    </view>
+    <view catchtap='oncstap' data-name='{{item.train_no}}' style='border-bottom:1rpx solid #eee;padding:20rpx;margin-right:20rpx;display:flex; flex-direction:row;justify-content:space-between;' wx:for='{{cs.list}}'>
+      <view style='display:flex;flex-direction:column;'>
+        <view style='color:#358CDB;font-size:32rpx;text-align:center;font-weight:bold;'>{{item.start_time}}</view>
+        <view style='margin-top:10rpx;text-align:center;font-size:30rpx;'>{{item.start_station}}</view>
+      </view>
+      <view>
+        <view style='font-size:26rpx;padding:6rpx 20rpx;border-bottom:1rpx solid #eee;text-align:center;'>{{item.run_time}}</view>
+        <view style='margin-top:5rpx;font-size:26rpx;text-align:center;'>{{item.train_no}}</view>
+      </view>
+      <view style='display:flex;flex-direction:column;'>
+        <view style='color:#358CDB;font-size:32rpx;text-align:center;font-weight:bold;'>{{item.end_time}}</view>
+        <view style='margin-top:10rpx;text-align:center;font-size:30rpx;'>{{item.end_station}}</view>
+      </view>
+    </view>
+  </view>
 </view>

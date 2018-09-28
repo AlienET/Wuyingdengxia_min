@@ -180,7 +180,7 @@
       <view class='tr tr_bor' wx:if='{{remark}}'>
         <view class='td td_t'>拼住人</view>
         <view class='td td_i'>
-          <input value='{{inputTxtR}}' placeholder='' bindfocus='bzxxR'></input>
+          <input value='{{inputTxtR}}' placeholder='' bindinput='bzxxR'></input>
         </view>
       </view>
       <view class='tr tr_bor'  wx:if='{{!remark}}'>

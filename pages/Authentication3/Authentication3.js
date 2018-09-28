@@ -133,7 +133,7 @@ Page({
         , 1500)
 
 
-      wx.hideLoading()
+      // wx.hideLoading()
     }
   },
   // 上一步
@@ -160,7 +160,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.hideLoading()
   },
 
   /**

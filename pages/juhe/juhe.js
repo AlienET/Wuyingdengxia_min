@@ -8,7 +8,10 @@ Page({
    */
   data: {
     cs:[],
-    w:''
+    w:'',
+    start:'',
+    end:'',
+    date:''
   },
   oncstap:function(e){
     var that =this;
@@ -31,6 +34,11 @@ Page({
       dz = 'https://apis.juhe.cn/train/station.list.php?key=ba31b08d5a33f101ba2193f2daaf3492'
     } else if (options.w == '2' || options.w == '3' || options.w == '6' || options.w == '7'){
       dz = 'https://apis.juhe.cn/train/s2swithprice?start=' + options.start + '&end=' + options.end + '&date=' + options.date +'&key=ba31b08d5a33f101ba2193f2daaf3492'
+      that.setData({
+        start: options.start,
+        end: options.end,
+        date: options.date
+      })
     }
     wx.request({
       url: dz,

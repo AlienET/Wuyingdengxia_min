@@ -29,14 +29,15 @@
 <view class='gap'></view>
 <view class='pad20'>
   <view class='meets'>会议日程</view>
-  <view wx:if='{{schedule == ""}}' style="text-align: center;color: #999;margin-top: 15px;font-size: 16px;">
+  <view wx:if='{{schedule.lenght == 0}}' style="text-align: center;color: #999;margin-top: 15px;font-size: 16px;">
     暂无日程安排....
   </view>
   <view wx:else class='meet_txt pt-n'>
-    <view class='table'>
-      <view class='tr mt-md' wx:for='{{schedule}}' wx:if='{{isSchedule?true:index<2}}'>
-        <view class='td_t'>{{item.meet_class_begin}} — {{item.meet_class_end}}</view>
-        <view class='td_i'>{{item.main_content}}</view>
+    <view class='table' wx:for='{{schedule}}' wx:if='{{isSchedule?true:index<1}}'>
+      <view style='padding-top:30rpx;'>{{item.date}}</view>
+      <view class='tr mt-md' wx:for='{{item.meet_class}}' wx:for-item="items" wx:if='{{isSchedule?true:index<1}}'>
+        <view class='td_t'>{{items.meet_class_begin}} — {{items.meet_class_end}}</view>
+        <view class='td_i'>{{items.main_content}}</view>
       </view>
     </view>
     <view class='txt-center mt-md'>

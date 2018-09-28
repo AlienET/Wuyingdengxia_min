@@ -28,7 +28,7 @@ Page({
     // 日期
     f_date: '',
     //备注
-    FinputTxt:'',
+    FinputTxt: '',
     // 日期
     date: '',
     // 车次
@@ -124,54 +124,61 @@ Page({
     var that = this;
     if (that.data.info.user_identity != '普通' && that.data.info.user_identity != '行业专家') {
       if (that.data.terminus != '终点' && that.data.originating != '始发' && that.data.train_no != '选择车次' && that.data.f_terminus != '终点' && that.data.f_originating != '始发' && that.data.f_train_no != '') {
-        wx.request({
-          url: app.InterfaceUrl + 'post_attend',
-          data: {
-            user_id: app.userData.user_id,
-            meet_id: that.data.meet_id,
-            take_type: '火车',
-            car_num1: that.data.train_no,
-            from1: that.data.originating,
-            to1: that.data.terminus,
-            car_num1b: that.data.trainAll,
-            from1b: '',
-            to1b: '',
-            car_num2: that.data.f_train_no,
-            from2: that.data.f_originating,
-            to2: that.data.f_terminus,
-            car_num2b: that.data.f_trainAll,
-            from2b: '',
-            to2b: '',
-            special1: that.data.inputTxt,
-            special2: that.data.FinputTxt,
-            begin_time: that.data.rzdate,
-            end_time: that.data.lkdate,
-            remark: that.data.inputRemark,
-            together_people: that.data.inputTxtR,
-            room_type: that.data.index
-          },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          method: 'POST',
+        wx.showLoading({
+          title: '提交中',
           success: function(res) {
-            console.log(res);
-            if (res.data.code == 1) {
-              wx.navigateTo({
-                url: '../applySubmit/applySubmit',
-              })
-            } else {
-              wx.showToast({
-                title: '提交失败...',
-                icon: 'none',
-                duration: 2000
-              })
-            }
-          },
-          fail: function(error) {
-            console.log(error)
+            wx.request({
+              url: app.InterfaceUrl + 'post_attend',
+              data: {
+                user_id: app.userData.user_id,
+                meet_id: that.data.meet_id,
+                take_type: '火车',
+                car_num1: that.data.train_no,
+                from1: that.data.originating,
+                to1: that.data.terminus,
+                car_num1b: that.data.trainAll,
+                from1b: '',
+                to1b: '',
+                car_num2: that.data.f_train_no,
+                from2: that.data.f_originating,
+                to2: that.data.f_terminus,
+                car_num2b: that.data.f_trainAll,
+                from2b: '',
+                to2b: '',
+                special1: that.data.inputTxt,
+                special2: that.data.FinputTxt,
+                begin_time: that.data.rzdate,
+                end_time: that.data.lkdate,
+                remark: that.data.inputRemark,
+                together_people: that.data.inputTxtR,
+                room_type: that.data.index
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              method: 'POST',
+              success: function(res) {
+                console.log(res);
+                if (res.data.code == 1) {
+                  wx.navigateTo({
+                    url: '../applySubmit/applySubmit',
+                  })
+                } else {
+                  wx.hideLoading()
+                  wx.showToast({
+                    title: '提交失败...',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              },
+              fail: function(error) {
+                console.log(error)
+              }
+            })
           }
         })
+
       } else {
         wx.showToast({
           title: '请完善信息',
@@ -181,54 +188,113 @@ Page({
       }
     } else {
       console.log(1)
-      wx.request({
-        url: app.InterfaceUrl + 'post_attend',
-        data: {
-          user_id: app.userData.user_id,
-          meet_id: that.data.meet_id,
-          take_type: '火车',
-          car_num1: that.data.train_no,
-          from1: that.data.originating,
-          to1: that.data.terminus,
-          car_num1b: that.data.trainAll,
-          from1b: '',
-          to1b: '',
-          car_num2: that.data.f_train_no,
-          from2: that.data.f_originating,
-          to2: that.data.f_terminus,
-          car_num2b: that.data.f_trainAll,
-          from2b: '',
-          to2b: '',
-          special1: that.data.inputTxt,
-          special2: that.data.FinputTxt,
-          begin_time: that.data.rzdate,
-          end_time: that.data.lkdate,
-          remark: that.data.inputRemark,
-          together_people: that.data.inputTxtR,
-          room_type: that.data.index
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        method: 'POST',
+      wx.showLoading({
+        title: ' ',
         success: function(res) {
-          console.log(res);
-          if (res.data.code == 1) {
-            wx.navigateTo({
-              url: '../applySubmit/applySubmit',
+          if (that.data.isSwitch) {
+            wx.request({
+              url: app.InterfaceUrl + 'post_attend',
+              data: {
+                user_id: app.userData.user_id,
+                meet_id: that.data.meet_id,
+                take_type: '火车',
+                car_num1: that.data.train_no,
+                from1: that.data.originating,
+                to1: that.data.terminus,
+                car_num1b: that.data.trainAll,
+                from1b: '',
+                to1b: '',
+                car_num2: that.data.f_train_no,
+                from2: that.data.f_originating,
+                to2: that.data.f_terminus,
+                car_num2b: that.data.f_trainAll,
+                from2b: '',
+                to2b: '',
+                special1: that.data.inputTxt,
+                special2: that.data.FinputTxt,
+                begin_time: that.data.rzdate,
+                end_time: that.data.lkdate,
+                remark: that.data.inputRemark,
+                together_people: that.data.inputTxtR,
+                room_type: that.data.index
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              method: 'POST',
+              success: function(res) {
+                console.log(res);
+                if (res.data.code == 1) {
+                  wx.navigateTo({
+                    url: '../applySubmit/applySubmit',
+                  })
+                } else {
+                  wx.hideLoading();
+                  wx.showToast({
+                    title: '提交失败...',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              },
+              fail: function(error) {
+                console.log(error)
+              }
             })
           } else {
-            wx.showToast({
-              title: '提交失败...',
-              icon: 'none',
-              duration: 2000
+            wx.request({
+              url: app.InterfaceUrl + 'post_attend',
+              data: {
+                user_id: app.userData.user_id,
+                meet_id: that.data.meet_id,
+                take_type: '火车',
+                car_num1: '',
+                from1: '',
+                to1: '',
+                car_num1b: '',
+                from1b: '',
+                to1b: '',
+                car_num2: '',
+                from2: '',
+                to2: '',
+                car_num2b: '',
+                from2b: '',
+                to2b: '',
+                special1: '',
+                special2: '',
+                begin_time: '',
+                end_time: '',
+                remark: '',
+                together_people: '',
+                room_type: ''
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              method: 'POST',
+              success: function(res) {
+                console.log(res);
+                if (res.data.code == 1) {
+                  wx.navigateTo({
+                    url: '../applySubmit/applySubmit',
+                  })
+                } else {
+                  wx.hideLoading();
+                  wx.showToast({
+                    title: '提交失败...',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              },
+              fail: function(error) {
+                console.log(error)
+              }
             })
           }
-        },
-        fail: function(error) {
-          console.log(error)
         }
       })
+
     }
   },
   // 日期
@@ -239,7 +305,7 @@ Page({
     })
   },
   // 日期
-  FbindDateChange: function (e) {
+  FbindDateChange: function(e) {
     var that = this;
     this.setData({
       f_date: e.detail.value
@@ -285,7 +351,7 @@ Page({
     })
   },
   // fan备注
-  Fbzxx: function (event) {
+  Fbzxx: function(event) {
     var that = this;
     console.log(event.detail.value)
     that.setData({
@@ -341,12 +407,15 @@ Page({
       },
       success: function(res) {
         console.log(res.data.data)
-        if (res.data.data.user_identity < 5) {
+        console.log(res.data.data.user_identity)
+        console.log(that.data.remark)
+        if (res.data.data.user_identity < 5 || res.data.data.user_identity > 6) {
           that.setData({
             isSwitch: true,
             remark: false
           })
         }
+        console.log(that.data.remark)
         if (res.data.data.user_identity == 0) {
           res.data.data.user_identity = '主任委员'
         } else if (res.data.data.user_identity == 1) {
@@ -392,6 +461,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    wx.hideLoading();
     var that = this;
     console.log(app.staName)
     if (app.j == '0') {

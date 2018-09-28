@@ -14,25 +14,25 @@
       </view>
     </view>
   </view>
-  <swiper current='{{flag}}' class='summarys' style="height:{{flag==0?310*Article.length:flag==1?310*Question.length:310*Video.length}}px;min-height:100%;height:{{100*NotBeginning.length}}rpx" bindchange='bindChange'>
+  <swiper current='{{flag}}' class='summarys' style="min-height:100%;height:{{200*Finished.length}}rpx" bindchange='bindChange'>
     <swiper-item>
-      <image wx:if='{{NotBeginning.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wuhuodong.png'></image>
-      <view wx:for='{{NotBeginning}}' catchtap='onweikaishi' data-id='{{item.meet_id}}' style='margin-bottom:20rpx;border-bottom:1rpx solid #EBEBEB;display:flex;flex-direction: row'>
-        <image class='ver-middle' style='width:198rpx;height:154rpx;margin-right:10rpx;' src='{{item.meeting_image}}'></image>
+      <image wx:if='{{Finished.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wuhuodong.png'></image>
+      <view wx:for='{{Finished}}' catchtap='onweikaishi' data-id='{{item.meet_id}}' style='margin-bottom:20rpx;border-bottom:1rpx solid #EBEBEB;display:flex;flex-direction: row'>
+        <image class='ver-middle' style='width:198rpx;height:154rpx;margin-right:10rpx;' mode='aspectFill' src='{{item.meeting_image}}'></image>
         <view class='ver-middle inline-block'>
           <view style='font-size:30rpx;'>{{item.meet_title}}</view>
           <view class='mt-sm' style='font-size:24rpx;color:#666;'>{{item.begin_time}} 至 {{item.end_time}}</view>
           <view class='txt-r mb-md'>
-            <text wx:if='{{item.isfinish==0}}' style='color:#FCBA2A'>未开始</text>
-            <text wx:if='{{item.isfinish==1}}' style='color:#4ACEAC'>进行中</text>
-            <text wx:if='{{item.isfinish==2}}' style='color: #979797;'>已结束</text>
+            <text wx:if='{{item.is_check==0}}' style='color:#ec971f'>审核中</text>
+            <text wx:if='{{item.is_check==1}}' style='color:#449d44'>审核通过</text>
+            <text wx:if='{{item.is_check==2}}' style='color: #c9302c;'>审核未通过</text>
           </view>
         </view>
       </view>
     </swiper-item>
     <swiper-item>
-      <image wx:if='{{Finished.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wuhuodong.png'></image>
-      <view wx:for='{{Finished}}'>
+      <image wx:if='{{NotBeginning.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wuhuodong.png'></image>
+      <view wx:for='{{NotBeginning}}'>
         <image class='ver-middle' style='width:198rpx;height:154rpx;margin-right:10rpx;' src='{{item.meeting_image}}'></image>
         <view class='ver-middle inline-block'>
           <view>{{item.meet_title}}</view>

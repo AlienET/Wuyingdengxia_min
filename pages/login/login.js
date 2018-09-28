@@ -14,7 +14,7 @@ Page({
   //   console.log(e.detail.userInfo)
   //   console.log(e.detail.rawData)
   // },
-  getUserInfo: function (e) {
+  getUserInfo: function(e) {
     var that = this;
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -23,7 +23,7 @@ Page({
       scope: 'scope.userInfo',
       success() {
         wx.getUserInfo({
-          success: function (res) {
+          success: function(res) {
             console.log(res);
             // 登陆
             wx.login({
@@ -31,40 +31,48 @@ Page({
                 console.log(res.code)
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
                 var code = res.code;
-                wx.request({
-                  url: app.InterfaceUrl + 'H5_login_wx?js_code=' + code,
-                  data: {},
-                  method: 'GET',
-                  header: { 'content-type': 'application/json' },
-                  success: function (res) {
-                    console.log(res);
-                    var openid = res.data.openid;
-                    var session_key = res.data.session_key;
-                    var unionid = res.data.unionid;
+                wx.showLoading({
+                  title: '',
+                  success: function(res) {
                     wx.request({
-                      url: app.InterfaceUrl + 'mini_wechat_login',
-                      data: {
-                        mini_openid: openid
-                      },
+                      url: app.InterfaceUrl + 'H5_login_wx?js_code=' + code,
+                      data: {},
                       method: 'GET',
-                      success: function (res) {
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                      success: function(res) {
                         console.log(res);
-                        if (res.data.msg == '请绑定手机号') {
-                          wx.redirectTo({
-                            url: '../verifyPhone/verifyPhone',
-                          })
-                        } else {
-                          wx.switchTab({
-                            url: '/pages/index/index',
-                          })
-                        }
+                        var openid = res.data.openid;
+                        var session_key = res.data.session_key;
+                        var unionid = res.data.unionid;
+                        wx.request({
+                          url: app.InterfaceUrl + 'mini_wechat_login',
+                          data: {
+                            mini_openid: openid
+                          },
+                          method: 'GET',
+                          success: function(res) {
+                            console.log(res);
+                            if (res.data.msg == '请绑定手机号') {
+                              wx.redirectTo({
+                                url: '../verifyPhone/verifyPhone',
+                              })
+                            } else {
+                              wx.switchTab({
+                                url: '/pages/index/index',
+                              })
+                            }
+                          }
+                        })
+                      },
+                      fail: function(error) {
+                        console.log(error)
                       }
                     })
-                  },
-                  fail: function (error) {
-                    console.log(error)
                   }
                 })
+
               }
             });
           }
@@ -75,56 +83,56 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
