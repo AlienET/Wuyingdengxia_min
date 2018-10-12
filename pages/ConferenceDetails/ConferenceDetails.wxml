@@ -37,7 +37,10 @@
       <view style='padding-top:30rpx;'>{{item.date}}</view>
       <view class='tr mt-md' wx:for='{{item.meet_class}}' wx:for-item="items" wx:if='{{isSchedule?true:index<1}}'>
         <view class='td_t'>{{items.meet_class_begin}} — {{items.meet_class_end}}</view>
-        <view class='td_i'>{{items.main_content}}</view>
+        <view class='td_i'>
+          {{items.main_content}}
+          <view style='margin-top:10rpx;'>{{items.main_talk}}</view>
+        </view>
       </view>
     </view>
     <view class='txt-center mt-md'>

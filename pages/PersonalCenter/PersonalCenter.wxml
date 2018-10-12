@@ -30,6 +30,12 @@
           <text>{{aboutData.supportnum}}</text>
         </view>
       </view>
+      <view wx:if='{{aboutData.isfinishCer == 0}}' style='margin-top:10rpx;'>
+        <view style='background:#D8D8D8;border-radius: 1.5px;height:3px;width:140%;'>
+          <view style='background: #FFCB58;border-radius: 1.5px;width:33%;height:100%'></view>
+        </view>
+        <view style='font-size: 10px;color: #FFFFFF;margin-top:10rpx;'>请填写详细个人信息完成身份认证 》</view>
+      </view>
     </view>
     <image class='link_r' style='position: absolute;right:50rpx;top:45%' src='/images/icon/jiantou4.png'></image>
   </view>
