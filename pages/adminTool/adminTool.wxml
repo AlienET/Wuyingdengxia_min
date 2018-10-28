@@ -1,4 +1,2 @@
 <!--pages/adminTool/adminTool.wxml-->
-<view style='text-align:center;padding-top:35%;'>
-  <image style='width:70%' mode='widthFix' src='/images/kong/bg.png'></image>
-</view>
+<web-view src="https://www.bizconfstreaming.cn/webcast/mdl1028.html?visitorId=1540282436h9g608z00o&actId=145769"></web-view>

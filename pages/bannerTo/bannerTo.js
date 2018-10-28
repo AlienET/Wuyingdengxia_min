@@ -19,7 +19,7 @@ Page({
     var url = '';
     var yszg = app.bannerUrl.substr(0,4);
     if(yszg == 'yszg'){
-      url = 'https://' + app.bannerUrl + '&user_id=' + options.userid;
+      url = 'https://' + app.bannerUrl + '&userId=' + options.userid;
     }else{
       url = 'https://' + app.bannerUrl;
     }
@@ -28,7 +28,10 @@ Page({
       url: url,
       })
   },
-
+  //H5 监听
+  bindGetMsg:function(e){
+    console.log(e)
+  }, 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

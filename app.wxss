@@ -353,7 +353,8 @@ body, view, text {
 /*  文章内容  */
 
 .content {
-  font-size: 30rpx;
+  line-height: 1.8;
+  font-size: 28rpx;
   text-indent: 4%;
   text-align: justify;
 }
