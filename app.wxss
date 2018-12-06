@@ -439,14 +439,16 @@ body, view, text {
   width: 40rpx;
   height: 40rpx;
 }
+
 /*  切换列表  */
+
 .abs_item {
-  padding: 10rpx 20rpx 10rpx 0;
+  padding: 20rpx 20rpx 20rpx 0;
   border-bottom: 1rpx solid #e7e7e7;
 }
 
 .abs_item_author {
-  margin-bottom: 10rpx;
+  margin-bottom: 20rpx;
 }
 
 .abs_item_author image {
@@ -464,11 +466,14 @@ body, view, text {
 }
 
 .abs_item_title {
-  font-size: 28rpx;
-  font-weight: 600;
-  margin-bottom: 8rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-bottom: 12rpx;
+  color: #333;
 }
-
+.abs_item_content{
+  font-size: 28rpx;
+}
 .abs_item_content image {
   width: 100%;
 }
@@ -477,12 +482,12 @@ body, view, text {
   font-size: 28rpx;
   color: #999;
   margin-bottom: 10rpx;
+  font-weight: 300;
 }
+
 .summarys {
   margin-left: 20rpx;
 }
-
-
 
 .summarys .txt-r view {
   font-size: 22rpx;
@@ -500,7 +505,9 @@ body, view, text {
   vertical-align: middle;
   color: #bdbdbd;
 }
+
 /*  问题列表  */
+
 .quiz_item {
   padding: 24rpx;
   padding-left: 0rpx;
@@ -508,8 +515,8 @@ body, view, text {
 }
 
 .quiz_item .item_title>text {
-  font-weight: 600;
-  font-size: 34rpx;
+  font-weight: 500;
+  font-size: 32rpx;
 }
 
 .quiz_item .item_title>view {
@@ -577,7 +584,9 @@ body, view, text {
 .quiz_item_img image:last-child {
   margin-right: 0rpx;
 }
+
 /*  视频列表  */
+
 .video_list {
   padding-left: 20rpx;
   display: flex;
@@ -606,4 +615,14 @@ body, view, text {
   font-size: 26rpx;
   color: #666;
   margin-top: 10rpx;
+}
+
+/*采纳*/
+.cn_btn {
+  float: right;
+  background: #4cd3a6;
+  padding: 6rpx 10rpx;
+  border-radius: 50rpx;
+  margin-top: 8rpx;
+  color: #fff !important;
 }

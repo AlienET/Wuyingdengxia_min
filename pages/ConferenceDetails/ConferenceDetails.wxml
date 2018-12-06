@@ -12,7 +12,7 @@
     <image src='/images/icon/time.png' style='width:36rpx;height:36rpx;'></image>
     <text>会议地点</text>
   </view>
-  <text class='meet_inner'>{{aboutData.meet_address}}</text>
+  <text class='meet_inner'>{{aboutData.place}}</text>
 </view>
 <view class='gap'></view>
 <view class='pad20'>

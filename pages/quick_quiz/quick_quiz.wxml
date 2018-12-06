@@ -16,34 +16,38 @@
       name}}</text>
     </view>
   </view>
-  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{90*tabActiveKeyId.length}}px;min-height:800rpx;">
+  <swiper current='{{currentTab}}' class="swiper" bindchange="bindChange" duration="300" style="height:{{Vheight}}px;min-height:{{Vheight}}px;">
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
-      <scroll-view style='height:100%;' scroll-y=" ">
+      <scroll-view style='height:100%;' scroll-y="true" bindscrolltolower="lower">
+        <view wx:if='{{tabActiveKeyId.length==0}}' style='text-align:center;color#eee;font-size:28rpx;padding-top:40rpx;'>
+          该标签下暂无文章...
+        </view>
         <view class='ml-md'>
           <view catchtap='onProblemDetailsTap' class='quiz_item' wx:for='{{tabActiveKeyId}}' data-quesid='{{item.question_id}}'>
             <view wx:if='{{item.is_anony>0}}'>
               <image src='{{item.headimg}}' style='border-radius:100%;width:52rpx;height:52rpx;vertical-align:middle;'></image>
               <text style='font-size:26rpx;color:#999;vertical-align:middle;margin-left:15rpx;'>{{item.user_name}}</text>
             </view>
-            <view class='item_title' style='margin-bottom:10rpx;'>
-              <text>{{item.question_title}}</text>
-              <view>
-                <image class='ver-middle' style='margin-right:10rpx;' src='/images/icon/icon_moon.png'></image>
-                <text class='ver-middle'>{{item.moon_cash}}</text>
+            <view class='item_title' style='margin-bottom:6px;'>
+              <view style='float:left;margin-right:8rpx;vertical-align:middle;'>
+                <image class='ver-middle' style='margin-right:5rpx;width:35rpx;margin-top:0rpx;' mode='widthFix' src='/images/icon/icon_moon.png'></image>
+                <text class='ver-middle' style='font-size:32rpx;font-weight:500;'>{{item.moon_cash}}</text>
               </view>
+              <text style='vertical-align:middle;'>{{item.question_title}}</text>
             </view>
             <view class='quiz_item_inner text-hide'>
               {{item.question_content}}
             </view>
             <view class='quiz_foot'>
               <text>{{item.ctime}}   ·   已回答 {{item.answer_num}}</text>
-              <view>
+              <!-- <view>
                 <image class='ver-middle' src='/images/icon/icon_answer.png'></image>
                 <text class='ver-middle'>回答</text>
-              </view>
+              </view> -->
             </view>
           </view>
         </view>
+        <view wx:if='{{Load>0}}' style='font-size:28rpx;color:#aaa;text-align:center;margin-top:10rpx;'>{{Load ==1?'加载更多中...':'已没有更多内容'}}</view>
       </scroll-view>
     </swiper-item>
   </swiper>

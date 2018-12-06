@@ -1,8 +1,9 @@
 <!--pages/index/article_detail/article_detail.wxml-->
 <import src="../../wxParse/wxParse.wxml" />
 <view class='container'>
-  <view class='section'>
-    <view class='title'>
+  <video wx:if='{{is_video}}' style='width:100%; {{aboutData.video_url != ""?"position:fixed;top:0;left:0;z-index:99;":""}}' controls src='{{aboutData.video_url}}'></video>
+  <view class='section' style='{{aboutData.video_url != ""?"margin-top:69%;":""}}'>
+    <view class='title' style='width:100%; {{aboutData.video_url != ""?"position:fixed;top:33.5%;left:0;z-index:99;padding:20rpx;background-color:#fff;":""}}'>
       {{aboutData.article_title}}
     </view>
     <view class='author'>
@@ -64,10 +65,10 @@
   </view>
   <view class='fill_comment' style='padding-top:0px;'>
     <input bindconfirm='commentInput' value='{{inputTxt}}' confirm-type='send' maxlength='-1' style='display:inline-block;width:432rpx;padding:16rpx 0;margin-right:40rpx;font-size:26rpx;vertical-align:middle' placeholder='参与讨论' placeholder-style='text-align:center;font-size:24rpx;background:#ededed url(/images/icon/icon_discuss.png) no-repeat 30% ;background-size:26.4rpx 27.8rpx;border-radius:100rpx;padding:8rpx 0;'></input>
-    <image catchtap='wzdz' wx:if='{{aboutData.is_support > 0}}' class='ver-middle' src='/images/icon/ydz.png' style='width:44rpx;height:44rpx;'></image>
+    <image catchtap='wzdz' wx:if='{{articleIcon.is_support > 0}}' class='ver-middle' src='/images/icon/ydz.png' style='width:44rpx;height:44rpx;'></image>
     <image catchtap='wzdz' wx:else class='ver-middle' src='/images/icon/icon_dz.png' style='width:44rpx;height:44rpx;'></image>
 
-    <image catchtap='wzsc' wx:if='{{aboutData.is_collection > 0}}' class='ver-middle' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
+    <image catchtap='wzsc' wx:if='{{articleIcon.is_collection > 0}}' class='ver-middle' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
     <image catchtap='wzsc' wx:else class='ver-middle' src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;'></image>
 
     <image catchtap='onShareTop' class='ver-middle' src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;'></image>

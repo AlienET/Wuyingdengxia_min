@@ -1,0 +1,103 @@
+<!--pages/notice/notice.wxml-->
+<view class='section' style='margin:0;'>
+  <view class='action'>
+    <view bindtap="onBackTap" data-current="0" class='{{flag==0?"active":""}}'>
+      通知
+      <view class='default'>
+        <view></view>
+      </view>
+    </view>
+    <view bindtap="onBackTap" data-current="1" class='{{flag==1?"active":""}}'>
+      系统
+      <view class='default'>
+        <view></view>
+      </view>
+    </view>
+  </view>
+  <swiper current='{{flag}}' class='summarys' style="height:{{flag==0?100*TZ.length:100*XT.length}}px;min-height:800rpx;" bindchange='bindChange'>
+    <swiper-item>
+      <scroll-view scroll-y='true'>
+        <!-- <view class='column'>
+          <image style='width:126rpx;' mode='widthFix' src='/images/icon/TG.png'></image>
+          <view class='row'>
+            <view>
+              <text class='tit'>参会通知</text>
+              <text class='Ctime'>7天谴</text>
+            </view>
+            <view style='color:#A0A0A0;font-size:28rpx;'>
+              您提交的实名认证信息已通过审核，可参与会议报名功能，如有要参与的会议请前往会议资讯参与会议。
+            </view>
+          </view>
+        </view> -->
+        <view wx:if='{{TZ.length == 0}}' style='text-align:center;margin-top:40rpx;color:#999;font-size:30rpx;'>
+          你暂无通知消息...
+        </view>
+        <view class='column' wx:for='{{TZ}}' catchtap='OnH5Tap' data-item='{{item}}'>
+          <image wx:if='{{item.message_type == 0}}' style='width:126rpx;' mode='widthFix' src='/images/icon/SMRZ.png'></image>
+          <image wx:elif='{{item.message_type == 1}}' style='width:126rpx;' mode='widthFix' src='/images/icon/JB.png'></image>
+          <image wx:elif='{{item.message_type == 2}}' style='width:126rpx;' mode='widthFix' src='/images/icon/TG.png'></image>
+          <image wx:elif='{{item.message_type == 3}}' style='width:126rpx;' mode='widthFix' src='/images/icon/TG.png'></image>
+          <image wx:elif='{{item.message_type == 4}}' style='width:126rpx;' mode='widthFix' src='/images/icon/WJ.png'></image>
+          <image wx:elif='{{item.message_type == 5}}' style='width:126rpx;' mode='widthFix' src='/images/icon/CH.png'></image>
+          <image wx:elif='{{item.message_type == 6}}' style='width:126rpx;' mode='widthFix' src='/images/icon/CH.png'></image>
+          <image wx:elif='{{item.message_type == 7}}' style='width:126rpx;' mode='widthFix' src='/images/icon/XX.png'></image>
+          <image wx:else style='width:126rpx;' mode='widthFix' src='/images/icon/WJ.png'></image>
+          <view class='row'>
+            <view>
+              <!-- <text class='tit'>{{item.message_type == "0"?'实名认证消息':item.messages_type == "1"?'月亮币消息':item.messages_type == "2"?'投稿成功消息':messages_type == "3"?'退稿消息':messages_type == "4"?'问卷调查':messages_type == "5"?'参会通知':messages_type == "6"?'会议消息':messages_type == "7"?'消息':'投票'}}</text> -->
+              <text wx:if='{{item.message_type == "0"}}' class='tit'>实名认证消息</text>
+              <text wx:elif='{{item.message_type == "1"}}' class='tit'>月亮币消息</text>
+              <text wx:elif='{{item.message_type == "2"}}' class='tit'>投稿成功消息</text>
+              <text wx:elif='{{item.message_type == "3"}}' class='tit'>退稿消息</text>
+              <text wx:elif='{{item.message_type == "4"}}' class='tit'>问卷调查</text>
+              <text wx:elif='{{item.message_type == "5"}}' class='tit'>参会通知</text>
+              <text wx:elif='{{item.message_type == "6"}}' class='tit'>会议消息</text>
+              <text wx:elif='{{item.message_type == "7"}}' class='tit'>消息</text>
+              <text wx:else class='tit'>投票</text>
+              <text class='Ctime'>{{item.ctime}}</text>
+            </view>
+            <view style='color:#A0A0A0;font-size:28rpx;'>
+              {{item.content}}
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y='true'>
+      <view wx:if='{{XT.length == 0}}' style='text-align:center;margin-top:40rpx;color:#999;font-size:30rpx;'>
+          你暂无系统消息...
+        </view>
+        <view class='column' wx:for='{{XT}}'>
+          <image wx:if='{{item.message_type == 0}}' style='width:126rpx;' mode='widthFix' src='/images/icon/SMRZ.png'></image>
+          <image wx:elif='{{item.message_type == 1}}' style='width:126rpx;' mode='widthFix' src='/images/icon/JB.png'></image>
+          <image wx:elif='{{item.message_type == 2}}' style='width:126rpx;' mode='widthFix' src='/images/icon/TG.png'></image>
+          <image wx:elif='{{item.message_type == 3}}' style='width:126rpx;' mode='widthFix' src='/images/icon/TG.png'></image>
+          <image wx:elif='{{item.message_type == 4}}' style='width:126rpx;' mode='widthFix' src='/images/icon/WJ.png'></image>
+          <image wx:elif='{{item.message_type == 5}}' style='width:126rpx;' mode='widthFix' src='/images/icon/CH.png'></image>
+          <image wx:elif='{{item.message_type == 6}}' style='width:126rpx;' mode='widthFix' src='/images/icon/CH.png'></image>
+          <image wx:elif='{{item.message_type == 7}}' style='width:126rpx;' mode='widthFix' src='/images/icon/XX.png'></image>
+          <image wx:else style='width:126rpx;' mode='widthFix' src='/images/icon/WJ.png'></image>
+          <view class='row'>
+            <view>
+              <!-- <text class='tit'>{{item.message_type == "0"?'实名认证消息':item.messages_type == "1"?'月亮币消息':item.messages_type == "2"?'投稿成功消息':messages_type == "3"?'退稿消息':messages_type == "4"?'问卷调查':messages_type == "5"?'参会通知':messages_type == "6"?'会议消息':messages_type == "7"?'消息':'投票'}}</text> -->
+              <text wx:if='{{item.message_type == "0"}}' class='tit'>实名认证消息</text>
+              <text wx:elif='{{item.message_type == "1"}}' class='tit'>月亮币消息</text>
+              <text wx:elif='{{item.message_type == "2"}}' class='tit'>投稿成功消息</text>
+              <text wx:elif='{{item.message_type == "3"}}' class='tit'>退稿消息</text>
+              <text wx:elif='{{item.message_type == "4"}}' class='tit'>问卷调查</text>
+              <text wx:elif='{{item.message_type == "5"}}' class='tit'>参会通知</text>
+              <text wx:elif='{{item.message_type == "6"}}' class='tit'>会议消息</text>
+              <text wx:elif='{{item.message_type == "7"}}' class='tit'>消息</text>
+              <text wx:else class='tit'>投票</text>
+              <text class='Ctime'>{{item.ctime}}</text>
+            </view>
+            <view style='color:#A0A0A0;font-size:28rpx;'>
+              {{item.content}}
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

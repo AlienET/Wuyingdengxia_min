@@ -19,9 +19,9 @@ Page({
     var url = '';
     var yszg = app.bannerUrl.substr(0,4);
     if(yszg == 'yszg'){
-      url = 'https://' + app.bannerUrl + '&userId=' + options.userid;
+      url = 'https://' + app.bannerUrl + '&userid=' + options.userid;
     }else{
-      url = 'https://' + app.bannerUrl;
+      url = app.bannerUrl+'&userid='+app.userData.userid;
     }
     console.log(url)
     that.setData({
@@ -57,7 +57,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    
   },
 
   /**

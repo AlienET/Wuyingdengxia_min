@@ -1,4 +1,5 @@
 // pages/SignBoard/SignBoard.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -16,21 +17,27 @@ Page({
   },
   // 兑换礼物详情
   ongiftDetailsTap: function (e) {
-    console.log(e.currentTarget.dataset.postid)
+    console.log(e.currentTarget.dataset.item)
+    var item = e.currentTarget.dataset.item;
+    app.goods = item;
     wx.navigateTo({
-      url: '../giftDetails/giftDetails?goods_id=' + e.currentTarget.dataset.postid,
+      url: '../giftDetails/giftDetails',
     })
   },
   // 签到领币
   onSignTap: function () {
     var that = this;
-    if (that.data.isSign == 0) {
+    if (that.data.isSign == '未签到') {
+      var data = new Object();
+      data.userid = app.userData.userid;
+      data.toid = '0';
+      data.type = '1';
+      data = JSON.stringify(data); // 转JSON字符串
+      var data = RSA.sign(data);
       wx.request({
-        url: app.InterfaceUrl + 'post_sign',
+        url: app.InterfaceUrl+'usermanage/userSign',
         data: {
-          userid: app.userData.user_id,
-          type: 1,
-          toid: 0
+          data : data
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -46,7 +53,7 @@ Page({
             icon: 'success',
             duration: 1500,
             success:function(res){
-              that.setData({isSign:1})
+              that.setData({isSign:'已签到'})
             }
           })
         }
@@ -67,20 +74,34 @@ Page({
     that.setData({ aboutData: app.userData })
     // 兑换礼物列表
     wx.request({
-      url: app.InterfaceUrl + 'get_allgoods',
+      url: app.InterfaceUrl+'usermanage/getAllGoods',
       data: {},
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
-        console.log(res.data.data)
+        console.log(res)
         that.setData({ goods: res.data.data })
       }
     });
     // 今天是否签到
+    var sign = new Object();
+    sign.userid = app.userData.userid;
+    sign = JSON.stringify(sign); // 转JSON字符串
+    var data = RSA.sign(sign);
     wx.request({
-      url: app.InterfaceUrl + 'get_singdata?userid='+app.userData.user_id,
-      data: {},
+      url: app.InterfaceUrl+'usermanage/getSignData',
+      data: {
+        data: data
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
-        console.log(res.data.data)
-        that.setData({ isSign: res.data.data.isSign })
+        console.log(res)
+        that.setData({ isSign: res.data.msg })
       }
     })
   },
@@ -98,6 +119,7 @@ Page({
   onShow: function () {
     var that = this;
     that.setData({ aboutData: app.userData })
+    app.goods = '';
   },
 
   /**

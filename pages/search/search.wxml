@@ -4,9 +4,9 @@
     <view class='mt-n'>
       <label class='search'>
         <image class='i-search' src='/images/icon/icon_search.png'></image>
-        <input bindinput="onSearchTap" type='text' class='search' placeholder='输入想要搜索的关键词' maxlength='20' value='{{inputText}}'></input>
+        <input bindinput="onSearchTap" type='text' class='search' placeholder='输入想要搜索的关键词' maxlength='20' value='{{inputText}}' bindconfirm='onlishiTap'></input>
       </label>
-      <text catchtap='onBackTap' class='ver-middle' style='font-size:30rpx;color:#2DA3FF'>取消</text>
+      <text catchtap='onReturnTap' class='ver-middle' style='font-size:30rpx;color:#2DA3FF'>取消</text>
     </view>
   </view>
   <view class='section pt-n' wx:if='{{isShow}}'>
@@ -28,41 +28,95 @@
   </view>
   <view class='past_search_list' wx:if='{{isShow}}'>
     <view wx:for='{{searchHistory}}'>
-      {{item.search_content}}
-      <text catchtap='deleteSome' data-postid='{{item}}' style='float:right;font-size:30rpx;'>×</text>
+      <text catchtap='reciTap' data-content='{{item}}'>{{item}}</text>
+      <text catchtap='deleteSome' data-postid='{{index}}' style='float:right;font-size:30rpx;'>×</text>
     </view>
   </view>
-  <view wx:if='{{!isShow}}' style='padding-left:20rpx;background:#fff;'>   
-  <!-- text-hide -->
-    <view wx:if='{{shui==1}}' catchtap="onArticleDetailTap" style='border-bottom:1rpx solid #F3F3F3;padding:20rpx;padding-left:0rpx' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}'>
-      <view style='font-size:34rpx;color:#333;'>
-        {{item.title}}
+  <view wx:if='{{!isShow}}' style='background:#fff;'>
+    <!--onArticleDetailTap-->
+    <!-- text-hide -->
+
+    <view class='section'>
+      <view class='action'>
+        <view bindtap="onBackTap" data-current="0" class='{{flag==0?"active":""}}'>
+          文章
+          <view class='default'>
+            <view></view>
+          </view>
+        </view>
+        <view bindtap="onBackTap" data-current="1" class='{{flag==1?"active":""}}'>
+          问答
+          <view class='default'>
+            <view></view>
+          </view>
+        </view>
+        <view bindtap="onBackTap" data-current="2" class='{{flag==2?"active":""}}'>
+          视频
+          <view class='default'>
+            <view></view>
+          </view>
+        </view>
       </view>
-      <!-- <view class='text-hide mt-sm' style='font-size:28rpx;color:#999;'>{{item.content}}</view> -->
+      <swiper current='{{flag}}' style="height:{{flag==0?70*wenzhang.length:flag==1?70*wenda.length:70*shipin.length}}px;min-height:800rpx;" bindchange='bindChange'>
+        <swiper-item>
+          <scroll-view scroll-y='true'>
+            <view wx:if='{{wenzhang.length == 0}}' style='text-align:center;padding-top:50rpx;'>
+              没有找到相关内容...
+            </view>
+            <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{wenzhang}}' data-postid='{{item.id}}'>
+              <view>
+                <view class='abs_item_title'>
+                  {{item.title}}
+                </view>
+                <view class='abs_item_content'>
+                  <view class='content_txt  text-hide'>
+                    {{item.content}}
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view scroll-y='true'>
+            <view wx:if='{{wenda.length == 0}}' style='text-align:center;padding-top:50rpx;'>
+              没有找到相关内容...
+            </view>
+            <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{wenda}}' data-postid='{{item.id}}'>
+              <view>
+                <view class='abs_item_title'>
+                  {{item.title}}
+                </view>
+                <view class='abs_item_content'>
+                  <view class='content_txt  text-hide'>
+                    {{item.content}}
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view scroll-y='true'>
+            <view wx:if='{{shipin.length == 0}}' style='text-align:center;padding-top:50rpx;'>
+              没有找到相关内容...
+            </view>
+            <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{shipin}}' data-postid='{{item.replaySubId}}'>
+              <view>
+                <view class='abs_item_title'>
+                  {{item.meetingTitle}}
+                </view>
+                <view class='abs_item_content'>
+                  <view class='content_txt  text-hide'>
+                    演讲人: {{item.meetingSpecialist}}
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
     </view>
-    <view wx:if='{{shui==2}}' catchtap="onArticleDetailTap" style='border-bottom:1rpx solid #F3F3F3;padding:20rpx;padding-left:0rpx' wx:for='{{tabActiveKeyId}}' data-postid='{{item.meet_id}}'>
-      <view style='font-size:34rpx;color:#333;'>
-        {{item.meet_title}}
-      </view>
-      <view style='margin-top:10rpx;'>
-        <image mode='aspectFill' style='width:100%;height:300rpx;' src='{{item.meeting_image}}'></image>
-      </view>
-      <view class='text-hide mt-sm' style='font-size:28rpx;color:#999;'>{{item.meet_content}}</view>
-    </view>
-    <view wx:if='{{shui==3}}' catchtap="onArticleDetailTap" style='border-bottom:1rpx solid #F3F3F3;padding:20rpx;padding-left:0rpx' wx:for='{{tabActiveKeyId}}' data-postid='{{item.question_id}}'>
-      <view style='font-size:34rpx;color:#333;'>
-        {{item.question_title}}
-      </view>
-      <view class='text-hide mt-sm' style='font-size:28rpx;color:#999;'>{{item.ques_answer}}</view>
-    </view>
-    <view wx:if='{{shui==4}}' catchtap="onArticleDetailTap" style='border-bottom:1rpx solid #F3F3F3;padding:20rpx;padding-left:0rpx' wx:for='{{tabActiveKeyId}}' data-postid='{{item.replay_id}}'>
-      <view style='font-size:34rpx;color:#333;'>
-        {{item.replay_title}}
-      </view>
-      <view style='margin-top:10rpx;'>
-        <image mode='aspectFill' style='width:100%;height:300rpx;' src='{{item.front_img}}'></image>
-      </view>
-      <view class='text-hide mt-sm' style='font-size:28rpx;color:#999;'>{{item.begin_time}}</view>
-    </view>
+
   </view>
 </view>

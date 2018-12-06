@@ -1,4 +1,5 @@
 // pages/pastVideoList/pastVideoList.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -22,10 +23,19 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var replay_id = options.replay_id;
+    var data = new Object();
+    data.replay_id = options.replay_id;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'get_allsub_replay?replay_id=' + options.replay_id,
-      data:{},
+      url: app.InterfaceUrl+'activitymanage/getHistoryMeetReplay',
+      data:{
+        data:data
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       success:function(res){
         console.log(res.data.data);
         that.setData({subReplay:res.data.data})

@@ -17,12 +17,14 @@ Page({
     // 会议资讯 列表
     meetingList:[],
     // 往期回顾
-    replayList:[]
+    replayList:[],
+    //高度
+    Vheight:''
   },
   // 搜索页
   onSearchTap: function (e) {
     wx.navigateTo({
-      url: '../search/search?userid=' + this.data.userid + '&shui=' + e.currentTarget.dataset.shui
+      url: '../search/search'
     })
   },
   // 点击切换
@@ -80,26 +82,43 @@ Page({
     });
     // 会议资讯列
     wx.request({
-      url: app.InterfaceUrl + 'get_allmeeting',
+      url: app.InterfaceUrl+'activitymanage/getAllMeet',
       data:{},
-      header: { 'content-type': 'application/json'},
+      header: { 'content-type': 'application/x-www-form-urlencoded'},
+      method:'POST',
       success:function(res){
         console.log(res.data.data);
-        var meets = []
-        for (var i = res.data.data.length - 1; i >= 0; i--){
-          meets.push(res.data.data[i])
-        }
-        that.setData({ meetingList: meets})
+        // var meets = []
+        // for (var i = res.data.data.length - 1; i >= 0; i--){
+        //   meets.push(res.data.data[i])
+        // }
+        that.setData({ meetingList: res.data.data})
       }
     });
     // 往期回顾列
     wx.request({
-      url: app.InterfaceUrl + 'get_allreplay',
+      url: app.InterfaceUrl+'activitymanage/getAllHistoryMeet',
       data:{},
       header:{'content-type':'application/json'},
+      method:"POST",
       success:function(res){
         console.log(res.data.data);
         that.setData({replayList:res.data.data})
+      }
+    });
+    wx.getSystemInfo({
+      success(res) {
+        console.log(res.model)
+        console.log(res.pixelRatio)
+        console.log(res.windowWidth)
+        console.log(res.windowHeight)
+        console.log(res.language)
+        console.log(res.version)
+        console.log(res.platform)
+        var Vheight = res.windowHeight - 78;
+        that.setData({
+          Vheight: Vheight
+        })
       }
     })
   },

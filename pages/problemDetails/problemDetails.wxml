@@ -25,6 +25,7 @@
   <view class='content mt-md'>
     <!-- {{aboutData.question_content}} -->
     <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    <image wx:for='{{aboutData.question_image}}' src='{{item}}' style='width100%;' mode='widthFix'></image>
   </view>
   <view class='content_label'>
     <text wx:for='{{aboutData.question_tags}}'>{{item}}</text>
@@ -63,18 +64,22 @@
         <view class='column_tr'>
           <text class='column_time'>{{item.ctime}} ·</text>
           <text class='column_replay' catchtap='replay' data-item='{{item}}'>回复</text>
+          <view wx:if='{{userId == aboutData.user_id}}' style='float:right'>
+            <text wx:if='{{isTake && item.is_take==0}}' class='cn_btn' catchtap='cainai' data-postid='{{index}}'>采 纳</text>
+          </view>
         </view>
       </view>
       <view>
-        <image wx:if='{{item.is_take}}' mode='widthFix' style='width:100rpx;position: absolute;bottom:19.5rpx;right:0rpx;' src='/images/icon/cainaicon.png'></image>
+        <image wx:if='{{item.is_take>0}}' mode='widthFix' style='width:100rpx;position: absolute;bottom:19.5rpx;right:0rpx;' src='/images/icon/cainaicon.png'></image>
       </view>
     </view>
   </view>
+  <view style='height:120rpx;padding:10rpx;'></view>
   <view class='fill_comment'>
     <view style='vertical-align:middle;'>
       <input bindconfirm='commentInput' value='{{inputTxt}}' placeholder='我来回答' maxlength='-1' confirm-type='send' style='font-size:26rpx;' placeholder-style='text-align:center;font-size:26rpx;background:#ededed url(/images/icon/huidahei.png) no-repeat 35% ;background-size:26.4rpx 27.8rpx;'></input>
     </view>
-    <image wx:if='{{aboutData.is_collection}}' catchtap='wzsc' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
+    <image wx:if='{{isSC.is_collection>0}}' catchtap='wzsc' src='/images/icon/icon_ysc.png' style='width:50rpx;height:48rpx;'></image>
     <image wx:else catchtap='wzsc' src='/images/icon/icon_wsc.png' style='width:50rpx;height:48rpx;'></image>
     <image catchtap='onShareTop' src='/images/icon/icon_fx.png' style='width:42rpx;height:44rpx;'></image>
   </view>

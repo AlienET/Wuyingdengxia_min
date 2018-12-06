@@ -9,7 +9,7 @@ textarea {
   margin: 20rpx;
   font-size: 26rpx;
   width: 96%;
-  min-height: 90%;
+  min-height: 78%;
 }
 
 .fill_comment image, .fill_comment text {
@@ -65,12 +65,12 @@ switch {
   font-size: 32rpx;
 }
 
-.fill_comment .content_label text:last-child {
+/* .fill_comment .content_label text:last-child {
   float: right;
   width: 248rpx;
   border-color: #f0f0f0;
   color: #c9c9c9;
-}
+} */
 
 .fill_comment .content_label .prohibit {
   border-color: #f0f0f0;

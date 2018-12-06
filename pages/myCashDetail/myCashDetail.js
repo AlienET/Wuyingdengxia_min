@@ -35,18 +35,14 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // console.log(options)
-    // wx.request({
-    //   url: app.InterfaceUrl + 'get_goods_byid?goods_id=' + options.goods_id,
-    //   success:function(res){
-    //     console.log(res.data.data)
-    //     that.setData({goods:res.data.data})
-    //   }
-    // })
     wx.getStorage({
       key: 'goods',
       success: function (res) {
         console.log(res.data)
+        var begin_time = res.data.begin_time.split(' ')
+        var end_time = res.data.end_time.split(' ')
+        res.data.begin_time = begin_time[0];
+        res.data.end_time = end_time[0];
         that.setData({ goods: res.data })
       }
     })

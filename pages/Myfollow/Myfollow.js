@@ -1,14 +1,13 @@
 // pages/Myfollow/Myfollow.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
-const app = getApp()
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // 当前用户id
-    userid: '10003',
     // 列表 数据
     aboutData: [],
     // 关注切换
@@ -19,13 +18,18 @@ Page({
     var that = this;
     console.log(e.currentTarget.dataset.item);
     console.log(e.currentTarget.dataset.idx)
+    var befollid = e.currentTarget.dataset.item.user_id;
+    var data = new Object();
+    data.userid = app.userData.userid;
+    data.befollid = befollid;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
     if (e.currentTarget.dataset.item.state) {
       // 取消关注
       wx.request({
-        url: app.InterfaceUrl + 'post_cel_follow',
+        url: app.InterfaceUrl+'usermanage/cancelFollow',
         data: {
-          userid: app.userData.user_id,
-          befollid: e.currentTarget.dataset.item.followid
+          data:data
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -39,10 +43,9 @@ Page({
       })
     } else {
       wx.request({
-        url: app.InterfaceUrl + 'post_follow',
+        url: app.InterfaceUrl+'usermanage/addFollow',
         data: {
-          userid: app.userData.user_id,
-          befollid: e.currentTarget.dataset.item.followid
+          data:data
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -61,11 +64,21 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    var data = new Object();
+    data.userid = app.userData.userid;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'get_myfollow?userid=' + app.userData.user_id,
-      data: {},
+      url: app.InterfaceUrl+'usermanage/myFollow',
+      data: {
+        data: data
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
-        console.log(res.data.data);
+        console.log(res);
         that.setData({ aboutData: res.data.data });
         for (var i = that.data.aboutData.length - 1; i >= 0; i--) {
           var aboutData_state = 'aboutData[' + i + '].state'

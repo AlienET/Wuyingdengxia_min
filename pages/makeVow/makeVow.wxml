@@ -1,6 +1,21 @@
 <!--pages/makeVow/makeVow.wxml 我要许愿-->
-<textarea class='section' maxlength='-1' auto-height='true' value=''  placeholder='请输入要许愿的内容'></textarea>
+<textarea class='section' style='min-height:800rpx;' maxlength='-1' auto-height value='' bindinput='textarea'  placeholder='请输入要许愿的内容'></textarea>
 <view class='bottom_nav'>
-  <text class='inline-block txt-center'>￥</text>
-  <text catchtap='onMakeVowBtnTap' class='fl-r'>提交</text>
+  <text bindtap='moonTap' class='{{ moonNum.active?"moonNum":"mons"}} mos'>{{moonNum.num}}</text>
+  <text catchtap='onMakeVowBtnTap' class='fl-r'>许愿</text>
+  <view style='background:#fff;padding:20rpx;' wx:if='{{isMoon}}'>
+    <view style='font-size:28rpx;margin-bottom:20rpx;'>
+      <view class='inline-block'>选择悬赏月亮币</view>
+      <view style='float:right'>
+        <view class='inline-block' style='color:#999;margin-right:8rpx;'>当前月亮币</view>
+        <view class='inline-block' style='color:#FCBA2A;font-size:32rpx;'>{{currentMoonY}}</view>
+      </view>
+    </view>
+    <view class='content_label'>
+      <view style='display:flex;justify-content:space-between;flex-wrap:wrap'>
+        <text wx:for='{{moonY}}' bindtap='chooseMoon' data-item='{{item}}' data-idx='{{index}}' class='{{item.num>currentMoonY?"prohibit":""}}  {{item.active?"active":""}}'>{{item.num}}</text>
+        <!-- <text>输入其它金额</text> -->
+      </view>
+    </view>
+  </view>
 </view>

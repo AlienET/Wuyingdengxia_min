@@ -29,6 +29,6 @@
   </view>
   <view class='ml-md'>
     <text class='text-muted lw_nav'>有效期：</text>
-    <text class='lw_nav_code'>{{goods.begin_time}}-{{goods.end_time}}</text>
+    <text class='lw_nav_code'>{{goods.begin_time}} - {{goods.end_time}}</text>
   </view>
 </view>

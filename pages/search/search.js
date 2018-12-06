@@ -1,4 +1,5 @@
 // pages/index/search/search.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp()
 
@@ -14,257 +15,238 @@ Page({
     hotWords: [],
     // 搜索历史
     searchHistory: [],
-    isShow: true,
-    tabActiveKeyId: [],
+    isShow: true, 
+    wenzhang: [],
+    wenda: [],
+    shipin: [],
     inputText: '',
-    shui: ''
+    // tab切换
+    flag: 0,
+    //搜索内容
+    valuetxt:''
   },
-  reciTap: function (e) {
+  // 点击切换
+  onBackTap: function(e) {
+    var that = this;
+    console.log(e.target.dataset.current)
+    if (this.data.flag === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        flag: e.target.dataset.current
+      })
+    }
+  },
+  /** 
+   * 滑动切换tab 
+   */
+  bindChange: function(e) {
+    console.log(e.detail.current)
+    var that = this;
+    that.setData({
+      flag: e.detail.current
+    });
+    var data = new Object();
+    data.type = e.detail.current == 0 ? 1 : e.detail.current == 1 ? 4 : 3;
+    data.keyword = that.data.valuetxt;
+    data.offset = 0;
+    data.size = 10;
+    data.userid = app.userData.userid;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
+    wx.request({
+      url: app.InterfaceUrl+'homepagemanage/queryAllInfo',
+      data: {
+        data: data
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(res)
+        if (e.detail.current == 0) {
+          that.setData({
+            wenzhang: res.data.data.article.list
+          })
+          console.log(that.data.wenzhang)
+        } else if (e.detail.current == 1) {
+          that.setData({
+            wenda: res.data.data.question.list
+          })
+          console.log(that.data.wenda)
+        } else {
+          that.setData({
+            shipin: res.data.data.replay.list
+          })
+          console.log(that.data.shipin)
+        }
+      }
+    })
+  },
+  reciTap: function(e) {
     var that = this;
     that.setData({
       inputText: e.currentTarget.dataset.content,
       isShow: false
     });
-    if (that.data.shui == '1') {
-      wx.request({
-        url: app.InterfaceUrl + 'searchall?user_id=' + app.userData.user_id + '&key=' + e.currentTarget.dataset.content,
-        success: function (res) {
-          console.log(res)
-          var tabActiveKeyId = [];
-          console.log(res.data.data)
-          if (res.data.data.length > 10) {
-            for (var i = 9; i >= 0; i--) {
-              tabActiveKeyId.push(res.data.data[i])
-            }
-          } else {
-            tabActiveKeyId = res.data.data
-          }
-          that.setData({ tabActiveKeyId: tabActiveKeyId })
-          console.log(that.data.tabActiveKeyId)
-        }
-      })
-    } else if (that.data.shui == '2') {
-      wx.request({
-        url: app.InterfaceUrl + 'get_search_meeting?key=' + e.currentTarget.dataset.content + '&user_id=' + app.userData.user_id,
-        success: function (res) {
-          console.log(res)
-          var tabActiveKeyId = [];
-          console.log(res.data.data)
-          if (res.data.data.length > 10) {
-            for (var i = 9; i >= 0; i--) {
-              tabActiveKeyId.push(res.data.data[i])
-            }
-          } else {
-            tabActiveKeyId = res.data.data
-          }
-          that.setData({ tabActiveKeyId: tabActiveKeyId })
-          console.log(that.data.tabActiveKeyId)
-        }
-      })
-    } else if (that.data.shui == '3') {
-      wx.request({
-        url: app.InterfaceUrl + 'get_search_question?key=' + e.currentTarget.dataset.content + '&user_id=' + app.userData.user_id,
-        success: function (res) {
-          console.log(res)
-          var tabActiveKeyId = [];
-          console.log(res.data.data)
-          if (res.data.data.length > 10) {
-            for (var i = 9; i >= 0; i--) {
-              tabActiveKeyId.push(res.data.data[i])
-            }
-          } else {
-            tabActiveKeyId = res.data.data
-          }
-          that.setData({ tabActiveKeyId: tabActiveKeyId })
-          console.log(that.data.tabActiveKeyId)
-        }
-      })
-    } else {
-      wx.request({
-        url: app.InterfaceUrl + 'get_allreplay_bytitle?replay_title=' + e.currentTarget.dataset.content + '&user_id=' + app.userData.user_id,
-        success: function (res) {
-          console.log(res)
-          var tabActiveKeyId = [];
-          console.log(res.data.data)
-          if (res.data.data.length > 10) {
-            for (var i = 9; i >= 0; i--) {
-              tabActiveKeyId.push(res.data.data[i])
-            }
-          } else {
-            tabActiveKeyId = res.data.data
-          }
-          that.setData({ tabActiveKeyId: tabActiveKeyId })
-          console.log(that.data.tabActiveKeyId)
-        }
-      })
-    }
 
+    var data = new Object();
+    data.type = that.data.flag == 0 ? 1 : that.data.flag == 1 ? 4 : 3;
+    data.keyword = e.currentTarget.dataset.content;
+    data.offset = 0;
+    data.size = 10;
+    data.userid = app.userData.userid;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
+    wx.request({
+      url: app.InterfaceUrl+'homepagemanage/queryAllInfo',
+      data: {
+        data: data
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+        success: function(res) {
+          console.log(res)
+          that.setData({
+            wenzhang: res.data.data.article.list
+          })
+          console.log(that.data.wenzhang)
+        }
+      })
   },
-  onBackTap: function () {
+  //退出页面
+  onReturnTap: function () {
     wx.navigateBack({
       delta: 1
     })
   },
   // 历史搜索-删除某条
-  deleteSome: function (item) {
+  deleteSome: function(index) {
     var that = this;
-    console.log(item)
+    that.data.searchHistory.splice(index.currentTarget.dataset.postid,1)
+    that.setData({
+      searchHistory: that.data.searchHistory
+    })
+    var searchHistory = that.data.searchHistory.join(',')
+    wx.setStorage({
+      key: "LSSS",
+      data: searchHistory
+    });
+  },
+  //进详情
+  onArticleDetailTap: function(e) {
+    var that = this;
+      console.log(e.currentTarget.dataset.postid) //id
+    if (that.data.flag == 0) {
+        wx.navigateTo({
+          url: '../article_detail/article_detail?articleid=' + e.currentTarget.dataset.postid,
+        })
+    } else if (that.data.flag == 1) {
+        wx.navigateTo({
+          url: '../problemDetails/problemDetails?quesid=' + e.currentTarget.dataset.postid,
+        })
+      } else {
+        wx.navigateTo({
+          url: '../pastVideo/pastVideo?replay_sub_id=' + e.currentTarget.dataset.postid,
+        })
+      }
+  },
+  // input
+  onSearchTap: function(event) {
+    var that = this;
+    that.setData({
+      valuetxt: event.detail.value
+    })
+    console.log(event.detail.value)
+    if (event.detail.value != '') {
+      that.setData({
+        isShow: false
+      })
+    } else {
+      that.setData({
+        isShow: true
+      })
+    }
+    var data = new Object();
+    data.type = that.data.flag==0?1:that.data.flag==1?4:3;
+    data.keyword = event.detail.value;
+    data.offset = 0;
+    data.size = 10;
+    data.userid = app.userData.userid;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'clean_searchHistory',
+      url: app.InterfaceUrl+'homepagemanage/queryAllInfo',
       data: {
-        userId: app.userData.user_id,
-        type: that.data.shui,
-        del_id: item.currentTarget.dataset.postid.search_id
+        data: data
       },
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
       method: 'POST',
-      success: function (res) {
-        console.log(res);
-        for (var i = that.data.searchHistory.length - 1; i >= 0; i--) {
-          if (that.data.searchHistory[i].search_id == item.currentTarget.dataset.postid.search_id) {
-            that.data.searchHistory.splice(i, 1)
-            that.setData({ searchHistory: that.data.searchHistory })
-          }
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function(res) {
+        console.log(res)
+        console.log(that.data.flag)
+        if(that.data.flag==0){
+          that.setData({
+            wenzhang:res.data.data.article.list
+          })
+          console.log(that.data.wenzhang)
+        }else if(that.data.flag == 1){
+          that.setData({
+            wenda: res.data.data.question.list
+          })
+          console.log(that.data.wenda)
+        }else{
+          that.setData({
+            shipin: res.data.data.replay.list
+          })
+          console.log(that.data.shipin)
         }
       }
     })
   },
-  onArticleDetailTap: function (e) {
+  // 记录搜索
+  onlishiTap:function(e){
     var that = this;
-    if (that.data.shui == '1') {
-      console.log(e.currentTarget.dataset.postid.type)//id
-      if (e.currentTarget.dataset.postid.type == 1) {
-        wx.navigateTo({
-          url: '../article_detail/article_detail?articleid=' + e.currentTarget.dataset.postid.id,
-        })
-      } else if (e.currentTarget.dataset.postid.type == 2){
-        wx.navigateTo({
-          url: '../problemDetails/problemDetails?quesid=' + e.currentTarget.dataset.postid.id,
-        })
-      }else{
-        wx.navigateTo({
-          url: '../ConferenceDetails/ConferenceDetails?meet_id=' + e.currentTarget.dataset.postid.id,
+    var value = wx.getStorageSync('LSSS');
+    if(value){
+      value = value + ',' + e.detail.value;
+    }else{
+      value = e.detail.value;
+    }
+    console.log(value)
+    wx.setStorage({
+      key: "LSSS",
+      data: value,
+      success:function(){
+        var searchHistory = value.split(',');
+        that.setData({
+          searchHistory: searchHistory
         })
       }
-
-    } else if (that.data.shui == '2') {
-      wx.navigateTo({
-        url: '../ConferenceDetails/ConferenceDetails?meet_id=' + e.currentTarget.dataset.postid.id,
-      })
-    } else if (that.data.shui == '3') {
-      wx.navigateTo({
-        url: '../problemDetails/problemDetails?quesid=' + e.currentTarget.dataset.postid.id,
-      })
-    } else {
-      wx.navigateTo({
-        url: '../pastVideoList/pastVideoList?replay_id=' + e.currentTarget.dataset.postid,
-      })
-    }
-  },
-  // input
-  onSearchTap: function (event) {
-    var that = this;
-    console.log(event.detail.value)
-    if (event.detail.value != '') {
-      that.setData({ isShow: false })
-    } else {
-      that.setData({ isShow: true })
-    }
-    if (that.data.shui == '1') {
-      wx.request({
-        url: app.InterfaceUrl + 'searchall?user_id=' + app.userData.user_id + '&key=' + event.detail.value,
-        success: function (res) {
-          console.log(res)
-          var tabActiveKeyId = [];
-          if (res.data.data.length > 10) {
-            for (var i = 9; i >= 0; i--) {
-              tabActiveKeyId.push(res.data.data[i])
-            }
-          } else {
-            tabActiveKeyId = res.data.data
-          }
-          that.setData({ tabActiveKeyId: tabActiveKeyId })
-          console.log(that.data.tabActiveKeyId)
-        }
-      })
-    } else if (that.data.shui == '2') {
-      wx.request({
-        url: app.InterfaceUrl + 'get_search_meeting?user_id=' + app.userData.user_id + '&key=' + event.detail.value,
-        success: function (res) {
-          console.log(res)
-          var tabActiveKeyId = [];
-          console.log(res.data.data)
-          if (res.data.data.length > 10) {
-            for (var i = 9; i >= 0; i--) {
-              tabActiveKeyId.push(res.data.data[i])
-            }
-          } else {
-            tabActiveKeyId = res.data.data
-          }
-          that.setData({ tabActiveKeyId: tabActiveKeyId })
-          console.log(that.data.tabActiveKeyId)
-        }
-      })
-    } else if (that.data.shui == '3') {
-      wx.request({
-        url: app.InterfaceUrl + 'get_search_question?user_id=' + app.userData.user_id + '&key=' + event.detail.value,
-        success: function (res) {
-          console.log(res)
-          var tabActiveKeyId = [];
-          console.log(res.data.data)
-          if (res.data.data.length > 10) {
-            for (var i = 9; i >= 0; i--) {
-              tabActiveKeyId.push(res.data.data[i])
-            }
-          } else {
-            tabActiveKeyId = res.data.data
-          }
-          that.setData({ tabActiveKeyId: tabActiveKeyId })
-          console.log(that.data.tabActiveKeyId)
-        }
-      })
-    } else {
-      wx.request({
-        url: app.InterfaceUrl + 'get_allreplay_bytitle?replay_title=' + event.detail.value + '&user_id=' + app.userData.user_id,
-        success: function (res) {
-          console.log(res)
-          var tabActiveKeyId = [];
-          console.log(res.data.data)
-          if (res.data.data.length > 10) {
-            for (var i = 9; i >= 0; i--) {
-              tabActiveKeyId.push(res.data.data[i])
-            }
-          } else {
-            tabActiveKeyId = res.data.data
-          }
-          that.setData({ tabActiveKeyId: tabActiveKeyId })
-          console.log(that.data.tabActiveKeyId)
-        }
-      })
-    }
+    })
   },
   // 清空历史搜索
-  deleteall: function () {
+  deleteall: function() {
     var that = this;
-    wx.request({
-      url: app.InterfaceUrl + 'clean_searchHistory',
-      data: {
-        userId: app.userData.user_id,
-        type: that.data.shui,
-        del_id: 0
-      },
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      method: 'POST',
-      success: function (res) {
-        console.log(res);
-        that.setData({ searchHistory: '' })
+    wx.setStorage({
+      key: "LSSS",
+      data: '',
+      success:function(){
+        that.setData({
+          searchHistory : []
+        })
       }
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options);
     var that = this;
     that.setData({
@@ -273,26 +255,26 @@ Page({
     });
     // 热搜关键词
     wx.request({
-      url: app.InterfaceUrl + 'get_hotWords',
+      url: app.InterfaceUrl+'homepagemanage/getHotWords',
       data: {},
-      header: { 'content-type': 'application/json' },
-      success: function (res) {
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method:'POST',
+      success: function(res) {
+        console.log(res);
         that.setData({
           hotWords: res.data.data
         })
       }
     });
     // 获取历史搜索
-    wx.request({
-      url: app.InterfaceUrl + 'get_searchHistory?userId=' + app.userData.user_id + '&type=' + that.data.shui,
-      data: {},
-      header: { 'content-type': 'application/json' },
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          searchHistory: res.data.data
-        })
-      }
+    var searchHistory = wx.getStorageSync('LSSS');
+    if (searchHistory){
+      searchHistory = searchHistory.split(',');
+    }
+    that.setData({
+      searchHistory: searchHistory
     })
 
 
@@ -301,49 +283,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

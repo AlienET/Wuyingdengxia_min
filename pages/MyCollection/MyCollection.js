@@ -1,4 +1,5 @@
 // pages/MyCollection/MyCollection.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -25,26 +26,26 @@ Page({
   onArticleDetailTap: function (item) {
     console.log(item.currentTarget.dataset.postid.article_id)
     wx.navigateTo({
-      url: '../article_detail/article_detail?userid='+app.userData.user_id+'&articleid=' + item.currentTarget.dataset.postid.article_id,
+      url: '../article_detail/article_detail?articleid=' + item.currentTarget.dataset.postid.article_id,
     })
   },
   // 收藏问答详情
   onProblemDetailsTap: function (item) {
     console.log(item.currentTarget.dataset.quesid.question_id);
     wx.navigateTo({
-      url: '../problemDetails/problemDetails?userid='+app.userData.user_id+'&quesid=' + item.currentTarget.dataset.quesid.question_id,
+      url: '../problemDetails/problemDetails?quesid=' + item.currentTarget.dataset.quesid.question_id,
     })
   },
   // 收藏视频详情
   onPastVideoTap:function(videoid){
     wx.navigateTo({
-      url: '../pastVideo/pastVideo?userid='+app.userData.user_id+'&replay_sub_id=' + videoid.currentTarget.dataset.postid,
+      url: '../pastVideo/pastVideo?replay_sub_id=' + videoid.currentTarget.dataset.postid,
     })
   },
   // 点击切换
   onBackTap: function (e) {
     var that = this;
-
+    console.log(e.target.dataset.current)
     if (this.data.flag === e.target.dataset.current) {
       return false;
     } else {
@@ -72,10 +73,58 @@ Page({
     * 滑动切换tab 
     */
   bindChange: function (e) {
-
+    console.log(e.detail.current)
     var that = this;
     that.setData({ flag: e.detail.current });
-
+    if (e.detail.current == 1){
+      // 我的收藏(问答)
+      var data = new Object();
+      data.userid = app.userData.userid;
+      data = JSON.stringify(data); // 转JSON字符串
+      var data = RSA.sign(data);
+      wx.request({
+        url: app.InterfaceUrl+'usermanage/myCollectionQuestion',
+        data: {
+          data: data
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          console.log(res);
+          that.setData({
+            // Article: res.data.data,
+            Question: res.data.data,
+            // Video: res.data.data
+          })
+        }
+      });
+    } else if (e.detail.current == 2){
+      // 我的收藏(问答)
+      var data = new Object();
+      data.userid = app.userData.userid;
+      data = JSON.stringify(data); // 转JSON字符串
+      var data = RSA.sign(data);
+      wx.request({
+        url: app.InterfaceUrl+'usermanage/myCollectionReplay',
+        data: {
+          data: data
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          console.log(res);
+          that.setData({
+            // Article: res.data.data,
+            // Question: res.data.data,
+            Video: res.data.data
+          })
+        }
+      });
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -94,17 +143,26 @@ Page({
         });
       }
     });
-    // 我的收藏
+    // 我的收藏(文章)
+    var data = new Object();
+    data.userid = app.userData.userid;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'get_mycollection?userid='+app.userData.user_id,
-      data: {},
-      header: { 'content-type': 'application/json' },
+      url: app.InterfaceUrl+'usermanage/myCollectionArticle',
+      data: {
+        data: data
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
-        console.log(res.data.data);
+        console.log(res);
         that.setData({
-          Article: res.data.data.article,
-          Question: res.data.data.question,
-          Video: res.data.data.video
+          Article: res.data.data,
+          // Question: res.data.data.question,
+          // Video: res.data.data.video
         })
       }
     });

@@ -1,30 +1,33 @@
 <!--pages/replay/replay.wxml-->
 <view style='display: flex;flex-direction: row;padding:20rpx;padding-top:0rpx;'>
   <view style='display:inline-block;margin-top:15rpx;'>
-    <image src='{{aboutData.headimg}}' catchtap='onauthorTap' data-userid='{{aboutData.user_id}}' style='width:56rpx;height:56rpx;border-radius:50%;vertical-align:middle;'></image>
+    <image src='{{aboutData.headimg}}' catchtap='onauthorTap' data-userid='{{aboutData.follow_user_id}}' style='width:56rpx;height:56rpx;border-radius:50%;vertical-align:middle;'></image>
   </view>
   <view style='width:100%;padding:10rpx;padding-top:0rpx;'>
     <view style='overflow: hidden;vertical-align:middle;'>
-      <text style='font-size:26rpx;color:#666;' catchtap='onauthorTap' data-userid='{{aboutData.user_id}}'>{{aboutData.user_name}}</text>
-      <view class='follow' style='{{aboutData.is_follow > 0?"background:#E9E9E9":""}}' catchtap='follow'>{{aboutData.is_follow > 0 ?'已关注':'关注'}}</view>
+      <text style='font-size:26rpx;color:#666;' catchtap='onauthorTap' data-userid='{{aboutData.follow_user_id}}'>{{aboutData.user_name}}</text>
+      <view class='follow' style='{{commentData.is_follow > 0?"background:#E9E9E9":""}}' catchtap='follow'>{{commentData.is_follow > 0 ?'已关注':'关注'}}</view>
       <view style='color: #B9B9B9;font-size:22rpx;'>{{aboutData.ctime}}</view>
-      <view style='font-size:28rpx;color: #333333;margin-top:10rpx;'>{{aboutData.comment_content}}</view>
+      <view style='font-size:28rpx;color: #333333;margin-top:10rpx;'>{{aboutData.content}}</view>
     </view>
   </view>
 </view>
 <view class='gap'></view>
 <view class='comment'>
   <view class='comment_all'>全部回复
-    <text>{{commentData.length}}</text> 
+    <text>{{commentData.array.length}}</text> 
   </view>
   <view class='comment_list'>
-    <view class='column' wx:for='{{commentData}}'>
+    <view wx:if='{{commentData.array.length == 0}}' style='text-align:center;margin-top:30rpx;font-size:32rpx;color:#999'>暂无回复...</view>
+    <view class='column' wx:for='{{commentData.array}}'>
       <view class='column_img'>
-        <image src='{{item.headimg}}' catchtap='onauthorTap' data-userid='{{item.user_id}}'></image>
+        <image src='{{item.reply_user_headimg}}' catchtap='onauthorTap' data-userid='{{item.reply_userid}}'></image>
       </view>
       <view class='column_inner'>
         <view class='column_user'>
-          <text catchtap='onauthorTap' data-userid='{{item.user_id}}'>{{item.user_name}}</text>
+          <text catchtap='onauthorTap' data-userid='{{item.reply_userid}}'>{{item.reply_direction[0]}}</text>
+          <text style='font-size:22rpx;margin:0 10rpx;'>回复</text>
+          <text catchtap='onauthorTap' data-userid='{{item.reply_to_userid =="*"?aboutData.follow_user_id:item.reply_to_userid}}'>{{item.reply_direction[1]?item.reply_direction[1]:aboutData.user_name}}</text>
           <view class='column_btn'>
 
             <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">
@@ -33,14 +36,10 @@
                 举报
               </view>
             </view>
-
-            <image wx:if='{{item.is_support>0}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
-            <image wx:else catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-            <text>{{item.comment_support_num}}</text>
           </view>
         </view>
         <view class='column_text'>
-          {{item.comment_content}}
+          {{item.reply_content}}
         </view>
         <view class='column_tr'>
           <text class='column_time'>{{item.ctime}} ·</text>
@@ -51,6 +50,6 @@
   </view>
 </view>
 <view class='fill_comment' style='background:#F9F9F9'>
-  <input bindblur='commentInput' bindconfirm='confirmtxt' value='{{inputTxt}}' confirm-type='send' maxlength='-1' style='display:inline-block;width:432rpx;padding:10rpx 0;margin-right:40rpx;font-size:26rpx;vertical-align:middle;background:#EDEDED;border-radius:100rpx;padding:10rpx 20rpx;margin:0 10rpx;width:75%' placeholder='请输入想要评论的内容' placeholder-style='font-size:26rpx;'></input>
+  <input focus='{{focus}}' bindinput='commentInput' bindconfirm='confirmtxt' value='{{inputTxt}}' confirm-type='send' maxlength='-1' style='display:inline-block;width:432rpx;padding:10rpx 0;margin-right:40rpx;font-size:26rpx;vertical-align:middle;background:#EDEDED;border-radius:100rpx;padding:10rpx 20rpx;margin:0 10rpx;width:75%' placeholder='请输入想要评论的内容' placeholder-style='font-size:26rpx;'></input>
   <text class='fb' catchtap='onfb'>发布</text>
 </view>

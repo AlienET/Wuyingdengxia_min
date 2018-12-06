@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class='container'>
+<view class='conasdiner'>
   <view class='section mt-n'>
     <image catchtap='onRCtap' mode='widthFix' class='RC' src='/images/icon/icon_RichScan.png'></image>
     <label class='search'>
@@ -29,13 +29,17 @@
       {{item.key_dis_title}}
     </view>
   </view>
-  <swiper current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{tabActiveKeyId.length*140}}px" bindchange="bindChange">
+  <swiper current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{tabActiveKeyId.length!=0?tabActiveKeyId.length*120:300}}px" bindchange="bindChange">
     <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
-      <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}'>
+      <scroll-view style='height:100%;' bindscrolltolower='loadMoreData'>
+        <view wx:if='{{tabActiveKeyId.length==0}}' style='text-align:center;color#eee;font-size:28rpx;padding-top:40rpx;'>
+        该标签下暂无文章...
+      </view>
+      <view wx:eles catchtap="onArticleDetailTap" class='abs_item' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}'>
         <!-- wx:if='{{tabActiveKeyId}}'  -->
         <view class='abs_item_author'>
           <image src='{{item.headimg}}'></image>
-          <text>{{item.user_name}}</text>
+          <text>{{item.article_author}}</text>
         </view>
         <view wx:if='{{item.article_img_path.length != 1}}'>
           <view class='abs_item_title'>
@@ -50,7 +54,7 @@
         <view wx:if='{{item.article_img_path.length == 1}}' style='display:flex;flex-direction:row'>
           <view style='display:inline-block;width:60%;'>
             <view class='abs_item_title text-hide' style='-webkit-line-clamp:3'>{{item.article_title}}</view>
-            <view class='txt-r' style='text-align:left;'>
+            <view class='txt-r' style='text-align:left;margin-top:60rpx;'>
               <view>
                 <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
                 <text>{{item.overlook_num}}</text>
@@ -65,12 +69,12 @@
               </view>
             </view>
           </view>
-          <image src='{{item.article_img_path[0]}}' style='width:250rpx;height:150rpx;display:inline-block;margin-left:15rpx;' mode='aspectFill'></image>
+          <image src='{{item.article_img_path[0]}}' style='width:130px;height:150rpx;display:inline-block;margin-left:15rpx;' mode='aspectFill'></image>
         </view>
         <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""&&item.article_img_path.length != 1}}'>
           <image wx:for='{{item.article_img_path}}' wx:for-item="itm" src='{{itm}}' mode='aspectFill' style='width:{{item.article_img_path.length == 3?"33%":"100%"}};height:100%'></image>
         </view>
-        <view class='txt-r' wx:if='{{item.article_img_path.length != 1}}'>
+        <view class='txt-r' style='text-align:left' wx:if='{{item.article_img_path.length != 1}}'>
           <view>
             <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
             <text>{{item.overlook_num}}</text>
@@ -85,7 +89,9 @@
           </view>
         </view>
       </view>
+      </scroll-view>
     </swiper-item>
   </swiper>
+  <view wx:if='{{Load}}' style='font-size:30rpx;color:#aaa;text-align:center;'>正在加载 ...</view>
 </view>
 <!-- <button open-type="getUserInfo" class="agree" bindgetuserinfo="agreeGetUser" lang="zh_CN">去设置</button> -->

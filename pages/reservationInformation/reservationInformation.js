@@ -1,4 +1,5 @@
 // pages/reservationInformation/reservationInformation.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp();
 var util = require('../../utils/util.js');
@@ -8,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //会议标题
+    title: '',
     begin_time: '',
     end_time: '',
     meet_title: '',
@@ -54,7 +57,7 @@ Page({
     index: 0,
     fangxin: ['大床房', '标准间单住', '标准间拼住'],
     // 是否帮忙
-    isSwitch: false,
+    isSwitch: true,
     // 专委判断
     remark: true
   },
@@ -122,180 +125,87 @@ Page({
   // 报名提交页面 跳转
   onBmtjTap: function(e) {
     var that = this;
-    if (that.data.info.user_identity != '普通' && that.data.info.user_identity != '行业专家') {
-      if (that.data.terminus != '终点' && that.data.originating != '始发' && that.data.train_no != '选择车次' && that.data.f_terminus != '终点' && that.data.f_originating != '始发' && that.data.f_train_no != '') {
-        wx.showLoading({
-          title: '提交中',
+    var data = new Object();
+    data.user_id = app.userData.userid;
+    data.meet_id = that.data.meet_id;
+    //去程 车次
+    data.car_num1 = that.data.train_no;
+    //去程 始发
+    data.from1 = that.data.originating;
+    //去程 终点
+    data.to1 = that.data.terminus;
+    //去程 车次备选
+    data.car_num1b = that.data.trainAll;
+    //
+    data.from1b = '';
+    //
+    data.to1b = '';
+    //返程 车次选择
+    data.car_num2 = that.data.f_train_no;
+    //返程 始发
+    data.from2 = that.data.f_originating;
+    //返程 终点
+    data.to2 = that.data.f_terminus;
+    //返程 备选车次
+    data.car_num2b = that.data.f_trainAll;
+    //
+    data.from2b = '';
+    //
+    data.to2b = '';
+    //去程 备注
+    data.special1 = that.data.inputTxt;
+    //返程 备注
+    data.special2 = that.data.FinputTxt;
+    //住房 入住时间
+    data.begin_time = that.data.rzdate;
+    //住房 离开时间
+    data.end_time = that.data.lkdate;
+    //住房备注
+    data.remark = that.data.inputRemark;
+    //房型选择
+    data.room_type = that.data.index.toString();
+    //拼住人
+    data.together_people = that.data.inputTxtR;
+    //去程 乘车时间
+    data.car_num1_time = that.data.date;
+    //返程 乘车时间
+    data.car_num2_time = that.data.f_date;
+    data.take_type = '火车';
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
+    wx.showLoading({
+      title: '提交中',
+      success: function(res) {
+        wx.request({
+          url: app.InterfaceUrl+'activitymanage/AttendMeet',
+          data: {
+            data: data
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
           success: function(res) {
-            wx.request({
-              url: app.InterfaceUrl + 'post_attend',
-              data: {
-                user_id: app.userData.user_id,
-                meet_id: that.data.meet_id,
-                take_type: '火车',
-                car_num1: that.data.train_no,
-                from1: that.data.originating,
-                to1: that.data.terminus,
-                car_num1b: that.data.trainAll,
-                from1b: '',
-                to1b: '',
-                car_num2: that.data.f_train_no,
-                from2: that.data.f_originating,
-                to2: that.data.f_terminus,
-                car_num2b: that.data.f_trainAll,
-                from2b: '',
-                to2b: '',
-                special1: that.data.inputTxt,
-                special2: that.data.FinputTxt,
-                begin_time: that.data.rzdate,
-                end_time: that.data.lkdate,
-                remark: that.data.inputRemark,
-                together_people: that.data.inputTxtR,
-                room_type: that.data.index
-              },
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              method: 'POST',
-              success: function(res) {
-                console.log(res);
-                if (res.data.code == 1) {
-                  wx.navigateTo({
-                    url: '../applySubmit/applySubmit',
-                  })
-                } else {
-                  wx.hideLoading()
-                  wx.showToast({
-                    title: '提交失败...',
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              },
-              fail: function(error) {
-                console.log(error)
-              }
-            })
+            console.log(res);
+            if (res.data.code == 1) {
+              wx.navigateTo({
+                url: '../applySubmit/applySubmit?title=' + that.data.meet_title + '&begin_time=' + that.data.begin_time + '&end_time=' + that.data.end_time,
+              })
+            } else {
+              wx.hideLoading()
+              wx.showToast({
+                title: '提交失败...',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          },
+          fail: function(error) {
+            console.log(error)
           }
-        })
-
-      } else {
-        wx.showToast({
-          title: '请完善信息',
-          icon: 'none',
-          duration: 2000
         })
       }
-    } else {
-      console.log(1)
-      wx.showLoading({
-        title: ' ',
-        success: function(res) {
-          if (that.data.isSwitch) {
-            wx.request({
-              url: app.InterfaceUrl + 'post_attend',
-              data: {
-                user_id: app.userData.user_id,
-                meet_id: that.data.meet_id,
-                take_type: '火车',
-                car_num1: that.data.train_no,
-                from1: that.data.originating,
-                to1: that.data.terminus,
-                car_num1b: that.data.trainAll,
-                from1b: '',
-                to1b: '',
-                car_num2: that.data.f_train_no,
-                from2: that.data.f_originating,
-                to2: that.data.f_terminus,
-                car_num2b: that.data.f_trainAll,
-                from2b: '',
-                to2b: '',
-                special1: that.data.inputTxt,
-                special2: that.data.FinputTxt,
-                begin_time: that.data.rzdate,
-                end_time: that.data.lkdate,
-                remark: that.data.inputRemark,
-                together_people: that.data.inputTxtR,
-                room_type: that.data.index
-              },
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              method: 'POST',
-              success: function(res) {
-                console.log(res);
-                if (res.data.code == 1) {
-                  wx.navigateTo({
-                    url: '../applySubmit/applySubmit',
-                  })
-                } else {
-                  wx.hideLoading();
-                  wx.showToast({
-                    title: '提交失败...',
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              },
-              fail: function(error) {
-                console.log(error)
-              }
-            })
-          } else {
-            wx.request({
-              url: app.InterfaceUrl + 'post_attend',
-              data: {
-                user_id: app.userData.user_id,
-                meet_id: that.data.meet_id,
-                take_type: '火车',
-                car_num1: '',
-                from1: '',
-                to1: '',
-                car_num1b: '',
-                from1b: '',
-                to1b: '',
-                car_num2: '',
-                from2: '',
-                to2: '',
-                car_num2b: '',
-                from2b: '',
-                to2b: '',
-                special1: '',
-                special2: '',
-                begin_time: '',
-                end_time: '',
-                remark: '',
-                together_people: '',
-                room_type: ''
-              },
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              method: 'POST',
-              success: function(res) {
-                console.log(res);
-                if (res.data.code == 1) {
-                  wx.navigateTo({
-                    url: '../applySubmit/applySubmit',
-                  })
-                } else {
-                  wx.hideLoading();
-                  wx.showToast({
-                    title: '提交失败...',
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              },
-              fail: function(error) {
-                console.log(error)
-              }
-            })
-          }
-        }
-      })
-
-    }
+    })
   },
   // 日期
   bindDateChange: function(e) {
@@ -397,46 +307,57 @@ Page({
       f_date: startDate,
       rzdate: startDate,
       lkdate: startDate,
-      meet_id: options.meet_id
+      meet_id: options.meet_id,
     })
-    wx.request({
-      url: app.InterfaceUrl + 'get_myinfo?userid=' + app.userData.user_id + '&current_userid=' + app.userData.user_id,
-      data: {},
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function(res) {
-        console.log(res.data.data)
-        console.log(res.data.data.user_identity)
-        console.log(that.data.remark)
-        if (res.data.data.user_identity < 5 || res.data.data.user_identity > 6) {
-          that.setData({
-            isSwitch: true,
-            remark: false
-          })
-        }
-        console.log(that.data.remark)
-        if (res.data.data.user_identity == 0) {
-          res.data.data.user_identity = '主任委员'
-        } else if (res.data.data.user_identity == 1) {
-          res.data.data.user_identity = '副主任委员'
-        } else if (res.data.data.user_identity == 2) {
-          res.data.data.user_identity = '常务副主任委员'
-        } else if (res.data.data.user_identity == 3) {
-          res.data.data.user_identity = '秘书'
-        } else if (res.data.data.user_identity == 4) {
-          res.data.data.user_identity = '青年委员'
-        } else if (res.data.data.user_identity == 5) {
-          res.data.data.user_identity = '行业专家'
-        } else if (res.data.data.user_identity == 6) {
-          res.data.data.user_identity = '普通'
-        } else {
-          res.data.data.user_identity = '委员'
-        }
-        that.setData({
-          info: res.data.data
-        })
-      },
+    if (app.userData.user_identity > 6) {
+      that.setData({
+        isSwitch: false,
+        remark: false
+      })
+    }
+    that.setData({
+      info: app.userData
+    })
+    if (that.data.info.user_identity == 1) {
+      that.data.info.user_identity = '主任委员'
+    } else if (that.data.info.user_identity == 2) {
+      that.data.info.user_identity = '副主任委员'
+    } else if (that.data.info.user_identity == 3) {
+      that.data.info.user_identity = '常务副主任委员'
+    } else if (that.data.info.user_identity == 4) {
+      that.data.info.user_identity = '秘书'
+    } else if (that.data.info.user_identity == 5) {
+      that.data.info.user_identity = '青年委员'
+    } else if (that.data.info.user_identity == 6) {
+      that.data.info.user_identity = '委员'
+    } else if (that.data.info.user_identity == 7) {
+      that.data.info.user_identity = '普通'
+    } else {
+      that.data.info.user_identity = '行业专家'
+    }
+    if (that.data.info.special_committee == 1) {
+      that.data.info.special_committee = '手术装备与材料专业委员会'
+    } else if (that.data.info.special_committee == 2) {
+      that.data.info.special_committee = '内镜装备与材料专业委员会'
+    } else if (that.data.info.special_committee == 3) {
+      that.data.info.special_committee = '护理设备专业委员会'
+    } else if (that.data.info.special_committee == 4) {
+      that.data.info.special_committee = '耗材管理专业委员会'
+    } else if (that.data.info.special_committee == 5) {
+      that.data.info.special_committee = '血液净化装备与材料专业委员会'
+    } else if (that.data.info.special_committee == 6) {
+      that.data.info.special_committee = '区域器材灭菌管理专业委员会'
+    } else if (that.data.info.special_committee == 7) {
+      that.data.info.special_committee = '安全防护专业委员会'
+    } else if (that.data.info.special_committee == 8) {
+      that.data.info.special_committee = '康复与老年护理专业委员会'
+    } else if (that.data.info.special_committee == 9) {
+      that.data.info.special_committee = '介入装备与材料专业委员会'
+    } else {
+      that.data.info.special_committee = '无'
+    }
+    that.setData({
+      info: that.data.info
     })
     that.setData({
       begin_time: options.begin_time,

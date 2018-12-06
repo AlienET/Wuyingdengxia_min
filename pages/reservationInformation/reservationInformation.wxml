@@ -143,7 +143,7 @@
     <view class='tr' style='margin-top:10rpx;'>
       <image class='ver-middle' src='/images/icon/zhusu.png'></image>
       <text class='ver-middle'>{{isSwitch?'填写住房信息':'是否需要帮忙订房'}}</text>
-      <switch wx:if='{{remark}}' bindchange="switchChange" checked='{{isSwitch}}' style='float:right;margin-top:-9rpx;'></switch>
+      <switch wx:if='{{!remark}}' bindchange="switchChange" checked='{{isSwitch}}' style='float:right;margin-top:-9rpx;'></switch>
     </view>
     <view wx:if='{{isSwitch}}'>
       <view class='tr tr_bor'>
@@ -167,7 +167,7 @@
           </picker>
         </view>
       </view>
-      <view class='tr tr_bor' wx:if='{{remark}}'>
+      <view class='tr tr_bor' wx:if='{{!remark}}'>
         <view class='td td_t'>选择房型</view>
         <view class='td td_i'>
           <picker bindchange="bindPickerChange" value="{{index}}" range="{{fangxin}}">
@@ -177,13 +177,13 @@
           </picker>
         </view>
       </view>
-      <view class='tr tr_bor' wx:if='{{remark}}'>
+      <view class='tr tr_bor' wx:if='{{!remark}}'>
         <view class='td td_t'>拼住人</view>
         <view class='td td_i'>
           <input value='{{inputTxtR}}' placeholder='' bindinput='bzxxR'></input>
         </view>
       </view>
-      <view class='tr tr_bor'  wx:if='{{!remark}}'>
+      <view class='tr tr_bor'  wx:if='{{remark}}'>
         <view class='td td_t'>备注</view>
         <view class='td td_i'>
           <input value='{{inputRemark}}' placeholder='如有需要请备注' bindfocus='zfbz'></input>

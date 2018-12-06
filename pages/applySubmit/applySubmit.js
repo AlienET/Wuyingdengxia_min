@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    title:'',
+    begin_time:'',
+    end_time:''
   },
   back:function(){
     wx.navigateBack({
@@ -23,7 +25,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+   var that = this;
+   that.setData({
+     title: options.title,
+     begin_time: options.begin_time,
+     end_time : options.end_time
+   })
   },
 
   /**

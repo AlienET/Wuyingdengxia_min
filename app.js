@@ -1,56 +1,13 @@
 //app.js
+var RSA = require('utils/wx_rsa.js');
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     var that = this;
-    // 登录
-    wx.login({
-      success: res => {
-        console.log(res.code)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        var code = res.code;
-        var that = this;
-        wx.request({
-          url: that.InterfaceUrl + 'H5_login_wx?js_code=' + code,
-          data: {},
-          method: 'GET',
-          header: { 'content-type': 'application/json' },
-          success: function (res) {
-            console.log(res);
-            var openid = res.data.openid;
-            var session_key = res.data.session_key;
-            var unionid = res.data.unionid;
-            console.log(res.data.unionid)
-            that.mini_openid = openid;
-            wx.request({
-              url: that.InterfaceUrl + 'mini_wechat_login',
-              data: {
-                mini_openid: openid
-              },
-              method: 'GET',
-              success: function (res) {
-                console.log(res)
-                if (that.authSetting && res.data.msg == '请绑定手机号') {
-                  console.log(res.data.msg)
-                  wx.redirectTo({
-                    url: '/pages/verifyPhone/verifyPhone',
-                  })
-                } else {
-                  that.userData = res.data.data
-                  console.log(that.userData)
-                }
-              }
-            })
-          },
-          fail: function (error) {
-            console.log(error)
-          }
-        })
-      }
-    })
+
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -62,7 +19,46 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               console.log(res)
-              this.globalData.userInfo = res.userInfo
+              this.globalData.userInfo = res.userInfo;
+              // 登录
+              wx.login({
+                success: res => {
+                  console.log(res.code)
+                  // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                  var code = res.code;
+                  var that = this;
+                  var obj = new Object();
+                  obj.js_code = code;
+                  obj = JSON.stringify(obj); // 转JSON字符串
+                  var data = RSA.sign(obj);
+                  wx.request({
+                    url: that.InterfaceUrl+'usermanage/smallAppsWxLogin',
+                    data: {
+                      data: data
+                    },
+                    method: 'POST',
+                    header: {
+                      'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    success: function(res) {
+                      console.log(res);
+                      if (res.data.msg == '请完善信息') {
+                        console.log(res.data.msg);
+                        that.mini_openid = res.data.data.mini_openid;
+                        wx.redirectTo({
+                          url: '/pages/verifyPhone/verifyPhone',
+                        })
+                      } else {
+                        that.userData = res.data.data
+                        console.log(that.userData)
+                      }
+                    },
+                    fail: function(error) {
+                      console.log(error)
+                    }
+                  })
+                }
+              })
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
@@ -82,17 +78,17 @@ App({
     // 更新
     const updateManager = wx.getUpdateManager()
 
-    updateManager.onCheckForUpdate(function (res) {
+    updateManager.onCheckForUpdate(function(res) {
       // 请求完新版本信息的回调
       console.log(res.hasUpdate)
     })
 
-    updateManager.onUpdateReady(function () {
+    updateManager.onUpdateReady(function() {
       // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
       updateManager.applyUpdate()
 
     })
-    updateManager.onUpdateFailed(function () {
+    updateManager.onUpdateFailed(function() {
       // 新的版本下载失败
       console.log('失败')
     })
@@ -104,7 +100,7 @@ App({
 
 
   // 时间戳
-  getDateDiff: function (dateTimeStamp) {
+  getDateDiff: function(dateTimeStamp) {
     var result;
     var minute = 1000 * 60;
     var hour = minute * 60;
@@ -127,17 +123,13 @@ App({
       else {
         result = "" + parseInt(monthC / 12) + "年前";
       }
-    }
-    else if (weekC >= 1) {
+    } else if (weekC >= 1) {
       result = "" + parseInt(weekC) + "周前";
-    }
-    else if (dayC >= 1) {
+    } else if (dayC >= 1) {
       result = "" + parseInt(dayC) + "天前";
-    }
-    else if (hourC >= 1) {
+    } else if (hourC >= 1) {
       result = "" + parseInt(hourC) + "小时前";
-    }
-    else if (minC >= 1) {
+    } else if (minC >= 1) {
       result = "" + parseInt(minC) + "分钟前";
     } else {
       result = "刚刚";
@@ -146,7 +138,7 @@ App({
     return result;
   },
   // 接口
-  InterfaceUrl: 'https://yszg.org/index.php/API/',
+  InterfaceUrl: 'https://www.wydx.top/',
   // 已授权
   authSetting: false,
   // openid
@@ -188,6 +180,12 @@ App({
     // 科室
     useroffice: '',
     // 职务
-    userpost: ''
+    userpost: '',
+    //商品详情
+    goods:'',
+    //回复详情
+    replayInner:'',
+    //二维码token
+    Rcode:''
   }
 })

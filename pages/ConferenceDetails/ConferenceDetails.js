@@ -1,5 +1,6 @@
 // pages/ConferenceDetails/ConferenceDetails.js
 //获取应用实例
+var RSA = require('../../utils/wx_rsa.js');
 const app = getApp()
 Page({
 
@@ -53,20 +54,26 @@ Page({
   // 报名 预定信息填写
   onEnrollTap: function() {
     var that = this;
+    var obj = new Object();
+    obj.userid = app.userData.userid;
+    obj.current_userid = app.userData.userid;
+    obj = JSON.stringify(obj); // 转JSON字符串
+    var data = RSA.sign(obj);
     wx.request({
-      url: app.InterfaceUrl + 'mini_wechat_login',
+      url: app.InterfaceUrl + 'usermanage/getUserInfo',
       data: {
-        mini_openid: app.mini_openid
+        data: data
       },
-      method: 'GET',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
       success: function(res) {
+        console.log(res);
         app.userData = res.data.data;
         if (that.data.aboutData.is_attend == '0') {
-          console.log(1)
           if (that.data.isfinish == '1') {
-            console.log(2)
             if (app.userData.isfinishCer == "1") {
-              console.log(3)
               wx.navigateTo({
                 url: '../reservationInformation/reservationInformation?meet_title=' + that.data.aboutData.meet_title + '&begin_time=' + that.data.aboutData.begin_time + '&end_time=' + that.data.aboutData.end_time + '&meet_id=' + that.data.aboutData.meet_id
               })
@@ -86,22 +93,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(2)
     var that = this;
+    var meetContent = new Object();
+    meetContent.userid = app.userData.userid;
+    meetContent.meet_id = options.meet_id;
+    meetContent = JSON.stringify(meetContent); // 转JSON字符串
+    var data = RSA.sign(meetContent);
     // 获取会议详情
     wx.request({
-      url: app.InterfaceUrl + 'get_meeting_byid?meet_id=' + options.meet_id + '&user_id=' + app.userData.user_id,
-      data: {},
+      url: app.InterfaceUrl + 'activitymanage/getMeetById',
+      data: {
+        data: data
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
       success: function(res) {
         // var meet_class = res.data.data.meet_date.length == 0 ? '' : res.data.data.meet_date[0].meet_class;
-        console.log(res.data.data.meet_date)
+        console.log(res)
         if (res.data.data.meet_date.length != 0) {
           for (var i = res.data.data.meet_date.length - 1; i >= 0; i--) {
-            console.log(i)
             var date = res.data.data.meet_date[i].date.split(' ');
-            console.log(date)
             res.data.data.meet_date[i].date = date[0]
-            console.log(res.data.data.meet_date[i].date)
           }
         }
         that.setData({
@@ -126,19 +140,29 @@ Page({
    */
   onShow: function() {
     var that = this;
+    var meetContent = new Object();
+    meetContent.userid = app.userData.userid;
+    meetContent.meet_id = that.data.aboutData.meet_id;
+    meetContent = JSON.stringify(meetContent); // 转JSON字符串
+    var data = RSA.sign(meetContent);
     if (that.data.aboutData.meet_id != undefined) {
       // 获取会议详情
       wx.request({
-        url: app.InterfaceUrl + 'get_meeting_byid?meet_id=' + that.data.aboutData.meet_id + '&user_id=' + app.userData.user_id,
-        data: {},
+        url: app.InterfaceUrl + 'activitymanage/getMeetById',
+        data: {
+          data: data
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
         success: function(res) {
-          // var meet_class = res.data.data.meet_date.length == 0 ? '' : res.data.data.meet_date[0].meet_class;
+          console.log(res.data.data)
           that.setData({
             aboutData: res.data.data,
             schedule: res.data.data.meet_date,
             isfinish: res.data.data.isfinish
           });
-          console.log(res.data.data);
         }
       })
     }

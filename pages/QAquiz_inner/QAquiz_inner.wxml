@@ -1,5 +1,11 @@
 <!--pages/QAquiz_inner/QAquiz_inner.wxml 提问内容-->
 <textarea bindinput='textareaTap' placeholder='请输入问题内容' auto-height maxlength='-1'></textarea>
+<view class='mb-md'>
+  <view class='pice_item inline-block' wx:for='{{tempFilePaths}}'>
+    <image catchtap='imgDelete' data-deleteimg='{{index}}' class='img_delete' src='/images/icon/cha.png'></image>
+    <image class='img_item' src='{{item}}' mode='aspectFill'></image>
+  </view>
+</view>
 <view class='fill_comment' style='padding-bottom:0rpx;'>
   <view style='padding-bottom:20rpx;'>
     <image catchtap='onchooseImage' src='/images/icon/tupian.png' style='width:40rpx;height:34rpx;'></image>

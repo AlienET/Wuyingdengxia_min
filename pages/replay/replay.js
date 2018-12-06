@@ -1,139 +1,82 @@
 // pages/replay/replay.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     aboutData: null,
     commentData: [],
-    inputTxt: ''
+    inputTxt: '',
+    //唤醒键盘
+    focus: false,
+    //回复再回复id
+    replyId: ''
   },
   // 个人页
-  onauthorTap: function (e) {
+  onauthorTap: function(e) {
     console.log(e.currentTarget.dataset.userid)
     wx.navigateTo({
       url: '../authorInfo/authorInfo?userid=' + e.currentTarget.dataset.userid,
     })
   },
   // 关注
-  follow: function () {
+  follow: function() {
     var that = this;
-    if (that.data.aboutData.is_follow > 0) {
+    var data = new Object();
+    data.userid = app.userData.userid;
+    data.befollid = that.data.aboutData.follow_user_id;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
+    if (that.data.commentData.is_follow > 0) {
       wx.request({
-        url: app.InterfaceUrl + 'post_cel_follow',
+        url: app.InterfaceUrl + 'usermanage/cancelFollow',
         data: {
-          userid: app.userData.user_id,
-          befollid: that.data.aboutData.user_id
+          data: data
         },
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
         method: "POST",
-        success: function (res) {
+        success: function(res) {
           console.log(res)
           that.setData({
-            'aboutData.is_follow': 0
+            'commentData.is_follow': 0
           })
-          console.log(that.data.aboutData.is_follow)
         },
-        fail: function (error) {
+        fail: function(error) {
           console.log(error);
         }
       })
     } else {
       wx.request({
-        url: app.InterfaceUrl + 'post_follow',
+        url: app.InterfaceUrl + 'usermanage/addFollow',
         data: {
-          userid: app.userData.user_id,
-          befollid: that.data.aboutData.user_id
+          data: data
         },
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
         method: "POST",
-        success: function (res) {
+        success: function(res) {
           that.setData({
-            'aboutData.is_follow': 1
+            'commentData.is_follow': 1
           })
-          console.log(res)
         },
-        fail: function (error) {
+        fail: function(error) {
           console.log(error);
         }
       })
     }
-  },
-  // 评论列点赞
-  like: function (index) {
-    var that = this;
-    console.log(that.data.commentData[index.currentTarget.dataset.postid].user_id)
-    // 获取点赞数 key_dis_list_id
-    var supportNum = 'commentData[' + index.currentTarget.dataset.postid + '].comment_support_num';
-    var isSupportM = 'commentData[' + index.currentTarget.dataset.postid + '].is_support';
-    var isSupport = that.data.commentData[index.currentTarget.dataset.postid].is_support;
-    var comment_id = that.data.commentData[index.currentTarget.dataset.postid].comment_id;
-    if (isSupport > 0) {
-      wx.request({
-        url: app.InterfaceUrl + 'post_cel_support',
-        data: {
-          userid: app.userData.user_id,
-          toid: comment_id,
-          supType: 1
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        method: 'POST',
-        success: function (res) {
-          console.log(res);
-          // 点赞 + 1
-          var addNum = parseInt(that.data.commentData[index.currentTarget.dataset.postid].comment_support_num) - 1;
-          // 根据 讨论列数组下标修改点赞数
-          that.setData({
-            [supportNum]: addNum,
-            [isSupportM]: 0
-          })
-        },
-        fail: function (error) {
-          console.log(error)
-        }
-      })
-
-    } else {
-      wx.request({
-        url: app.InterfaceUrl + 'get_support',
-        data: {
-          userid: app.userData.user_id,
-          toid: that.data.commentData[index.currentTarget.dataset.postid].comment_id,
-          supType: 1
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        method: 'GET',
-        success: function (res) {
-          console.log(res.data);
-          // 点赞 + 1
-          var addNum = parseInt(that.data.commentData[index.currentTarget.dataset.postid].comment_support_num) + 1;
-          // 根据 讨论列数组下标修改点赞数
-          that.setData({
-            [supportNum]: addNum,
-            [isSupportM]: 1
-          })
-        },
-        fail: function (error) {
-          console.log(error)
-        }
-      })
-
-    }
-
   },
   // 举报切换
-  luelue: function (index) {
+  luelue: function(index) {
     var that = this;
     // console.log(index.currentTarget.dataset.postid);
-    var jubao = 'commentData[' + index.currentTarget.dataset.postid + '].jubao';
-    var Fjubao = that.data.commentData[index.currentTarget.dataset.postid].jubao;
+    var jubao = 'commentData.array[' + index.currentTarget.dataset.postid + '].jubao';
+    var Fjubao = that.data.commentData.array[index.currentTarget.dataset.postid].jubao;
     if (Fjubao) {
       that.setData({
         [jubao]: false
@@ -145,27 +88,31 @@ Page({
     }
   },
   // 举报
-  report: function (item) {
-    console.log(item.currentTarget.dataset.postid.jubao);
+  report: function(item) {
     var that = this;
+    var obj = new Object();
+    obj.user_id = app.userData.userid;
+    obj.to_id = item.currentTarget.dataset.postid.reply_id.toString();
+    obj.type = '1';
+    obj.to_type = that.data.aboutData.type;
+    obj.content = item.currentTarget.dataset.postid.reply_content;
+    obj.title = that.data.aboutData.title;
+    obj = JSON.stringify(obj); // 转JSON字符串
+    var data = RSA.sign(obj);
     wx.request({
-      url: app.InterfaceUrl + 'post_report',
+      url: app.InterfaceUrl + 'usermanage/addReport',
       data: {
-        user_id: app.userData.user_id,
-        to_id: item.currentTarget.dataset.postid.user_id,
-        type: 0,
-        to_type: 3,
-        content: item.currentTarget.dataset.postid.comment_content
+        data: data
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         // 隐藏 ‘举报’
         for (var i = that.data.commentData.length - 1; i >= 0; i--) {
-          var commentData_jubao = 'commentData[' + i + '].jubao'
+          var commentData_jubao = 'commentData.array[' + i + '].jubao'
           that.setData({
             [commentData_jubao]: false
           })
@@ -176,63 +123,77 @@ Page({
           duration: 1000,
         })
       },
-      fail: function (error) {
+      fail: function(error) {
         console.log(error);
       }
     })
   },
-  commentInput: function (event) {
+  commentInput: function(event) {
     var that = this;
     console.log(event.detail.value)
-    that.setData({ inputTxt: event.detail.value })
+    that.setData({
+      inputTxt: event.detail.value
+    })
   },
-  confirmtxt: function (event) {
+  confirmtxt: function(event) {
     var that = this;
+    var data = new Object();
+    data.userid = app.userData.userid;
+    data.toid = that.data.focus ? that.data.replyId.toString() : that.data.aboutData.comment_id;
+    data.comType = '1';
+    data.comContent = event.detail.value;
+    data.comment_to_type = that.data.aboutData.type;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'post_comment',
+      url: app.InterfaceUrl + 'usermanage/commentAndReply',
       data: {
-        userid: app.userData.user_id,
-        toid: that.data.aboutData.comment_id,
-        comType: 1,
-        comContent: event.detail.value,
-        comment_to_type: 3
+        data: data
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         console.log(res);
-
         // 获取评论数据
+        var obj = new Object();
+        obj.comment_id = that.data.aboutData.comment_id;
+        obj.user_id = app.userData.userid;
+        obj.follow_user_id = that.data.aboutData.follow_user_id;
+        obj = JSON.stringify(obj); // 转JSON字符串
+        var obj = RSA.sign(obj);
         wx.request({
-          url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.comment_id + '&comType=1&comment_to_type=3',
-          data: {},
-          header: {
-            'content-type': 'application/json'
+          url: app.InterfaceUrl + 'usermanage/getReplyList',
+          data: {
+            data: obj
           },
-          success: function (res) {
-            console.log(res.data.data);
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          success: function(res) {
+            console.log(res);
             var arrReverse = [];
             var time = '';
-            for (var i = res.data.data.length - 1; i >= 0; i--) {
-              if (res.data.data[i].user_id == app.userData.user_id) {
-
-                if (res.data.data[i].comment_content == event.detail.value) {
+            for (var i = res.data.data.array.length - 1; i >= 0; i--) {
+              if (res.data.data.array[i].reply_userid == app.userData.userid) {
+                if (res.data.data.array[i].reply_content == event.detail.value) {
                   console.log(res.data.data[i])
-                  res.data.data[i].jubao = false;
-                  res.data.data[i].ctime = '刚刚';
+                  res.data.data.array[i].jubao = false;
+                  res.data.data.array[i].ctime = '刚刚';
 
                   var refresh = [];
-                  refresh = res.data.data.splice(i, 1);
+                  refresh = res.data.data.array.splice(i, 1);
                   // this.DiscussListsData.unshift(refresh[0]);
 
-                  that.data.commentData.unshift(refresh[0]);
-                  arrReverse = that.data.commentData;
+                  that.data.commentData.array.unshift(refresh[0]);
+                  arrReverse = that.data.commentData.array;
                   console.log(arrReverse)
                   that.setData({
-                    commentData: arrReverse
+                    'commentData.array': arrReverse
                   });
+                  console.log(that.data.commentData.array)
                   return;
                 }
               }
@@ -240,65 +201,77 @@ Page({
             // console.log(that.data.commentData)
           }
         })
-        that.setData({ inputTxt: '' });
+        that.setData({
+          inputTxt: '',
+          focus: false
+        });
       },
-      fail: function (error) {
+      fail: function(error) {
         console.log(error);
       }
 
     })
   },
-  onfb: function () {
+  onfb: function() {
     var that = this;
-    // 获取评论数据
-    var inputTxt = that.data.inputTxt;
-    console.log(that.data.inputTxt)
+    var inputText = that.data.inputTxt;
+    var toid = that.data.focus ? that.data.replyId.toString() : that.data.aboutData.comment_id;
+    console.log(toid)
+    var data = new Object();
+    data.userid = app.userData.userid;
+    data.toid = toid;
+    data.comType = '1';
+    data.comContent = that.data.inputTxt;
+    data.comment_to_type = that.data.aboutData.type;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'post_comment',
+      url: app.InterfaceUrl + 'usermanage/commentAndReply',
       data: {
-        userid: app.userData.user_id,
-        toid: that.data.aboutData.comment_id,
-        comType: 1,
-        comContent: that.data.inputTxt,
-        comment_to_type: 3
+        data: data
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         console.log(res);
-
         // 获取评论数据
+        var obj = new Object();
+        obj.comment_id = that.data.aboutData.comment_id;
+        obj.user_id = app.userData.userid;
+        obj.follow_user_id = that.data.aboutData.follow_user_id;
+        obj = JSON.stringify(obj); // 转JSON字符串
+        var obj = RSA.sign(obj);
         wx.request({
-          url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + that.data.comment_id + '&comType=1&comment_to_type=3',
-          data: {},
-          header: {
-            'content-type': 'application/json'
+          url: app.InterfaceUrl + 'usermanage/getReplyList',
+          data: {
+            data: obj
           },
-          success: function (res) {
-            console.log(res.data.data);
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          success: function(res) {
+            console.log(res);
             var arrReverse = [];
             var time = '';
-            console.log(inputTxt)
-            for (var i = res.data.data.length - 1; i >= 0; i--) {
-              if (res.data.data[i].user_id == app.userData.user_id) {
-
-                if (res.data.data[i].comment_content == inputTxt) {
+            console.log(inputText)
+            for (var i = res.data.data.array.length - 1; i >= 0; i--) {
+              if (res.data.data.array[i].reply_userid == app.userData.userid) {
+                if (res.data.data.array[i].reply_content == inputText) {
                   console.log(res.data.data[i])
-                  res.data.data[i].jubao = false;
-                  res.data.data[i].ctime = '刚刚';
-
+                  res.data.data.array[i].jubao = false;
+                  res.data.data.array[i].ctime = '刚刚';
                   var refresh = [];
-                  refresh = res.data.data.splice(i, 1);
-                  // this.DiscussListsData.unshift(refresh[0]);
-
-                  that.data.commentData.unshift(refresh[0]);
-                  arrReverse = that.data.commentData;
+                  refresh = res.data.data.array.splice(i, 1);
+                  that.data.commentData.array.unshift(refresh[0]);
+                  arrReverse = that.data.commentData.array;
                   console.log(arrReverse)
                   that.setData({
-                    commentData: arrReverse
+                    'commentData.array': arrReverse
                   });
+                  console.log(that.data.commentData.array)
                   return;
                 }
               }
@@ -306,97 +279,114 @@ Page({
             // console.log(that.data.commentData)
           }
         })
-        that.setData({ inputTxt: '' });
+        that.setData({
+          inputTxt: '',
+          focus: false
+        });
       },
-      fail: function (error) {
+      fail: function(error) {
         console.log(error);
       }
-
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(options.comment_id)
+  onLoad: function(options) {
     var that = this;
+    console.log(app.replayInner)
     that.setData({
-      comment_id: options.comment_id
+      aboutData: app.replayInner
     })
+    var data = new Object();
+    data.comment_id = that.data.aboutData.comment_id;
+    data.user_id = app.userData.userid;
+    data.follow_user_id = that.data.aboutData.follow_user_id;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'get_comment_detail?comment_id=' + options.comment_id + '&userid=' + app.userData.user_id,
-      success: function (res) {
-        that.setData({ aboutData: res.data.data })
-        console.log(that.data.aboutData)
-      }
-    })
-    wx.request({
-      url: app.InterfaceUrl + 'get_allcomment_byid?toid=' + options.comment_id + '&comType=1&comment_to_type=3',
-      success: function (res) {
-        console.log(res.data.data)
-        var arrReverse = [];
+      url: app.InterfaceUrl + 'usermanage/getReplyList',
+      data: {
+        data: data
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function(res) {
+        console.log(res)
+        var arrReverse = '';
         var time = '';
-        for (var i = res.data.data.length - 1; i >= 0; i--) {
-          time = res.data.data[i].ctime.substring(0, 19);
+        for (var i = res.data.data.array.length - 1; i >= 0; i--) {
+          time = res.data.data.array[i].ctime.substring(0, 19);
           time = time.replace(/-/g, '/');
           time = new Date(time).getTime();
-          res.data.data[i].jubao = false;
-          res.data.data[i].ctime = app.getDateDiff(time);
+          res.data.data.array[i].jubao = false;
+          res.data.data.array[i].ctime = app.getDateDiff(time);
         }
         arrReverse = res.data.data
         that.setData({
           commentData: arrReverse
         });
+        console.log(that.data.commentData)
       }
     })
   },
-
+  //回复列回复
+  replay: function(item) {
+    console.log(item)
+    var that = this;
+    that.setData({
+      focus: true,
+      replyId: item.currentTarget.dataset.item.reply_id
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
+  onUnload: function() {
+    app.replayInner = '';
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

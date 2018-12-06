@@ -12,15 +12,9 @@ Page({
   // 我要许愿
   onmakeVowTap: function () {
     var that = this;
-    if (that.data.aboutData.isfinishCer == 0) {
-      wx.navigateTo({
-        url: '../Authentication1/Authentication1',
-      })
-    } else {
       wx.navigateTo({
         url: '../makeVow/makeVow',
       })
-    }
   },
   // 许愿记录
   onMakeVowRecordTap: function () {

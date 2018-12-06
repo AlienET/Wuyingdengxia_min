@@ -16,3 +16,6 @@
 .r_success{
   color: #44D783;
 }
+.r_default{
+  color: #5bc0de;
+}

@@ -1,0 +1,61 @@
+/* pages/notice/notice.wxss */
+
+.action {
+  margin: 0 20rpx;
+}
+
+.action > view {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  font-size: 34rpx;
+  padding: 15rpx 0;
+}
+
+.action .default {
+  text-align: center;
+  font-size: 12rpx;
+}
+
+.action .default view {
+  border: 3rpx solid #fff;
+  border-radius: 100%;
+  width: 25%;
+  display: inline-block;
+}
+
+.action>.active {
+  color: #0a93ff;
+  font-weight: 600;
+}
+
+.action .active .default view {
+  border-color: #0a93ff;
+}
+
+.column {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid #f7f7f7;
+  padding-bottom: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.column view.row {
+  padding: 0 20rpx;
+  width: 100%;
+  margin-left: 4rpx;
+}
+
+.tit {
+  color: #232323;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.Ctime {
+  float: right;
+  color: #a0a0a0;
+  font-size: 28rpx;
+  margin-top: 10rpx;
+}

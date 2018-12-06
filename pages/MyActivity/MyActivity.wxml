@@ -14,10 +14,10 @@
       </view>
     </view>
   </view>
-  <swiper current='{{flag}}' class='summarys' style="min-height:100%;height:{{200*Finished.length}}rpx" bindchange='bindChange'>
+  <swiper current='{{flag}}' class='summarys' style="min-height:800rpx;height:{{200*Finished.length}}rpx" bindchange='bindChange'>
     <swiper-item>
       <image wx:if='{{Finished.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wuhuodong.png'></image>
-      <view wx:for='{{Finished}}' catchtap='onweikaishi' data-id='{{item.meet_id}}' style='margin-bottom:20rpx;border-bottom:1rpx solid #EBEBEB;display:flex;flex-direction: row'>
+      <view wx:for='{{Finished}}' catchtap='onweikaishi' data-id='{{item}}' style='margin-bottom:20rpx;border-bottom:1rpx solid #EBEBEB;display:flex;flex-direction: row'>
         <image class='ver-middle' style='width:198rpx;height:154rpx;margin-right:10rpx;' mode='aspectFill' src='{{item.meeting_image}}'></image>
         <view class='ver-middle inline-block'>
           <view style='font-size:30rpx;'>{{item.meet_title}}</view>
@@ -32,13 +32,13 @@
     </swiper-item>
     <swiper-item>
       <image wx:if='{{NotBeginning.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wuhuodong.png'></image>
-      <view wx:for='{{NotBeginning}}'>
+      <view wx:for='{{NotBeginning}}' catchtap='hyxq' data-id='{{item}}' style='margin-bottom:20rpx;padding-bottom:20rpx;border-bottom:1rpx solid #F4F4F4;'>
         <image class='ver-middle' style='width:198rpx;height:154rpx;margin-right:10rpx;' src='{{item.meeting_image}}'></image>
-        <view class='ver-middle inline-block'>
-          <view>{{item.meet_title}}</view>
-          <view class='mt-sm' style='font-size:26rpx;color:#666;'>主讲人：刘教授</view>
-          <view class='txt-r mt-md'>
-
+        <view class='ver-middle inline-block' style='width:65%;vertical-align:top;'>
+          <view style='font-size:34rpx;margin-bottom:20rpx;' class='sheng'>{{item.meet_title}}</view>
+          <view class='mt-sm' style='font-size:26rpx;color:#666;' class='sheng'>{{item.begin_time}} - {{item.end_time}}</view>
+          <view class='txt-r mt-md' style='font-size:24rpx; {{item.is_sign == 0?"color:#D4B248;":"color:#00B26A;"}}'>
+            {{item.is_sign == 0?'未签到':'已签到'}}
           </view>
         </view>
       </view>

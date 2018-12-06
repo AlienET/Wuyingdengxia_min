@@ -1,4 +1,5 @@
 // pages/MyActivity/MyActivity.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -43,38 +44,55 @@ Page({
 
   },
   onweikaishi: function(e) {
+    console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
-      url: '../ConferenceDetails/ConferenceDetails?meet_id=' + e.currentTarget.dataset.id,
+      url: '../MyConferenceDetails/MyConferenceDetails?meet_id=' + e.currentTarget.dataset.id.meet_id + '&is_check=' + e.currentTarget.dataset.id.is_check + '&sr=1&userid=' + app.userData.userid,
+    })
+  },
+  //会议详情
+  hyxq: function(e) {
+    var that = this;
+    wx.navigateTo({
+      url: '../ConferenceDetails/ConferenceDetails?meet_id=' + e.currentTarget.dataset.id.meet_id,
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-    wx.request({
-      url: app.InterfaceUrl + 'get_mymetting?userid=' + app.userData.user_id,
-      data: {},
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function(res) {
-        console.log(res.data.data);
-        for (var i = res.data.data.length - 1; i >= 0; i--) {
-          if (res.data.data[i].isfinish == '1') {
-            that.data.Finished.unshift(res.data.data[i]);
-          } else {
-            that.data.NotBeginning.unshift(res.data.data[i])
-          }
-        }
-        that.setData({
-          NotBeginning: that.data.NotBeginning,
-          Finished: that.data.Finished
-        })
-        console.log(that.data.NotBeginning)
-        console.log(that.data.Finished)
-      }
-    })
+    // var that = this;
+    // var data = new Object();
+    // data.userid = app.userData.userid;
+    // data = JSON.stringify(data); // 转JSON字符串
+    // var data = RSA.sign(data);
+    // wx.request({
+    //   url: app.InterfaceUrl+'usermanage/myMeet',
+    //   data: {
+    //     data: data
+    //   },
+    //   method: 'POST',
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded'
+    //   },
+    //   success: function(res) {
+    //     console.log(res);
+    //     if (res.data.msg != '无会议信息') {
+    //       for (var i = res.data.data.length - 1; i >= 0; i--) {
+    //         if (res.data.data[i].isfinish == '1') {
+    //           that.data.Finished.unshift(res.data.data[i]);
+    //         } else {
+    //           that.data.NotBeginning.unshift(res.data.data[i])
+    //         }
+    //       }
+    //     }
+    //     that.setData({
+    //       NotBeginning: that.data.NotBeginning,
+    //       Finished: that.data.Finished
+    //     })
+    //     console.log(that.data.NotBeginning)
+    //     console.log(that.data.Finished)
+    //   }
+    // })
   },
 
   /**
@@ -88,7 +106,43 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    var that = this;
+    var data = new Object();
+    data.userid = app.userData.userid;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
+    wx.request({
+      url: app.InterfaceUrl+'usermanage/myMeet',
+      data: {
+        data: data
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function(res) {
+        console.log(res);
+        if (res.data.msg != '无会议信息') {
+          that.setData({
+            NotBeginning: [],
+            Finished: []
+          });
+          for (var i = res.data.data.length - 1; i >= 0; i--) {
+            if (res.data.data[i].isfinish == '1') {
+              that.data.Finished.unshift(res.data.data[i]);
+            } else {
+              that.data.NotBeginning.unshift(res.data.data[i])
+            }
+          }
+        }
+        that.setData({
+          NotBeginning: that.data.NotBeginning,
+          Finished: that.data.Finished
+        })
+        console.log(that.data.NotBeginning)
+        console.log(that.data.Finished)
+      }
+    })
   },
 
   /**

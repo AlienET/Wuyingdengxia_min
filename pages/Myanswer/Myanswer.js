@@ -1,4 +1,5 @@
 // pages/Myanswer/Myanswer.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -8,7 +9,6 @@ Page({
    */
   data: {
     // 当前用户id
-    userid: '10026',
     aboutData: []
   },
   onanswer:function(e){
@@ -22,11 +22,21 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    var data = new Object();
+    data.userid = app.userData.userid;
+    data = JSON.stringify(data); // 转JSON字符串
+    var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'get_myanswer?userid=' + app.userData.user_id,
-      data: {},
+      url: app.InterfaceUrl+'questionsmanage/myAnswer',
+      data: {
+        data: data
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       success: function (res) {
-        console.log(res.data.data);
+        console.log(res);
         var arrReverse = [];
         for (var i = res.data.data.length - 1; i >= 0; i--) {
           arrReverse.push(res.data.data[i]);

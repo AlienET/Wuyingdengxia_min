@@ -20,7 +20,7 @@
       </view>
     </view>
   </view>
-  <swiper current='{{flag}}' class='summarys' style="height:{{flag==0?310*Article.length:flag==1?310*Question.length:310*Video.length}}px;min-height:100%" bindchange='bindChange'>
+  <swiper current='{{flag}}' class='summarys' style="height:{{flag==0?310*Article.length:flag==1?310*Question.length:310*Video.length}}px;min-height:800rpx;" bindchange='bindChange'>
     <swiper-item>
       <scroll-view scroll-y='true'>
       <image wx:if='{{Article.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wushoucang.png'></image>
@@ -40,10 +40,10 @@
               </view>
             </view>
           </view>
-          <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""}}'>
+          <!-- <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""}}'>
             <image wx:for='{{item.article_img_path}}' wx:for-item="itm" src='{{itm}}' mode='aspectFill' style='width:{{item.article_img_path.length == 3?"33%":"100%"}};height:100%'></image>
-          </view>
-          <view class='txt-r'>
+          </view> -->
+          <view class='txt-r' style='text-align:left'>
             <view>
               <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
               <text>{{item.overlook_num}}</text>
@@ -87,10 +87,10 @@
       </view>
     </swiper-item>
     <swiper-item>
-      <!-- <view class='txt-center' wx:if='{{Video == null}}' style='margin-top:20rpx;font-size:30rpx;color:#999'>还没有收藏视频...</view> -->
+      <image wx:if='{{Video.length == 0}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wushoucang.png'></image>
       <image wx:if='{{Video == null}}' class='mt-md' style='width:100%' mode='widthFix' src='/images/kong/wushoucang.png'></image>
       <view wx:for='{{Video}}' catchtap='onPastVideoTap' data-postid='{{item.replay_sub_id}}' class='v_item'>
-        <image src='{{item.headimg}}'></image>
+        <video controls="{{false}}" show-play-btn="{{false}}" show-fullscreen-btn="{{false}}" show-center-play-btn="{{false}}" show-progress="{{false}}"  style='width:200rpx;height:150rpx' src='{{item.play_url}}'></video>
         <view class='item_xx'>
           <view class='fs-30'>{{item.meeting_title}}</view>
           <view class='xx_user'>主讲：{{item.meeting_specialist}}</view>

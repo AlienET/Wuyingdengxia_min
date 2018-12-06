@@ -1,0 +1,192 @@
+<!--pages/MyConferenceDetails/MyConferenceDetails.wxml-->
+<view class='xxTop' catchtap='hyxq'>
+  <!-- <view class='bmzt'>· 已通过</view> -->
+  <view  class='bmzt' wx:if='{{is_check==0}}' style='color:#ec971f'>· 审核中</view>
+  <view  class='bmzt' wx:elif='{{is_check==1}}'>· 已通过</view>
+  <view  class='bmzt' wx:else style='color: #c9302c;'>· 未通过</view>
+  <view style='display: flex;flex-direction: row;justify-content:space-between;margin-bottom:20rpx;'>
+    <text style='color:#fff;font-size:28rpx;'>{{aboutData.meet_title}}</text>
+    <image src='/images/icon/jiantou4.png' style='width:16rpx' mode='widthFix'></image>
+  </view>
+  <view style='font-size:22rpx;color:#fff;'>
+    <!-- 2084年4月28号 -->
+    {{aboutData.meet_begin_time}}
+  </view>
+</view>
+<view style='padding:20rpx;padding-bottom:0rpx;'>
+<!-- 报名费 -->
+  <!-- <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;display:flex;flex-direction: row;justify-content:space-between;padding-bottom:20rpx;'>
+    <view style='display:inline-block;width:300rpx;color:#9F9F9F;'>
+      报名费
+    </view>
+    <view>
+      ¥680
+    </view>
+  </view> -->
+  <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;display:flex;flex-direction: row;justify-content:space-between;' catchtap='Rcode'>
+    <view style='display:inline-block;width:300rpx;color:#9F9F9F;line-height:60rpx;'>
+      参会二维码
+    </view>
+    <view>
+      <image class='ver-middle' src='/images/icon/er.png' style='width:60rpx;margin-right:20rpx;' mode='widthFix'></image>
+      <image class='ver-middle' src='/images/icon/jiantouhui.png' style='width:15rpx' mode='widthFix'></image>
+    </view>
+  </view>
+  <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;display:flex;flex-direction: row;justify-content:space-between;padding:20rpx 0rpx;'>
+    <view style='display:inline-block;width:300rpx;color:#9F9F9F;'>
+      签到状态
+    </view>
+    <view>
+      {{aboutData.is_sign>0?'已签到':'未签到'}}
+    </view>
+  </view>
+</view>
+<view class='gap'></view>
+<view style='padding:0 20rpx;'>
+  <view style='color:#333333;font-size:30rpx;padding:20rpx 0;'>参会信息</view>
+  <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+    <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+      参会人
+    </view>
+    <view style='display:inline-block;color:#5C5C5C;'>
+      {{aboutData.user_name}}
+    </view>
+  </view>
+  <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+    <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+      联系方式
+    </view>
+    <view style='display:inline-block;color:#5C5C5C;'>
+      {{aboutData.phone_num}}
+    </view>
+  </view>
+</view>
+<view class='gap'></view>
+<view style='padding:0 20rpx;margin-bottom:20rpx;'>
+  <view style='padding:20rpx 0;display:flex;flex-direction: row;justify-content:space-between;' catchtap='ccxx1'>
+    <view class='ver-middle' style='color:#333333;font-size:30rpx;'>
+      乘车信息(1)
+    </view>
+    <image class='ver-middle' src='/images/icon/jiantouhui.png' style='width:15rpx; {{ccxx1?"transform:rotate(90deg)":""}}' mode='widthFix'></image>
+  </view>
+  <view wx:if='{{ccxx1}}'>
+    <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+      <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+        行程
+      </view>
+      <view style='display:inline-block;color:#5C5C5C;'>
+        {{aboutData.from1}} - {{aboutData.to1}}
+      </view>
+    </view>
+    <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+      <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+        日期
+      </view>
+      <view style='display:inline-block;color:#5C5C5C;'>
+        {{aboutData.car_num1_time}}
+      </view>
+    </view>
+    <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+      <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+        车次\备选
+      </view>
+      <view style='display:inline-block;color:#5C5C5C;'>
+        {{aboutData.car_num1}}/{{aboutData.car_num1b}}
+      </view>
+    </view>
+    <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+      <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+        备注
+      </view>
+      <view style='display:inline-block;color:#5C5C5C;'>
+        {{aboutData.special1}}
+      </view>
+    </view>
+  </view>
+</view>
+<view style='padding:0 20rpx;margin-bottom:20rpx;'>
+  <view style='padding:20rpx 0;display:flex;flex-direction: row;justify-content:space-between;' catchtap='ccxx2'>
+    <view class='ver-middle' style='color:#333333;font-size:30rpx;'>
+      乘车信息(2)
+    </view>
+    <image class='ver-middle' src='/images/icon/jiantouhui.png' style='width:15rpx; {{ccxx2?"transform:rotate(90deg)":""}}' mode='widthFix'></image>
+  </view>
+  <view wx:if='{{ccxx2}}'>
+    <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+      <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+        行程
+      </view>
+      <view style='display:inline-block;color:#5C5C5C;'>
+        {{aboutData.from2}} - {{aboutData.to2}}
+      </view>
+    </view>
+    <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+      <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+        日期
+      </view>
+      <view style='display:inline-block;color:#5C5C5C;'>
+        {{aboutData.car_num2_time}}
+      </view>
+    </view>
+    <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+      <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+        车次\备选
+      </view>
+      <view style='display:inline-block;color:#5C5C5C;'>
+        {{aboutData.car_num2}}/{{aboutData.car_num2b}}
+      </view>
+    </view>
+    <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+      <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+        备注
+      </view>
+      <view style='display:inline-block;color:#5C5C5C;'>
+        {{aboutData.special2}}
+      </view>
+    </view>
+  </view>
+</view>
+<view class='gap'></view>
+<view style='padding:0 20rpx;'>
+  <view style='color:#333333;font-size:30rpx;padding:20rpx 0;'>住宿信息</view>
+  <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+    <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+      入离日期
+    </view>
+    <view style='display:inline-block;color:#5C5C5C;'>
+      {{aboutData.begin_time}} - {{aboutData.end_time}}
+    </view>
+  </view>
+  <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+    <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+      房型
+    </view>
+    <view style='display:inline-block;color:#5C5C5C;'>
+      {{aboutData.room_type=='0'?'大床房':aboutData.room_type == '1'?'标间':'标间拼住'}}
+    </view>
+  </view>
+  <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+    <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+      拼住人
+    </view>
+    <view style='display:inline-block;color:#5C5C5C;'>
+      {{aboutData.together_people}}
+    </view>
+  </view>
+  <view style='border-bottom:1rpx solid #F9F9F9;font-size:28rpx;padding:20rpx 0rpx;'>
+    <view style='display:inline-block;width:200rpx;color:#9F9F9F;'>
+      备注
+    </view>
+    <view style='display:inline-block;color:#5C5C5C;'>
+      {{aboutData.remark}}
+    </view>
+  </view>
+</view>
+<view style='height:100rpx;'></view>
+<view class='flex-b' wx:if='{{sr==1}}'>
+  <view class='lxhw' catchtap='onCallTap'>
+    <image src='/images/icon/huiwu.png' style='vertical-align:middle;width:40rpx;margin-right:10rpx;' mode='widthFix'></image>
+    <text style='vertical-align:middle;font-size:32rpx;'>联系会务</text>
+  </view>
+  <view class='baom' catchtap='onEnrollTap' style='{{is_check != 0?"background:#eee;color:#999":""}}'>取消报名</view>
+</view>

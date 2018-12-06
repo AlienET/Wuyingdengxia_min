@@ -1,4 +1,5 @@
 // pages/WishDetails/WishDetails.js
+var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp()
 Page({
@@ -17,18 +18,26 @@ Page({
       confirmColor: '#2da3ff',
       success: function (res) {
         if (res.confirm) {
-          console.log('用户点击确定');
+          var data = new Object();
+          data.wishid = that.data.aboutData.wishid;
+          data = JSON.stringify(data); // 转JSON字符串
+          var data = RSA.sign(data);
           wx.request({
-            url: app.InterfaceUrl + 'confirm_wish?wishid',
-            data: { wishid: that.data.aboutData.wishid},
+            url: app.InterfaceUrl+'usermanage/confirmWishRealization',
+            data: {
+              data:data
+            },
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
             success:function(res){
               console.log(res)
-              // wx.navigateBack({
-              //   delta: 1,
-              // })
+              wx.navigateBack({
+                delta: 1,
+              })
             }
           })
-          
         } else if (res.cancel) {
           console.log('用户点击取消');
         }

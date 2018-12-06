@@ -1,5 +1,5 @@
 <!--pages/discuss_details/discuss_details.wxml-->
-<import src="../../wxParse/wxParse.wxml"/>
+<import src="../../wxParse/wxParse.wxml" />
 <view class='container'>
   <view class='section'>
     <text class='discussion' style='{{type>0?"border-color:#FCBA2A;color:#FCBA2A;":""}}'>{{type>0?'问题征集':'正在讨论'}}</text>
@@ -10,26 +10,26 @@
       <text>{{aboutData.key_ctime}}</text>
     </view>
     <view class='content'>
-     <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
       <!-- {{aboutData.content}} -->
     </view>
   </view>
   <view style='height:30rpx;background-color:#F3F4F8;'></view>
-  <view class='comment'>
+  <view class='comment' style='margin-bottom:120rpx;'>
     <view class='comment_all'>全部评论
-      <text>{{DiscussListsData.length}}</text>
+      <text>{{DiscussListsData.length == 0?'':DiscussListsData.length}}</text>
     </view>
-    <view wx:if="{{!DiscussListsData.length == 0}}" style="text-align:center;padding:20rpx;color: #B9B9B9;font-size:30rpx;">
+    <view wx:if="{{DiscussListsData.length == 0}}" style="text-align:center;padding:20rpx;color: #B9B9B9;font-size:30rpx;">
       暂无评论 ...
     </view>
-    <view class='comment_list'>
+    <view wx:else class='comment_list'>
       <view class='column' wx:for='{{DiscussListsData}}'>
         <view class='column_img'>
-          <image  catchtap='onauthorTap' data-userid='{{item.user_id}}' src='{{item.headimg}}'></image>
+          <image catchtap='onauthorTap' data-userid='{{item.user_id}}' src='{{item.headimg}}'></image>
         </view>
         <view class='column_inner'>
           <view class='column_user'>
-            <text  catchtap='onauthorTap' data-userid='{{item.user_id}}'>{{item.user_name}}</text>
+            <text catchtap='onauthorTap' data-userid='{{item.user_id}}'>{{item.user_name ==''?'未命名':item.user_name}}</text>
             <view class='column_btn'>
 
               <view style="position: relative;vertical-align: middle;margin-right: 25rpx;display:inline-block">
@@ -42,11 +42,11 @@
               <!-- <image style='width:28rpx;height:24rpx;' catchtap='report' data-postid='{{item}}' src='/images/icon/icon_warn.png'></image> -->
               <image wx:if='{{item.is_support > 0}}' catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/ydz.png'></image>
               <image wx:else catchtap='like' data-postid='{{index}}' style='width:26rpx;height:26rpx;' src='/images/icon/icon_like.png'></image>
-              <text>{{item.support_num}}</text>
+              <text>{{item.comment_support_num}}</text>
             </view>
           </view>
           <view class='column_text'>
-            {{item.key_dis_content}}
+            {{item.comment_content}}
           </view>
           <view class='column_tr'>
             <text class='column_time'>{{item.ctime}}</text>
@@ -55,7 +55,7 @@
       </view>
     </view>
   </view>
-  
+
   <view class='fill_comment'>
     <input bindconfirm='commentInput' value='{{inputTxt}}' confirm-type='send' maxlength='-1' style='display:inline-block;width:97%;padding:10rpx 0;margin-right:40rpx;font-size:26rpx;' placeholder='参与讨论' placeholder-style='text-align:center;font-size:26rpx;background:#ededed url(/images/icon/icon_discuss.png) no-repeat 40% ;background-size:26.4rpx 27.8rpx;border-radius:100rpx;'></input>
   </view>

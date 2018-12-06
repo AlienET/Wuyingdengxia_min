@@ -38,10 +38,7 @@ Page({
     var that = this;
     console.log(options);
     that.setData({
-      goods_name: options.goods_name,
-      moon_cash: options.moon_cash,
-      courtesy_code: options.courtesy_code,
-      order_num: options.order_num
+      goods : app.goods
     })
   },
 

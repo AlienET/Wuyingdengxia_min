@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+var RSA = require('../../utils/wx_rsa.js');
 Page({
   data: {
     motto: 'Hello World',
@@ -24,66 +25,65 @@ Page({
     currentTab: '',
     // tab切换的当前key_id
     tabActiveKeyId: [],
+    //标签
+    LabelName: '热门',
+    //标签下文章的页数
+    ArticlePage: 1,
+    //Load 文章加载
+    Load: false,
+    BottomLoad:true
     // -------------------------------
   },
   //事件处理函数
 
   // 搜索页
-  onSearchTap: function () {
+  onSearchTap: function() {
     wx.navigateTo({
-      url: '../search/search?userid=' + this.data.userid + '&shui=1'
+      url: '../search/search'
     })
   },
-
   // 文章详情页
-  onArticleDetailTap: function (item) {
+  onArticleDetailTap: function(item) {
     wx.navigateTo({
-      url: '../article_detail/article_detail?articleid=' + item.currentTarget.dataset.postid.article_id + '&userid=' + this.data.userid
+      url: '../article_detail/article_detail?articleid=' + item.currentTarget.dataset.postid.article_id
     });
     // console.log(item.currentTarget.dataset.postid.article_id);
   },
   // 讨论详情
-  onDiscussDetailsTap: function (event) {
-    console.log(event.currentTarget.dataset.postid.type);
+  onDiscussDetailsTap: function(event) {
     wx.navigateTo({
       url: '../discuss_details/discuss_details?key_dis_id=' + event.currentTarget.dataset.postid.key_dis_id + '&type=' + event.currentTarget.dataset.postid.type,
     })
 
   },
   // 文章投稿
-  onContributeTap: function () {
+  onContributeTap: function() {
     wx.navigateTo({
       url: '../article_contribute/article_contribute',
     })
   },
   // 我的导航编辑
-  onNavEditTap: function () {
+  onNavEditTap: function() {
     wx.navigateTo({
-      url: '../myNavEdit/myNavEdit?userid=' + this.data.userid + '&who=1',
+      url: '../myNavEdit/myNavEdit?&who=1',
     })
   },
-  // 活动页
-  // onActionTap:function(){
-  //   wx.navigateTo({
-  //     url:'../meeting_mess/meeting_mess'
-  //   })
-  // },
-  bindViewTap: function () {
+  bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
   // 点击banner
-  onBannerImgTap: function (event) {
+  onBannerImgTap: function(event) {
     console.log(event.currentTarget.dataset.postid.banner_link)
     var arra = event.currentTarget.dataset.postid.banner_link.split('?');
     if (arra[0] == 'yszg.org/Wuyingdengxia/meetingDetails.html') {
       var canshu = arra[1].split('&');
       var canshuname = '';
       var canshuzhi = '';
-      for (var i = canshu.length - 1; i >= 0; i--){
+      for (var i = canshu.length - 1; i >= 0; i--) {
         var canshuArr = canshu[i].split('=');
-        if (canshuArr[0] == 'meet_id'){
+        if (canshuArr[0] == 'meet_id') {
           console.log(canshuArr)
           wx.navigateTo({
             url: '../ConferenceDetails/ConferenceDetails?meet_id=' + canshuArr[1],
@@ -93,39 +93,84 @@ Page({
     } else {
       app.bannerUrl = event.currentTarget.dataset.postid.banner_link;
       wx.navigateTo({
-        url: '../bannerTo/bannerTo?userid=' + app.userData.user_id,
+        url: '../bannerTo/bannerTo',
       })
     }
   },
-
   // 扫一扫
-  onRCtap: function () {
-    // 允许从相机和相册扫码
+  onRCtap: function() {
+    // wx.showToast({
+    //   title: '功能开发中敬请期待！',
+    //   icon: 'none',
+    //   duration: 1500
+    // })
+
+    //允许从相机和相册扫码
     wx.scanCode({
       success: (res) => {
         console.log(res)
-        console.log(res.result)
-        var login_token = res.result.split('=')
-        login_token = login_token[1]
-        console.log(login_token[1])
+        console.log(res.result);
+        var arr = res.result.split('&');
+        console.log(arr)
+        var data = new Object();
+        data.meet_id = arr[2];
+        data.userid = arr[1];
+        data.identity = app.userData.userPosition;
+        data = JSON.stringify(data); // 转JSON字符串
+        var data = RSA.sign(data);
         wx.request({
-          url: 'https://yszg.org/index.php/test/index?user_id=' + app.userData.user_id + '&user_token=' + app.userData.user_token + '&login_token=' + login_token,
-          success: function (res) {
-            console.log(res.data.msg)
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'success',
-              duration: 2000
-            })
+          url: app.InterfaceUrl + 'activitymanage/getAttendMeet',
+          data: {
+            data: data
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function(res) {
+            console.log(res)
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'success',
+                duration: 2000
+              })
+            } else {
+              console.log('success');
+              //MyConferenceDetails
+              wx.showLoading({
+                title: '加载中',
+                success: function() {
+                  wx.navigateTo({
+                    url: '../MyConferenceDetails/MyConferenceDetails?meet_id=' + arr[2] + '&is_check=1&sr=0&userid=' + arr[1]
+                  })
+                }
+              })
+
+            }
+          },
+          fail: function(error) {
+            console.log(error)
           }
         })
+        // wx.request({
+        //   url: 'https://yszg.org/index.php/test/index?user_id=' + app.userData.user_id + '&user_token=' + app.userData.user_token + '&login_token=' + login_token,
+        //   success: function (res) {
+        //     console.log(res.data.msg)
+        //     wx.showToast({
+        //       title: res.data.msg,
+        //       icon: 'success',
+        //       duration: 2000
+        //     })
+        //   }
+        // })
       }
     })
   },
   /** 
    * 点击tab切换
    */
-  swichNav: function (e) {
+  swichNav: function(e) {
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -134,13 +179,23 @@ Page({
         currentTab: e.target.dataset.current
       });
       // 文章列
+      var articleList = new Object();
+      articleList.label = that.data.labellist[e.target.dataset.current].name;
+      articleList.sortby = '1';
+      articleList.page = '1';
+      articleList.size = '15';
+      Adata = JSON.stringify(articleList); // 转JSON字符串
+      var Adata = RSA.sign(Adata);
       wx.request({
-        url: app.InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.target.dataset.current].name + '&sortby=1',
-        data: {},
-        header: {
-          'content-type': 'application/json' // 默认值
+        url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+        data: {
+          data: Adata
         },
-        success: function (res) {
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        method: 'POST',
+        success: function(res) {
           console.log(res.data.data)
           if (res.data.data.length < 30) {
             for (var i = res.data.data.length - 1; i >= 0; i--) {
@@ -179,20 +234,36 @@ Page({
     }
   },
   /** 
-     * 滑动切换tab 
-     */
-  bindChange: function (e) {
-
+   * 滑动切换tab 
+   */
+  bindChange: function(e) {
     var that = this;
-    that.setData({ currentTab: e.detail.current });
+    console.log(that.data.LabelName)
+    that.setData({
+      currentTab: e.detail.current
+    });
+    that.setData({
+      LabelName: that.data.labellist[e.detail.current].name,
+      ArticlePage: 1
+    });
     // 文章列
+    var articleList = new Object();
+    articleList.label = that.data.labellist[e.detail.current].name;
+    articleList.sortby = '1';
+    articleList.page = '1';
+    articleList.size = '15';
+    Adata = JSON.stringify(articleList); // 转JSON字符串
+    var Adata = RSA.sign(Adata);
     wx.request({
-      url: app.InterfaceUrl + 'get_article_bylabel?label=' + that.data.labellist[e.detail.current].name + '&sortby=1',
-      data: {},
-      header: {
-        'content-type': 'application/json' // 默认值
+      url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+      data: {
+        data: Adata
       },
-      success: function (res) {
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      method: 'POST',
+      success: function(res) {
         if (res.data.data.length < 30) {
           for (var i = res.data.data.length - 1; i >= 0; i--) {
             // console.log(res.data.data[i].article_img_path)//split(',');
@@ -224,14 +295,65 @@ Page({
       }
     });
   },
-
-  onLoad: function () {
+  //文章上拉到底刷新
+  loadMoreData: function() {
     var that = this;
-    // that.setData({ userid: app.userData.user_id})
+    that.setData({
+      Load: true
+    });
+    if (that.data.Load && that.data.BottomLoad) {
+      that.setData({
+        BottomLoad:false
+      })
+      // 文章列
+      var page = that.data.ArticlePage + 1;
+      var articleList = new Object();
+      articleList.label = that.data.labellist[that.data.currentTab].name;
+      articleList.sortby = '1';
+      articleList.page = page.toString();
+      articleList.size = '15';
+      Adata = JSON.stringify(articleList); // 转JSON字符串
+      var Adata = RSA.sign(Adata);
+      wx.request({
+        url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+        data: {
+          data: Adata
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        method: 'POST',
+        success: function(res) {
+          console.log(res)
+          var data = that.data.tabActiveKeyId;
+          for (var i = res.data.data.length - 1; i >= 0; i--) {
+            if (res.data.data[i].article_img_path == '') {
+              res.data.data[i].article_img_path = res.data.data[i].article_img_path;
+              data.push(res.data.data[i])
+            } else {
+              res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+              data.push(res.data.data[i])
+            }
+          };
+          var NewData = data.concat(res.data.data);
+          console.log(data)
+          that.setData({
+            tabActiveKeyId: NewData,
+            Load: false,
+            BottomLoad:true
+          });
+          console.log(that.data.tabActiveKeyId)
+        }
+      });
+    }
+  },
+  onLoad: function() {
+    var that = this;
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true,
+        // userid: app.userData.userid
       })
       console.log(app.userData)
     } else if (this.data.canIUse) {
@@ -259,95 +381,40 @@ Page({
     }
     // banner图
     wx.request({
-      url: app.InterfaceUrl + 'get_allbanner', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'homepagemanage/getLooppicture', //仅为示例，并非真实的接口地址
       data: {},
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
+      method: 'POST',
+      success: function(res) {
+        console.log(res)
         that.setData({
           bannerList: res.data.data,
         });
-        // console.log('banner图');
-        // console.log(that.data.bannerList);
+        console.log('banner图');
+        console.log(that.data.bannerList);
       }
     });
-    // 标签列表
+    // 热门话题
     wx.request({
-      url: app.InterfaceUrl + 'get_labels?userid=' + that.data.userid + '&type=1', //仅为示例，并非真实的接口地址
+      url: app.InterfaceUrl + 'homepagemanage/getHotTop', //仅为示例，并非真实的接口地址
       data: {},
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
-      success: function (res) {
-        that.setData({
-          labellist: res.data.data,
-          currentTab: 0
-        });
-        var initActive = that.data.labellist[0].name;
-        // 文章列
-        wx.request({
-          url: app.InterfaceUrl + 'get_article_bylabel?label=' + initActive + '&sortby=1',
-          data: {},
-          header: {
-            'content-type': 'application/json' // 默认值
-          },
-          success: function (res) {
-            if (res.data.data.length < 30) {
-              for (var i = res.data.data.length - 1; i >= 0; i--) {
-                // console.log(res.data.data[i].article_img_path)//split(',');
-                if (res.data.data[i].article_img_path == '') {
-                  res.data.data[i].article_img_path = res.data.data[i].article_img_path
-                } else {
-                  res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
-                }
-              };
-              that.setData({
-                tabActiveKeyId: res.data.data,
-              });
-            } else {
-              var arr = [];
-              for (var i = 30; i >= 0; i--) {
-                // console.log(res.data.data[i].article_img_path)//split(',');
-                if (res.data.data[i].article_img_path == '') {
-                  res.data.data[i].article_img_path = res.data.data[i].article_img_path;
-                  arr.unshift(res.data.data[i])
-                } else {
-                  res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
-                  arr.unshift(res.data.data[i])
-                }
-              };
-              that.setData({
-                tabActiveKeyId: arr,
-              });
-            }
-          }
-        });
-        // console.log('标签列');
-        // console.log(that.data.labellist);
-      }
-    });
-    // 正在讨论列
-    wx.request({
-      url: app.InterfaceUrl + 'get_hot_labelList?key_id=0', //仅为示例，并非真实的接口地址
-      data: {},
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res)
+      method: 'POST',
+      success: function(res) {
         that.setData({
           discusslist: res.data.data,
         });
-        // console.log('正在讨论列');
-        // console.log(res);
       }
     });
     /** 
-    * 获取系统信息 
-    */
+     * 获取系统信息 
+     */
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
@@ -359,22 +426,30 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     var that = this;
     // 标签列表
+    var labels = new Object();
+    labels.userid = app.userData ? app.userData.userid : '';
+    labels.type = '1';
+    data = JSON.stringify(labels); // 转JSON字符串
+    var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'get_labels?userid=' + app.userData.user_id + '&type=1', //仅为示例，并非真实的接口地址
-      data: {},
-      header: {
-        'content-type': 'application/json' // 默认值
+      url: app.InterfaceUrl + 'homepagemanage/getLabels', //仅为示例，并非真实的接口地址
+      data: {
+        data: data
       },
-      success: function (res) {
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      method: 'POST',
+      success: function(res) {
         that.setData({
           labellist: res.data.data,
           currentTab: app.ADcurrentTab
@@ -382,13 +457,23 @@ Page({
         var initActive = that.data.labellist[app.ADcurrentTab].name;
         console.log(initActive)
         // 文章列
+        var articleList = new Object();
+        articleList.label = initActive;
+        articleList.sortby = '1';
+        articleList.page = '1';
+        articleList.size = '15';
+        Adata = JSON.stringify(articleList); // 转JSON字符串
+        var Adata = RSA.sign(Adata);
         wx.request({
-          url: app.InterfaceUrl + 'get_article_bylabel?label=' + initActive + '&sortby=1',
-          data: {},
-          header: {
-            'content-type': 'application/json' // 默认值
+          url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+          data: {
+            data: Adata
           },
-          success: function (res) {
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          method: 'POST',
+          success: function(res) {
             if (res.data.data.length < 30) {
               for (var i = res.data.data.length - 1; i >= 0; i--) {
                 // console.log(res.data.data[i].article_img_path)//split(',');
@@ -423,12 +508,79 @@ Page({
     });
   },
   /**
- * 生命周期函数--监听页面隐藏
- */
-  onHide: function () {
-    app.ADcurrentTab = this.data.currentTab
+   * 生命周期函数--监听页面隐藏a
+   */
+  onHide: function() {
+    app.ADcurrentTab = this.data.currentTab;
+    wx.hideLoading();
   },
-  getUserInfo: function (e) {
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+    console.log('到底')
+    var that = this;
+    that.setData({
+      Load: true
+    });
+    if (that.data.Load&&that.data.BottomLoad) {
+      that.setData({
+        BottomLoad: false
+      })
+      // 文章列
+      var page = that.data.ArticlePage + 1;
+      var articleList = new Object();
+      articleList.label = that.data.labellist[that.data.currentTab].name;
+      articleList.sortby = '1';
+      articleList.page = page.toString();
+      articleList.size = '15';
+      Adata = JSON.stringify(articleList); // 转JSON字符串
+      var Adata = RSA.sign(Adata);
+      wx.request({
+        url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+        data: {
+          data: Adata
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        method: 'POST',
+        success: function(res) {
+          console.log(res)
+          if (res.data.data.length == 0) {
+            that.setData({
+              Load: false
+            });
+            wx.showToast({
+              title: '已没有更多文章...',
+              icon: 'none',
+              duration: 1500
+            })
+          } else {
+            var data = that.data.tabActiveKeyId;
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              if (res.data.data[i].article_img_path == '') {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path;
+                data.push(res.data.data[i])
+              } else {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+                data.push(res.data.data[i])
+              }
+            };
+            var NewData = data.concat(res.data.data);
+            console.log(data)
+            that.setData({
+              tabActiveKeyId: NewData,
+              Load: false,
+              BottomLoad:true
+            });
+            console.log(that.data.tabActiveKeyId)
+          }
+        }
+      });
+    }
+  },
+  getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({

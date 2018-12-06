@@ -23,6 +23,9 @@
   <view style='border-bottom:1rpx solid #F0F0F0;padding:10rpx 30rpx;'>
     <text style='color:#0A93FF;font-size:34rpx;padding:10rpx;border-bottom:4rpx solid #0A93FF'>文章</text>
   </view>
+  <view wx:if='{{articleList.length == 0}}' style='text-align:center;margin-top:30rpx;color:#999;font-size:32rpx;'>
+      {{aboutData.username}} 还没发表过文章
+  </view>
   <view catchtap="onArticleDetailTap" class='abs_item' wx:for='{{articleList}}' data-postid='{{item.article_id}}'>
     <view class='abs_item_author'>
       <image src='{{aboutData.headimg}}'></image>

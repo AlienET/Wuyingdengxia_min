@@ -24,5 +24,43 @@ textarea {
 
 .bottom_nav text.fl-r {
   font-size: 34rpx;
-  color: #2DA3FF;
+  color: #2da3ff;
+}
+
+.prohibit {
+  border-color: #f0f0f0;
+  color: #c9c9c9;
+}
+
+.content_label text {
+  width: 152rpx;
+  text-align: center;
+  border-radius: 100rpx;
+  padding: 8rpx 0;
+  margin-left: 0rpx;
+  margin-bottom: 15rpx;
+  font-size: 32rpx;
+}
+
+.content_label .active {
+  border-color: #fcba2a;
+  background: #fcba2a;
+  color: #fff;
+}
+
+.bottom_nav .moonNum {
+  border-color: #febb00;
+  color: #febb00;
+}
+
+.mos {
+  border: 1px solid #999;
+  color: #999;
+  font-size: 28rpx;
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
+  border-radius: 50%;
 }

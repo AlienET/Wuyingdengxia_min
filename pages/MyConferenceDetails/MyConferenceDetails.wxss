@@ -1,0 +1,39 @@
+/* pages/MyConferenceDetails/MyConferenceDetails.wxss */
+
+.flex-b {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0rpx;
+  width: 100%;
+}
+
+.lxhw {
+  border-top: 1rpx solid #eee;
+  line-height: 45rpx;
+  background: #fff;
+}
+
+.baom {
+  background: #2da3ff;
+  color: #fff;
+  font-size: 32rpx;
+  line-height: 45rpx;
+}
+
+.flex-b view {
+  width: 50%;
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.xxTop {
+  background: linear-gradient(to right, #08b5fe, #269afc);
+  padding: 40rpx;
+}
+
+.bmzt {
+  color: #40f0a5;
+  font-size: 36rpx;
+  margin-bottom: 20rpx;
+}

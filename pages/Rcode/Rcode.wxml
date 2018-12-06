@@ -1,0 +1,4 @@
+<!--pages/Rcode/Rcode.wxml-->
+<view class='button-wrapper'>
+  <canvas class='canvas' canvas-id='canvas'></canvas>
+</view>
