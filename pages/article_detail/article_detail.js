@@ -36,7 +36,6 @@ Page({
     data.comContent = event.detail.value;
     data = JSON.stringify(data); // 转JSON字符串
     data = RSA.sign(data);
-
     console.log(event.detail.value);
     wx.request({
       url: app.InterfaceUrl + 'usermanage/commentAndReply',

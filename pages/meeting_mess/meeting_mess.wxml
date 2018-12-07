@@ -49,7 +49,7 @@
             </label>
           </view>
           <view class='mt-md'>
-            <view catchtap='onVideoListTap' data-postid='{{item.replay_id}}' class='mb-md' wx:for='{{replayList}}'>
+            <view catchtap='onVideoListTap' data-postid='{{item}}' class='mb-md' wx:for='{{replayList}}'>
               <image mode='aspectFill' style='height:300rpx;' src='{{item.front_img}}'></image>
               <view class='meeting_msg'>
                 <text class='meet_tit'>{{item.replay_title}}</text>

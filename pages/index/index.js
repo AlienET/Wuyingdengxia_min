@@ -77,7 +77,7 @@ Page({
   onBannerImgTap: function(event) {
     console.log(event.currentTarget.dataset.postid.banner_link)
     var arra = event.currentTarget.dataset.postid.banner_link.split('?');
-    if (arra[0] == 'yszg.org/Wuyingdengxia/meetingDetails.html') {
+    if (arra[0] == 'https://www.wydx.top/html5/app/meetingDetails.html') {
       var canshu = arra[1].split('&');
       var canshuname = '';
       var canshuzhi = '';
@@ -93,7 +93,7 @@ Page({
     } else {
       app.bannerUrl = event.currentTarget.dataset.postid.banner_link;
       wx.navigateTo({
-        url: '../bannerTo/bannerTo',
+        url: '../bannerTo/bannerTo?userid='+app.userData.userid,
       })
     }
   },

@@ -107,20 +107,46 @@ Page({
   addlabel: function(items) {
     var that = this;
     console.log(items)
-    var item = items.currentTarget.dataset.item;
-    if (that.data.isEdit) {
-      item.name = item.label_name;
-      that.data.mylabel.push(item);
-      var addlabel = that.data.mylabel
-      // 
-      that.data.tjlabel.splice(items.currentTarget.dataset.idx, 1);
-      var tjlabel = that.data.tjlabel
-      that.setData({
-        mylabel: addlabel,
-        tjlabel: tjlabel
-      })
+    if (that.data.isType == 1 || that.data.isType == 2) {
+      if (that.data.mylabel.length >= 5) {
+        wx.showToast({
+          title: '标签限制只能为5个',
+          icon: 'none',
+          duration: 1500
+        })
+      } else {
+        var item = items.currentTarget.dataset.item;
+        if (that.data.isEdit) {
+          item.name = item.label_name;
+          that.data.mylabel.push(item);
+          var addlabel = that.data.mylabel
+          // 
+          that.data.tjlabel.splice(items.currentTarget.dataset.idx, 1);
+          var tjlabel = that.data.tjlabel
+          that.setData({
+            mylabel: addlabel,
+            tjlabel: tjlabel
+          })
+        } else {
+          return;
+        }
+      }
     } else {
-      return;
+      var item = items.currentTarget.dataset.item;
+      if (that.data.isEdit) {
+        item.name = item.label_name;
+        that.data.mylabel.push(item);
+        var addlabel = that.data.mylabel
+        // 
+        that.data.tjlabel.splice(items.currentTarget.dataset.idx, 1);
+        var tjlabel = that.data.tjlabel
+        that.setData({
+          mylabel: addlabel,
+          tjlabel: tjlabel
+        })
+      } else {
+        return;
+      }
     }
   },
   /**

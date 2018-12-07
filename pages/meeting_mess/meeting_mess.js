@@ -43,7 +43,7 @@ Page({
   onVideoListTap: function (e) {
     console.log(e.currentTarget.dataset.postid)//replay_id
     wx.navigateTo({
-      url: '../pastVideoList/pastVideoList?replay_id=' + e.currentTarget.dataset.postid,
+      url: '../pastVideoList/pastVideoList?replay_id=' + e.currentTarget.dataset.postid.replay_id + '&imgUrl=' + e.currentTarget.dataset.postid.front_img,
     })
   },
   //  会议咨询详情
