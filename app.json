@@ -70,26 +70,26 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/icon/index_n.png",
-        "selectedIconPath": "images/icon/index.png",
+        "iconPath": "images/icon/index_n.jpg",
+        "selectedIconPath": "images/icon/index.jpg",
         "text": "首页"
       },
       {
         "pagePath": "pages/meeting_mess/meeting_mess",
-        "iconPath": "images/icon/action_n.png",
-        "selectedIconPath": "images/icon/action.png",
+        "iconPath": "images/icon/action_n.jpg",
+        "selectedIconPath": "images/icon/action.jpg",
         "text": "活动"
       },
       {
         "pagePath": "pages/quick_quiz/quick_quiz",
-        "iconPath": "images/icon/questions_answer_n.png",
-        "selectedIconPath": "images/icon/questions_answer.png",
+        "iconPath": "images/icon/questions_answer_n.jpg",
+        "selectedIconPath": "images/icon/questions_answer.jpg",
         "text": "问答"
       },
       {
         "pagePath": "pages/adminTool/adminTool",
-        "iconPath": "images/icon/tool_n.png",
-        "selectedIconPath": "images/icon/tool.png",
+        "iconPath": "images/icon/tool_n.jpg",
+        "selectedIconPath": "images/icon/tool.jpg",
         "text": "直播"
       },
       {
