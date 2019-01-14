@@ -17,7 +17,7 @@
 .meet_ text {
   vertical-align: middle;
   font-size: 32rpx;
-  margin-left: 20rpx;
+  /* margin-left: 20rpx; */
   font-weight: 600;
 }
 

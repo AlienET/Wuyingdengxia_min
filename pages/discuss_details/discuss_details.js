@@ -267,7 +267,7 @@ Page({
         that.setData({
           article: article
         })
-        var temp = WxParse.wxParse('article', 'html', that.data.article, that, 5);
+        WxParse.wxParse('article', 'html', that.data.article, that, 5);
         // if (res.data.data.user_dis.length > 0) {
         //   for (var i = res.data.data.user_dis.length - 1; i >= 0; i--) {
         //     time = res.data.data.user_dis[i].ctime.substring(0, 19);
@@ -280,7 +280,7 @@ Page({
         that.setData({
           aboutData: res.data.data,
           DiscussListsData: res.data.data.user_dis,
-          article: temp
+          // article: temp
         });
         console.log(that.data.aboutData)
       }

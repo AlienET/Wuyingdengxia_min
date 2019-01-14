@@ -53,7 +53,10 @@
     "pages/logs/logs",
     "pages/notice/notice",
     "pages/MyConferenceDetails/MyConferenceDetails",
-    "pages/Rcode/Rcode"
+    "pages/AddressInvoice/AddressInvoice",
+    "pages/Rcode/Rcode",
+    "pages/AddAddress/AddAddress",
+    "pages/AddInvoice/AddInvoice"
   ],
   "window": {
     "backgroundTextStyle": "dark",

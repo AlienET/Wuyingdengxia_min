@@ -1,0 +1,24 @@
+/* pages/AddInvoice/AddInvoice.wxss */
+.DZ_item {
+  border-bottom: 1rpx solid #e8e8e8;
+  padding: 20rpx;
+  padding-left: 0rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.DZ_item>view {
+  display: inline-block;
+  font-size: 32rpx;
+  color: #d7d7d7;
+}
+
+.baoc {
+  display: inline-block;
+  border-radius: 100rpx;
+  padding: 10rpx 40rpx;
+  font-size: 32rpx;
+  color: #fff;
+  background: #1397ff;
+}

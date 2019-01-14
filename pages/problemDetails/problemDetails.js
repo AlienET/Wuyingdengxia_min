@@ -384,13 +384,13 @@ Page({
           article: res.data.data.question_content
         });
         console.log(that.data.article)
-        var temp = WxParse.wxParse('article', 'html', that.data.article, that, 5);
+        WxParse.wxParse('article', 'html', that.data.article, that, 5);
         if (res.data.data.question_image) {
           res.data.data.question_image = res.data.data.question_image.split(',');
         }
         that.setData({
           aboutData: res.data.data,
-          article: temp
+          // article: temp
         })
         console.log(that.data.aboutData);
       }

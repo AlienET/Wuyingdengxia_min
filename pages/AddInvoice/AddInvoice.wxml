@@ -1,0 +1,39 @@
+<!--pages/AddInvoice/AddInvoice.wxml-->
+<view style='border-top:1rpx solid #E8E8E8;padding-left:20rpx;'>
+  <view class='DZ_item'>
+    <view>
+      发票类型
+    </view>
+    <radio-group bindchange='radioChange'>
+      <label style='display:inline-block;margin-right:50rpx;'>
+        <radio value='GR' checked='true'></radio>
+        <text style='font-size:28rpx;color:#323232;margin-left:10rpx;'>个人</text>
+      </label>
+      <label style='display:inline-block;margin-right:50rpx;'>
+        <radio value='QY'></radio>
+        <text style='font-size:28rpx;color:#323232;margin-left:10rpx;'>企业</text>
+      </label>
+    </radio-group>
+  </view>
+  <view class='DZ_item'>
+    <view>
+      姓名
+    </view>
+    <input type='text' style='text-align:right;font-size:32rpx;' bindinput='bindGRInput'></input>
+  </view>
+  <view class='DZ_item'>
+    <view>
+      公司抬头
+    </view>
+    <input type='text' style='text-align:right;font-size:32rpx;' bindinput='bindTTInput'></input>
+  </view>
+  <view class='DZ_item'>
+    <view>
+      税号
+    </view>
+    <input type='number' style='text-align:right;font-size:32rpx;' bindinput='bindSHInput'></input>
+  </view>
+</view>
+<view style='margin-top:2em;text-align:center;'>
+  <view class='baoc' catchtap='PreservationTap'>保 存</view>
+</view>

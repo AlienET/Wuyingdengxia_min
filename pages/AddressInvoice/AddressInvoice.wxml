@@ -1,0 +1,98 @@
+<!--pages/AddressInvoice/AddressInvoice.wxml-->
+<view class='section' style='min-height:100%;margin-right:0rpx;margin-left:0rpx;'>
+  <view class='action'>
+    <view bindtap="onBackTap" data-current="0" class='{{flag==0?"active":""}}'>
+      发票
+      <view class='default'>
+        <view></view>
+      </view>
+    </view>
+    <view bindtap="onBackTap" data-current="1" class='{{flag==1?"active":""}}'>
+      地址
+      <view class='default'>
+        <view></view>
+      </view>
+    </view>
+  </view>
+  <swiper current='{{flag}}' style="min-height:800rpx;height:{{200*Finished.length}}rpx;border-top:1rpx solid #e8e8e8;" bindchange='bindChange'>
+    <swiper-item>
+      <radio-group bindchange="radioChange">
+        <view style='border-bottom:1rpx solid #E8E8E8;display:flex;flex-direction: row;justify-content:space-between;padding:30rpx 40rpx;'>
+          <radio value='beijing' class='ver-middle'>
+            <view class='ver-middle'>
+              <view style='display:inline-block;' class='ver-middle'>
+                <view style='font-size:30rpx;'>
+                  北京协和医院总医院
+                  <text style='display:inline-block;font-size:19rpx;color:#fff;background: #1397FF;border-radius: 8.5px;padding:0rpx 10rpx;'>企业</text>
+                </view>
+                <view style='font-size:30rpx;margin-top:5rpx;'>
+                  20394914928414231
+                </view>
+              </view>
+            </view>
+          </radio>
+          <image class='ver-middle' src='/images/icon/jiantouhui.png' style='width:20rpx;margin-top:22rpx;' mode='widthFix'></image>
+        </view>
+        <view style='border-bottom:1rpx solid #E8E8E8;display:flex;flex-direction: row;justify-content:space-between;padding:30rpx 40rpx;'>
+          <radio value='adasa' class='ver-middle'>
+            <view class='ver-middle'>
+              <view style='display:inline-block;margin-top:-13rpx;' class='ver-middle'>
+                <view style='font-size:30rpx;' class='ver-middle'>
+                  阿大撒
+                  <text style='display:inline-block;font-size:19rpx;color:#fff;background: #1397FF;border-radius: 8.5px;padding:0rpx 10rpx;'>个人</text>
+                </view>
+              </view>
+            </view>
+          </radio>
+          <image src='/images/icon/jiantouhui.png' class='ver-middle' style='width:20rpx;margin-top:22rpx;' mode='widthFix'></image>
+        </view>
+      </radio-group>
+      <view style='text-align:center;margin-top:1.5em;'>
+        <view catchtap='fapiaoTap' style='color:#1397FF;border:1rpx solid #1397FF;border-radius:100rpx;padding:16rpx 40rpx;display:inline-block;font-size:32rpx;'>+ 添加常用发票抬头</view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <radio-group bindchange="radioChange">
+        <view style='border-bottom:1rpx solid #E8E8E8;display:flex;flex-direction: row;justify-content:space-between;padding:30rpx 40rpx;'>
+          <radio value='beijing' class='ver-middle'>
+            <view class='ver-middle'>
+              <view style='display:inline-block;' class='ver-middle'>
+                <view style='font-size:30rpx;'>
+                  北京协和医院总医院
+                </view>
+                <view style='font-size:30rpx;margin-top:5rpx;'>
+                  17690839993
+                </view>
+                <view style='font-size:30rpx;margin-top:5rpx;'>
+                  北京市-朝阳区  外交公寓301
+                </view>
+              </view>
+            </view>
+          </radio>
+          <image class='ver-middle' src='/images/icon/jiantouhui.png' style='width:20rpx;margin-top:22rpx;' mode='widthFix'></image>
+        </view>
+        <view style='border-bottom:1rpx solid #E8E8E8;display:flex;flex-direction: row;justify-content:space-between;padding:30rpx 40rpx;'>
+          <radio value='adasa' class='ver-middle'>
+            <view class='ver-middle'>
+              <view style='display:inline-block;' class='ver-middle'>
+                <view style='font-size:30rpx;'>
+                  北京协和医院总医院
+                </view>
+                <view style='font-size:30rpx;margin-top:5rpx;'>
+                  17690839993
+                </view>
+                <view style='font-size:30rpx;margin-top:5rpx;'>
+                  北京市-朝阳区  外交公寓301
+                </view>
+              </view>
+            </view>
+          </radio>
+          <image src='/images/icon/jiantouhui.png' class='ver-middle' style='width:20rpx;margin-top:22rpx;' mode='widthFix'></image>
+        </view>
+      </radio-group>
+      <view style='text-align:center;margin-top:1.5em;'>
+        <view catchtap='dizhiTap' style='color:#1397FF;border:1rpx solid #1397FF;border-radius:100rpx;padding:16rpx 40rpx;display:inline-block;font-size:32rpx;'>+ 添加常用地址</view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

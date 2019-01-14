@@ -439,7 +439,7 @@ Page({
           article: res.data.data.article_content
         })
         console.log(that.data.article)
-        var temp = WxParse.wxParse('article', 'html', that.data.article, that, 5);
+        WxParse.wxParse('article', 'html', that.data.article, that, 5);
         var articleTags = res.data.data.article_tags.split(',');
         var articleArr = [];
         for (var i = articleTags.length - 1; i >= 0; i--) {
@@ -455,7 +455,7 @@ Page({
         res.data.data.article_tags = articleArr;
         that.setData({
           aboutData: res.data.data,
-          article: temp
+          // article: that.data.article
         });
         // article_tags  
         console.log(that.data.aboutData.article_tags)

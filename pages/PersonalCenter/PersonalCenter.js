@@ -18,6 +18,12 @@ Page({
       url: '../MyCollection/MyCollection',
     })
   },
+  //我的收藏发票/地址信息
+  onMyAddressInvoiceTap:function(){
+    wx.navigateTo({
+      url: '../AddressInvoice/AddressInvoice',
+    })
+  },
   //我的活动
   onMyActivityTap: function() {
     wx.navigateTo({

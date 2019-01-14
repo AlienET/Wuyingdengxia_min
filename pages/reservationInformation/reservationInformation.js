@@ -12,6 +12,7 @@ Page({
     //会议标题
     title: '',
     begin_time: '',
+    meet_regist_fee:'',
     end_time: '',
     meet_title: '',
     //去程
@@ -361,6 +362,7 @@ Page({
     })
     that.setData({
       begin_time: options.begin_time,
+      meet_regist_fee: options.meet_regist_fee,
       end_time: options.end_time,
       meet_title: options.meet_title,
       aboutData: app.userData,

@@ -1,0 +1,111 @@
+/* pages/AddressInvoice/AddressInvoice.wxss */
+
+page {
+  min-height: 100%;
+}
+
+.action {
+  margin: 0 20rpx;
+}
+
+.action > view {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  font-size: 34rpx;
+  padding: 15rpx 0;
+}
+
+.action .default {
+  text-align: center;
+  font-size: 12rpx;
+}
+
+.action .default view {
+  border: 3rpx solid #fff;
+  border-radius: 100%;
+  width: 25%;
+  display: inline-block;
+}
+
+.action>.active {
+  color: #0a93ff;
+  font-weight: 600;
+}
+
+.action .active .default view {
+  border-color: #0a93ff;
+}
+
+.mb-md>image {
+  width: 100%;
+  border-radius: 10rpx;
+}
+
+.meeting_msg .meet_tit {
+  font-size: 30rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+
+.meeting_msg .meet_state {
+  padding: 5rpx 10rpx;
+  border: 1rpx solid;
+  border-radius: 100rpx;
+  font-size: 20rpx;
+  /* color: #f5a623; */
+  vertical-align: middle;
+}
+
+.meeting_msg .meet_state.z {
+  border-color: #f5a623;
+  color: #f5a623;
+}
+
+.meeting_msg .meet_state.w {
+  border-color: #c6c6c6;
+  color: #c6c6c6;
+}
+
+.meeting_msg view {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 8rpx;
+}
+
+.inline-block text {
+  color: #bdbdbd;
+  font-size: 22rpx;
+  vertical-align: middle;
+  margin-left: 8rpx;
+}
+
+.sheng {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+
+/* 选中后的样式 （可根据设计稿需求自己修改） */
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  margin-top: -0.5rpx;
+  border-radius: 50%;
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 28rpx; /* 对勾大小 26rpx */
+  color: #fff; /* 对勾颜色 */
+  background: #1397ff;
+  border-color: #1397ff;
+}

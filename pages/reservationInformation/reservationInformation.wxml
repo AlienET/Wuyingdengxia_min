@@ -9,6 +9,10 @@
       <view class='td td_t'>参会时间</view>
       <view class='td td_i'>{{begin_time}}</view>
     </view>
+    <view class='tr'>
+      <view class='td td_t'>报名费</view>
+      <view class='td td_i'>¥{{meet_regist_fee}}</view>
+    </view>
   </view>
 </view>
 <view class='gap'></view>
