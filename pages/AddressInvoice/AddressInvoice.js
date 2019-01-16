@@ -12,7 +12,7 @@ Page({
      * 页面配置 
      */
     winWidth: 0,
-    winHeight: 0,
+    Vheight: 0,
     // tab切换
     flag: 0,
     // 地址
@@ -61,54 +61,54 @@ Page({
     console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
   //常用发票
-  fapiaoTap: function() {
-    wx.navigateTo({
-      url: '../AddInvoice/AddInvoice',
-    })
+  fapiaoTap: function(e) {
+    console.log(e.target.dataset.event)
+    if (e.target.dataset.event) {
+      var e = e.target.dataset.event;
+      wx.navigateTo({
+        url: '../AddInvoice/AddInvoice?bill_person_name=' + e.bill_person_name + '&receipt_id=' + e.receipt_id + '&receipt_info=' + e.receipt_info + '&receipt_type=' + e.receipt_type + '&tax_num=' + e.tax_num,
+      })
+    } else {
+      wx.navigateTo({
+        url: '../AddInvoice/AddInvoice',
+      })
+    }
+
   },
   //常用地址
-  dizhiTap: function() {
-    wx.navigateTo({
-      url: '../AddAddress/AddAddress',
-    })
+  dizhiTap: function(e) {
+    console.log(e.target.dataset.e)
+    if (e.target.dataset.e) {
+      var e = e.target.dataset.e;
+      wx.navigateTo({
+        url: '../AddAddress/AddAddress?mail_id=' + e.mail_id + '&mail_phone=' + e.mail_phone + '&mail_name=' + e.mail_name + '&mail_address=' + e.mail_address,
+      })
+    } else {
+      wx.navigateTo({
+        url: '../AddAddress/AddAddress',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // var that = this;
-    // var data = new Object();
-    // data.userid = app.userData.userid;
-    // data = JSON.stringify(data); // 转JSON字符串
-    // var data = RSA.sign(data);
-    // wx.request({
-    //   url: app.InterfaceUrl+'usermanage/myMeet',
-    //   data: {
-    //     data: data
-    //   },
-    //   method: 'POST',
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded'
-    //   },
-    //   success: function(res) {
-    //     console.log(res);
-    //     if (res.data.msg != '无会议信息') {
-    //       for (var i = res.data.data.length - 1; i >= 0; i--) {
-    //         if (res.data.data[i].isfinish == '1') {
-    //           that.data.Finished.unshift(res.data.data[i]);
-    //         } else {
-    //           that.data.NotBeginning.unshift(res.data.data[i])
-    //         }
-    //       }
-    //     }
-    //     that.setData({
-    //       NotBeginning: that.data.NotBeginning,
-    //       Finished: that.data.Finished
-    //     })
-    //     console.log(that.data.NotBeginning)
-    //     console.log(that.data.Finished)
-    //   }
-    // })
+    var that = this;
+    wx.getSystemInfo({
+      success(res) {
+        console.log(res.model)
+        console.log(res.pixelRatio)
+        console.log(res.windowWidth)
+        console.log(res.windowHeight)
+        console.log(res.language)
+        console.log(res.version)
+        console.log(res.platform)
+        var Vheight = res.windowHeight - 68;
+        that.setData({
+          Vheight: Vheight
+        })
+      }
+    })
   },
 
   /**

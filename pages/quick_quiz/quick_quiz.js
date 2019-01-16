@@ -222,7 +222,7 @@ Page({
           Vheight: Vheight
         })
       }
-    })
+    }) 
     // 标签列表
     var labels = new Object();
     labels.userid = app.userData.userid;

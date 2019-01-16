@@ -1,4 +1,7 @@
 // pages/AddAddress/AddAddress.js
+var RSA = require('../../utils/wx_rsa.js');
+//获取应用实例
+const app = getApp()
 Page({
 
   /**
@@ -13,7 +16,11 @@ Page({
     //手机号
     phone: '',
     //详细信息
-    information: ''
+    information: '',
+    //修改/添加
+    or: false,
+    //地址id
+    rId: ''
   },
   //收件人
   bindNameInput: function(e) {
@@ -49,19 +56,93 @@ Page({
   //保存信息
   PreservationTap: function() {
     var that = this;
-    console.log(that.data.name)
-    console.log(that.data.region)
-    console.log(that.data.phone)
-    console.log(that.data.information)
-    wx.navigateBack({
-      delta: 1
-    })
+    if (that.data.name != '' && that.data.phone != '' && that.data.information != '') {
+      if (that.data.or) {
+        var data = new Object();
+        data.mail_id = that.data.rId;
+        data.mail_address = that.data.region + '-' + that.data.information;
+        data.mail_phone = that.data.phone;
+        data.mail_name = that.data.name;
+        data = JSON.stringify(data);
+        var data = RSA.sign(data);
+        wx.request({
+          url: app.InterfaceUrl + 'usermanage/editUserMailInfo',
+          data: {
+            data: data
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            console.log(res);
+            wx.showToast({
+              title: '操作成功',
+              icon: 'success',
+              duration: 1500,
+              success: function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            })
+          }
+        });
+      } else {
+        var data = new Object();
+        data.user_id = app.userData.userid;
+        data.mail_address = that.data.region + '-' + that.data.information;
+        data.mail_phone = that.data.phone;
+        data.mail_name = that.data.name;
+        data = JSON.stringify(data); // 转JSON字符串
+        var data = RSA.sign(data);
+        wx.request({
+          url: app.InterfaceUrl + 'usermanage/addUserMailInfo',
+          data: {
+            data: data
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function(res) {
+            console.log(res);
+            wx.showToast({
+              title: '操作成功',
+              icon: 'success',
+              duration: 1500,
+              success: function() {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            })
+          }
+        });
+      }
+    } else {
+      wx.showToast({
+        title: '请完善信息',
+        icon: 'none',
+        duration: 1500
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    console.log(options);
+    var that = this;
+    var arrays = options.mail_address.split('-');
+    that.setData({
+      name: options.mail_name,
+      phone: options.mail_phone,
+      region: arrays[0],
+      information: arrays[1],
+      rId: options.mail_id,
+      or: true
+    })
   },
 
   /**
