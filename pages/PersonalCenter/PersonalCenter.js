@@ -90,6 +90,11 @@ Page({
       url: '../notice/notice',
     })
   },
+  chong:function(){
+    wx.navigateTo({
+      url: '../recharge/recharge',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

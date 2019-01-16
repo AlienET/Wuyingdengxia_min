@@ -450,8 +450,9 @@ Page({
       },
       method: 'POST',
       success: function(res) {
+        var arrays = res.data.data.slice(0,10);
         that.setData({
-          labellist: res.data.data,
+          labellist: arrays,
           currentTab: app.ADcurrentTab
         });
         var initActive = that.data.labellist[app.ADcurrentTab].name;
