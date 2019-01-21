@@ -1,4 +1,5 @@
 /* pages/AddInvoice/AddInvoice.wxss */
+
 .DZ_item {
   border-bottom: 1rpx solid #e8e8e8;
   padding: 20rpx;
@@ -21,4 +22,27 @@
   font-size: 32rpx;
   color: #fff;
   background: #1397ff;
+}
+
+radio .wx-radio-input {
+  border-radius: 50%;
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+
+/* 选中后的样式 （可根据设计稿需求自己修改） */
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  /* margin-top: -0.5rpx; */
+  border-radius: 50%;
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 28rpx; /* 对勾大小 26rpx */
+  color: #fff; /* 对勾颜色 */
+  background: #1397ff;
+  border-color: #1397ff;
 }

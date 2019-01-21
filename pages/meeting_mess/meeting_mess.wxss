@@ -19,8 +19,8 @@
 
 .action .default view {
   border: 3rpx solid #fff;
-  border-radius: 100%;
-  width: 25%;
+  /* border-radius: 100%; */
+  width: 18%;
   display: inline-block;
 }
 

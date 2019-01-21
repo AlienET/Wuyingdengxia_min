@@ -17,7 +17,7 @@
       <view class='ylb'>
         <image src='/images/icon/icon_moon.png' style='width:28rpx;height:28rpx;'></image>
         <text class='ver-middle'>{{aboutData.moon_cash == ''?0:aboutData.moon_cash}}</text>
-        <!-- <view class='cz' catchtap='chong'>充值</view> -->
+        <view class='cz' catchtap='chong'>充值</view>
       </view>
       <view class='att'>
         <view>
