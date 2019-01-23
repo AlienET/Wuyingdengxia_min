@@ -2,12 +2,36 @@
 <view style='padding:20rpx;'>
   <view style='border-bottom:1rpx solid #F3F3F3;'>
     <view style='padding:20rpx 0rpx;font-size:30rpx;padding-bottom:0rpx;'>
-      账号 : <text style='margin-left:10rpx;'>Alien (123123)</text>
+      账号 : <text style='margin-left:10rpx;'>{{username}} ({{phoneNum}})</text>
     </view>
     <view style='padding:20rpx 0rpx;'>
       <text class='ver-middle' style='font-size:30rpx;'>余额 : </text>
       <image class='ver-middle' src='/images/icon/icon_moon.png' style='width:28rpx;height:28rpx;margin-left:10rpx;'></image>
-        <text class='ver-middle' style='color:#EEC557;font-size:30rpx;'>1221</text>
+        <text class='ver-middle' style='color:#EEC557;font-size:30rpx;'>{{moon_cash}}</text>
     </view>
+  </view>
+  <view>
+    <view style='margin:20rpx 0rpx;font-size:30rpx;'>充值数量</view>
+    <view style='display:flex;flex-wrap:wrap;justify-content:space-between;flex-direction: row;'>
+      <view class='itema {{item.ave?"ave":""}}' wx:for='{{yb}}' bindtap='radioChange' data-item='{{item}}' data-idx='{{index}}'> <!-- ave -->
+        <view style='font-size:24rpx;'>{{item.yb}}月币</view>
+        <view style='font-size:22rpx;'>{{item.xj}}元</view>
+      </view>
+      <view class='itemq' catchtap='qtTap'>
+        <view style='font-size:26rpx;'>其他金额</view>
+      </view>
+    </view>
+    <view style='margin-top:20rpx;border-bottom:1rpx solid #F6F6F6;'>
+      <view style='font-size:30rpx;margin-bottom:20rpx;'>支付方式</view>
+      <view style='margin-bottom:30rpx;'>
+        <image class='ver-middle' src='/images/icon/weixins.png' mode='widthFix' style='width:75rpx;'></image>
+        <text class='ver-middle' style='font-size:28rpx;margin-left:20rpx;'>微信支付</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='position:absolute;top:80%;left:0rpx;width:100%;text-align:center;'>
+  <view style='display:inline-block;width:260rpx;padding:20rpx 40rpx;border-radius:100px;background:#50A5F8;color:#fff;font-size:32rpx;' catchtap='chongzhi'>
+    立即充值
   </view>
 </view>

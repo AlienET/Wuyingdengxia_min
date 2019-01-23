@@ -57,7 +57,8 @@
     "pages/Rcode/Rcode",
     "pages/AddAddress/AddAddress",
     "pages/AddInvoice/AddInvoice",
-    "pages/recharge/recharge"
+    "pages/recharge/recharge",
+    "pages/qtje/qtje"
   ],
   "window": {
     "backgroundTextStyle": "dark",
