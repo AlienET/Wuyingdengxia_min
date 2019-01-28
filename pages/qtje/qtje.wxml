@@ -8,7 +8,7 @@
     <input bindinput="bindKeyInput" value='{{val}}' type='number' placeholder='充值月币数量' placeholder-style='color:#C2C2C3;' style='font-size:34rpx;vertical-align:middle;display:inline-block;margin-left:20rpx;'></input>
   </view>
   <view style='text-align:center;margin-top:80rpx;'>
-    <view style='display:inline-block;color:#fff;background:#4FA5F8;width:260rpx;padding:20rpx 0rpx;border-radius:100px;font-size:32rpx;'>
+    <view style='display:inline-block;color:#fff;background:#4FA5F8;width:260rpx;padding:20rpx 0rpx;border-radius:100px;font-size:32rpx;' catchtap='chongzhi'>
       立即充值
     </view>
   </view>

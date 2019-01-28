@@ -39,45 +39,57 @@ Page({
   //充值
   chongzhi: function() {
     var that = this;
-    that.data.cz = that.data.cz*100;
-    var data = new Object();
-    data.appid = 'wx8dbc9156e40232a7';
-    data.spbill_create_ip = 'xiaochengxu';
-    data.order_type = '1';
-    data.toId = '10198';
-    data.userid = '10198';
-    data.total_fee = that.data.cz.toString();
-    data = JSON.stringify(data); // 转JSON字符串
-    var data = RSA.sign(data);
-    wx.request({
-      url: 'http://39.106.49.2:8081/usermanage/UnifiedOrder',
-      data: {
-        data: data
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success:function(res){
-        console.log(res)
-      }
-    })
-    // wx.requestPayment({
-    //   'timeStamp': '',
-    //   'nonceStr': '',
-    //   'package': '',
-    //   'signType': 'MD5',
-    //   'paySign': '',
-    //   'success': function(res) {
-    //     console.log(res)
-    //   },
-    //   'fail': function(res) {
-    //     console.log(res)
-    //   },
-    //   'complete': function(res) {
-    //     console.log(res)
-    //   }
-    // })
+    if (that.data.cz > 0) {
+      that.data.cz = that.data.cz * 100;
+      var data = new Object();
+      data.appid = "wx8dbc9156e40232a7";
+      data.spbill_create_ip = "wydx";
+      data.order_type = "1";
+      data.toId = "11388";
+      data.userid = "11388";
+      data.trade_type = "JSAPI";
+      data.js_code = "061YqqHE0c2ARk2hOLIE0ohsHE0YqqHh";
+      data.openid = "oMF6e4l2LM-pCoJHNmj7vPeGpIOc";
+      data.total_fee = that.data.cz.toString();
+      data = JSON.stringify(data); // 转JSON字符串
+      var data = RSA.sign(data);
+      wx.request({
+        url: 'http://39.106.49.2:8081/usermanage/UnifiedOrder',
+        data: {
+          data: data
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function(res) {
+          console.log(res)
+          console.log(res.data.data)
+          wx.requestPayment({
+            'timeStamp': res.data.data.timestamp,
+            'nonceStr': res.data.data.noncestr,
+            'package': 'prepay_id=' + res.data.data.prepayid+'&Sign=WXPay',
+            'signType': 'MD5',
+            'paySign': res.data.data.sign,
+            'success': function(res) {
+              console.log(res)
+            },
+            'fail': function(res) {
+              console.log(res)
+            },
+            'complete': function(res) {
+              console.log(res)
+            }
+          })
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '请选择充值数量',
+        icon: 'none',
+        duration: 1500
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -104,7 +116,8 @@ Page({
     data = JSON.stringify(data); // 转JSON字符串
     var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'usermanage/getUserInfo',
+      // url: app.InterfaceUrl + 'usermanage/getUserInfo',
+      url:'http://39.106.49.2:8081/usermanage/smallAppsWxLogin',
       data: {
         data: data
       },

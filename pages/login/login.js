@@ -20,9 +20,9 @@ Page({
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     console.log(app.globalData.userInfo)
-    wx.authorize({
-      scope: 'scope.userInfo',
-      success() {
+    // wx.authorize({
+    //   scope: 'scope.userInfo',
+    //   success() {
         wx.getUserInfo({
           success: function(res) {
             console.log(res);
@@ -41,7 +41,8 @@ Page({
                   title: '',
                   success: function(res) {
                     wx.request({
-                      url: app.InterfaceUrl+'usermanage/smallAppsWxLogin',
+                      // url: app.InterfaceUrl + 'usermanage/smallAppsWxLogin',
+                      url: 'http://39.106.49.2:8081/usermanage/smallAppsWxLogin',
                       data: {
                         data: data
                       },
@@ -75,8 +76,8 @@ Page({
             });
           }
         })
-      }
-    })
+      // }
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
