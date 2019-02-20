@@ -102,11 +102,11 @@
     </view>
     <image src='/images/icon/jiantouhui.png'></image>
   </view>
-  <!-- <view catchtap='onMyAddressInvoiceTap' class='mLi'>
+  <view catchtap='onMyAddressInvoiceTap' class='mLi'>
     <view>
       <image mode='{{bGmode}}' src='/images/icon/wdfp.png'></image>
       发票/地址信息
     </view>
     <image src='/images/icon/jiantouhui.png'></image>
-  </view> -->
+  </view>
 </view>

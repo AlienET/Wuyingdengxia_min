@@ -1,0 +1,19 @@
+<!--pages/RegistrationFee/RegistrationFee.wxml-->
+<view class='zfbmf' style='padding:0rpx 40rpx;'>
+  <view style='text-align:center;font-size:60rpx;'>¥ 680.00</view>
+  <view style='font-size:28rpx;color: #686868;text-align: center;'>苏州医疗器械装备交流会</view>
+  <view style='margin-top:50rpx;'>
+    <image class='ver-middle' src='/images/icon/weixins.png' mode='widthFix' style='width:75rpx;'></image>
+    <text class='ver-middle' style='font-size:28rpx;margin-left:30rpx;color:#666;'>微信支付</text>
+  </view>
+  <view style='border-bottom:1rpx solid #F1F1F1;padding:20rpx 0rpx;display: flex;justify-content:space-between;'>
+    <view style='font-size:32rpx;display:inline-block;margin-top:12rpx;' class='ver-middle'>发票</view>
+    <view class='ver-middle' catchtap='invoiceTap'>
+      <view class='ver-middle' style='font-size:30rpx;color:#989898;display:inline-block;margin-right:20rpx;'>是否需要发票</view>
+      <image class='ver-middle' src='/images/icon/jiantouhui.png' mode='widthFix' style='width:19rpx;margin-top:5rpx;'></image>
+    </view>
+  </view>
+  <view style='text-align:center;margin-top:100%;'>
+    <view style='display:inline-block;background-image: linear-gradient(-143deg, #1E94FF 3%, #3EAAFE 100%);border-radius:100px;color:#fff;font-size:32rpx;padding:15rpx 75rpx;'>立即报名</view>
+  </view>
+</view>

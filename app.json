@@ -58,7 +58,9 @@
     "pages/AddAddress/AddAddress",
     "pages/AddInvoice/AddInvoice",
     "pages/recharge/recharge",
-    "pages/qtje/qtje"
+    "pages/qtje/qtje",
+    "pages/invoice/invoice",
+    "pages/RegistrationFee/RegistrationFee"
   ],
   "window": {
     "backgroundTextStyle": "dark",

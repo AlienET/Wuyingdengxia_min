@@ -25,8 +25,9 @@ App({
                 success: res => {
                   console.log(res.code)
                   // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                  that.wx_code = res.code;
                   var code = res.code;
-                  var that = this;
+                  // var that = this;
                   var obj = new Object();
                   obj.js_code = code;
                   obj = JSON.stringify(obj); // 转JSON字符串
@@ -43,9 +44,10 @@ App({
                     },
                     success: function(res) {
                       console.log(res);
+                      that.mini_openid = res.data.data.mini_openid;
                       if (res.data.msg == '请完善信息') {
                         console.log(res.data.msg);
-                        that.mini_openid = res.data.data.mini_openid;
+                        // that.mini_openid = res.data.data.mini_openid;
                         wx.redirectTo({
                           url: '/pages/verifyPhone/verifyPhone',
                         })
@@ -187,6 +189,8 @@ App({
     //回复详情
     replayInner:'',
     //二维码token
-    Rcode:''
+    Rcode:'',
+    //登陆code
+    wx_code:''
   }
 })

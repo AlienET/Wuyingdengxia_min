@@ -45,11 +45,11 @@ Page({
       data.appid = "wx8dbc9156e40232a7";
       data.spbill_create_ip = "wydx";
       data.order_type = "1";
-      data.toId = "11388";
-      data.userid = "11388";
+      data.toId = app.userData.userid;
+      data.userid = app.userData.userid;
       data.trade_type = "JSAPI";
-      data.js_code = "061YqqHE0c2ARk2hOLIE0ohsHE0YqqHh";
-      data.openid = "oMF6e4l2LM-pCoJHNmj7vPeGpIOc";
+      data.js_code = app.wx_code;
+      data.openid = app.mini_openid;
       data.total_fee = that.data.cz.toString();
       data = JSON.stringify(data); // 转JSON字符串
       var data = RSA.sign(data);
@@ -117,7 +117,7 @@ Page({
     var data = RSA.sign(data);
     wx.request({
       // url: app.InterfaceUrl + 'usermanage/getUserInfo',
-      url:'http://39.106.49.2:8081/usermanage/smallAppsWxLogin',
+      url:'http://39.106.49.2:8081/usermanage/getUserInfo',
       data: {
         data: data
       },

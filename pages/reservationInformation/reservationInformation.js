@@ -123,91 +123,98 @@ Page({
       index: e.detail.value
     })
   },
-  // 报名提交页面 跳转
-  onBmtjTap: function(e) {
+  onBmtjTap:function(e){
     var that = this;
-    var data = new Object();
-    data.user_id = app.userData.userid;
-    data.meet_id = that.data.meet_id;
-    //去程 车次
-    data.car_num1 = that.data.train_no;
-    //去程 始发
-    data.from1 = that.data.originating;
-    //去程 终点
-    data.to1 = that.data.terminus;
-    //去程 车次备选
-    data.car_num1b = that.data.trainAll;
-    //
-    data.from1b = '';
-    //
-    data.to1b = '';
-    //返程 车次选择
-    data.car_num2 = that.data.f_train_no;
-    //返程 始发
-    data.from2 = that.data.f_originating;
-    //返程 终点
-    data.to2 = that.data.f_terminus;
-    //返程 备选车次
-    data.car_num2b = that.data.f_trainAll;
-    //
-    data.from2b = '';
-    //
-    data.to2b = '';
-    //去程 备注
-    data.special1 = that.data.inputTxt;
-    //返程 备注
-    data.special2 = that.data.FinputTxt;
-    //住房 入住时间
-    data.begin_time = that.data.rzdate;
-    //住房 离开时间
-    data.end_time = that.data.lkdate;
-    //住房备注
-    data.remark = that.data.inputRemark;
-    //房型选择
-    data.room_type = that.data.index.toString();
-    //拼住人
-    data.together_people = that.data.inputTxtR;
-    //去程 乘车时间
-    data.car_num1_time = that.data.date;
-    //返程 乘车时间
-    data.car_num2_time = that.data.f_date;
-    data.take_type = '火车';
-    data = JSON.stringify(data); // 转JSON字符串
-    var data = RSA.sign(data);
-    wx.showLoading({
-      title: '提交中',
-      success: function(res) {
-        wx.request({
-          url: app.InterfaceUrl+'activitymanage/AttendMeet',
-          data: {
-            data: data
-          },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          method: 'POST',
-          success: function(res) {
-            console.log(res);
-            if (res.data.code == 1) {
-              wx.navigateTo({
-                url: '../applySubmit/applySubmit?title=' + that.data.meet_title + '&begin_time=' + that.data.begin_time + '&end_time=' + that.data.end_time,
-              })
-            } else {
-              wx.hideLoading()
-              wx.showToast({
-                title: '提交失败...',
-                icon: 'none',
-                duration: 2000
-              })
-            }
-          },
-          fail: function(error) {
-            console.log(error)
-          }
-        })
-      }
+    wx.navigateTo({
+      url: '../RegistrationFee/RegistrationFee',
     })
   },
+  // 报名提交页面 跳转
+  // onBmtjTap: function(e) {
+  //   var that = this;
+  //   var data = new Object();
+  //   data.user_id = app.userData.userid;
+  //   data.meet_id = that.data.meet_id;
+  //   //去程 车次
+  //   data.car_num1 = that.data.train_no;
+  //   //去程 始发
+  //   data.from1 = that.data.originating;
+  //   //去程 终点
+  //   data.to1 = that.data.terminus;
+  //   //去程 车次备选
+  //   data.car_num1b = that.data.trainAll;
+  //   //
+  //   data.from1b = '';
+  //   //
+  //   data.to1b = '';
+  //   //返程 车次选择
+  //   data.car_num2 = that.data.f_train_no;
+  //   //返程 始发
+  //   data.from2 = that.data.f_originating;
+  //   //返程 终点
+  //   data.to2 = that.data.f_terminus;
+  //   //返程 备选车次
+  //   data.car_num2b = that.data.f_trainAll;
+  //   //
+  //   data.from2b = '';
+  //   //
+  //   data.to2b = '';
+  //   //去程 备注
+  //   data.special1 = that.data.inputTxt;
+  //   //返程 备注
+  //   data.special2 = that.data.FinputTxt;
+  //   //住房 入住时间
+  //   data.begin_time = that.data.rzdate;
+  //   //住房 离开时间
+  //   data.end_time = that.data.lkdate;
+  //   //住房备注
+  //   data.remark = that.data.inputRemark;
+  //   //房型选择
+  //   data.room_type = that.data.index.toString();
+  //   //拼住人
+  //   data.together_people = that.data.inputTxtR;
+  //   //去程 乘车时间
+  //   data.car_num1_time = that.data.date;
+  //   //返程 乘车时间
+  //   data.car_num2_time = that.data.f_date;
+  //   data.take_type = '火车';
+  //   data = JSON.stringify(data); // 转JSON字符串
+  //   var data = RSA.sign(data);
+  //   wx.showLoading({
+  //     title: '提交中',
+  //     success: function(res) {
+  //       wx.request({
+  //         // url: app.InterfaceUrl+'activitymanage/AttendMeet',
+  //         url:'http://39.106.49.2:8083/activitymanage/AttendMeet',
+  //         data: {
+  //           data: data
+  //         },
+  //         header: {
+  //           'content-type': 'application/x-www-form-urlencoded'
+  //         },
+  //         method: 'POST',
+  //         success: function(res) {
+  //           console.log(res);
+  //           if (res.data.code == 1) {
+  //             wx.navigateTo({
+  //               url: '../applySubmit/applySubmit?title=' + that.data.meet_title + '&begin_time=' + that.data.begin_time + '&end_time=' + that.data.end_time,
+  //             })
+  //           } else {
+  //             wx.hideLoading()
+  //             wx.showToast({
+  //               title: '提交失败...',
+  //               icon: 'none',
+  //               duration: 2000
+  //             })
+  //           }
+  //         },
+  //         fail: function(error) {
+  //           console.log(error)
+  //         }
+  //       })
+  //     }
+  //   })
+  // },
   // 日期
   bindDateChange: function(e) {
     var that = this;

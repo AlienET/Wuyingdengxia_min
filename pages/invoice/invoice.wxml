@@ -1,0 +1,45 @@
+<!--pages/invoice/invoice.wxml-->
+<view style='margin:30rpx 20rpx;'>
+  <view style='font-size:32rpx;'>请选择发票</view>
+  <radio-group class="radio-group" bindchange="radioChange" style='margin-top:20rpx;'>
+    <label class="radio" for='nofp'>
+      <radio value="nofp" id='nofp' /> 不要发票
+    </label>
+    <label class="radio" for='zzfp'>
+      <radio value="zzfp" id='zzfp' checked='checked' /> 纸质发票
+    </label>
+  </radio-group>
+</view>
+<view class='gap'></view>
+<view style='margin:0 20rpx;' wx:if='{{is_invoice == "zzfp"}}'>
+  <radio-group bindchange="radioChangelis">
+    <view style='border-bottom:1rpx solid #E8E8E8;display:flex;flex-direction: row;justify-content:space-between;padding:30rpx 40rpx;' wx:for='{{fpLis}}'>
+      <radio class='ver-middle' value='{{item.receipt_id}}'>
+        <view class='ver-middle'>
+          <view style='display:inline-block;' class='ver-middle' wx:if='{{item.receipt_type == 1}}'>
+            <view style='font-size:30rpx;'>
+              {{item.receipt_info}}
+              <text style='display:inline-block;font-size:19rpx;color:#fff;background: #1397FF;border-radius: 8.5px;padding:0rpx 10rpx;'>企业</text>
+            </view>
+            <view style='font-size:30rpx;margin-top:5rpx;'>
+              {{item.tax_num}}
+            </view>
+          </view>
+          <view style='display:inline-block;margin-top:-13rpx;' class='ver-middle' wx:else>
+            <view style='font-size:30rpx;' class='ver-middle'>
+              {{item.bill_person_name}}
+              <text style='display:inline-block;font-size:19rpx;color:#fff;background: #1397FF;border-radius: 8.5px;padding:0rpx 10rpx;'>个人</text>
+            </view>
+          </view>
+        </view>
+      </radio>
+      <image catchtap='fapiaoTap' data-event='{{item}}' class='ver-middle' src='/images/icon/jiantouhui.png' style='width:20rpx;margin-top:22rpx;' mode='widthFix'></image>
+    </view>
+  </radio-group>
+
+  <view catchtap='OnaddfpTap' style='text-align:center;margin-top:50rpx;'>
+    <view style='border:1rpx solid #1397FF;border-radius:100px;padding:15rpx 0rpx;width:55%;text-align:center;color:#1397FF;display:inline-block;font-size:34rpx;'>
+      + 添加常用发票抬头
+    </view>
+  </view>
+</view>

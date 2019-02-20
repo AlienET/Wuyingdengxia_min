@@ -1,0 +1,7 @@
+/* pages/RegistrationFee/RegistrationFee.wxss */
+page{
+  min-height: 100%;
+}
+.zfbmf{
+  min-height: 100%;
+}

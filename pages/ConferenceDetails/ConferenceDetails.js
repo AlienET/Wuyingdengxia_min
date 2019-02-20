@@ -60,7 +60,8 @@ Page({
     obj = JSON.stringify(obj); // 转JSON字符串
     var data = RSA.sign(obj);
     wx.request({
-      url: app.InterfaceUrl + 'usermanage/getUserInfo',
+      url:'http://39.106.49.2:8081/usermanage/getUserInfo',
+      // url: app.InterfaceUrl + 'usermanage/getUserInfo',
       data: {
         data: data
       },
@@ -101,7 +102,8 @@ Page({
     var data = RSA.sign(meetContent);
     // 获取会议详情
     wx.request({
-      url: app.InterfaceUrl + 'activitymanage/getMeetById',
+      // url: app.InterfaceUrl + 'activitymanage/getMeetById',
+      url: 'http://39.106.49.2:8083/activitymanage/getMeetById',
       data: {
         data: data
       },
@@ -118,6 +120,7 @@ Page({
             res.data.data.meet_date[i].date = date[0]
           }
         }
+        res.data.data.meet_regist_fee = res.data.data.meet_regist_fee / 100;
         that.setData({
           aboutData: res.data.data,
           schedule: res.data.data.meet_date,
@@ -148,7 +151,8 @@ Page({
     if (that.data.aboutData.meet_id != undefined) {
       // 获取会议详情
       wx.request({
-        url: app.InterfaceUrl + 'activitymanage/getMeetById',
+        // url: app.InterfaceUrl + 'activitymanage/getMeetById',
+        url: 'http://39.106.49.2:8083/activitymanage/getMeetById',
         data: {
           data: data
         },
@@ -158,6 +162,7 @@ Page({
         method: 'POST',
         success: function(res) {
           console.log(res.data.data)
+          res.data.data.meet_regist_fee = res.data.data.meet_regist_fee / 100;
           that.setData({
             aboutData: res.data.data,
             schedule: res.data.data.meet_date,
