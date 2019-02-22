@@ -3,6 +3,7 @@ var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
 const app = getApp();
 var util = require('../../utils/util.js');
+
 Page({
 
   /**
@@ -12,7 +13,7 @@ Page({
     //会议标题
     title: '',
     begin_time: '',
-    meet_regist_fee:'',
+    meet_regist_fee: '',
     end_time: '',
     meet_title: '',
     //去程
@@ -123,10 +124,59 @@ Page({
       index: e.detail.value
     })
   },
-  onBmtjTap:function(e){
+  onBmtjTap: function(e) {
     var that = this;
     wx.navigateTo({
-      url: '../RegistrationFee/RegistrationFee',
+      url: '../RegistrationFee/RegistrationFee?meet_title=' + that.data.meet_title + '&meet_regist_fee=' + that.data.meet_regist_fee,
+      success: function(res) {
+        var data = new Object();
+        data.user_id = app.userData.userid;
+        data.meet_id = that.data.meet_id;
+        //去程 车次
+        data.car_num1 = that.data.train_no;
+        //去程 始发
+        data.from1 = that.data.originating;
+        //去程 终点
+        data.to1 = that.data.terminus;
+        //去程 车次备选
+        data.car_num1b = that.data.trainAll;
+        //
+        data.from1b = '';
+        //
+        data.to1b = '';
+        //返程 车次选择
+        data.car_num2 = that.data.f_train_no;
+        //返程 始发
+        data.from2 = that.data.f_originating;
+        //返程 终点
+        data.to2 = that.data.f_terminus;
+        //返程 备选车次
+        data.car_num2b = that.data.f_trainAll;
+        //
+        data.from2b = '';
+        //
+        data.to2b = '';
+        //去程 备注
+        data.special1 = that.data.inputTxt;
+        //返程 备注
+        data.special2 = that.data.FinputTxt;
+        //住房 入住时间
+        data.begin_time = that.data.rzdate;
+        //住房 离开时间
+        data.end_time = that.data.lkdate;
+        //住房备注
+        data.remark = that.data.inputRemark;
+        //房型选择
+        data.room_type = that.data.index.toString();
+        //拼住人
+        data.together_people = that.data.inputTxtR;
+        //去程 乘车时间
+        data.car_num1_time = that.data.date;
+        //返程 乘车时间
+        data.car_num2_time = that.data.f_date;
+        data.take_type = '火车';
+        app.reservationInformationData = data;
+      }
     })
   },
   // 报名提交页面 跳转
@@ -440,7 +490,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    app.reservationInformationData = '';
   },
 
   /**

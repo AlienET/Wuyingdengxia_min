@@ -60,7 +60,8 @@
     "pages/recharge/recharge",
     "pages/qtje/qtje",
     "pages/invoice/invoice",
-    "pages/RegistrationFee/RegistrationFee"
+    "pages/RegistrationFee/RegistrationFee",
+    "pages/addressDZ/addressDZ"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -1,16 +1,33 @@
 <!--pages/RegistrationFee/RegistrationFee.wxml-->
 <view class='zfbmf' style='padding:0rpx 40rpx;'>
-  <view style='text-align:center;font-size:60rpx;'>¥ 680.00</view>
-  <view style='font-size:28rpx;color: #686868;text-align: center;'>苏州医疗器械装备交流会</view>
+  <view style='text-align:center;font-size:60rpx;'>¥ {{meet_regist_fee}}.00</view>
+  <view style='font-size:28rpx;color: #686868;text-align: center;'>{{meet_title}}</view>
   <view style='margin-top:50rpx;'>
     <image class='ver-middle' src='/images/icon/weixins.png' mode='widthFix' style='width:75rpx;'></image>
     <text class='ver-middle' style='font-size:28rpx;margin-left:30rpx;color:#666;'>微信支付</text>
   </view>
   <view style='border-bottom:1rpx solid #F1F1F1;padding:20rpx 0rpx;display: flex;justify-content:space-between;'>
-    <view style='font-size:32rpx;display:inline-block;margin-top:12rpx;' class='ver-middle'>发票</view>
+    <view style='font-size:32rpx;display:inline-block;{{InvoiceInformation?"margin-top:45rpx;":"margin-top:12rpx;"}}' class='ver-middle'>发票</view>
+    <view wx:if='{{InvoiceInformation}}' style='margin-right:30rpx;display:inline-block;' class='ver-middle'>
+      <view style='font-size:30rpx;margin-bottom:10rpx;'>发票类型（{{InvoiceInformation.receipt_type=='1'?"企业":"个人"}}）</view>
+      <view style='font-size:30rpx;margin-bottom:10rpx;'>{{InvoiceInformation.receipt_info}}</view>
+      <view style='font-size:30rpx;'>{{InvoiceInformation.tax_num}}</view>
+    </view>
     <view class='ver-middle' catchtap='invoiceTap'>
-      <view class='ver-middle' style='font-size:30rpx;color:#989898;display:inline-block;margin-right:20rpx;'>是否需要发票</view>
-      <image class='ver-middle' src='/images/icon/jiantouhui.png' mode='widthFix' style='width:19rpx;margin-top:5rpx;'></image>
+      <view wx:if='{{InvoiceInformation == ""}}' class='ver-middle' style='font-size:30rpx;color:#989898;display:inline-block;margin-right:20rpx;'>是否需要发票</view>
+      <image class='ver-middle' src='/images/icon/jiantouhui.png' mode='widthFix' style='width:19rpx;{{InvoiceInformation?"margin-top:47rpx;":"margin-top:5rpx;"}}'></image>
+    </view>
+  </view>
+  <view wx:if='{{InvoiceInformation!=""}}' style='border-bottom:1rpx solid #F1F1F1;padding:20rpx 0rpx;display: flex;justify-content:space-between;'>
+    <view style='font-size:32rpx;display:inline-block;{{MailingAddress?"margin-top:48rpx;":"margin-top:12rpx;"}}' class='ver-middle'>配送地址</view>
+    <view wx:if='{{MailingAddress}}' style='margin-right:30rpx;display:inline-block;' class='ver-middle'>
+      <view style='font-size:30rpx;margin-bottom:10rpx;'>{{MailingAddress.mail_name}}</view>
+      <view style='font-size:30rpx;margin-bottom:10rpx;'>{{MailingAddress.mail_phone}}</view>
+      <view style='font-size:30rpx;'>{{MailingAddress.mail_address}}</view>
+    </view>
+    <view class='ver-middle' catchtap='addressTap'>
+      <view wx:if='{{MailingAddress == ""}}' class='ver-middle' style='font-size:30rpx;color:#989898;display:inline-block;margin-right:20rpx;'>请选择发票配送地址</view>
+      <image class='ver-middle' src='/images/icon/jiantouhui.png' mode='widthFix' style='width:19rpx;{{MailingAddress?"margin-top:55rpx;":"margin-top:5rpx;"}}'></image>
     </view>
   </view>
   <view style='text-align:center;margin-top:100%;'>

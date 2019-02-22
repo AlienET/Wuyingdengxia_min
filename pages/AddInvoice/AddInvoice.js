@@ -100,7 +100,7 @@ Page({
           data = JSON.stringify(data); // 转JSON字符串
           var data = RSA.sign(data);
           wx.request({
-            url: app.InterfaceUrl + 'usermanage/addUserReceiptInfo',
+            url: 'http://39.106.49.2:8081/usermanage/addUserReceiptInfo',
             data: {
               data: data
             },
@@ -143,7 +143,7 @@ Page({
           data = JSON.stringify(data); // 转JSON字符串
           var data = RSA.sign(data);
           wx.request({
-            url: app.InterfaceUrl + 'usermanage/editUserReceiptInfo',
+            url: 'http://39.106.49.2:8081/usermanage/editUserReceiptInfo',
             data: {
               data: data
             },
@@ -174,7 +174,7 @@ Page({
           data = JSON.stringify(data); // 转JSON字符串
           var data = RSA.sign(data);
           wx.request({
-            url: app.InterfaceUrl + 'usermanage/addUserReceiptInfo',
+            url: 'http://39.106.49.2:8081/usermanage/addUserReceiptInfo',
             data: {
               data: data
             },

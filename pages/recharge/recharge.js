@@ -66,13 +66,22 @@ Page({
           console.log(res)
           console.log(res.data.data)
           wx.requestPayment({
-            'timeStamp': res.data.data.timestamp,
-            'nonceStr': res.data.data.noncestr,
-            'package': 'prepay_id=' + res.data.data.prepayid+'&Sign=WXPay',
+            'timeStamp': res.data.data.timeStamp,
+            'nonceStr': res.data.data.nonceStr,
+            'package': res.data.data.package,
             'signType': 'MD5',
             'paySign': res.data.data.sign,
             'success': function(res) {
               console.log(res)
+              wx.showToast({
+                title: '充值成功',
+                icon: 'success',
+                duration: 2000
+              });
+              var moon_cash = parseInt(that.data.moon_cash) + that.data.cz / 10;
+              that.setData({
+                moon_cash: moon_cash
+              })
             },
             'fail': function(res) {
               console.log(res)
@@ -117,7 +126,7 @@ Page({
     var data = RSA.sign(data);
     wx.request({
       // url: app.InterfaceUrl + 'usermanage/getUserInfo',
-      url:'http://39.106.49.2:8081/usermanage/getUserInfo',
+      url: 'http://39.106.49.2:8081/usermanage/getUserInfo',
       data: {
         data: data
       },

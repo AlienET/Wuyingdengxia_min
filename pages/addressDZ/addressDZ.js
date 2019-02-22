@@ -1,37 +1,27 @@
-// pages/invoice/invoice.js
+// pages/addressDZ/addressDZ.js
 var RSA = require('../../utils/wx_rsa.js');
 //获取应用实例
-const app = getApp();
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //要不要发票
-    is_invoice: 'zzfp',
     //发票列表
-    fpLis:''
-  },
-  //选择是否需要发票
-  radioChange: function(e) {
-    var that = this;
-    that.setData({
-      is_invoice: e.detail.value
-    })
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+    fpLis: ''
   },
   //添加发票
   OnaddfpTap: function(e) {
     var that = this;
     wx.navigateTo({
-      url: '../AddInvoice/AddInvoice',
+      url: '../AddAddress/AddAddress',
     })
   },
   //选择发票
   radioChangelis: function(e) {
     var that = this;
-    app.InvoiceInformation = that.data.fpLis[e.detail.value];
+    app.MailingAddress = that.data.fpLis[e.detail.value];
   },
   /**
    * 生命周期函数--监听页面加载
@@ -57,7 +47,7 @@ Page({
     obj = JSON.stringify(obj); // 转JSON字符串
     var data = RSA.sign(obj);
     wx.request({
-      url: 'http://39.106.49.2:8081/usermanage/queryUserReceiptInfo',
+      url: 'http://39.106.49.2:8081/usermanage/queryUserMailInfo',
       data: {
         data: data
       },
@@ -66,13 +56,16 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function(res) {
+        console.log(res)
         for (var i = res.data.data - 1; i >= 0; i--) {
           res.data.data[i].checked = 'no';
         }
-        res.data.data[0].checked = 'checked';
-        app.InvoiceInformation = res.data.data[0];
+        if(res.data.data.length>0){
+          res.data.data[0].checked = 'checked';
+          app.MailingAddress = res.data.data[0];
+        }
         that.setData({
-          fpLis:res.data.data
+          fpLis: res.data.data
         })
         console.log(that.data.fpLis)
       },

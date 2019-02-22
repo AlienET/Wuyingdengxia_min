@@ -466,7 +466,7 @@ Page({
         Adata = JSON.stringify(articleList); // 转JSON字符串
         var Adata = RSA.sign(Adata);
         wx.request({
-          url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+          url: 'http://39.106.49.2:8082/homepagemanage/getArticleByLabel',
           data: {
             data: Adata
           },

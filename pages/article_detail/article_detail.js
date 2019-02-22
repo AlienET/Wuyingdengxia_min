@@ -425,7 +425,8 @@ Page({
       articleid: options.articleid,
     });
     wx.request({
-      url: app.InterfaceUrl + 'homepagemanage/getArticleById',
+      // url: app.InterfaceUrl + 'homepagemanage/getArticleById',
+      url:'http://39.106.49.2:8082/homepagemanage/getArticleById',
       data: {
         data: data
       },

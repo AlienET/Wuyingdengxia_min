@@ -44,7 +44,7 @@ App({
                     },
                     success: function(res) {
                       console.log(res);
-                      that.mini_openid = res.data.data.mini_openid;
+                      that.mini_openid = res.data.data.we_chat_id;
                       if (res.data.msg == '请完善信息') {
                         console.log(res.data.msg);
                         // that.mini_openid = res.data.data.mini_openid;
@@ -191,6 +191,12 @@ App({
     //二维码token
     Rcode:'',
     //登陆code
-    wx_code:''
+    wx_code:'',
+    //报名时选中发票信息
+    InvoiceInformation:'',
+    //报名时选中的邮寄地址
+    MailingAddress:'',
+    //报名填写信息
+    reservationInformationData:''
   }
 })

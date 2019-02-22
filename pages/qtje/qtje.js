@@ -20,16 +20,17 @@ Page({
   //充值
   chongzhi: function () {
     var that = this;
-    
     if (that.data.val > 0) {
       that.data.val = that.data.val * 10;
       var data = new Object();
       data.appid = 'wx8dbc9156e40232a7';
       data.spbill_create_ip = 'wydx';
       data.order_type = '1';
-      data.toId = '10198';
-      data.userid = '10198';
+      data.toId = app.userData.userid;
+      data.userid = app.userData.userid;
       data.trade_type = 'JSAPI';
+      data.js_code = app.wx_code;
+      data.openid = app.mini_openid;
       data.total_fee = that.data.val.toString();
       data = JSON.stringify(data); // 转JSON字符串
       var data = RSA.sign(data);
@@ -45,13 +46,21 @@ Page({
         success: function (res) {
           console.log(res.data.data)
           wx.requestPayment({
-            'timeStamp': res.data.data.timestamp,
-            'nonceStr': res.data.data.noncestr,
-            'package': 'prepay_id=' + res.data.data.prepayid,
+            'timeStamp': res.data.data.timeStamp,
+            'nonceStr': res.data.data.nonceStr,
+            'package': res.data.data.package,
             'signType': 'MD5',
             'paySign': res.data.data.sign,
             'success': function (res) {
               console.log(res)
+              wx.showToast({
+                title: '充值成功',
+                icon: 'success',
+                duration: 2000
+              });
+              that.setData({
+                val: ''
+              })
             },
             'fail': function (res) {
               console.log(res)
