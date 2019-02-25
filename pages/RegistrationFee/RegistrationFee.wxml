@@ -31,6 +31,6 @@
     </view>
   </view>
   <view style='text-align:center;margin-top:100%;'>
-    <view style='display:inline-block;background-image: linear-gradient(-143deg, #1E94FF 3%, #3EAAFE 100%);border-radius:100px;color:#fff;font-size:32rpx;padding:15rpx 75rpx;'>立即报名</view>
+    <view style='display:inline-block;background-image: linear-gradient(-143deg, #1E94FF 3%, #3EAAFE 100%);border-radius:100px;color:#fff;font-size:32rpx;padding:15rpx 75rpx;' catchtap='OnSignUpTap'>立即报名</view>
   </view>
 </view>
