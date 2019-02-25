@@ -133,47 +133,79 @@ Page({
         data.user_id = app.userData.userid;
         data.meet_id = that.data.meet_id;
         //去程 车次
+        if (that.data.train_no != '选择车次'){
         data.car_num1 = that.data.train_no;
+        }
         //去程 始发
+        if (that.data.originating != ''){
         data.from1 = that.data.originating;
+        }
         //去程 终点
+        if (that.data.terminus!=''){
         data.to1 = that.data.terminus;
+        }
         //去程 车次备选
+        if (that.data.trainAll!=''){
         data.car_num1b = that.data.trainAll;
+        }
         //
-        data.from1b = '';
+        // data.from1b = '';
         //
-        data.to1b = '';
+        // data.to1b = '';
         //返程 车次选择
+        if (that.data.f_train_no!=''){
         data.car_num2 = that.data.f_train_no;
+        }
         //返程 始发
+        if (that.data.f_originating!=''){
         data.from2 = that.data.f_originating;
+        }
         //返程 终点
+        if (that.data.f_terminus!=''){
         data.to2 = that.data.f_terminus;
+        }
         //返程 备选车次
+        if (that.data.f_trainAll!=''){
         data.car_num2b = that.data.f_trainAll;
+        }
         //
-        data.from2b = '';
+        // data.from2b = '';
         //
-        data.to2b = '';
+        // data.to2b = '';
         //去程 备注
+        if (that.data.inputTxt!=''){
         data.special1 = that.data.inputTxt;
+        }
         //返程 备注
+        if (that.data.FinputTxt!=''){
         data.special2 = that.data.FinputTxt;
+        }
         //住房 入住时间
+        if (that.data.rzdate!=''){
         data.begin_time = that.data.rzdate;
+        }
         //住房 离开时间
+        if (that.data.lkdate!=''){
         data.end_time = that.data.lkdate;
+        }
         //住房备注
+        if (that.data.inputRemark!=''){
         data.remark = that.data.inputRemark;
+        }
         //房型选择
         data.room_type = that.data.index.toString();
         //拼住人
+        if (that.data.inputTxtR!=''){
         data.together_people = that.data.inputTxtR;
+        }
         //去程 乘车时间
+        if (that.data.date!=''){
         data.car_num1_time = that.data.date;
+        }
         //返程 乘车时间
+        if (that.data.f_date!=''){
         data.car_num2_time = that.data.f_date;
+        }
         data.take_type = '火车';
         app.reservationInformationData = data;
       }

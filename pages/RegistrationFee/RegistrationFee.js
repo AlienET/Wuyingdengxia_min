@@ -98,8 +98,8 @@ Page({
             'success': function(res) {
               console.log(res)
               var reservationInformationData = app.reservationInformationData;
-              reservationInformationData.mail_id = '';
-              reservationInformationData.receipt_id = '';
+              // reservationInformationData.mail_id = '';
+              // reservationInformationData.receipt_id = '';
               var objs = JSON.stringify(reservationInformationData); // 转JSON字符串
               var objss = RSA.sign(objs);
               wx.showLoading({
