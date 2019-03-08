@@ -41,8 +41,8 @@ Page({
                   title: '',
                   success: function(res) {
                     wx.request({
-                      // url: app.InterfaceUrl + 'usermanage/smallAppsWxLogin',
-                      url: 'http://39.106.49.2:8081/usermanage/smallAppsWxLogin',
+                      url: app.InterfaceUrl + 'usermanage/smallAppsWxLogin',
+                      // url: 'http://39.106.49.2:8081/usermanage/smallAppsWxLogin',
                       data: {
                         data: data
                       },

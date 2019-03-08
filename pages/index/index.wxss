@@ -36,15 +36,40 @@ swiper swiper-item image {
   height: 36rpx;
 }
 
-
-
-
 /*  标签切换  */
-.swiper-tab{}  
-.swiper-tab-list{    
-}  
-  
-.swiper-box{  }  
-.swiper-box view{  
-     
+
+.swiper-tab {
+}
+
+.swiper-tab-list {
+}
+
+.swiper-box {
+}
+
+.swiper-box view {
+}
+
+/* //改版UI */
+
+.top-tab {
+  display: inline-block;
+  font-size: 34rpx;
+  color: #252525;
+}
+
+.top-tab.top-tab-active {
+  color: #1397ff;
+}
+
+.abs_item .txt-r view {
+  font-size: 22rpx;
+  vertical-align: middle;
+  margin-right: 30rpx;
+  display: inline-block;
+}
+
+.abs_item .txt-r view text {
+  vertical-align: middle;
+  color: #bdbdbd;
 }

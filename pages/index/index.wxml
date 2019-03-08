@@ -1,60 +1,104 @@
 <!--index.wxml-->
 <view class='conasdiner'>
-  <view class='section mt-n'>
-    <image catchtap='onRCtap' mode='widthFix' class='RC' src='/images/icon/icon_RichScan.png'></image>
-    <label class='search'>
-      <image class='i-search' mode='widthFix' src='/images/icon/icon_search.png'></image>
-      <input catchtap="onSearchTap" placeholder-style='font-size:24rpx;' style='width:88%' type='text' disabled='true' placeholder='输入想要搜索的关键词' maxlength='20'></input>
-    </label>
-    <text catchtap='onContributeTap' class='contribute ver-middle' style='float:right;margin-top:8rpx;'>投稿</text>
-  </view>
-  <view>
-    <swiper previous-margin='10rpx' style='height:300rpx' next-margin='20rpx' vertical='{{false}}' indicator-dots autoplay interval="5000" duration="1000" circular indicator-color="rgba(256,256,256,0.5)" indicator-active-color="rgba(256,256,256,0.8)">
-      <swiper-item wx:for='{{bannerList}}' style='text-align:center'>
-        <image style='margin:0 15rpx;' catchtap='onBannerImgTap' data-postid="{{item}}" src='{{item.banner_imgpath}}' mode='widthFix'></image>
-      </swiper-item>
-    </swiper>
-  </view>
-  <view class=' p_rel'>
-    <image catchtap='onNavEditTap' mode='widthFix' src='/images/icon/icon_addSheet.png'></image>
-    <view class='sheet section mb-n swiper-tab'>
-      <text wx:for='{{labellist}}' class="swiper-tab-list {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" bindtap="swichNav">{{item.name}}</text>
-      <!-- active -->
+  <view class='section mt-n' style='display:flex;justify-content:space-between;'>
+    <view>
+      <image catchtap='onRCtap' mode='widthFix' class='RC' src='/images/icon/icon_RichScan.png'></image>
+      <image catchtap="onSearchTap" class='i-search ver-middle' style='width:36rpx;margin-left:20rpx;' mode='widthFix' src='/images/icon/new/Group.png'></image>
+    </view>
+    <view style='display:inline-block;' class='ver-middle'>
+      <view bindtap="onTopTabTap" data-current="0" class='ver-middle top-tab {{flag==0?"top-tab-active":""}}'>专栏</view>
+      <view style='display:inline-block;width:1rpx;height:22rpx;background-color:#DADADA;margin:0rpx 15rpx;' class='ver-middle'></view>
+      <view bindtap="onTopTabTap" data-current="1" class='ver-middle top-tab {{flag==1?"top-tab-active":""}}'>热点</view>
+    </view>
+    <view catchtap='onContributeTap' class='contribute ver-middle'>
+      <image src='/images/icon/new/Group6@2x.png' style='width:36rpx;margin-right:10rpx;' mode='widthFix' class='ver-middle'></image>
+      <text class='color: #3E3E3E;font-size:30rpx;' class='ver-middle'>投稿</text>
     </view>
   </view>
-  <view class='sheet dis_matter'>
-    <view class='item' catchtap='onDiscussDetailsTap' data-postid="{{item}}" wx:for='{{discusslist}}'>
-      <image wx:if='{{item.type < 1}}' mode='widthFix' src='/images/icon/icon_underDiscussion.png'></image>
-      <image wx:else mode='widthFix' src='/images/icon/wtzj.png'></image>
-      {{item.key_dis_title}}
-    </view>
-  </view>
-  <swiper current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{tabActiveKeyId.length!=0?tabActiveKeyId.length*120:300}}px" bindchange="bindChange">
-    <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
-      <scroll-view style='height:100%;' bindscrolltolower='loadMoreData'>
-        <view wx:if='{{tabActiveKeyId.length==0}}' style='text-align:center;color#eee;font-size:28rpx;padding-top:40rpx;'>
-        该标签下暂无文章...
-      </view>
-      <view wx:eles catchtap="onArticleDetailTap" class='abs_item' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}'>
-        <!-- wx:if='{{tabActiveKeyId}}'  -->
-        <view class='abs_item_author'>
-          <image src='{{item.headimg}}'></image>
-          <text>{{item.article_author}}</text>
-        </view>
-        <view wx:if='{{item.article_img_path.length != 1}}'>
-          <view class='abs_item_title'>
-            {{item.article_title}}
+  <swiper current='{{flag}}' style='height:{{winHeight}}px'>
+    <swiper-item>
+      <scroll-view scroll-y='true' style='height:100%;' bindscrolltolower='loadMoreDataBottom'>
+        <view style='padding:0rpx 20rpx;'>
+          <!-- 改版UI -->
+          <view>
+            <swiper previous-margin='10rpx' style='height:300rpx' next-margin='20rpx' vertical='{{false}}' indicator-dots autoplay interval="5000" duration="1000" circular indicator-color="rgba(256,256,256,0.5)" indicator-active-color="rgba(256,256,256,0.8)">
+              <swiper-item wx:for='{{bannerList}}' style='text-align:center'>
+                <image style='margin:0 15rpx;' catchtap='onBannerImgTap' data-postid="{{item}}" src='{{item.banner_imgpath}}' mode='widthFix'></image>
+              </swiper-item>
+            </swiper>
           </view>
-          <view class='abs_item_content'>
-            <view class='content_txt  text-hide'>
-              {{item.article_content}}
+          <!-- 新版 入口列 -->
+          <view style='display:flex;justify-content:space-between;margin:30rpx;'>
+            <view style='text-align:center;display:inline-block;'>
+              <image src='/images/icon/new/mrcd.png' mode='widthFix' style='width:90rpx;'></image>
+              <view style='font-size:28rpx;color: #353535;margin-top:10rpx;'>每日晨读</view>
+            </view>
+            <view style='text-align:center;display:inline-block;'>
+              <image src='/images/icon/new/spjx.png' mode='widthFix' style='width:90rpx;'></image>
+              <view style='font-size:28rpx;color: #353535;margin-top:10rpx;'>视频教学</view>
+            </view>
+            <view style='text-align:center;display:inline-block;'>
+              <image src='/images/icon/new/tssh.png' mode='widthFix' style='width:90rpx;'></image>
+              <view style='font-size:28rpx;color: #353535;margin-top:10rpx;'>天使生活</view>
+            </view>
+            <view style='text-align:center;display:inline-block;'>
+              <image src='/images/icon/xuyuanchiicon.png' mode='widthFix' style='width:90rpx;'></image>
+              <view style='font-size:28rpx;color: #353535;margin-top:10rpx;'>心愿池</view>
             </view>
           </view>
-        </view>
-        <view wx:if='{{item.article_img_path.length == 1}}' style='display:flex;flex-direction:row'>
-          <view style='display:inline-block;width:60%;'>
-            <view class='abs_item_title text-hide' style='-webkit-line-clamp:3'>{{item.article_title}}</view>
-            <view class='txt-r' style='text-align:left;margin-top:60rpx;'>
+          <!-- 热门文章列 -->
+          <view style='padding-bottom:20rpx;border-bottom:1rpx solid #E9E9E9;text-align:left;'>
+            <image src='/images/icon/new/Group3@2x.png' mode='widthFix' style='width:30rpx;' class='ver-middle'></image>
+            <text style='color: #2F2F2F;font-size:32rpx;font-weight:bold;margin-left:15rpx;' class='ver-middle;'>热点内容</text>
+          </view>
+          <view wx:if='{{tabActivePopular.length==0}}' style='text-align:center;color#eee;font-size:28rpx;padding-top:40rpx;'>
+            该标签下暂无文章...
+          </view>
+          <view wx:eles catchtap="onArticleDetailTap" class='abs_item txt-l' wx:for='{{tabActivePopular}}' data-postid='{{item}}'>
+            <!-- wx:if='{{tabActiveKeyId}}'  -->
+            <!-- <view class='abs_item_author'>
+              <image src='{{item.headimg}}'></image>
+              <text>{{item.article_author}}</text>
+            </view> -->
+            <view wx:if='{{item.article_img_path.length != 1}}'>
+              <view class='abs_item_title'>
+                {{item.article_title}}
+              </view>
+              <view class='abs_item_content'>
+                <view class='content_txt  text-hide'>
+                  {{item.article_content}}
+                </view>
+              </view>
+            </view>
+            <view wx:if='{{item.article_img_path.length == 1}}' style='display:flex;flex-direction:row'>
+              <view style='display:inline-block;width:60%;'>
+                <view class='abs_item_title text-hide' style='-webkit-line-clamp:3'>{{item.article_title}}</view>
+                <!-- <view class='txt-r' style='text-align:left;margin-top:60rpx;'>
+                  <view>
+                    <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
+                    <text>{{item.overlook_num}}</text>
+                  </view>
+                  <view>
+                    <image src='/images/icon/icon_reply.png' style='width:28rpx;height:26rpx;'></image>
+                    <text>{{item.recom_num}}</text>
+                  </view>
+                  <view>
+                    <image src='/images/icon/icon_like.png' style='width:24rpx;height:24rpx;'></image>
+                    <text>{{item.support_num}}</text>
+                  </view>
+                </view> -->
+                <view class='abs_item_author'>
+                  <image class='ver-middle' src='{{item.headimg}}' mode='widthFix' style='width:36rpx;'></image>
+                  <text class='ver-middle'>{{item.article_author}}</text>
+                  <text class='ver-middle' style='margin-left:40rpx;'>{{item.overlook_num}} 浏览</text>
+                </view>
+              </view>
+              <image src='{{item.article_img_path[0]}}' style='width:130px;height:150rpx;display:inline-block;margin-left:15rpx;' mode='aspectFill'></image>
+            </view>
+            <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""&&item.article_img_path.length != 1}}'>
+              <image wx:for='{{item.article_img_path}}' wx:for-item="itm" src='{{itm}}' mode='aspectFill' style='width:{{item.article_img_path.length == 3?"33%":"100%"}};height:100%'></image>
+            </view>
+            <!-- <view class='txt-r' style='text-align:left' wx:if='{{item.article_img_path.length != 1}}'>
               <view>
                 <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
                 <text>{{item.overlook_num}}</text>
@@ -67,31 +111,112 @@
                 <image src='/images/icon/icon_like.png' style='width:24rpx;height:24rpx;'></image>
                 <text>{{item.support_num}}</text>
               </view>
+            </view> -->
+            <view class='abs_item_author' wx:if='{{item.article_img_path.length != 1}}'>
+              <image class='ver-middle' src='{{item.headimg}}' mode='widthFix' style='width:36rpx;'></image>
+              <text class='ver-middle'>{{item.article_author}}</text>
+              <text class='ver-middle' style='margin-left:40rpx;'>{{item.overlook_num}} 浏览</text>
             </view>
           </view>
-          <image src='{{item.article_img_path[0]}}' style='width:130px;height:150rpx;display:inline-block;margin-left:15rpx;' mode='aspectFill'></image>
+          <view wx:if='{{Load}}' style='font-size:30rpx;color:#aaa;text-align:center;'>正在加载 ...</view>
         </view>
-        <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""&&item.article_img_path.length != 1}}'>
-          <image wx:for='{{item.article_img_path}}' wx:for-item="itm" src='{{itm}}' mode='aspectFill' style='width:{{item.article_img_path.length == 3?"33%":"100%"}};height:100%'></image>
-        </view>
-        <view class='txt-r' style='text-align:left' wx:if='{{item.article_img_path.length != 1}}'>
-          <view>
-            <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
-            <text>{{item.overlook_num}}</text>
-          </view>
-          <view>
-            <image src='/images/icon/icon_reply.png' style='width:28rpx;height:26rpx;'></image>
-            <text>{{item.recom_num}}</text>
-          </view>
-          <view>
-            <image src='/images/icon/icon_like.png' style='width:24rpx;height:24rpx;'></image>
-            <text>{{item.support_num}}</text>
-          </view>
-        </view>
-      </view>
       </scroll-view>
     </swiper-item>
+    <swiper-item>
+        <view>
+          <view class=' p_rel'>
+            <image catchtap='onNavEditTap' mode='widthFix' src='/images/icon/icon_addSheet.png'></image>
+            <view class='sheet section mb-n swiper-tab'>
+              <text wx:for='{{labellist}}' class="swiper-tab-list {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" bindtap="swichNav">{{item.name}}</text>
+              <!-- active -->
+            </view>
+          </view>
+          <!-- 旧版本的 ‘正在讨论’ -->
+          <!-- <view class='sheet dis_matter'>
+            <view class='item' catchtap='onDiscussDetailsTap' data-postid="{{item}}" wx:for='{{discusslist}}'>
+              <image wx:if='{{item.type < 1}}' mode='widthFix' src='/images/icon/icon_underDiscussion.png'></image>
+              <image wx:else mode='widthFix' src='/images/icon/wtzj.png'></image>
+              {{item.key_dis_title}}
+            </view>
+          </view> -->
+           <!-- bindscrolltolower='loadMoreData' -->
+          <swiper current="{{currentTab}}" class="swiper-box summarys" duration="300" style="height:{{winHeight-45}}px" bindchange="bindChange">
+            <swiper-item wx:for='{{labellist.length}}' style='text-align:left'>
+              <scroll-view scroll-y='true' style='height:100%;'  bindscrolltolower='loadMoreData'>
+                <view wx:if='{{tabActiveKeyId.length==0}}' style='text-align:center;color#eee;font-size:28rpx;padding-top:40rpx;'>
+                  该标签下暂无文章...
+                </view>
+                <view wx:eles catchtap="onArticleDetailTap" class='abs_item' wx:for='{{tabActiveKeyId}}' data-postid='{{item}}'>
+                  <!-- wx:if='{{tabActiveKeyId}}'  -->
+                  <!-- <view class='abs_item_author'>
+                    <image class='ver-middle' src='{{item.headimg}}' mode='widthFix' style='width:36rpx;'></image>
+                    <text class='ver-middle'>{{item.article_author}}</text>
+                    <text class='ver-middle' style='margin-left:40rpx;'>{{item.overlook_num}} 浏览</text>
+                  </view> -->
+                  <view wx:if='{{item.article_img_path.length != 1}}'>
+                    <view class='abs_item_title'>
+                      {{item.article_title}}
+                    </view>
+                    <view class='abs_item_content'>
+                      <view class='content_txt  text-hide'>
+                        {{item.article_content}}
+                      </view>
+                    </view>
+                  </view>
+                  <view wx:if='{{item.article_img_path.length == 1}}' style='display:flex;flex-direction:row'>
+                    <view style='display:inline-block;width:60%;'>
+                      <view class='abs_item_title text-hide' style='-webkit-line-clamp:3'>{{item.article_title}}</view>
+                      <!-- <view class='txt-r' style='text-align:left;margin-top:60rpx;'>
+                        <view>
+                          <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
+                          <text>{{item.overlook_num}}</text>
+                        </view>
+                        <view>
+                          <image src='/images/icon/icon_reply.png' style='width:28rpx;height:26rpx;'></image>
+                          <text>{{item.recom_num}}</text>
+                        </view>
+                        <view>
+                          <image src='/images/icon/icon_like.png' style='width:24rpx;height:24rpx;'></image>
+                          <text>{{item.support_num}}</text>
+                        </view>
+                      </view> -->
+                      <view class='abs_item_author'>
+                        <image class='ver-middle' src='{{item.headimg}}' mode='widthFix' style='width:36rpx;'></image>
+                        <text class='ver-middle'>{{item.article_author}}</text>
+                        <text class='ver-middle' style='margin-left:40rpx;'>{{item.overlook_num}} 浏览</text>
+                      </view>
+                    </view>
+                    <image src='{{item.article_img_path[0]}}' style='width:130px;height:150rpx;display:inline-block;margin-left:15rpx;' mode='aspectFill'></image>
+                  </view>
+                  <view style='height:230rpx;display:flex;justify-content:space-between' wx:if='{{item.article_img_path.length !=""&&item.article_img_path.length != 1}}'>
+                    <image wx:for='{{item.article_img_path}}' wx:for-item="itm" src='{{itm}}' mode='aspectFill' style='width:{{item.article_img_path.length == 3?"33%":"100%"}};height:100%'></image>
+                  </view>
+                  <!-- <view class='txt-r' style='text-align:left' wx:if='{{item.article_img_path.length != 1}}'>
+                    <view>
+                      <image src='/images/icon/icon_watch.png' style='width:28rpx;height:24rpx;'></image>
+                      <text>{{item.overlook_num}}</text>
+                    </view>
+                    <view>
+                      <image src='/images/icon/icon_reply.png' style='width:28rpx;height:26rpx;'></image>
+                      <text>{{item.recom_num}}</text>
+                    </view>
+                    <view>
+                      <image src='/images/icon/icon_like.png' style='width:24rpx;height:24rpx;'></image>
+                      <text>{{item.support_num}}</text>
+                    </view>
+                  </view> -->
+                  <view class='abs_item_author' wx:if='{{item.article_img_path.length != 1}}'>
+                    <image class='ver-middle' src='{{item.headimg}}' mode='widthFix' style='width:36rpx;'></image>
+                    <text class='ver-middle'>{{item.article_author}}</text>
+                    <text class='ver-middle' style='margin-left:40rpx;'>{{item.overlook_num}} 浏览</text>
+                  </view>
+                </view>
+              </scroll-view>
+            </swiper-item>
+          </swiper>
+          <view wx:if='{{Load}}' style='font-size:30rpx;color:#aaa;text-align:center;'>正在加载 ...</view>
+        </view>
+    </swiper-item>
   </swiper>
-  <view wx:if='{{Load}}' style='font-size:30rpx;color:#aaa;text-align:center;'>正在加载 ...</view>
 </view>
 <!-- <button open-type="getUserInfo" class="agree" bindgetuserinfo="agreeGetUser" lang="zh_CN">去设置</button> -->

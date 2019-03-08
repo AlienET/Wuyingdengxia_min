@@ -60,8 +60,8 @@ Page({
     obj = JSON.stringify(obj); // 转JSON字符串
     var data = RSA.sign(obj);
     wx.request({
-      url:'http://39.106.49.2:8081/usermanage/getUserInfo',
-      // url: app.InterfaceUrl + 'usermanage/getUserInfo',
+      // url:'http://39.106.49.2:8081/usermanage/getUserInfo',
+      url: app.InterfaceUrl + 'usermanage/getUserInfo',
       data: {
         data: data
       },
@@ -102,8 +102,8 @@ Page({
     var data = RSA.sign(meetContent);
     // 获取会议详情
     wx.request({
-      // url: app.InterfaceUrl + 'activitymanage/getMeetById',
-      url: 'http://39.106.49.2:8083/activitymanage/getMeetById',
+      url: app.InterfaceUrl + 'activitymanage/getMeetById',
+      // url: 'http://39.106.49.2:8083/activitymanage/getMeetById',
       data: {
         data: data
       },
@@ -151,8 +151,8 @@ Page({
     if (that.data.aboutData.meet_id != undefined) {
       // 获取会议详情
       wx.request({
-        // url: app.InterfaceUrl + 'activitymanage/getMeetById',
-        url: 'http://39.106.49.2:8083/activitymanage/getMeetById',
+        url: app.InterfaceUrl + 'activitymanage/getMeetById',
+        // url: 'http://39.106.49.2:8083/activitymanage/getMeetById',
         data: {
           data: data
         },

@@ -13,7 +13,7 @@ Page({
   },
   back:function(){
     wx.navigateBack({
-      delta: 2
+      delta: 3
     })
   },
   chakan:function(){

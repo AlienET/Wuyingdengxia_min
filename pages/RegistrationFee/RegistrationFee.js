@@ -59,11 +59,70 @@ Page({
         success: function(res) {
           console.log(res)
           console.log(res.data.data)
+          wx.requestPayment({
+            'timeStamp': res.data.data.timeStamp,
+            'nonceStr': res.data.data.nonceStr,
+            'package': res.data.data.package,
+            'signType': 'MD5',
+            'paySign': res.data.data.sign,
+            'success': function(res) {
+              console.log(res)
+              var reservationInformationData = app.reservationInformationData;
+              reservationInformationData.receipt_id = app.InvoiceInformation.receipt_id;
+              reservationInformationData.mail_id = app.InvoiceInformation.mail_id;
+              var objs = JSON.stringify(reservationInformationData); // 转JSON字符串
+              var objss = RSA.sign(objs);
+              wx.showLoading({
+                title: '提交中',
+                success: function(res) {
+                  wx.request({
+                    // url: app.InterfaceUrl+'activitymanage/AttendMeet',
+                    url: 'http://39.106.49.2:8083/activitymanage/AttendMeet',
+                    data: {
+                      data: objss
+                    },
+                    header: {
+                      'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    method: 'POST',
+                    success: function(res) {
+                      console.log(res);
+                      if (res.data.code == 1) {
+                        wx.navigateTo({
+                          url: '../applySubmit/applySubmit?title=' + that.data.meet_title + '&begin_time=' + reservationInformationData.begin_time + '&end_time=' + reservationInformationData.end_time,
+                        })
+                      } else {
+                        wx.hideLoading()
+                        wx.showToast({
+                          title: '提交失败...',
+                          icon: 'none',
+                          duration: 2000
+                        })
+                      }
+                    },
+                    fail: function(error) {
+                      console.log(error)
+                    }
+                  })
+                }
+              })
+            },
+            'fail': function(res) {
+              console.log(res)
+              wx.showToast({
+                title: '报名支付失败',
+                icon: 'success',
+                duration: 2000
+              });
+            },
+            'complete': function(res) {
+              console.log(res)
+            }
+          })
         }
       })
 
     } else if (that.data.InvoiceInformation == '' && that.data.MailingAddress == '') {
-
       var data = new Object();
       var meet_regist_fee = that.data.meet_regist_fee * 100;
       data.appid = "wx8dbc9156e40232a7";
@@ -98,8 +157,6 @@ Page({
             'success': function(res) {
               console.log(res)
               var reservationInformationData = app.reservationInformationData;
-              // reservationInformationData.mail_id = '';
-              // reservationInformationData.receipt_id = '';
               var objs = JSON.stringify(reservationInformationData); // 转JSON字符串
               var objss = RSA.sign(objs);
               wx.showLoading({
@@ -109,7 +166,7 @@ Page({
                     // url: app.InterfaceUrl+'activitymanage/AttendMeet',
                     url: 'http://39.106.49.2:8083/activitymanage/AttendMeet',
                     data: {
-                      data: data
+                      data: objss
                     },
                     header: {
                       'content-type': 'application/x-www-form-urlencoded'
@@ -119,7 +176,7 @@ Page({
                       console.log(res);
                       if (res.data.code == 1) {
                         wx.navigateTo({
-                          url: '../applySubmit/applySubmit?title=' + reservationInformationData.meet_title + '&begin_time=' + reservationInformationData.begin_time + '&end_time=' + reservationInformationData.end_time,
+                          url: '../applySubmit/applySubmit?title=' + that.data.meet_title + '&begin_time=' + reservationInformationData.begin_time + '&end_time=' + reservationInformationData.end_time,
                         })
                       } else {
                         wx.hideLoading()
@@ -193,6 +250,7 @@ Page({
         InvoiceInformation: app.InvoiceInformation,
         MailingAddress: app.MailingAddress
       })
+      console.log(app.MailingAddress);
     }
   },
 

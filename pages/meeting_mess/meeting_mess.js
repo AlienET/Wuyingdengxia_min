@@ -82,8 +82,8 @@ Page({
     });
     // 会议资讯列
     wx.request({
-      // url: app.InterfaceUrl+'activitymanage/getAllMeet',
-      url:'http://39.106.49.2:8083/activitymanage/getAllMeet',
+      url: app.InterfaceUrl+'activitymanage/getAllMeet',
+      // url:'http://39.106.49.2:8083/activitymanage/getAllMeet',
       data:{},
       header: { 'content-type': 'application/x-www-form-urlencoded'},
       method:'POST',

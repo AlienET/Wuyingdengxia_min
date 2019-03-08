@@ -31,8 +31,15 @@ Page({
     ArticlePage: 1,
     //Load 文章加载
     Load: false,
-    BottomLoad:true
+    BottomLoad: true,
     // -------------------------------
+    //新版本
+    //切换
+    flag: 0,
+    //热点内容
+    tabActivePopular: '',
+    //热点 页数
+    ArticlePagePopular: 1
   },
   //事件处理函数
 
@@ -93,7 +100,7 @@ Page({
     } else {
       app.bannerUrl = event.currentTarget.dataset.postid.banner_link;
       wx.navigateTo({
-        url: '../bannerTo/bannerTo?userid='+app.userData.userid,
+        url: '../bannerTo/bannerTo?userid=' + app.userData.userid,
       })
     }
   },
@@ -295,27 +302,28 @@ Page({
       }
     });
   },
-  //文章上拉到底刷新
-  loadMoreData: function() {
+  //热点内容下拉加载列表
+  loadMoreDataBottom: function() {
     var that = this;
     that.setData({
       Load: true
     });
     if (that.data.Load && that.data.BottomLoad) {
       that.setData({
-        BottomLoad:false
+        BottomLoad: false
       })
       // 文章列
-      var page = that.data.ArticlePage + 1;
+      var page = parseInt(that.data.ArticlePagePopular) + 1;
       var articleList = new Object();
-      articleList.label = that.data.labellist[that.data.currentTab].name;
+      articleList.label = '热门';
       articleList.sortby = '1';
       articleList.page = page.toString();
       articleList.size = '15';
       Adata = JSON.stringify(articleList); // 转JSON字符串
       var Adata = RSA.sign(Adata);
       wx.request({
-        url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+        // url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+        url: 'http://39.106.49.2:8082/homepagemanage/getArticleByLabel',
         data: {
           data: Adata
         },
@@ -325,26 +333,108 @@ Page({
         method: 'POST',
         success: function(res) {
           console.log(res)
-          var data = that.data.tabActiveKeyId;
-          for (var i = res.data.data.length - 1; i >= 0; i--) {
-            if (res.data.data[i].article_img_path == '') {
-              res.data.data[i].article_img_path = res.data.data[i].article_img_path;
-              data.push(res.data.data[i])
-            } else {
-              res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
-              data.push(res.data.data[i])
-            }
-          };
-          var NewData = data.concat(res.data.data);
-          console.log(data)
-          that.setData({
-            tabActiveKeyId: NewData,
-            Load: false,
-            BottomLoad:true
-          });
-          console.log(that.data.tabActiveKeyId)
+          if (res.data.data.length == 0) {
+            wx.showToast({
+              title: '已没有更多文章...',
+              icon: 'none',
+              duration: 1500
+            })
+          } else {
+            var data = that.data.tabActivePopular;
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              if (res.data.data[i].article_img_path == '') {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path;
+                data.push(res.data.data[i])
+              } else {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+                data.push(res.data.data[i])
+              }
+            };
+            var NewData = data.concat(res.data.data);
+            that.setData({
+              tabActivePopular: NewData,
+              Load: false,
+              BottomLoad: true,
+              ArticlePagePopular: page
+            });
+            console.log(that.data.ArticlePagePopular)
+          }
         }
       });
+    }
+  },
+  //热点专栏文章上拉到底刷新
+  loadMoreData: function() {
+    console.log('111')
+    var that = this;
+    that.setData({
+      Load: true
+    });
+    if (that.data.Load && that.data.BottomLoad) {
+      that.setData({
+        BottomLoad: false
+      })
+      // 文章列
+      var page = parseInt(that.data.ArticlePage) + 1;
+      var articleList = new Object();
+      articleList.label = that.data.labellist[that.data.currentTab].name;
+      articleList.sortby = '1';
+      articleList.page = page.toString();
+      articleList.size = '15';
+      Adata = JSON.stringify(articleList); // 转JSON字符串
+      var Adata = RSA.sign(Adata);
+      wx.request({
+        url: 'http://39.106.49.2:8082/homepagemanage/getArticleByLabel',
+        // url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+        data: {
+          data: Adata
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        method: 'POST',
+        success: function(res) {
+          console.log(res)
+          if (res.data.data.length == 0) {
+            wx.showToast({
+              title: '已没有更多文章...',
+              icon: 'none',
+              duration: 1500
+            })
+          } else {
+            var data = that.data.tabActiveKeyId;
+            for (var i = res.data.data.length - 1; i >= 0; i--) {
+              if (res.data.data[i].article_img_path == '') {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path;
+                data.push(res.data.data[i])
+              } else {
+                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+                data.push(res.data.data[i])
+              }
+            };
+            var NewData = data.concat(res.data.data);
+            that.setData({
+              tabActiveKeyId: NewData,
+              Load: false,
+              BottomLoad: true,
+              ArticlePage: page
+            });
+          }
+        }
+      });
+    }
+  },
+  //新版本
+  // 点击切换
+  onTopTabTap: function(e) {
+    var that = this;
+
+    if (this.data.flag === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        flag: e.target.dataset.current
+      })
     }
   },
   onLoad: function() {
@@ -397,30 +487,66 @@ Page({
       }
     });
     // 热门话题
-    wx.request({
-      url: app.InterfaceUrl + 'homepagemanage/getHotTop', //仅为示例，并非真实的接口地址
-      data: {},
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      method: 'POST',
-      success: function(res) {
-        that.setData({
-          discusslist: res.data.data,
-        });
-      }
-    });
+    // wx.request({
+    //   url: app.InterfaceUrl + 'homepagemanage/getHotTop', //仅为示例，并非真实的接口地址
+    //   data: {},
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded' // 默认值
+    //   },
+    //   method: 'POST',
+    //   success: function(res) {
+    //     that.setData({
+    //       discusslist: res.data.data,
+    //     });
+    //   }
+    // });
     /** 
      * 获取系统信息 
      */
     wx.getSystemInfo({
       success: function(res) {
+        var winHeight = res.windowHeight - 36;
+        console.log(winHeight)
         that.setData({
           winWidth: res.windowWidth,
-          winHeight: res.windowHeight
+          winHeight: winHeight
         });
       }
 
+    });
+    //热点内容
+    var articleList = new Object();
+    articleList.label = '热门';
+    articleList.sortby = '1';
+    articleList.page = '1';
+    articleList.size = '15';
+    Adata = JSON.stringify(articleList); // 转JSON字符串
+    var Adata = RSA.sign(Adata);
+    wx.request({
+      // url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+      url: 'http://39.106.49.2:8082/homepagemanage/getArticleByLabel',
+      data: {
+        data: Adata
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log(res.data.data)
+        for (var i = res.data.data.length - 1; i >= 0; i--) {
+          // console.log(res.data.data[i].article_img_path)//split(',');
+          if (res.data.data[i].article_img_path == '') {
+            res.data.data[i].article_img_path = res.data.data[i].article_img_path
+          } else {
+            res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+          }
+        };
+        that.setData({
+          tabActivePopular: res.data.data,
+        });
+
+      }
     });
   },
   /**
@@ -441,7 +567,8 @@ Page({
     data = JSON.stringify(labels); // 转JSON字符串
     var data = RSA.sign(data);
     wx.request({
-      url: app.InterfaceUrl + 'homepagemanage/getLabels', //仅为示例，并非真实的接口地址
+      // url: app.InterfaceUrl + 'homepagemanage/getLabels', //仅为示例，并非真实的接口地址
+      url: 'http://39.106.49.2:8082/homepagemanage/getLabels',
       data: {
         data: data
       },
@@ -450,12 +577,13 @@ Page({
       },
       method: 'POST',
       success: function(res) {
-        var arrays = res.data.data.slice(0,10);
+        console.log(res)
+        var arrays = res.data.data.slice(0, 10);
         that.setData({
           labellist: arrays,
           currentTab: app.ADcurrentTab
         });
-        var initActive = that.data.labellist[app.ADcurrentTab].name;
+        var initActive = arrays[app.ADcurrentTab].name;
         console.log(initActive)
         // 文章列
         var articleList = new Object();
@@ -466,6 +594,7 @@ Page({
         Adata = JSON.stringify(articleList); // 转JSON字符串
         var Adata = RSA.sign(Adata);
         wx.request({
+          // url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
           url: 'http://39.106.49.2:8082/homepagemanage/getArticleByLabel',
           data: {
             data: Adata
@@ -475,6 +604,7 @@ Page({
           },
           method: 'POST',
           success: function(res) {
+            console.log(res.data.data)
             if (res.data.data.length < 30) {
               for (var i = res.data.data.length - 1; i >= 0; i--) {
                 // console.log(res.data.data[i].article_img_path)//split(',');
@@ -518,69 +648,80 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
-    console.log('到底')
-    var that = this;
-    that.setData({
-      Load: true
-    });
-    if (that.data.Load&&that.data.BottomLoad) {
-      that.setData({
-        BottomLoad: false
-      })
-      // 文章列
-      var page = that.data.ArticlePage + 1;
-      var articleList = new Object();
-      articleList.label = that.data.labellist[that.data.currentTab].name;
-      articleList.sortby = '1';
-      articleList.page = page.toString();
-      articleList.size = '15';
-      Adata = JSON.stringify(articleList); // 转JSON字符串
-      var Adata = RSA.sign(Adata);
-      wx.request({
-        url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
-        data: {
-          data: Adata
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded' // 默认值
-        },
-        method: 'POST',
-        success: function(res) {
-          console.log(res)
-          if (res.data.data.length == 0) {
-            that.setData({
-              Load: false
-            });
-            wx.showToast({
-              title: '已没有更多文章...',
-              icon: 'none',
-              duration: 1500
-            })
-          } else {
-            var data = that.data.tabActiveKeyId;
-            for (var i = res.data.data.length - 1; i >= 0; i--) {
-              if (res.data.data[i].article_img_path == '') {
-                res.data.data[i].article_img_path = res.data.data[i].article_img_path;
-                data.push(res.data.data[i])
-              } else {
-                res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
-                data.push(res.data.data[i])
-              }
-            };
-            var NewData = data.concat(res.data.data);
-            console.log(data)
-            that.setData({
-              tabActiveKeyId: NewData,
-              Load: false,
-              BottomLoad:true
-            });
-            console.log(that.data.tabActiveKeyId)
-          }
-        }
-      });
-    }
-  },
+  // onReachBottom: function() {
+  //   console.log('到底')
+  //   var that = this;
+  //   var loads = true;
+  //   if (that.data.tabActiveKeyId.length >= 90) {
+  //     loads = false;
+  //   }
+  //   that.setData({
+  //     Load: loads
+  //   });
+  //   if (that.data.Load && that.data.BottomLoad) {
+  //     that.setData({
+  //       BottomLoad: false
+  //     })
+  //     // 文章列
+  //     var page = parseInt(that.data.ArticlePage) + 1;
+  //     var articleList = new Object();
+  //     articleList.label = that.data.labellist[that.data.currentTab].name;
+  //     articleList.sortby = '1';
+  //     articleList.page = page.toString();
+  //     articleList.size = '15';
+  //     Adata = JSON.stringify(articleList); // 转JSON字符串
+  //     var Adata = RSA.sign(Adata);
+  //     wx.request({
+  //       url: 'http://39.106.49.2:8082/homepagemanage/getArticleByLabel',
+  //       // url: app.InterfaceUrl + 'homepagemanage/getArticleByLabel',
+  //       data: {
+  //         data: Adata
+  //       },
+  //       header: {
+  //         'content-type': 'application/x-www-form-urlencoded' // 默认值
+  //       },
+  //       method: 'POST',
+  //       success: function(res) {
+  //         console.log(res)
+  //         if (res.data.data.length == 0) {
+  //           that.setData({
+  //             Load: false
+  //           });
+  //           wx.showToast({
+  //             title: '已没有更多文章...',
+  //             icon: 'none',
+  //             duration: 1500
+  //           })
+  //         } else {
+  //           var data = that.data.tabActiveKeyId;
+  //           for (var i = res.data.data.length - 1; i >= 0; i--) {
+  //             if (res.data.data[i].article_img_path == '') {
+  //               res.data.data[i].article_img_path = res.data.data[i].article_img_path;
+  //               data.push(res.data.data[i])
+  //             } else {
+  //               res.data.data[i].article_img_path = res.data.data[i].article_img_path.split(',');
+  //               data.push(res.data.data[i])
+  //             }
+  //           };
+  //           var NewData = data.concat(res.data.data);
+  //           console.log(NewData)
+  //           var BottomLoads = true;
+  //           if (NewData.length > 90) {
+  //             var BottomLoads = false;
+  //             NewData = that.data.tabActiveKeyId;
+  //           }
+  //           that.setData({
+  //             tabActiveKeyId: NewData,
+  //             Load: false,
+  //             BottomLoad: BottomLoads,
+  //             ArticlePage: page
+  //           });
+  //           console.log(that.data.tabActiveKeyId)
+  //         }
+  //       }
+  //     });
+  //   }
+  // },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo

@@ -460,13 +460,13 @@ body, view, text {
 
 .abs_item_author text {
   vertical-align: middle;
-  font-size: 26rpx;
-  color: #999;
-  margin-left: 20rpx;
+  font-size: 22rpx;
+  color: #AFAFAF;
+  margin-left: 10rpx;
 }
 
 .abs_item_title {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: 500;
   margin-bottom: 12rpx;
   color: #333;

@@ -413,20 +413,24 @@ Page({
    */
   onLoad: function(options) {
     console.log(options);
+    // console.log(app.userData.userid);
+    var User_ID = '';
+    if (app.userData){
+      User_ID = app.userData.userid;
+    }else{User_ID=''}
     var that = this;
-
     var data = new Object();
-    data.userid = app.userData.userid;
+    data.userid = User_ID;
     data.articleid = options.articleid;
     data = JSON.stringify(data); // 转JSON字符串
     data = RSA.sign(data);
     that.setData({
-      userid: app.userData.userid,
+      userid: User_ID,
       articleid: options.articleid,
     });
     wx.request({
-      // url: app.InterfaceUrl + 'homepagemanage/getArticleById',
-      url:'http://39.106.49.2:8082/homepagemanage/getArticleById',
+      url: app.InterfaceUrl + 'homepagemanage/getArticleById',
+      // url:'http://39.106.49.2:8082/homepagemanage/getArticleById',
       data: {
         data: data
       },
@@ -465,7 +469,7 @@ Page({
     // 获取评论数据
     var comData = new Object();
     comData.toid = that.data.articleid,
-      comData.user_id = app.userData.userid,
+      comData.user_id = User_ID,
       comData.comType = "0",
       comData.comment_to_type = '0';
     comData = JSON.stringify(comData); // 转JSON字符串
@@ -499,7 +503,7 @@ Page({
     //对文章点赞/收藏状态
     var articleIcon = new Object();
     articleIcon.type = '0';
-    articleIcon.userid = app.userData.userid;
+    articleIcon.userid = User_ID;
     articleIcon.to_id = options.articleid;
     articleIcon = JSON.stringify(articleIcon); // 转JSON字符串
     articleIcon = RSA.sign(articleIcon);

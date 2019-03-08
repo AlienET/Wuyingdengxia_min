@@ -33,8 +33,8 @@ App({
                   obj = JSON.stringify(obj); // 转JSON字符串
                   var data = RSA.sign(obj);
                   wx.request({
-                    // url: that.InterfaceUrl+'usermanage/smallAppsWxLogin',
-                    url:'http://39.106.49.2:8081/usermanage/smallAppsWxLogin',
+                    url: that.InterfaceUrl+'usermanage/smallAppsWxLogin',
+                    // url:'http://39.106.49.2:8081/usermanage/smallAppsWxLogin',
                     data: {
                       data: data
                     },
